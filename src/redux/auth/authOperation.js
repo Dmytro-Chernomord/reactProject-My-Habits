@@ -41,4 +41,5 @@ export default {
   registration,
   logIn,
   logOut,
+  setToken,
 };
