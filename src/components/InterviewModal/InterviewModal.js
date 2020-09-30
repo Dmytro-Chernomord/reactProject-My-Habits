@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import styles from './AddHabbit.module.css';
 
-export default function QuestionsModal({ onClose }) {
+export default function InterviewModal({ onClose }) {
   const [years, setYears] = useState('');
   const [amount, setAmount] = useState('');
   const [time, setTime] = useState('');
