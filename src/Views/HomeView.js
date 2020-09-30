@@ -6,6 +6,9 @@ import TempBut from '../components/TempBut';
 import NotificationsPage from '../components/NotificationsPage/NotificationsPage';
 import AchievementsPage from '../components/AchievementsPage/AchievementsPage';
 import CheckListPage from '../components/CheckListPage/CheckListPage';
+import userOperation from '../redux/user/userOperation';
+import setToken from '../redux/auth/authOperation';
+import authSelector from '../redux/auth/authSelector';
 
 const styles = {
   display: 'flex',
@@ -14,6 +17,11 @@ const styles = {
 };
 
 class HomeView extends Component {
+  componentDidMount() {
+    console.log(this.props.token);
+    setToken.setToken(this.props.token);
+    this.props.onGetOwnHabits();
+  }
   render() {
     const { match } = this.props;
     return (
@@ -64,6 +72,11 @@ class HomeView extends Component {
   }
 }
 
-export default connect(null, {
+const mapStateToProps = state => ({
+  token: authSelector.isAuthenticated(state),
+});
+
+export default connect(mapStateToProps, {
   onLogOut: authOperation.logOut,
+  onGetOwnHabits: userOperation.getOwnHabits,
 })(HomeView);

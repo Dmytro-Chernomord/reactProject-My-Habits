@@ -9,9 +9,9 @@ import PublicRoute from './PublicRoute';
 import userOperation from '../redux/user/userOperation';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.onGetOwnHabits();
-  }
+  // componentDidMount() {
+  //   this.props.onGetOwnHabits();
+  // }
 
   render() {
     return (
