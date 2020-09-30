@@ -10,7 +10,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <div style={styles}>
-        <LoginForm />
+        {/* <LoginForm /> */}
         <Main />
         <RegisterForm />
       </div>
