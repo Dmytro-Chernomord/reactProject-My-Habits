@@ -7,10 +7,11 @@
   background-color: #43d190;
   height: 100vh;
   position: relative;
+  width: 100%;
 }
 .backdrop {
-  background-color: red;
-  width: 65%;
+  background-color: #ffffff;
+  width: 70%;
   display: block;
   position: absolute;
   top: 0;
@@ -33,4 +34,12 @@
 .exitActive {
   transform: translateX(-100%);
   transition: transform 250ms linear;
+}
+.buttonDiv {
+  justify-content: center;
+  display: flex;
+}
+
+.buttonLogin {
+  margin-right: 50px;
 }

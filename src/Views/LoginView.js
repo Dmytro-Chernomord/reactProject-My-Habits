@@ -12,7 +12,7 @@ export default class LoginView extends Component {
       <div style={styles}>
         {/* <LoginForm /> */}
         <Main />
-        <RegisterForm />
+        {/* <RegisterForm /> */}
       </div>
     );
   }

@@ -3,25 +3,25 @@ import { CSSTransition } from 'react-transition-group';
 import LoginForm from './LoginForm';
 import styles from './rightModal.module.css';
 import s from './Main.module.css';
+import Button from '../UIcomponents/Button/Button';
+import RegisterForm from './RegisterForm';
 
 export default function Authorization() {
   const [modalView, setmodalView] = useState(false);
+  const [rightmodalView, setRightmodalView] = useState(false);
 
   const changeModal = () => {
     setmodalView(!modalView);
   };
+  const rightchangeModal = () => {
+    setRightmodalView(!rightmodalView);
+  };
   const closeOnBackdop = event => {
     if (event.target === event.currentTarget && modalView) {
+      // changeModal();
       changeModal();
-    }
-  };
-  const [rightmodalView, setRightmodalView] = useState(false);
-
-  const rightchangeModal = () => {
-    setRightmodalView(!modalView);
-  };
-  const rightcloseOnBackdop = event => {
-    if (event.target === event.currentTarget && rightmodalView) {
+    } else if (event.target === event.currentTarget && rightmodalView) {
+      // changeModal();
       rightchangeModal();
     }
   };
@@ -43,15 +43,29 @@ export default function Authorization() {
           unmountOnExit
         >
           <div className={styles.backdrop}>
-            <LoginForm />
+            {' '}
+            <RegisterForm />
           </div>
         </CSSTransition>
-        <button type="button" onClick={changeModal}>
+        {/* <button type="button" onClick={changeModal}>
           login
-        </button>
-        <button type="button" onClick={rightchangeModal}>
-          Registration
-        </button>
+        </button> */}
+        <div className={s.buttonDiv}>
+          <div className={s.buttonLogin}>
+            <Button
+              type="button"
+              handelClick={changeModal}
+              label="Login"
+              green={true}
+            />
+          </div>
+
+          <Button
+            type="button"
+            handelClick={rightchangeModal}
+            label="Registration"
+          />
+        </div>
         <CSSTransition
           in={modalView}
           timeout={250}
