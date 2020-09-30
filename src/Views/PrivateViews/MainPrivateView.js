@@ -26,7 +26,7 @@ export default function MainPrivateView() {
       <NavLink to={routes.checklist}>Checklist </NavLink>
       <NavLink to={routes.achievements}>Ach </NavLink>
       <NavLink to={routes.account}>Acc </NavLink>
-      <div>Вариант 3</div>
+
       <LeftSideBar />
       <Suspense fallback={<h1>Loading</h1>}>
         <Switch>
@@ -35,7 +35,7 @@ export default function MainPrivateView() {
           <Route exact path={routes.account} component={ProfilePage} />
         </Switch>
       </Suspense>
-      <div>Вариант 2</div>
+
       {view === 'Checklist' && <h2>ChecklistView from </h2>}
       {view === 'Account' && <h2>Account from </h2>}
       <button type="button" onClick={() => setView('Account')}>
