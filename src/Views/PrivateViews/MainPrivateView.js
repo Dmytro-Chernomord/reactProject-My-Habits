@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState, useCallback } from 'react';
-import Modal from '../../components/Modal/Modal';
+import ModalBackdrop from '../../components/Modal/Modal';
 import ModalContent from '../../components/ModalContent/ModalContent';
 
 // const ChecklistView = lazy(() =>
@@ -8,7 +8,6 @@ import ModalContent from '../../components/ModalContent/ModalContent';
 //   ),
 // );
 export default function MainPrivateView() {
-  const [view, setView] = useState('Checklist');
   const [showModal, setShowModal] = useState(false);
   const [layout, setLayout] = useState(false);
 
@@ -37,9 +36,9 @@ export default function MainPrivateView() {
         Сигареты за сегодня
       </button>
       {showModal && (
-        <Modal onClose={toggleModal}>
+        <ModalBackdrop onClose={toggleModal}>
           <ModalContent onSave={toggleModal} layout={layout} />
-        </Modal>
+        </ModalBackdrop>
       )}
     </>
   );

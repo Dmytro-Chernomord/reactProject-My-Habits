@@ -20,8 +20,6 @@ import styles from './ModalContent.module.css';
 export default function ModalContent({ onSave, layout }) {
   const [view, setView] = useState(layout);
 
-  //   const params = useRouteMatch();
-  //   const url = params.url;
   return (
     <>
       {view === 'HabitChoiceModal' && (
@@ -33,36 +31,6 @@ export default function ModalContent({ onSave, layout }) {
       {view === 'CustomHabbit' && <CustomHabbitModal onClose={onSave} />}
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
-
-      {/* <div>Добавление новой привычки</div>
-      <ul className={styles.list}>
-        <li>
-          <button type="button" onClick={() => setView('TemplateHabbit')}>
-            Выбрать шаблонную привычку
-          </button>
-        </li>
-        <li>
-          <button type="button" onClick={() => setView('CustomHabbit')}>
-            Добавить свою привычку
-          </button>
-        </li>
-      </ul> */}
-      {/* <ul className={styles.info_list}>
-        <li>
-          <Link exact to={`${url}/template`} className={styles.info_item}>
-            Выбрать шаблонную привычку
-          </Link>
-        </li>
-        <li>
-          <Link to={`${url}/custom`} className={styles.info_item}>
-            Добавить свою привычку
-          </Link>
-        </li>
-      </ul> */}
-      {/* <Switch>
-        <Route path={`${url}/template`} render={() => <TemplateHabbit />} />
-        <Route path={`${url}/custom`} render={() => <CustomHabbit />} />
-      </Switch> */}
     </>
   );
 }
