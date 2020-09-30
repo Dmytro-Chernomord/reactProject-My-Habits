@@ -10,10 +10,10 @@ const PublicRoute = ({
 }) => (
   <Route
     {...routeProps}
-    // render={props =>
-    //   isAuthenticated ? <Redirect to="/home" /> : <Component {...props} />
-    // }
-    render={props => <Component {...props} />}
+    render={props =>
+      isAuthenticated ? <Redirect to="/home" /> : <Component {...props} />
+    }
+    // render={props => <Component {...props} />}
   />
 );
 
