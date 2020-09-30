@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 
 // import styles from './CreateHabbitForm.module.css';
 
-export default function CreateHabbitForm({ onClose }) {
+export default function CustomHabbitForm({ onClose }) {
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -90,10 +90,10 @@ export default function CreateHabbitForm({ onClose }) {
         size="1"
         onChange={handleInputChange}
       >
-        <option value="Ежедневно">Ежедневно</option>
-        <option value="Раз в два дня">Раз в два дня</option>
-        <option value="ПН-СР-ПТ">ПН-СР-ПТ</option>
-        <option value="ВТ-ЧТ-СБ">ВТ-ЧТ-СБ</option>
+        <option value="eachDay">Ежедневно</option>
+        <option value="eachTwoDays">Раз в два дня</option>
+        <option value="Mn-Wd-Fr">ПН-СР-ПТ</option>
+        <option value="Tu-Th-Sa">ВТ-ЧТ-СБ</option>
       </select>
       <button type="button" onClick={() => null}>
         Удалить привычку

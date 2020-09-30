@@ -10,27 +10,29 @@ import React, { useState, useEffect } from 'react';
 //   useLocation,
 // } from 'react-router-dom';
 // import routes from '../../routes';
-import AddHabbit from '../AddHabbit/AddHabbit';
-import TemplateHabbit from '../TemplateHabbit/TemplateHabbit';
-import CustomHabbit from '../CustomHabbit/CustomHabbit';
-import CigaretteAmount from '../CigaretteAmount/CigaretteAmount';
-import QuestionsModal from '../QuestionsModal/QuestionsModal';
+import HabitChoiceModal from '../HabitChoiceModal/HabitChoiceModal';
+import HabitTemplateModal from '../HabitTemplateModal/HabitTemplateModal';
+import CustomHabbitModal from '../CustomHabbitModal/CustomHabbitModal';
+import DailyResultModal from '../DailyResultModal/DailyResultModal';
+import InterviewModal from '../InterviewModal/InterviewModal';
 import styles from './ModalContent.module.css';
 
 export default function ModalContent({ onSave }) {
-  const [view, setView] = useState('AddHabbit');
+  const [view, setView] = useState('HabitChoiceModal');
 
   //   const params = useRouteMatch();
   //   const url = params.url;
   return (
     <>
-      {view === 'AddHabbit' && <AddHabbit onClick={setView} onClose={onSave} />}
-      {view === 'TemplateHabbit' && (
-        <TemplateHabbit onClick={setView} onClose={onSave} />
+      {view === 'HabitChoiceModal' && (
+        <HabitChoiceModal onClick={setView} onClose={onSave} />
       )}
-      {view === 'CustomHabbit' && <CustomHabbit onClose={onSave} />}
-      {view === 'CigaretteAmount' && <CigaretteAmount onClose={onSave} />}
-      {view === 'QuestionsModal' && <QuestionsModal onClose={onSave} />}
+      {view === 'TemplateHabbit' && (
+        <HabitTemplateModal onClick={setView} onClose={onSave} />
+      )}
+      {view === 'CustomHabbit' && <CustomHabbitModal onClose={onSave} />}
+      {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
+      {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
 
       {/* <div>Добавление новой привычки</div>
       <ul className={styles.list}>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // // import styles from './AddHabbit.module.css';
 
-export default function TemplateHabbit({ habbits, onClick }) {
+export default function HabitTemplateModal({ habbits, onClick }) {
   return (
     <div>
       <h2>Шаблонные привычки</h2>
