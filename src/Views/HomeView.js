@@ -27,7 +27,7 @@ class HomeView extends Component {
     const { match } = this.props;
     return (
       <>
-        <h2>Это домашняя страница за логиненого пользователя</h2>
+        <h2>Это домашняя страница залогиненного пользователя</h2>
         <div style={styles}>
           <div style={styles.box}>
             LeftSideBar
