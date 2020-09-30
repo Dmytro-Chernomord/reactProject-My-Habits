@@ -17,8 +17,8 @@ import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import InterviewModal from '../InterviewModal/InterviewModal';
 import styles from './ModalContent.module.css';
 
-export default function ModalContent({ onSave }) {
-  const [view, setView] = useState('HabitChoiceModal');
+export default function ModalContent({ onSave, layout }) {
+  const [view, setView] = useState(layout);
 
   //   const params = useRouteMatch();
   //   const url = params.url;

@@ -12,7 +12,7 @@ import React, { useState, useEffect } from 'react';
 // import routes from '../../routes';
 // import CustomHabbit from '../CustomHabbit/CustomHabbit';
 // import TemplateHabbit from '../TemplateHabbit/TemplateHabbit';
-import styles from './AddHabbit.module.css';
+// import styles from './AddHabbit.module.css';
 
 export default function HabitChoiceModal({ onClick, onClose }) {
   //   const params = useRouteMatch();
