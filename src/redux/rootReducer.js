@@ -30,6 +30,10 @@ const habitsReducer = createReducer([], {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return actions.payload.habits;
   },
+  [actions.addHabitSuccess]: (state, action) => [
+    ...state,
+    action.payload.habits,
+  ],
 });
 
 const cigarettesInitialStates = {

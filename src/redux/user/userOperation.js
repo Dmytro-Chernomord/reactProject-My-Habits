@@ -14,4 +14,18 @@ const getOwnHabits = userData => dispatch => {
   // .catch(er => console.log(er));
 };
 
-export default { getOwnHabits };
+const addHabit = habit => async dispatch => {
+  dispatch(actions.addHabitRequest());
+
+  try {
+    const response = await axios.post(
+      'https://make-it-habit-api.herokuapp.com/habits',
+      { ...habit },
+    );
+    dispatch(actions.addHabitSuccess(response.data));
+  } catch (error) {
+    dispatch(actions.addHabitError(error.message));
+  }
+};
+
+export default { getOwnHabits, addHabit };
