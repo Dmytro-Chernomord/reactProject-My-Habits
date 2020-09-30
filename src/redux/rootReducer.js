@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import actions from './userActions';
+import actions from './user/userActions';
 
 const userInitialState = {
   firstName: '',
@@ -12,7 +12,7 @@ const userInitialState = {
   id: '',
 };
 
-const userReducer = createReducer(userInitialState, {
+const RootReducer = createReducer(userInitialState, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return {
       avatar: actions.payload.user.avatar,
@@ -63,13 +63,13 @@ const quizReducer = createReducer(quizInitialState, {
   },
 });
 // export default combineReducers({
-//   user: userReducer,
+//   user: RootReducer,
 //   habits: habitsReducer,
 //   // error: errorReducer,
 // });
 
 export default {
-  user: userReducer,
+  user: RootReducer,
   habits: habitsReducer,
   cigarettes: cigarettesReducer,
   payments: paymentsReducer,

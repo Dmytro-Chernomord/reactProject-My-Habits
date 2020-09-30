@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import s from './Authorization.module.css';
 import Button from '../../components/Button/Button';
-import MainTitle from '../../components/MainTitle/MainTitle';
+
 import routes from '../../routes';
 
 export default function Authorization() {

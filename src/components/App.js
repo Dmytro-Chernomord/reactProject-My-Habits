@@ -2,7 +2,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-
+import NotFoundView from '../Views/NotFoundView';
 import routes from '../routes';
 import RegisterView from '../Views/AuthViews/RegisterView';
 import LoginView from '../Views/AuthViews/LoginView';
@@ -72,7 +72,7 @@ export default function App() {
           <Route path={routes.login} component={LoginView} />
           <Route path={routes.register} component={RegisterView} />
           <Route path={routes.privateMain} component={MainView} />
-
+          <Route path={routes.notfound} component={NotFoundView} />
           {/* <PrivateRoute exact path={routes.contacts} component={ContactView} /> */}
           {/* <PublicRoute
             path={routes.login}
