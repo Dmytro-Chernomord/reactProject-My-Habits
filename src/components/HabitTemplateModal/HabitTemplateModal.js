@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // // import styles from './AddHabbit.module.css';
 
-export default function HabitTemplateModal({ habbits, onClick }) {
+export default function HabitTemplateModal({ habbits, onClick, onClose }) {
   return (
     <div>
       <h2>Шаблонные привычки</h2>
@@ -22,8 +22,11 @@ export default function HabitTemplateModal({ habbits, onClick }) {
           </button>
         </li>
       </ul>
-      <button type="button" onClick={() => onClick('AddHabbit')}>
+      <button type="button" onClick={() => onClick('HabitChoiceModal')}>
         Отмена
+      </button>
+      <button type="button" onClick={() => onClose()}>
+        X
       </button>
     </div>
   );
