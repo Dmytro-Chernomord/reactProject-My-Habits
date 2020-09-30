@@ -29,10 +29,12 @@
 
 .ButtonGreen:hover,
 .ButtonGreen:focus {
-  background-color: #3dbf84;
+  background-color: #e5fafa;
+  color: #43d190;
 }
 
 .ButtonWhite:hover,
 .ButtonWhite:focus {
-  background-color: #e5fafa;
+  background-color: #3dbf84;
+  color: #ffffff;
 }
