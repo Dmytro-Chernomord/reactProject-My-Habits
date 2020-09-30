@@ -6,7 +6,7 @@ import userSelectors from '../../../redux/user/userSelector';
 
 // import styles from './CreateHabbitForm.module.css';
 
-export default function CustomHabbitForm({ onClose }) {
+export default function CustomHabbitForm({ onClose, ableDelete = false }) {
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -18,6 +18,8 @@ export default function CustomHabbitForm({ onClose }) {
     [dispatch],
   );
   const planningTime = date + ' ' + time;
+
+  console.log(ableDelete);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -98,9 +100,11 @@ export default function CustomHabbitForm({ onClose }) {
         <option value="Mn-Wd-Fr">ПН-СР-ПТ</option>
         <option value="Tu-Th-Sa">ВТ-ЧТ-СБ</option>
       </select>
-      <button type="button" onClick={() => null}>
-        Удалить привычку
-      </button>
+      {ableDelete && (
+        <button type="button" onClick={() => null}>
+          Удалить привычку
+        </button>
+      )}
       <button type="button" onClick={onClose}>
         Отмена
       </button>
