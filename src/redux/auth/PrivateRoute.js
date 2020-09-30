@@ -26,7 +26,7 @@ import authSelectors from '../auth/authSelector';
 //       render={props => <Component {...props} />
 //       }
 //     />
-//     <div>Calendar</div>
+//     <div>RightSideBar</div>
 //   </>
 // );
 

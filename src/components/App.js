@@ -7,14 +7,16 @@ import routes from '../routes';
 import RegisterView from '../Views/AuthViews/RegisterView';
 import LoginView from '../Views/AuthViews/LoginView';
 import MainView from '../Views/PrivateViews/MainPrivateView';
-import UserCard from '../components/UserCard/UserCard';
+import LeftSideBar from '../components/LeftSideBar/LeftSideBar';
 import authOperations from '../redux/auth/authOperation';
 import userOperations from '../redux/user/userOperation';
 import Button from '../components/Button/Button';
 axios.defaults.baseURL = 'https://make-it-habit-api.herokuapp.com';
 
-const StartView = lazy(() =>
-  import('../Views/AuthViews/StartView' /* webpackChunkName: "start-view" */),
+const Authorization = lazy(() =>
+  import(
+    '../Views/AuthViews/Authorization' /* webpackChunkName: "start-view" */
+  ),
 );
 
 // const userTest = {
@@ -63,10 +65,10 @@ export default function App() {
         getOwnHabits
       </button>
       <div>Вариант 1</div>
-      {user && <UserCard />}
+      {user && <LeftSideBar />}
       <Suspense fallback={<h1>Loading</h1>}>
         <Switch>
-          <Route exact path={routes.start} component={StartView} />
+          <Route exact path={routes.start} component={Authorization} />
           <Route path={routes.login} component={LoginView} />
           <Route path={routes.register} component={RegisterView} />
           <Route path={routes.privateMain} component={MainView} />

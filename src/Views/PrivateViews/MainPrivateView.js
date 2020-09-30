@@ -1,10 +1,10 @@
 import { Route, Switch, NavLink } from 'react-router-dom';
 import React, { Suspense, lazy, useState, useCallback } from 'react';
 import routes from '../../routes';
-import AccountView from '../PrivateViews/AccountView';
+import ProfilePage from '../PrivateViews/ProfilePage';
 import Achievements from '../PrivateViews/Achievements';
 import CheckListView from '../PrivateViews/CheckListView';
-import UserCard from '../../components/UserCard/UserCard';
+import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import Modal from '../../components/Modal/Modal';
 import ModalContent from '../../components/ModalContent/ModalContent';
 
@@ -27,12 +27,12 @@ export default function MainPrivateView() {
       <NavLink to={routes.achievements}>Ach </NavLink>
       <NavLink to={routes.account}>Acc </NavLink>
       <div>Вариант 3</div>
-      <UserCard />
+      <LeftSideBar />
       <Suspense fallback={<h1>Loading</h1>}>
         <Switch>
           <Route path={routes.checklist} component={CheckListView} />
           <Route path={routes.achievements} component={Achievements} />
-          <Route exact path={routes.account} component={AccountView} />
+          <Route exact path={routes.account} component={ProfilePage} />
         </Switch>
       </Suspense>
       <div>Вариант 2</div>
@@ -44,7 +44,7 @@ export default function MainPrivateView() {
       <button type="button" onClick={() => setView('Checklist')}>
         setView
       </button>
-      <div>Calendar</div>
+      <div>RightSideBar</div>
       <button onClick={toggleModal} aria-label="Добавить привычку">
         Добавить привычку
       </button>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import s from './StartView.module.css';
+import s from './Authorization.module.css';
 import Button from '../../components/Button/Button';
 import MainTitle from '../../components/MainTitle/MainTitle';
 import routes from '../../routes';
 
-export default function StartView() {
+export default function Authorization() {
   return (
     <div className={s.div}>
       <h1>«Курение ослабляет силу мысли и делает неясным её выражение».</h1>
