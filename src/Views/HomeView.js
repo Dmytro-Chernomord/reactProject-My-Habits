@@ -9,7 +9,7 @@ import CheckListPage from '../components/CheckListPage/CheckListPage';
 import userOperation from '../redux/user/userOperation';
 import setToken from '../redux/auth/authOperation';
 import authSelector from '../redux/auth/authSelector';
-
+import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
 
 const styles = {
   display: 'flex',
@@ -50,7 +50,9 @@ class HomeView extends Component {
           </div>
 
           <div style={styles.box}>
-            <header style={styles.title}>title</header>
+            <header style={styles.title}>
+              title <MainPrivateView />
+            </header>
             <div>
               <Route
                 path={`${match.path}/CheckListPage`}
