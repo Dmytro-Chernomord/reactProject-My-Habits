@@ -4,6 +4,8 @@
   border-radius: 5px;
   display: inline-block;
   position: absolute;
-  left: 20%;
+  left: 40%;
   font-size: 20px;
+  z-index: 999;
+  top: 20%;
 }
