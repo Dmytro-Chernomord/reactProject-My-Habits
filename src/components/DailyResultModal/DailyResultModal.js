@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import styles from './AddHabbit.module.css';
 
-export default function CigaretteAmount({ onClose }) {
+export default function DailyResultModal({ onClose }) {
   const [amount, setAmount] = useState('');
 
   const handleInputChange = e => {
