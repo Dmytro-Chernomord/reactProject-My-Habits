@@ -6,7 +6,6 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 import userOperation from '../redux/user/userOperation';
-import Error from '../components/Error/Error';
 
 class App extends Component {
   // componentDidMount() {
@@ -16,7 +15,6 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        {this.props.error && <Error />}
         <Suspense fallback={<h1>Loading</h1>}>
           <Switch>
             {routes.map(route =>
@@ -32,12 +30,7 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  error: state.error,
-});
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   onGetOwnHabits: userOperation.getOwnHabits,
 })(App);

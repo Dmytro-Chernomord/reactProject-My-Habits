@@ -2,11 +2,11 @@ import { createAction } from '@reduxjs/toolkit';
 
 const registrationRequest = createAction('auth/registrationRequest');
 const registrationSuccess = createAction('auth/registrationSuccess');
-const registrationError = createAction('auth/registrationError');
+// const registrationError = createAction('auth/registrationError');
 
 const loginRequest = createAction('auth/loginRequest');
 const loginSuccess = createAction('auth/loginSuccess');
-const loginError = createAction('auth/loginError');
+// const loginError = createAction('auth/loginError');
 
 // const logoutRequest = createAction('auth/logoutRequest');
 const logoutSuccess = createAction('auth/logoutSuccess');
@@ -17,10 +17,10 @@ const logoutSuccess = createAction('auth/logoutSuccess');
 export default {
   registrationRequest,
   registrationSuccess,
-  registrationError,
+  // registrationError,
   loginRequest,
   loginSuccess,
-  loginError,
+  // loginError,
   //   logoutRequest,
   logoutSuccess,
   //   logoutError,

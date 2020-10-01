@@ -1,6 +1,5 @@
 .Modal__backdrop {
   position: fixed;
-  z-index: 99;
   top: 0;
   left: 0;
   width: 100vw;
@@ -14,7 +13,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 784px;
-  max-height: 580px;
   width: 100%;
   /* padding: 12px; */
   background-color: #fff;
