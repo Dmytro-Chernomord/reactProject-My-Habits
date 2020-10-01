@@ -18,12 +18,19 @@ import InterviewModal from '../InterviewModal/InterviewModal';
 import styles from './ModalContent.module.css';
 
 const templateHabits = [
-  { id: '001', name: 'смотреть в окно' },
-  { id: '002', name: 'гладить кота' },
-  { id: '003', name: 'мыть пол' },
-  { id: '004', name: 'делать уборку' },
-  { id: '005', name: 'читать книги' },
-  { id: '006', name: 'помогать соседке' },
+  { id: '001', name: 'Начинать утро с 10-15 минутной зарядки' },
+  { id: '002', name: 'Планировать свой день' },
+  { id: '003', name: 'Вставать на 30 мин раньшьше обычного' },
+  { id: '004', name: 'Читать минимум 30 мин в день' },
+  { id: '005', name: 'Замена выкуриной сигареты половинкой киви' },
+  { id: '006', name: 'Принять контрасный душ' },
+  { id: '007', name: '5 минутная зарядка для глаз (обед)' },
+  {
+    id: '008',
+    name: '25 минут полной концентрации на работе и 5 минут отдыха',
+  },
+  { id: '009', name: 'Раз в неделлю проводить медитацию' },
+  { id: '010', name: 'Начинать робочий день с подготовки рабочего места' },
 ];
 
 export default function ModalContent({ onSave, layout, ableToDelete }) {
@@ -31,7 +38,7 @@ export default function ModalContent({ onSave, layout, ableToDelete }) {
   const [data, setData] = useState('');
 
   return (
-    <>
+    <div className={styles.modalWrapper}>
       {view === 'HabitChoiceModal' && (
         <HabitChoiceModal onClick={setView} onClose={onSave} />
       )}
@@ -52,6 +59,15 @@ export default function ModalContent({ onSave, layout, ableToDelete }) {
       )}
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
-    </>
+      {view !== 'InterviewModal' && (
+        <p onClick={onSave} className={styles.modalCloseBtn}>
+          <svg
+            xmlns="../../images/svg-icons/close.svg"
+            width="16px"
+            height="16px"
+          ></svg>
+        </p>
+      )}
+    </div>
   );
 }

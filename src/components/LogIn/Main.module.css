@@ -4,7 +4,8 @@
   height: 600px;
 } */
 .div {
-  background-color: #43d190;
+  /* background-color: #43d190; */
+  background-image: url(../../images/bgtest.jpg);
   height: 100vh;
   position: relative;
   width: 100%;
