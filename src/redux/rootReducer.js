@@ -38,6 +38,7 @@ const RootReducer = createReducer(userInitialState, {
       phone: payload.phone,
     };
   },
+  // [authAction.logoutSuccess]: (_, action) => console.log('action'),
 });
 
 const habitsReducer = createReducer([], {
