@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-weight: 700;
+  margin-right: 12px;
+  text-decoration: none;
+  font-size: 26px;
+  color: blueviolet;
+}
