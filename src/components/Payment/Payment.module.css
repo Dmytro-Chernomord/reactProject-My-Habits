@@ -4,13 +4,14 @@ p {
 
 .background {
   background-color: #f6f6f6;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 .titel {
   color: #4f4f4f;
   font-size: 26px;
   font-weight: 400;
   margin-left: 77px;
-  margin-top: 60px;
 }
 
 .card {
