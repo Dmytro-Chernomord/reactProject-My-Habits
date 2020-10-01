@@ -17,8 +17,8 @@ const logIn = userData => dispatch => {
       setToken(response.data.access_token);
       dispatch(authAction.loginSuccess(response.data));
     })
-    .catch(er => console.log(er));
-  // .catch(error => dispatch(authAction.loginError(error)));
+    // .catch(er => er.message);
+    .catch(error => dispatch(authAction.loginError(error.message)));
 };
 
 const registration = userData => dispatch => {

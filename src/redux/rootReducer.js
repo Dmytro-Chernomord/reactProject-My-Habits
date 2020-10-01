@@ -3,6 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
 // import { getSelectedDate } from './date/dateActions';
 import modalAction from './modal/modalActions';
+import authAction from './auth/authAction';
 
 const userInitialState = {
   firstName: '',
@@ -17,7 +18,6 @@ const userInitialState = {
 
 const RootReducer = createReducer(userInitialState, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
-    console.log(actions.payload.user);
     return {
       avatar: actions.payload.user.avatar,
       email: actions.payload.user.email,
@@ -77,19 +77,20 @@ const quizReducer = createReducer(quizInitialState, {
     return { ...actions.payload.user.quizInfo };
   },
 });
-// export default combineReducers({
-//   user: RootReducer,
-//   habits: habitsReducer,
-//   // error: errorReducer,
-// });
-// function getModal() {
-//   const modal = useSelector(state => state.modal)
-//   return true;
-// }
+
 const modalReducer = createReducer(false, {
   [modalAction.toggleModal]: (state, _) => !state,
   // [actions.getOwnHabitsSuccess]: (state, _) => !state,
   [actions.addHabitSuccess]: (state, _) => !state,
+});
+
+const errorReducer = createReducer(null, {
+  [authAction.registrationError]: () => true,
+  [authAction.registrationRequest]: () => false,
+  [authAction.registrationSuccess]: () => false,
+  [authAction.loginError]: () => true,
+  [authAction.loginRequest]: () => false,
+  [authAction.loginSuccess]: () => false,
 });
 
 export default {
@@ -99,5 +100,5 @@ export default {
   payments: paymentsReducer,
   quiz: quizReducer,
   modal: modalReducer,
-  // error: errorReducer,
+  error: errorReducer,
 };
