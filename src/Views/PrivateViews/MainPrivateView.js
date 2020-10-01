@@ -2,7 +2,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import React, { Suspense, lazy, useState, useCallback } from 'react';
 import routes from '../../routes';
 import ProfilePage from '../PrivateViews/ProfilePage';
-import Achievements from '../PrivateViews/Achievements';
+import Achievements from './Achievements';
 import CheckListView from '../PrivateViews/CheckListView';
 import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import Modal from '../../components/Modal/Modal';
