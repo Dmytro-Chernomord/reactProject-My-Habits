@@ -28,4 +28,24 @@ const addHabit = habit => async dispatch => {
   }
 };
 
-export default { getOwnHabits, addHabit };
+const addUserInfo = dataUser => async dispatch => {
+  dispatch(actions.addUserInfoRequest());
+
+  try {
+    const response = await axios.patch('/users', { ...dataUser });
+    dispatch(actions.addUserInfoSuccess(response.data));
+  } catch (error) {
+    dispatch(actions.addUserInfoError(error.message));
+  }
+};
+
+const changePassword = data => async dispatch => {
+  try {
+    const response = await axios.post('/auth/updatePassword', { ...data });
+    console.log('Password', response);
+  } catch (error) {
+    console.log(error);
+    // dispatch(actions.addUserInfoError(error.message));
+  }
+};
+export default { getOwnHabits, addHabit, addUserInfo, changePassword };

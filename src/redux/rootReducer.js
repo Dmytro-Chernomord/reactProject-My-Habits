@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
+// import { getSelectedDate } from './date/dateActions';
 import modalAction from './modal/modalActions';
 
 const userInitialState = {
@@ -23,6 +24,15 @@ const RootReducer = createReducer(userInitialState, {
       registerData: actions.payload.user.registerData,
       phone: actions.payload.user.phone,
       id: actions.payload.user.id,
+    };
+  },
+  [actions.addUserInfoSuccess]: (_, { payload }) => {
+    return {
+      avatar: payload.avatar,
+      email: payload.email,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      phone: payload.phone,
     };
   },
 });
@@ -73,9 +83,9 @@ const quizReducer = createReducer(quizInitialState, {
 //   const modal = useSelector(state => state.modal)
 //   return true;
 // }
-const modalReducer = createReducer(true, {
+const modalReducer = createReducer(false, {
   [modalAction.toggleModal]: (state, _) => !state,
-  [actions.getOwnHabitsSuccess]: (state, _) => !state,
+  // [actions.getOwnHabitsSuccess]: (state, _) => !state,
   [actions.addHabitSuccess]: (state, _) => !state,
 });
 

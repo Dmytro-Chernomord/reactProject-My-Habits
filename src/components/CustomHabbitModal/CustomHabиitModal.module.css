@@ -1,4 +1,4 @@
-.containerProfile {
+/* .containerProfile {
   padding: 60px 63px;
   width: 842px;
   background-color: #f6f6f6;
@@ -12,7 +12,7 @@
 }
 .boxInfoProfile {
   display: flex;
-}
+} */
 .formProfile {
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   border-radius: 5px;
 }
 
-.boxAvatar {
+/* .boxAvatar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,9 +59,6 @@
   line-height: 1.2;
   color: #bdbdbd;
 }
-.linkPageAvatars:hover {
-  color: #43d190;
-}
 
 .typeSubscription {
   padding: 2px 8px;
@@ -71,4 +68,4 @@
   line-height: 1.2;
   background: linear-gradient(222.27deg, #2eebda 3.75%, #7cf7a3 94.69%);
   border-radius: 5px;
-}
+} */

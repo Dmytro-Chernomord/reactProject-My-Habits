@@ -1,0 +1,106 @@
+.title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #4f4f4f;
+}
+.progressBar {
+  display: inline-block;
+  width: 440px;
+  height: 6px;
+  background: #43d190;
+  box-shadow: 0px 2px 8px rgba(67, 209, 144, 0.4);
+  border-radius: 10px;
+}
+
+.progressNumber {
+  margin-left: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: right;
+  text-transform: capitalize;
+
+  color: #43d190;
+}
+
+.text {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #bdbdbd;
+}
+
+.border {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.description {
+  display: flex;
+}
+
+.description > :first-child {
+  margin-right: 50px;
+}
+
+.numberGreen {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #43d190;
+}
+
+.numberRed {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #fe6083;
+}
+
+.button1 {
+  position: absolute;
+  top: 30px;
+  right: 105px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.button1:focus,
+.button1:hover {
+  border-color: #43d190;
+}
+
+.button2 {
+  position: absolute;
+  top: 30px;
+  right: 45px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.button2:focus,
+.button2:hover {
+  border-color: #fe6083;
+}
