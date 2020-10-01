@@ -43,7 +43,7 @@ class HomeView extends Component {
                 <Link to={`${match.url}/ProfilePage`}>ProfilePage</Link>
               </li>
               <li>
-                <Link to={`${match.url}/CheckListPage`}>CheckListPage</Link>
+                <Link to={`${match.url}`}>CheckListPage</Link>
               </li>
               <li>
                 <Link to={`${match.url}/Achievments`}>AchievmentsPage</Link>
@@ -60,10 +60,7 @@ class HomeView extends Component {
               title <MainPrivateView />
             </header>
             <div>
-              <Route
-                path={`${match.path}/CheckListPage`}
-                component={CheckListPage}
-              />
+              <Route path={`${match.path}`} exact component={CheckListPage} />
               <Route
                 path={`${match.path}/NotificationsPage`}
                 component={NotificationsPage}
