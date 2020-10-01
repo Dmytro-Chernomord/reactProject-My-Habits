@@ -32,7 +32,7 @@ class ItemHabit extends Component {
   };
 
   render() {
-    const { name, efficiency } = this.props;
+    const { name, efficiency, _id } = this.props;
     const { data, index, enabled } = this.state;
 
     const stateBut1 = data[index] === true ? true : false;
@@ -63,6 +63,9 @@ class ItemHabit extends Component {
         >
           "-"
         </button>
+
+        <button onClick={this.props.settingHabit(_id)}>настройка</button>
+
         {enabled && (
           <>
             <div className={s.border}></div>
@@ -85,4 +88,6 @@ class ItemHabit extends Component {
   }
 }
 
-export default connect(null)(ItemHabit);
+export default connect(null, { settingHabit: habitsOperation.setSetting })(
+  ItemHabit,
+);

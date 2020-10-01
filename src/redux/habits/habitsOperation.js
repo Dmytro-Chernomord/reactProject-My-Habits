@@ -12,7 +12,7 @@ const sendData = ({ id, name, data }, index, key = false) => {
   };
 };
 
-const setHabitsData = data => {
+const setData = data => dispatch => {
   // dispatch(habitsAction.setHabitsDataRequest());
   axios
     .patch('/habits', {
@@ -24,4 +24,8 @@ const setHabitsData = data => {
     .catch(error => console.log(error));
 };
 
-export default { setHabitsData };
+const setSetting = id => dispatch => {
+  // console.log('id', id);
+};
+
+export default { setData, setSetting };
