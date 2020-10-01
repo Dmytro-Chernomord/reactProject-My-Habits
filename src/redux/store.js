@@ -29,6 +29,7 @@ const store = configureStore({
     payments: userData.payments,
     quiz: userData.quiz,
     date: dateReducer,
+    modal: userData.modal,
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: getDefaultMiddleware({

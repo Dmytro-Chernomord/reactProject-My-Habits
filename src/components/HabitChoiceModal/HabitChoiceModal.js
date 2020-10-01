@@ -16,9 +16,9 @@ export default function HabitChoiceModal({ onClick, onClose }) {
         <button type="button" onClick={() => onClose()}>
           Отмена
         </button>
-        <button type="button" onClick={() => onClose()}>
+        {/* <button type="button" onClick={() => onClose()}>
           X
-        </button>
+        </button> */}
       </div>
     </>
   );
