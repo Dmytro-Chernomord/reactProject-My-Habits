@@ -38,6 +38,11 @@ const RootReducer = createReducer(userInitialState, {
       phone: payload.phone,
     };
   },
+  [actions.addUserSubscriptionSuccess]: (state, { payload }) => ({
+    ...state,
+    subscription: payload.plan,
+  }),
+
   // [authAction.logoutSuccess]: (_, action) => console.log('action'),
 });
 
