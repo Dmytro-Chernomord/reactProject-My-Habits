@@ -10,6 +10,7 @@ import ModalContent from '../../components/ModalContent/ModalContent';
 export default function MainPrivateView() {
   const [showModal, setShowModal] = useState(false);
   const [layout, setLayout] = useState(false);
+  const [isAbleToDelete, setIsAbleToDelete] = useState(false);
 
   const toggleModal = useCallback(() => {
     setShowModal(prevShowModal => !prevShowModal);
@@ -28,6 +29,16 @@ export default function MainPrivateView() {
       </button>
       <button
         onClick={() => {
+          setLayout('CustomHabbitModal');
+          toggleModal();
+          setIsAbleToDelete(true);
+        }}
+        aria-label="Добавить привычку"
+      >
+        Редактировать привычку
+      </button>
+      <button
+        onClick={() => {
           setLayout('DailyResultModal');
           toggleModal();
         }}
@@ -37,7 +48,11 @@ export default function MainPrivateView() {
       </button>
       {showModal && (
         <ModalBackdrop onClose={toggleModal}>
-          <ModalContent onSave={toggleModal} layout={layout} />
+          <ModalContent
+            onSave={toggleModal}
+            layout={layout}
+            ableToDelete={isAbleToDelete}
+          />
         </ModalBackdrop>
       )}
     </>

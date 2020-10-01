@@ -17,18 +17,39 @@ import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import InterviewModal from '../InterviewModal/InterviewModal';
 import styles from './ModalContent.module.css';
 
-export default function ModalContent({ onSave, layout }) {
+const templateHabits = [
+  { id: '001', name: 'смотреть в окно' },
+  { id: '002', name: 'гладить кота' },
+  { id: '003', name: 'мыть пол' },
+  { id: '004', name: 'делать уборку' },
+  { id: '005', name: 'читать книги' },
+  { id: '006', name: 'помогать соседке' },
+];
+
+export default function ModalContent({ onSave, layout, ableToDelete }) {
   const [view, setView] = useState(layout);
+  const [data, setData] = useState({});
 
   return (
     <>
       {view === 'HabitChoiceModal' && (
         <HabitChoiceModal onClick={setView} onClose={onSave} />
       )}
-      {view === 'TemplateHabbit' && (
-        <HabitTemplateModal onClick={setView} onClose={onSave} />
+      {view === 'HabitTemplateModal' && (
+        <HabitTemplateModal
+          onClick={setView}
+          addData={setData}
+          onClose={onSave}
+          habits={templateHabits}
+        />
       )}
-      {view === 'CustomHabbit' && <CustomHabbitModal onClose={onSave} />}
+      {view === 'CustomHabbitModal' && (
+        <CustomHabbitModal
+          onClose={onSave}
+          ableDelete={ableToDelete}
+          habitInfo={data}
+        />
+      )}
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
     </>
