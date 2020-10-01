@@ -1,0 +1,14 @@
+.modalWrapper {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 784px;
+  padding: 60px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import userOperations from '../../redux/user/userOperation';
 import userSelectors from '../../redux/user/userSelector';
+import Input from '../UIcomponents/Input/Input';
 
 // import styles from './CreateHabbitForm.module.css';
 
@@ -68,13 +69,15 @@ export default function CustomHabbitModal({
     <div>
       <h2>Настройте привычку под себя</h2>
       <p>так Вам будет удобнее достичь своей цели</p>
-      <button type="button" onClick={onClose}></button>
+      {/* <button type="button" onClick={onClose}></button> */}
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="name">Название</label>
-        <input
+        <Input
           type="text"
-          name="name"
+          // name="name"
           id="name"
+          // error="wrong language"
+          // required
           value={name}
           onChange={handleInputChange}
         />
@@ -119,8 +122,8 @@ export default function CustomHabbitModal({
     </div>
   );
 }
-{
-  /* <CSSTransition
+
+/* <CSSTransition
         in={showAlert}
         classNames="alert"
         timeout={500}
@@ -140,4 +143,3 @@ export default function CustomHabbitModal({
       <button type="button" onClick={onClose}>
         Х
       </button> */
-}
