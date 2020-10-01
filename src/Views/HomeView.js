@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import authOperation from '../redux/auth/authOperation';
 import TempBut from '../components/TempBut';
 import NotificationsPage from '../components/NotificationsPage/NotificationsPage';
-import AchievementsPage from '../components/AchievementsPage/AchievementsPage';
+import Achievements from '../Views/PrivateViews/Achievements';
 import CheckListPage from '../components/CheckListPage/CheckListPage';
 import userOperation from '../redux/user/userOperation';
 import setToken from '../redux/auth/authOperation';
@@ -44,6 +44,9 @@ class HomeView extends Component {
               <li>
                 <Link to={`${match.url}/CheckListPage`}>CheckListPage</Link>
               </li>
+              <li>
+                <Link to={`${match.url}/Achievments`}>AchievmentsPage</Link>
+              </li>
             </ul>
             <TempBut onClick={this.props.onLogOut}>Log Out</TempBut>
           </div>
@@ -64,6 +67,10 @@ class HomeView extends Component {
               <Route
                 path={`${match.path}/ProfilePage`}
                 component={ProfilePage}
+              />
+              <Route
+                path={`${match.path}/Achievments`}
+                component={Achievements}
               />
             </div>
           </div>

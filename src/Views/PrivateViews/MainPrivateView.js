@@ -1,4 +1,10 @@
 import React, { Suspense, lazy, useState, useCallback } from 'react';
+import routes from '../../routes';
+import ProfilePage from '../PrivateViews/ProfilePage';
+import Achievements from './Achievements';
+import CheckListView from '../PrivateViews/CheckListView';
+import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
+import Modal from '../../components/Modal/Modal';
 import ModalBackdrop from '../../components/Modal/Modal';
 import ModalContent from '../../components/ModalContent/ModalContent';
 
