@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import userOperations from '../../redux/user/userOperation';
 import userSelectors from '../../redux/user/userSelector';
 
-// import styles from './CreateHabbitForm.module.css';
+import styles from './CustomHabbitModal.module.css';
 
 export default function CustomHabbitModal({
   onClose,
@@ -68,43 +68,55 @@ export default function CustomHabbitModal({
     <div>
       <h2>Настройте привычку под себя</h2>
       <p>так Вам будет удобнее достичь своей цели</p>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="name">Название</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="date">Дата старта</label>
-        <input
-          type="date"
-          name="date"
-          id="date"
-          value={date}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="time">Время</label>
-        <input
-          type="time"
-          name="time"
-          id="time"
-          value={time}
-          onChange={handleInputChange}
-        />
-        <label>Повторение</label>
-        <select
-          name="iteration"
-          id="iteration"
-          size="1"
-          onChange={handleInputChange}
-        >
-          <option value="eachDay">Ежедневно</option>
-          <option value="eachTwoDays">Раз в два дня</option>
-          <option value="Mn-Wd-Fr">ПН-СР-ПТ</option>
-          <option value="Tu-Th-Sa">ВТ-ЧТ-СБ</option>
-        </select>
+      <form onSubmit={handleFormSubmit} className={styles.formProfile}>
+        <label htmlFor="name" className={styles.label}>
+          <span className={styles.textLabel}>Название</span>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            onChange={handleInputChange}
+            className={styles.input}
+          />
+        </label>
+        <label htmlFor="date" className={styles.label}>
+          <span className={styles.textLabel}>Дата старта</span>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            value={date}
+            onChange={handleInputChange}
+            className={styles.input}
+          />
+        </label>
+        <label htmlFor="time" className={styles.label}>
+          <span className={styles.textLabel}>Время</span>
+          <input
+            type="time"
+            name="time"
+            id="time"
+            value={time}
+            onChange={handleInputChange}
+            className={styles.input}
+          />
+        </label>
+        <label className={styles.label}>
+          <span className={styles.textLabel}>Повторение</span>
+          <select
+            name="iteration"
+            id="iteration"
+            size="1"
+            onChange={handleInputChange}
+            className={styles.input}
+          >
+            <option value="eachDay">Ежедневно</option>
+            <option value="eachTwoDays">Раз в два дня</option>
+            <option value="Mn-Wd-Fr">ПН-СР-ПТ</option>
+            <option value="Tu-Th-Sa">ВТ-ЧТ-СБ</option>
+          </select>
+        </label>
         {ableDelete && (
           <button type="button" onClick={() => null}>
             Удалить привычку
