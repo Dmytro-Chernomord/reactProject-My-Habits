@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './AvatarView.module.css';
-import Header from '../../components/Header/Header';
-import userOperation from '../../redux/user/userOperation';
-import avatars from '../../avatars';
+import Header from '../../../components/Header/Header';
+import userOperation from '../../../redux/user/userOperation';
+import avatars from '../../../avatars';
 
 export default function AvatarView() {
   const dispatch = useDispatch();
