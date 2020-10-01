@@ -13,8 +13,8 @@ export default function CustomHabbitModal({
   habitInfo,
 }) {
   const [name, setName] = useState(habitInfo);
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
   const [iteration, setIteration] = useState('allday');
   // const habits = useSelector(userSelectors.getHabits);
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ export default function CustomHabbitModal({
           name="name"
           id="name"
           // error="wrong language"
-          // required
+          required
           value={name}
           onChange={handleInputChange}
         />
@@ -87,6 +87,7 @@ export default function CustomHabbitModal({
           name="date"
           id="date"
           value={date}
+          required
           onChange={handleInputChange}
         />
         <label htmlFor="time">Время</label>
@@ -95,6 +96,7 @@ export default function CustomHabbitModal({
           name="time"
           id="time"
           value={time}
+          required
           onChange={handleInputChange}
         />
         <label>Повторение</label>

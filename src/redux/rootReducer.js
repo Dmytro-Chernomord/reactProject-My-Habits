@@ -74,9 +74,9 @@ const quizReducer = createReducer(quizInitialState, {
 //   const modal = useSelector(state => state.modal)
 //   return true;
 // }
-const modalReducer = createReducer(true, {
+const modalReducer = createReducer(false, {
   [modalAction.toggleModal]: (state, _) => !state,
-  [actions.getOwnHabitsSuccess]: (state, _) => !state,
+  // [actions.getOwnHabitsSuccess]: (state, _) => !state,
   [actions.addHabitSuccess]: (state, _) => !state,
 });
 

@@ -13,6 +13,10 @@ import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
 import ProfilePage from './PrivateViews/ProfilePage';
 import { RightSideBar } from '../components/RightSideBar/RightSideBar';
 import Subscriptions from './PrivateViews/SubscriptionsViews/Subscriptions';
+import ModalBackdrop from '../components/Modal/Modal';
+import ModalContent from '../components/ModalContent/ModalContent';
+import toggle from '../redux/modal/modalOperation';
+import modalSelector from '../redux/modal/modalSelector';
 
 const styles = {
   display: 'flex',
@@ -21,6 +25,14 @@ const styles = {
 };
 
 class HomeView extends Component {
+  state = {
+    layout: 'HabitChoiceModal',
+  };
+
+  changeLayout = layout => {
+    this.setState({ layout });
+  };
+
   componentDidMount() {
     console.log(this.props.token);
     setToken.setToken(this.props.token);
@@ -66,10 +78,12 @@ class HomeView extends Component {
                 path={`${match.path}/NotificationsPage`}
                 component={NotificationsPage}
               />
-              <Route
-                path={`${match.path}/ProfilePage`}
-                component={ProfilePage}
-              />
+              <Route path={`${match.path}/ProfilePage`}>
+                <ProfilePage
+                  toggleModal={this.props.toggleModal}
+                  changeLayout={this.changeLayout}
+                />
+              </Route>
               <Route
                 path={`${match.path}/Achievments`}
                 component={Achievements}
@@ -84,6 +98,15 @@ class HomeView extends Component {
             <RightSideBar />
           </div>
         </div>
+        {this.props.showModal && (
+          <ModalBackdrop onClose={this.props.toggleModal}>
+            <ModalContent
+              onSave={this.props.toggleModal}
+              layout={this.state.layout}
+              // ableToDelete={isAbleToDelete}
+            />
+          </ModalBackdrop>
+        )}
       </>
     );
   }
@@ -91,9 +114,11 @@ class HomeView extends Component {
 
 const mapStateToProps = state => ({
   token: authSelector.isAuthenticated(state),
+  showModal: modalSelector.getModal(state),
 });
 
 export default connect(mapStateToProps, {
   onLogOut: authOperation.logOut,
   onGetOwnHabits: userOperation.getOwnHabits,
+  toggleModal: toggle.toggleModal,
 })(HomeView);
