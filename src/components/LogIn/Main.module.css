@@ -160,17 +160,19 @@
   color: #ffffff;
 }
 
-/* .backdrop {
+.backdrop {
   background-color: #ffffff;
   width: 70%;
   display: block;
   position: absolute;
   top: 0;
-
+  height: 100vh;
+  /* left: 8px; */
+  left: 0;
   bottom: 0;
-} */
+}
 
-/* .enter {
+.enter {
   transform: translateX(-100%);
 }
 
@@ -185,4 +187,4 @@
 .exitActive {
   transform: translateX(-100%);
   transition: transform 250ms linear;
-} */
+}

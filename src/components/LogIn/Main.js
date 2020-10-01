@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-// import { CSSTransition } from 'react-transition-group';
-// import LoginForm from './LoginForm';
-// import styles from './rightModal.module.css';
+import { CSSTransition } from 'react-transition-group';
+import LoginForm from './LoginForm';
+import s from './rightModal.module.css';
 import styles from './Main.module.css';
 // import Button from '../UIcomponents/Button/Button';
-// import RegisterForm from './RegisterForm';
+import RegisterForm from './RegisterForm';
 import { ReactComponent as Logo } from '../../images/homepage/svg/MakeitHabit.svg';
 import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
 
@@ -19,6 +19,10 @@ export default function Authorization() {
     setRightmodalView(!rightmodalView);
   };
   const closeOnBackdop = event => {
+    console.log('hi');
+    console.log('event.currentTarget);', event.currentTarget);
+    console.log('event.target);', event.target);
+
     if (event.target === event.currentTarget && modalView) {
       // changeModal();
       changeModal();
@@ -30,45 +34,72 @@ export default function Authorization() {
 
   return (
     <>
-      <div className={styles.HomeContainer}>
-        <div className={styles.Home}>
-          <div className={styles.HomeLeft}>
-            <div className={styles.HomeBackground1}></div>
-            <div className={styles.HomeBackground2}></div>
-          </div>
+      <div className={styles.div}>
+        <div className={styles.HomeContainer}>
+          <div className={styles.Home}>
+            <div className={styles.HomeLeft}>
+              <div className={styles.HomeBackground1}></div>
+              <div className={styles.HomeBackground2}></div>
+            </div>
 
-          <div className={styles.HomeCentre}>
-            <div className={styles.HomeBlock}>
-              <p className={styles.HomeTitle}>
-                «Курение ослабляет силу мысли и делает неясным её выражение».
-              </p>
-              <p className={styles.HomeTitleName}>Л.Н.Толстой</p>
-              <div className={styles.HomeLogo}>
-                <div className={styles.HomeLogoSvg}>
-                  <div className={styles.HomeLogoPng}>
-                    <Svg />
+            <div className={styles.HomeCentre}>
+              <div className={styles.HomeBlock}>
+                <p className={styles.HomeTitle}>
+                  «Курение ослабляет силу мысли и делает неясным её выражение».
+                </p>
+                <p className={styles.HomeTitleName}>Л.Н.Толстой</p>
+                <div className={styles.HomeLogo}>
+                  <div className={styles.HomeLogoSvg}>
+                    <div className={styles.HomeLogoPng}>
+                      <Svg />
+                    </div>
                   </div>
+                  <Logo />
                 </div>
-                <Logo />
-              </div>
-              <p className={styles.HomeTitleHi}>Добро пожаловать!</p>
-              <p className={styles.HomeTitleTxt}>
-                Войдите или зарегистрируйтесь, чтобы начать использовать наше
-                приложение
-              </p>
-              <div className={styles.HomeButtonBlock}>
-                <button className={styles.HomeButton}>
-                  <p className={styles.HomeEnterTxt}>Вход</p>
-                </button>
-                <button className={styles.HomeButton}>
-                  <p className={styles.HomeEnterTxt}>Регистрация</p>
-                </button>
+                <p className={styles.HomeTitleHi}>Добро пожаловать!</p>
+                <p className={styles.HomeTitleTxt}>
+                  Войдите или зарегистрируйтесь, чтобы начать использовать наше
+                  приложение
+                </p>
+                <CSSTransition
+                  in={rightmodalView}
+                  timeout={250}
+                  classNames={s}
+                  unmountOnExit
+                >
+                  <div className={s.backdrop}>
+                    {' '}
+                    <RegisterForm />
+                  </div>
+                </CSSTransition>{' '}
+                <CSSTransition
+                  in={modalView}
+                  timeout={250}
+                  classNames={styles}
+                  unmountOnExit
+                >
+                  <div className={styles.backdrop}>
+                    <LoginForm />
+                  </div>
+                </CSSTransition>
+                <div className={styles.HomeButtonBlock}>
+                  <button onClick={changeModal} className={styles.HomeButton}>
+                    <p className={styles.HomeEnterTxt}>Вход</p>
+                  </button>
+
+                  <button
+                    className={styles.HomeButton}
+                    onClick={rightchangeModal}
+                  >
+                    <p className={styles.HomeEnterTxt}>Регистрация</p>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles.HomeRight}>
-            <div className={styles.HomeBackground3}></div>
-            <div className={styles.HomeBackground4}></div>
+            <div className={styles.HomeRight}>
+              <div className={styles.HomeBackground3}></div>
+              <div className={styles.HomeBackground4}></div>
+            </div>
           </div>
         </div>
       </div>
