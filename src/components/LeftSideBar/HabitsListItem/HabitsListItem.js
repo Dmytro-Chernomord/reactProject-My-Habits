@@ -1,8 +1,8 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import styles from './habitsListItem.module.css';
+import styles from './HabitsListItem.module.css';
 
-function ContactListItem({ text }) {
+function HabitsListItem({ text }) {
   return (
     <li className={styles.habitsCards}>
       <p className={styles.habitsCardsItems}>{text}</p>
@@ -10,4 +10,4 @@ function ContactListItem({ text }) {
   );
 }
 
-export default ContactListItem;
+export default HabitsListItem;

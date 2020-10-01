@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './userMenu.module.css';
+import styles from './UserMenu.module.css';
 
 const UserMenu = ({ name, onLogout }) => (
   <div className={styles.container}>

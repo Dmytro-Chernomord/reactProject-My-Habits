@@ -11,6 +11,7 @@ import LeftSideBar from '../components/LeftSideBar/LeftSideBar';
 import authOperations from '../redux/auth/authOperation';
 import userOperations from '../redux/user/userOperation';
 import Button from '../components/Button/Button';
+import LeftSideBarView from '../Views/LeftSideBarView';
 axios.defaults.baseURL = 'https://make-it-habit-api.herokuapp.com';
 
 const Authorization = lazy(() =>
@@ -72,6 +73,7 @@ export default function App() {
           <Route path={routes.login} component={LoginView} />
           <Route path={routes.register} component={RegisterView} />
           <Route path={routes.privateMain} component={MainView} />
+          {/* <Route path={routes.privateMain} component={LeftSideBarView} /> */}
 
           {/* <PrivateRoute exact path={routes.contacts} component={ContactView} /> */}
           {/* <PublicRoute
