@@ -1,10 +1,8 @@
-import { ChildCare } from '@material-ui/icons';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import habitsSelector from '../../redux/habits/habitsSelector';
 import ItemHabit from './ItemHabit';
 import s from './CheckListPage.module.css';
-import { colors } from '@material-ui/core';
 
 const generateColor = () => {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
