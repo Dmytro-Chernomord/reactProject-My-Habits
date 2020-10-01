@@ -10,6 +10,7 @@ import userOperation from '../redux/user/userOperation';
 import setToken from '../redux/auth/authOperation';
 import authSelector from '../redux/auth/authSelector';
 import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
+import ProfilePage from './PrivateViews/ProfilePage';
 
 const styles = {
   display: 'flex',
@@ -38,9 +39,7 @@ class HomeView extends Component {
                 </Link>
               </li>
               <li>
-                <Link to={`${match.url}/AchievementsPage`}>
-                  AchievementsPage
-                </Link>
+                <Link to={`${match.url}/ProfilePage`}>ProfilePage</Link>
               </li>
               <li>
                 <Link to={`${match.url}/CheckListPage`}>CheckListPage</Link>
@@ -63,8 +62,8 @@ class HomeView extends Component {
                 component={NotificationsPage}
               />
               <Route
-                path={`${match.path}/AchievementsPage`}
-                component={AchievementsPage}
+                path={`${match.path}/ProfilePage`}
+                component={ProfilePage}
               />
             </div>
           </div>
