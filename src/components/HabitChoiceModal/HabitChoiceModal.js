@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import Button from '../UIcomponents/Button/Button';
+import styles from '../ModalContent/ModalContent.module.css';
 
 export default function HabitChoiceModal({ onClick, onClose }) {
   return (
     <>
       <div>
-        <h2>Добавление новой привычки</h2>
-        <p>Вы можете выбрать привычку из предложенных вариантов</p>
-        <button type="button" onClick={() => onClick('HabitTemplateModal')}>
-          Выбрать шаблонную привычку
-        </button>
-        <p>Или создать свою собственную</p>
-        <button type="button" onClick={() => onClick('CustomHabbitModal')}>
-          Добавить свою привычку
-        </button>
-        <button type="button" onClick={() => onClose()}>
-          Отмена
-        </button>
-        {/* <button type="button" onClick={() => onClose()}>
-          X
-        </button> */}
+        <h2 className={styles.modalTitle}>Добавление привычки</h2>
+        <p className={styles.modalText}>
+          Вы можете выбрать привычку из предложенных вариантов
+        </p>
+        <Button
+          type={'button'}
+          green={true}
+          handelClick={() => onClick('HabitTemplateModal')}
+          label={'Выбрать шаблонную привычку +'}
+        />
+        <p className={styles.modalText}>Или создать свою собственную</p>
+        <Button
+          type={'button'}
+          green={true}
+          handelClick={() => onClick('CustomHabbitModal')}
+          label={'Добавить свою привычку +'}
+        />
+        <div className={styles.emptyDiv}></div>
+        <Button
+          type={'button'}
+          green={false}
+          handelClick={() => onClose()}
+          label={'Отмена'}
+        />
       </div>
     </>
   );

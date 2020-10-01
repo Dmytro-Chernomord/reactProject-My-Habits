@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
-// import { createPortal } from 'react-dom';
-// import {
-//   Route,
-//   NavLink,
-//   Link,
-//   Switch,
-//   useRouteMatch,
-//   useHistory,
-//   useLocation,
-// } from 'react-router-dom';
-// import routes from '../../routes';
 import HabitChoiceModal from '../HabitChoiceModal/HabitChoiceModal';
 import HabitTemplateModal from '../HabitTemplateModal/HabitTemplateModal';
 import CustomHabbitModal from '../CustomHabbitModal/CustomHabbitModal';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import InterviewModal from '../InterviewModal/InterviewModal';
 import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
+import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from './ModalContent.module.css';
 
 const templateHabits = [
@@ -64,13 +54,7 @@ export default function ModalContent({ onSave, layout, ableToDelete }) {
       )}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
       {view !== 'InterviewModal' && (
-        <p onClick={onSave} className={styles.modalCloseBtn}>
-          <svg
-            xmlns="../../images/svg-icons/close.svg"
-            width="16px"
-            height="16px"
-          ></svg>
-        </p>
+        <ButtonClose type="button" onClick={onSave} />
       )}
     </div>
   );
