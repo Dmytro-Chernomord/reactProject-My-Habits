@@ -12,10 +12,12 @@ const userInitialState = {
   avatar: '',
   phone: '',
   id: '',
+  subscription: '',
 };
 
 const RootReducer = createReducer(userInitialState, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
+    console.log(actions.payload.user);
     return {
       avatar: actions.payload.user.avatar,
       email: actions.payload.user.email,
@@ -24,6 +26,7 @@ const RootReducer = createReducer(userInitialState, {
       registerData: actions.payload.user.registerData,
       phone: actions.payload.user.phone,
       id: actions.payload.user.id,
+      subscription: actions.payload.user.subscription,
     };
   },
   [actions.addUserInfoSuccess]: (_, { payload }) => {
