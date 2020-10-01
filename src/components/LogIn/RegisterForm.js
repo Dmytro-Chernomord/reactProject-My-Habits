@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from '../../redux/auth/authOperation';
 
-export default function RegisterView() {
+export default function RegisterForm() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

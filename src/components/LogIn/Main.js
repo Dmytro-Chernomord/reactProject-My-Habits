@@ -1,10 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
-import s from './Authorization.module.css';
-import Button from '../../components/Button/Button';
-import MainTitle from '../../components/MainTitle/MainTitle';
-import routes from '../../routes';
+import s from './Main.module.css';
 
 export default function Authorization() {
   return (
@@ -15,13 +11,6 @@ export default function Authorization() {
       <p>
         Войдите или зарегистрируйтесь, чтобы начать использовать наше приложение
       </p>
-
-      <NavLink to={routes.login}>
-        <Button text="Login" variety="login" />
-      </NavLink>
-      <NavLink to={routes.register}>
-        <Button text="Registration" variety="green" />
-      </NavLink>
     </div>
   );
 }

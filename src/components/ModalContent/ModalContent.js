@@ -10,57 +10,27 @@ import React, { useState, useEffect } from 'react';
 //   useLocation,
 // } from 'react-router-dom';
 // import routes from '../../routes';
-import AddHabbit from '../AddHabbit/AddHabbit';
-import TemplateHabbit from '../TemplateHabbit/TemplateHabbit';
-import CustomHabbit from '../CustomHabbit/CustomHabbit';
-import CigaretteAmount from '../CigaretteAmount/CigaretteAmount';
-import QuestionsModal from '../QuestionsModal/QuestionsModal';
+import HabitChoiceModal from '../HabitChoiceModal/HabitChoiceModal';
+import HabitTemplateModal from '../HabitTemplateModal/HabitTemplateModal';
+import CustomHabbitModal from '../CustomHabbitModal/CustomHabbitModal';
+import DailyResultModal from '../DailyResultModal/DailyResultModal';
+import InterviewModal from '../InterviewModal/InterviewModal';
 import styles from './ModalContent.module.css';
 
-export default function ModalContent({ onSave }) {
-  const [view, setView] = useState('AddHabbit');
+export default function ModalContent({ onSave, layout }) {
+  const [view, setView] = useState(layout);
 
-  //   const params = useRouteMatch();
-  //   const url = params.url;
   return (
     <>
-      {view === 'AddHabbit' && <AddHabbit onClick={setView} onClose={onSave} />}
-      {view === 'TemplateHabbit' && (
-        <TemplateHabbit onClick={setView} onClose={onSave} />
+      {view === 'HabitChoiceModal' && (
+        <HabitChoiceModal onClick={setView} onClose={onSave} />
       )}
-      {view === 'CustomHabbit' && <CustomHabbit onClose={onSave} />}
-      {view === 'CigaretteAmount' && <CigaretteAmount onClose={onSave} />}
-      {view === 'QuestionsModal' && <QuestionsModal onClose={onSave} />}
-
-      {/* <div>Добавление новой привычки</div>
-      <ul className={styles.list}>
-        <li>
-          <button type="button" onClick={() => setView('TemplateHabbit')}>
-            Выбрать шаблонную привычку
-          </button>
-        </li>
-        <li>
-          <button type="button" onClick={() => setView('CustomHabbit')}>
-            Добавить свою привычку
-          </button>
-        </li>
-      </ul> */}
-      {/* <ul className={styles.info_list}>
-        <li>
-          <Link exact to={`${url}/template`} className={styles.info_item}>
-            Выбрать шаблонную привычку
-          </Link>
-        </li>
-        <li>
-          <Link to={`${url}/custom`} className={styles.info_item}>
-            Добавить свою привычку
-          </Link>
-        </li>
-      </ul> */}
-      {/* <Switch>
-        <Route path={`${url}/template`} render={() => <TemplateHabbit />} />
-        <Route path={`${url}/custom`} render={() => <CustomHabbit />} />
-      </Switch> */}
+      {view === 'TemplateHabbit' && (
+        <HabitTemplateModal onClick={setView} onClose={onSave} />
+      )}
+      {view === 'CustomHabbit' && <CustomHabbitModal onClose={onSave} />}
+      {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
+      {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
     </>
   );
 }
