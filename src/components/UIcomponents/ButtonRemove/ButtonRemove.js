@@ -1,4 +1,3 @@
-// created by Elena
 import React from 'react';
 import styles from './ButtonRemove.module.css';
 import PropTypes from 'prop-types';
