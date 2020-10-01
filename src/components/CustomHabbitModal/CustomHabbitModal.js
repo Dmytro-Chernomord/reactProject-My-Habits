@@ -16,7 +16,7 @@ export default function CustomHabbitModal({
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [iteration, setIteration] = useState('');
-  const habits = useSelector(userSelectors.getHabits);
+  // const habits = useSelector(userSelectors.getHabits);
   const dispatch = useDispatch();
   const onSubmit = useCallback(
     habit => dispatch(userOperations.addHabit(habit)),

@@ -53,13 +53,13 @@ export default function ModalContent({ onSave, layout, ableToDelete }) {
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
       {view !== 'InterviewModal' && (
-        <button type="button" onClick={onSave} className={styles.modalCloseBtn}>
+        <p onClick={onSave} className={styles.modalCloseBtn}>
           <svg
             xmlns="../../images/svg-icons/close.svg"
             width="16px"
             height="16px"
           ></svg>
-        </button>
+        </p>
       )}
     </div>
   );
