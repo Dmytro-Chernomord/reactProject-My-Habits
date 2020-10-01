@@ -28,9 +28,9 @@ export default function HabitTemplateModal({
       <button type="button" onClick={() => onClick('HabitChoiceModal')}>
         Назад
       </button>
-      <button type="button" onClick={() => onClose()}>
+      {/* <button type="button" onClick={() => onClose()}>
         X
-      </button>
+      </button> */}
     </div>
   );
 }
