@@ -15,14 +15,14 @@ export default function CustomHabbitModal({
   const [name, setName] = useState(habitInfo);
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [iteration, setIteration] = useState('');
+  const [iteration, setIteration] = useState('allday');
   // const habits = useSelector(userSelectors.getHabits);
   const dispatch = useDispatch();
   const onSubmit = useCallback(
     habit => dispatch(userOperations.addHabit(habit)),
     [dispatch],
   );
-  const planningTime = date + ' ' + time;
+  const planningTime = date + 'T' + time + ':00.000Z';
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -51,7 +51,7 @@ export default function CustomHabbitModal({
 
   const handleFormSubmit = e => {
     e.preventDefault();
-
+    console.log('hi');
     const data = { name, planningTime, iteration };
     onSubmit(data);
 
@@ -72,9 +72,9 @@ export default function CustomHabbitModal({
       {/* <button type="button" onClick={onClose}></button> */}
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="name">Название</label>
-        <Input
+        <input
           type="text"
-          // name="name"
+          name="name"
           id="name"
           // error="wrong language"
           // required
@@ -104,21 +104,23 @@ export default function CustomHabbitModal({
           size="1"
           onChange={handleInputChange}
         >
-          <option value="eachDay">Ежедневно</option>
-          <option value="eachTwoDays">Раз в два дня</option>
-          <option value="Mn-Wd-Fr">ПН-СР-ПТ</option>
-          <option value="Tu-Th-Sa">ВТ-ЧТ-СБ</option>
+          <option value="allday">Ежедневно</option>
+          <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
+          <option value="weekend">Сб-Вс</option>
+          <option value="firstset">Пн-Ср-Пт</option>
+          <option value="secondset">ВТ-ЧТ-СБ</option>
         </select>
-      </form>
-      {ableDelete && (
-        <button type="button" onClick={() => null}>
-          Удалить привычку
+
+        {ableDelete && (
+          <button type="button" onClick={() => null}>
+            Удалить привычку
+          </button>
+        )}
+        <button type="button" onClick={onClose}>
+          Отмена
         </button>
-      )}
-      <button type="button" onClick={onClose}>
-        Отмена
-      </button>
-      <button type="submit">Сохранить</button>
+        <button type="submit">Сохранить</button>
+      </form>
     </div>
   );
 }

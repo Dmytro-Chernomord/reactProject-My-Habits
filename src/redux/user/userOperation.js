@@ -22,7 +22,6 @@ const addHabit = habit => async dispatch => {
       'https://make-it-habit-api.herokuapp.com/habits',
       { ...habit },
     );
-    console.log(response.data);
     dispatch(actions.addHabitSuccess(response.data));
   } catch (error) {
     dispatch(actions.addHabitError(error.message));
