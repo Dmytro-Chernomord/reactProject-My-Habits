@@ -11,6 +11,7 @@ import setToken from '../redux/auth/authOperation';
 import authSelector from '../redux/auth/authSelector';
 import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
 import ProfilePage from './PrivateViews/ProfilePage';
+import Subscriptions from './PrivateViews/SubscriptionsViews/Subscriptions';
 
 const styles = {
   display: 'flex',
@@ -47,6 +48,9 @@ class HomeView extends Component {
               <li>
                 <Link to={`${match.url}/Achievments`}>AchievmentsPage</Link>
               </li>
+              <li>
+                <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
+              </li>
             </ul>
             <TempBut onClick={this.props.onLogOut}>Log Out</TempBut>
           </div>
@@ -71,6 +75,10 @@ class HomeView extends Component {
               <Route
                 path={`${match.path}/Achievments`}
                 component={Achievements}
+              />{' '}
+              <Route
+                path={`${match.path}/Subscriptions`}
+                component={Subscriptions}
               />
             </div>
           </div>
