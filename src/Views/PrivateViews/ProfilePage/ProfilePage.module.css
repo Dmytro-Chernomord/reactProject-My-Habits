@@ -59,6 +59,9 @@
   line-height: 1.2;
   color: #bdbdbd;
 }
+.linkPageAvatars:hover {
+  color: #43d190;
+}
 
 .typeSubscription {
   padding: 2px 8px;

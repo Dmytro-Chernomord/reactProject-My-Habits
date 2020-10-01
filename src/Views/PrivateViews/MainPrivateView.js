@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../routes';
-import ProfilePage from '../PrivateViews/ProfilePage';
+import ProfilePage from './ProfilePage/ProfilePage';
 import Achievements from './Achievements';
 import CheckListView from '../PrivateViews/CheckListView';
 import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
