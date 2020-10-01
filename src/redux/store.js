@@ -30,7 +30,6 @@ const store = configureStore({
     quiz: userData.quiz,
     date: dateReducer,
     modal: userData.modal,
-    error: userData.error,
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: getDefaultMiddleware({

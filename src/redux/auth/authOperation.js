@@ -17,28 +17,26 @@ const logIn = userData => dispatch => {
       setToken(response.data.access_token);
       dispatch(authAction.loginSuccess(response.data));
     })
-    // .catch(er => er.message);
-    .catch(error => dispatch(authAction.loginError(error.message)));
+    .catch(er => console.log(er));
+  // .catch(error => dispatch(authAction.loginError(error)));
 };
 
 const registration = userData => dispatch => {
   dispatch(authAction.registrationRequest());
 
-  axios
-    .post('/auth/registration', userData)
-    .then(response => {
-      //? autologin?
-      axios
-        .post('/auth/login', userData)
-        .then(response => {
-          console.log(response);
-          setToken(response.data.access_token);
-          dispatch(authAction.loginSuccess(response.data));
-        })
-        .catch(er => console.log(er));
-      dispatch(authAction.registrationSuccess(response.data));
-    })
-    .catch(error => dispatch(authAction.registrationError(error)));
+  axios.post('/auth/registration', userData).then(response => {
+    //? autologin?
+    axios
+      .post('/auth/login', userData)
+      .then(response => {
+        console.log(response);
+        setToken(response.data.access_token);
+        dispatch(authAction.loginSuccess(response.data));
+      })
+      .catch(er => console.log(er));
+    dispatch(authAction.registrationSuccess(response.data));
+  });
+  // .catch(error => dispatch(authAction.registrationError(error)));
 };
 
 const logOut = () => dispatch => {
