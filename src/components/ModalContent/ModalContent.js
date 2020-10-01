@@ -31,6 +31,11 @@ export default function ModalContent({ onSave, layout }) {
       {view === 'CustomHabbit' && <CustomHabbitModal onClose={onSave} />}
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
+      {view !== 'InterviewModal' && (
+        <button type="button" onClick={onSave}>
+          Х
+        </button>
+      )}
     </>
   );
 }

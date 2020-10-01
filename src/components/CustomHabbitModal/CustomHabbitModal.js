@@ -8,9 +8,9 @@ export default function CustomHabbitModal({ onClose }) {
       <h2>Настройте привычку под себя</h2>
       <p>так Вам будет удобнее достичь своей цели</p>
       <CustomHabbitForm onClose={onClose} />
-      <button type="button" onClick={onClose}>
+      {/* <button type="button" onClick={onClose}>
         Х
-      </button>
+      </button> */}
     </div>
   );
 }
