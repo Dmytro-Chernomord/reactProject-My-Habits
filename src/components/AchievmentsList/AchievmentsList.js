@@ -20,6 +20,8 @@ const AchievmentsList = function () {
   const threeCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el >= 3,
   );
+
+  console.log(daysDontSmoke.length > 0);
   return (
     <ul className={styles.list}>
       <li
@@ -46,7 +48,7 @@ const AchievmentsList = function () {
         <p className={styles.text}>Отказ от 5 сигарет</p>
       </li>
       <li
-        className={daysDontSmoke.lengh > 0 ? styles.item_success : styles.item}
+        className={daysDontSmoke.length > 0 ? styles.item_success : styles.item}
       >
         <p className={styles.text}>Не курю 1 день</p>
       </li>
