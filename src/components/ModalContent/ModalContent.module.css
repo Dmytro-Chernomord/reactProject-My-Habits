@@ -4,7 +4,7 @@
   max-width: 784px;
   padding: 60px;
   box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
-  border-radius: 10px;
+  text-align: center;
 }
 
 .modalCloseBtn {
@@ -12,4 +12,27 @@
   top: 0;
   right: 0;
   background-color: #fff;
+}
+
+.modalTitle {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 70px;
+  font-size: 26px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.modalText {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  font-size: 18px;
+  color: #bdbdbd;
+  text-align: center;
+}
+
+.emptyDiv {
+  height: 118px;
 }
