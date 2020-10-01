@@ -1,28 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import Header from '../../../components/Header/Header';
 import style from './Subscriptions.module.css';
 import Button from '../../../components/UIcomponents/Button/Button';
 import Payments from '../../../components/Payment/Payment';
-import operathions from '../../../redux/user/userOperation';
 
 const Subscriptions = () => {
-  const [plan, setPlan] = useState('');
-  const dispatch = useDispatch();
-
-  const changeSubscription = useCallback(() => {
-    dispatch(operathions.changeSubscription({ plan }));
-  }, [dispatch, plan]);
-
-  const handleSubscription = e => {
-    setPlan(e.target.textContent);
-  };
-
-  const pushSubsrpt = () => {
-    console.log({ plan });
-    changeSubscription();
-  };
-
   return (
     <>
       <Header title="Подписки" />
@@ -30,21 +12,13 @@ const Subscriptions = () => {
         <h2 className={style.header}>Тип подписки</h2>
 
         <div className={style.subscribe}>
-          <button
-            type="button"
-            className={style.btnNoob}
-            onClick={handleSubscription}
-          >
+          <button type="button" className={style.btnNoob}>
             Noob
           </button>
           <p className={style.color}> 30 дней — $4.99</p>
         </div>
         <div className={style.subscribe}>
-          <button
-            type="button"
-            className={style.btnBasic}
-            onClick={handleSubscription}
-          >
+          <button type="button" className={style.btnBasic}>
             Basic
           </button>
           <p className={style.color}>
@@ -52,11 +26,7 @@ const Subscriptions = () => {
           </p>
         </div>
         <div className={style.subscribe}>
-          <button
-            type="button"
-            className={style.btnStandart}
-            onClick={handleSubscription}
-          >
+          <button type="button" className={style.btnStandart}>
             Standart
           </button>
           <p className={style.color}>
@@ -64,11 +34,7 @@ const Subscriptions = () => {
           </p>
         </div>
         <div className={style.subscribe}>
-          <button
-            type="button"
-            className={style.btnPremium}
-            onClick={handleSubscription}
-          >
+          <button type="button" className={style.btnPremium}>
             Premium
           </button>
           <p className={style.color}>
@@ -76,29 +42,20 @@ const Subscriptions = () => {
           </p>
         </div>
         <div className={style.subscribe}>
-          <button
-            type="button"
-            className={style.btnUltra}
-            onClick={handleSubscription}
-          >
+          <button type="button" className={style.btnUltra}>
             Ultra
           </button>
           <p className={style.color}>
-            12 месяцев — $53.89 <span className={style.span}>- 10%</span>
+            312 месяцев — $53.89 <span className={style.span}>- 10%</span>
           </p>
         </div>
 
         <div className={style.position}>
-          <Button
-            type="button"
-            label="Изменить подписку"
-            handelClick={pushSubsrpt}
-          />
+          <Button type="button" label="Изменить подписку" />
         </div>
       </div>
       <Payments />
     </>
   );
 };
-
 export default Subscriptions;
