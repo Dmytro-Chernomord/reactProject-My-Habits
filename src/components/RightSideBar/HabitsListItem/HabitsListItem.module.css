@@ -1,0 +1,56 @@
+.ListItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 0 30px;
+  font-family: 'Rubik';
+  font-size: 14px;
+  line-height: 1.21;
+  position: relative;
+}
+
+.ListItem:not(:last-child) {
+  margin-bottom: 50px;
+}
+.ListItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -42px;
+  height: 36px;
+  border-left: 2px dashed #e0e0e0;
+  left: 45px;
+}
+.Text {
+  margin-right: 10px;
+  display: inline-block;
+  width: 211px;
+  color: #4f4f4f;
+  font-weight: 400;
+}
+
+.TimeBox {
+  width: 40px;
+  margin-right: 35px;
+}
+
+.Through {
+  composes: Text;
+  text-decoration-line: line-through;
+  color: #bdbdbd;
+}
+
+.Time {
+  display: inline-block;
+  color: #43d190;
+  font-weight: 500;
+}
+
+.CheckedBox {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #43d190;
+  background-image: url(../../../images/svg-icons/mark.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
