@@ -1,20 +1,25 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
+import userOperations from '../../../redux/user/userOperation';
+import userSelectors from '../../../redux/user/userSelector';
 
 // import styles from './CreateHabbitForm.module.css';
 
-export default function CustomHabbitForm({ onClose }) {
+export default function CustomHabbitForm({ onClose, ableDelete = false }) {
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [iteration, setIteration] = useState('');
-  //   const items = useSelector(contactsSelectors.getItems);
-  //   const dispatch = useDispatch();
-  //   const onSubmit = useCallback(
-  //     contact => dispatch(contactsOperations.addContact(contact)),
-  //     [dispatch],
-  //   );
+  const habits = useSelector(userSelectors.getHabits);
+  const dispatch = useDispatch();
+  const onSubmit = useCallback(
+    habit => dispatch(userOperations.addHabit(habit)),
+    [dispatch],
+  );
+  const planningTime = date + ' ' + time;
+
+  console.log(ableDelete);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -41,24 +46,24 @@ export default function CustomHabbitForm({ onClose }) {
     }
   };
 
-  //   const handleFormSubmit = e => {
-  //     e.preventDefault();
+  const handleFormSubmit = e => {
+    e.preventDefault();
 
-  //       const data = { name, date, time, iteration };
-  //       onSubmit(data);
+    const data = { name, planningTime, iteration };
+    onSubmit(data);
 
-  //     resetForm();
-  //   };
+    resetForm();
+  };
 
-  //   const resetForm = () => {
-  //     setName('');
-  //     setDate('');
-  //      setTime('');
-  //      setIteration('');
-  //   };
+  const resetForm = () => {
+    setName('');
+    setDate('');
+    setTime('');
+    setIteration('');
+  };
 
   return (
-    <form onSubmit={() => null}>
+    <form onSubmit={handleFormSubmit}>
       <label htmlFor="name">Название</label>
       <input
         type="text"
@@ -95,9 +100,11 @@ export default function CustomHabbitForm({ onClose }) {
         <option value="Mn-Wd-Fr">ПН-СР-ПТ</option>
         <option value="Tu-Th-Sa">ВТ-ЧТ-СБ</option>
       </select>
-      <button type="button" onClick={() => null}>
-        Удалить привычку
-      </button>
+      {ableDelete && (
+        <button type="button" onClick={() => null}>
+          Удалить привычку
+        </button>
+      )}
       <button type="button" onClick={onClose}>
         Отмена
       </button>

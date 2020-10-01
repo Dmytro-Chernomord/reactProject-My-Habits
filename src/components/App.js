@@ -1,7 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { Switch, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import routes from '../routes';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
