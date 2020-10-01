@@ -19,7 +19,6 @@ const Subscriptions = () => {
   };
 
   const pushSubsrpt = () => {
-    console.log({ plan });
     changeSubscription();
   };
 
