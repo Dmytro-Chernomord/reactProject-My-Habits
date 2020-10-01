@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../routes';
 import ProfilePage from '../PrivateViews/ProfilePage';
 import Achievements from './Achievements';
@@ -7,6 +8,8 @@ import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import Modal from '../../components/Modal/Modal';
 import ModalBackdrop from '../../components/Modal/Modal';
 import ModalContent from '../../components/ModalContent/ModalContent';
+import toggle from '../../redux/modal/modalOperation';
+import modalSelector from '../../redux/modal/modalSelector';
 
 // const ChecklistView = lazy(() =>
 //   import(
@@ -14,13 +17,16 @@ import ModalContent from '../../components/ModalContent/ModalContent';
 //   ),
 // );
 export default function MainPrivateView() {
-  const [showModal, setShowModal] = useState(false);
+  const showModal = useSelector(modalSelector.getModal);
+  const dispatch = useDispatch();
+  // const [showModal, setShowModal] = useState(false);
   const [layout, setLayout] = useState(false);
   const [isAbleToDelete, setIsAbleToDelete] = useState(false);
-
-  const toggleModal = useCallback(() => {
-    setShowModal(prevShowModal => !prevShowModal);
-  }, []);
+  console.log(showModal);
+  // const toggleModal = useCallback(() => {
+  //   setShowModal(prevShowModal => !prevShowModal);
+  // }, []);
+  const toggleModal = () => dispatch(toggle.toggleModal());
 
   return (
     <>

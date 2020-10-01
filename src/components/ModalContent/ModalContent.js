@@ -15,6 +15,7 @@ import HabitTemplateModal from '../HabitTemplateModal/HabitTemplateModal';
 import CustomHabbitModal from '../CustomHabbitModal/CustomHabbitModal';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import InterviewModal from '../InterviewModal/InterviewModal';
+import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
 import styles from './ModalContent.module.css';
 
 const templateHabits = [
@@ -58,6 +59,9 @@ export default function ModalContent({ onSave, layout, ableToDelete }) {
         />
       )}
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
+      {view === 'ChangePasswordModal' && (
+        <ChangePasswordModal onClose={onSave} />
+      )}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
       {view !== 'InterviewModal' && (
         <p onClick={onSave} className={styles.modalCloseBtn}>

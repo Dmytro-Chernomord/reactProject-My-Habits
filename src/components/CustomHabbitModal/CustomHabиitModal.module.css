@@ -1,0 +1,71 @@
+/* .containerProfile {
+  padding: 60px 63px;
+  width: 842px;
+  background-color: #f6f6f6;
+}
+.titleProfile {
+  margin: 0 0 30px 0;
+  text-align: start;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 1.19;
+}
+.boxInfoProfile {
+  display: flex;
+} */
+.formProfile {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.textLabel {
+  display: block;
+  width: 100px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.16;
+}
+
+.input {
+  width: 345px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+/* .boxAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.linkPageAvatars {
+  margin-top: 10px;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #bdbdbd;
+}
+
+.typeSubscription {
+  padding: 2px 8px;
+  margin: 20px 0 15px 0;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.2;
+  background: linear-gradient(222.27deg, #2eebda 3.75%, #7cf7a3 94.69%);
+  border-radius: 5px;
+} */
