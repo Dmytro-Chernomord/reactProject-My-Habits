@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
+// import { getSelectedDate } from './date/dateActions';
+import modalAction from './modal/modalActions';
 
 const userInitialState = {
   firstName: '',
@@ -30,10 +32,7 @@ const habitsReducer = createReducer([], {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return actions.payload.habits;
   },
-  [actions.addHabitSuccess]: (state, action) => [
-    ...state,
-    action.payload.habits,
-  ],
+  [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
 });
 
 const cigarettesInitialStates = {
@@ -71,6 +70,15 @@ const quizReducer = createReducer(quizInitialState, {
 //   habits: habitsReducer,
 //   // error: errorReducer,
 // });
+// function getModal() {
+//   const modal = useSelector(state => state.modal)
+//   return true;
+// }
+const modalReducer = createReducer(true, {
+  [modalAction.toggleModal]: (state, _) => !state,
+  [actions.getOwnHabitsSuccess]: (state, _) => !state,
+  [actions.addHabitSuccess]: (state, _) => !state,
+});
 
 export default {
   user: RootReducer,
@@ -78,6 +86,6 @@ export default {
   cigarettes: cigarettesReducer,
   payments: paymentsReducer,
   quiz: quizReducer,
-
+  modal: modalReducer,
   // error: errorReducer,
 };

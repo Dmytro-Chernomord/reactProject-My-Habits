@@ -1,0 +1,18 @@
+.button {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border: 0;
+  cursor: pointer;
+  background-color: #fff;
+  background-image: url(../../../images/svg-icons/trash-grey.svg),
+    url(../../../images/svg-icons/trash-red.svg);
+  background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center;
+}
+.button:hover,
+.button:focus {
+  background-size: 0, auto;
+}
