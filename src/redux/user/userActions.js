@@ -8,6 +8,10 @@ const addHabitRequest = createAction('contacts/addHabitRequest');
 const addHabitSuccess = createAction('contacts/addHabitSuccess');
 const addHabitError = createAction('contacts/addHabitError');
 
+const addUserInfoRequest = createAction('contacts/addUserInfoRequest');
+const addUserInfoSuccess = createAction('contacts/addUserInfoSuccess');
+const addUserInfoError = createAction('contacts/addUserInfoError');
+
 export default {
   getOwnHabitsRequest,
   getOwnHabitsSuccess,
@@ -15,4 +19,7 @@ export default {
   addHabitRequest,
   addHabitSuccess,
   addHabitError,
+  addUserInfoRequest,
+  addUserInfoSuccess,
+  addUserInfoError,
 };

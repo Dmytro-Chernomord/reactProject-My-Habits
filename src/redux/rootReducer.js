@@ -24,6 +24,15 @@ const RootReducer = createReducer(userInitialState, {
       id: actions.payload.user.id,
     };
   },
+  [actions.addUserInfoSuccess]: (_, { payload }) => {
+    return {
+      avatar: payload.avatar,
+      email: payload.email,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      phone: payload.phone,
+    };
+  },
 });
 
 const habitsReducer = createReducer([], {
