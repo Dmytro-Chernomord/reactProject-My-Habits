@@ -8,7 +8,9 @@ h2 {
 .span {
   color: #43d190;
 }
-
+.div {
+  background-color: #f6f6f6;
+}
 .subscribe {
   margin-left: 77px;
   display: inline-flex;
