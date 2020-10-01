@@ -22,12 +22,14 @@ const AchievmentsList = function () {
   );
   return (
     <ul className={styles.list}>
-      <li className={daysDontSmoke ? styles.item_success : styles.item}>
+      <li
+        className={daysDontSmoke.length > 0 ? styles.item_success : styles.item}
+      >
         <p className={styles.text}>Отказ от одной сигареты</p>
       </li>
       <li
         className={
-          daysDontSmoke.length || threeCigarettesLess
+          daysDontSmoke.length > 0 || threeCigarettesLess
             ? styles.item_success
             : styles.item
         }
@@ -36,14 +38,16 @@ const AchievmentsList = function () {
       </li>
       <li
         className={
-          daysDontSmoke.length || fiveCigarettesLess
+          daysDontSmoke.length > 0 || fiveCigarettesLess
             ? styles.item_success
             : styles.item
         }
       >
         <p className={styles.text}>Отказ от 5 сигарет</p>
       </li>
-      <li className={daysDontSmoke.length ? styles.item_success : styles.item}>
+      <li
+        className={daysDontSmoke.lengh > 0 ? styles.item_success : styles.item}
+      >
         <p className={styles.text}>Не курю 1 день</p>
       </li>
       <li
