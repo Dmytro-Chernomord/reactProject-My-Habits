@@ -10,7 +10,7 @@ import userOperation from '../redux/user/userOperation';
 import setToken from '../redux/auth/authOperation';
 import authSelector from '../redux/auth/authSelector';
 import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
-import ProfilePage from './PrivateViews/ProfilePage';
+import ProfilePage from './PrivateViews/ProfilePage/ProfilePage';
 import { RightSideBar } from '../components/RightSideBar/RightSideBar';
 import Subscriptions from './PrivateViews/SubscriptionsViews/Subscriptions';
 import ModalBackdrop from '../components/Modal/Modal';
