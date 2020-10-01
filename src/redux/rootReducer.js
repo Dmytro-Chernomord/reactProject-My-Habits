@@ -65,10 +65,10 @@ const paymentsReducer = createReducer([], {
 });
 
 const quizInitialState = {
-  cigarettePackPrice: 1,
-  cigarettePerDay: 1,
-  cigarettePerTime: 1,
-  smokeYears: 1,
+  cigarettePackPrice: 0,
+  cigarettePerDay: 0,
+  cigarettePerTime: 0,
+  smokeYears: 0,
 };
 
 const quizReducer = createReducer(quizInitialState, {
