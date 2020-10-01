@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../../../components/Header/Header';
 import style from './Subscriptions.module.css';
 import Button from '../../../components/UIcomponents/Button/Button';
+import Payments from '../../../components/Payment/Payment';
 
 const Subscriptions = () => {
   return (
@@ -52,6 +53,7 @@ const Subscriptions = () => {
       <div className={style.position}>
         <Button type="button" label="Изменить подписку" />
       </div>
+      <Payments />
     </>
   );
 };
