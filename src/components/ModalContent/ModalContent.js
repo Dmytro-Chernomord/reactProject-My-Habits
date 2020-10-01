@@ -28,7 +28,7 @@ const templateHabits = [
 
 export default function ModalContent({ onSave, layout, ableToDelete }) {
   const [view, setView] = useState(layout);
-  const [data, setData] = useState({});
+  const [data, setData] = useState('');
 
   return (
     <>
