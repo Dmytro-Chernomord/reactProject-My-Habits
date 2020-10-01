@@ -15,4 +15,11 @@ export default [
     component: lazy(() => import('./Views/HomeView')),
     private: true,
   },
+  {
+    path: '/home',
+    label: 'Home',
+    exact: false,
+    component: lazy(() => import('./Views/HomeView')),
+    private: true,
+  },
 ];
