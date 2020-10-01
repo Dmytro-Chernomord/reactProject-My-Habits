@@ -6,11 +6,11 @@ export default function HabitChoiceModal({ onClick, onClose }) {
       <div>
         <h2>Добавление новой привычки</h2>
         <p>Вы можете выбрать привычку из предложенных вариантов</p>
-        <button type="button" onClick={() => onClick('TemplateHabbit')}>
+        <button type="button" onClick={() => onClick('HabitTemplateModal')}>
           Выбрать шаблонную привычку
         </button>
         <p>Или создать свою собственную</p>
-        <button type="button" onClick={() => onClick('CustomHabbit')}>
+        <button type="button" onClick={() => onClick('CustomHabbitModal')}>
           Добавить свою привычку
         </button>
         <button type="button" onClick={() => onClose()}>
