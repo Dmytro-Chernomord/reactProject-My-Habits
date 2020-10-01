@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
+import { getSelectedDate } from './date/dateActions';
 
 const userInitialState = {
   firstName: '',
