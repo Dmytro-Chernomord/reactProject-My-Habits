@@ -43,7 +43,7 @@ const RootReducer = createReducer(userInitialState, {
     subscription: payload.plan,
   }),
 
-  // [authAction.logoutSuccess]: (_, action) => console.log('action'),
+  [authAction.logoutSuccess]: () => userInitialState,
 });
 
 const habitsReducer = createReducer([], {
@@ -53,6 +53,7 @@ const habitsReducer = createReducer([], {
   [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
   [habitsActions.removeHabitSuccess]: (state, action) =>
     state.filter(habit => habit._id !== action.payload),
+  [authAction.logoutSuccess]: () => [],
 });
 
 const cigarettesInitialStates = {
@@ -63,6 +64,7 @@ const cigarettesReducer = createReducer(cigarettesInitialStates, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return { ...actions.payload.user.cigarettes };
   },
+  [authAction.logoutSuccess]: () => cigarettesInitialStates,
 });
 
 const paymentsReducer = createReducer([], {
@@ -70,6 +72,7 @@ const paymentsReducer = createReducer([], {
     console.log(actions.payload.user.payments);
     return actions.payload.user.payments;
   },
+  [authAction.logoutSuccess]: () => [],
 });
 
 const quizInitialState = {
@@ -84,6 +87,7 @@ const quizReducer = createReducer(quizInitialState, {
     console.log(actions.payload.user.quizInfo);
     return { ...actions.payload.user.quizInfo };
   },
+  [authAction.logoutSuccess]: () => quizInitialState,
 });
 
 const modalReducer = createReducer(false, {
