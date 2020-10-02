@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 import userOperations from '../../redux/user/userOperation';
-import userSelectors from '../../redux/user/userSelector';
-import Input from '../UIcomponents/Input/Input';
-
-// import styles from './CreateHabbitForm.module.css';
+// import userSelectors from '../../redux/user/userSelector';
+// import Input from '../UIcomponents/Input/Input';
+import Button from '../UIcomponents/Button/Button';
+import { ButtonRemove } from '../UIcomponents/ButtonRemove/ButtonRemove';
+import styles from '../ModalContent/ModalContent.module.css';
 
 export default function CustomHabbitModal({
   onClose,
@@ -13,9 +14,9 @@ export default function CustomHabbitModal({
   habitInfo,
 }) {
   const [name, setName] = useState(habitInfo);
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [iteration, setIteration] = useState('allday');
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
+  const [iteration, setIteration] = useState('');
   // const habits = useSelector(userSelectors.getHabits);
   const dispatch = useDispatch();
   const onSubmit = useCallback(
@@ -51,11 +52,10 @@ export default function CustomHabbitModal({
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    console.log('hi');
     const data = { name, planningTime, iteration };
     onSubmit(data);
 
-    resetForm();
+    // resetForm();
   };
 
   const resetForm = () => {
@@ -67,59 +67,96 @@ export default function CustomHabbitModal({
 
   return (
     <div>
-      <h2>Настройте привычку под себя</h2>
-      <p>так Вам будет удобнее достичь своей цели</p>
-      {/* <button type="button" onClick={onClose}></button> */}
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="name">Название</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          // error="wrong language"
-          // required
-          value={name}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="date">Дата старта</label>
-        <input
-          type="date"
-          name="date"
-          id="date"
-          value={date}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="time">Время</label>
-        <input
-          type="time"
-          name="time"
-          id="time"
-          value={time}
-          onChange={handleInputChange}
-        />
-        <label>Повторение</label>
-        <select
-          name="iteration"
-          id="iteration"
-          size="1"
-          onChange={handleInputChange}
-        >
-          <option value="allday">Ежедневно</option>
-          <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
-          <option value="weekend">Сб-Вс</option>
-          <option value="firstset">Пн-Ср-Пт</option>
-          <option value="secondset">ВТ-ЧТ-СБ</option>
-        </select>
-
+      <h2 className={styles.modalTitleCustom}>Настройте привычку под себя</h2>
+      <p className={styles.modalTextCustom}>
+        так Вам будет удобнее достичь своей цели
+      </p>
+      <form onSubmit={handleFormSubmit} className={styles.formProfile}>
+        <label htmlFor="name" className={styles.label}>
+          <span className={styles.textLabel}>Название</span>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            required
+            value={name}
+            onChange={handleInputChange}
+            className={styles.inputHabitName}
+          />
+        </label>
+        <label htmlFor="date" className={styles.label}>
+          <span className={styles.textLabel}>Дата старта</span>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            value={date}
+            required
+            onChange={handleInputChange}
+            className={styles.input}
+          />
+        </label>
+        <label htmlFor="time" className={styles.label}>
+          <span className={styles.textLabel}>Время</span>
+          <input
+            type="time"
+            name="time"
+            id="time"
+            value={time}
+            required
+            onChange={handleInputChange}
+            className={styles.input}
+          />
+        </label>
+        <label className={styles.label}>
+          <span className={styles.textLabel}>Повторение</span>
+          <select
+            className={styles.input}
+            name="iteration"
+            id="iteration"
+            size="1"
+            required="required"
+            onChange={handleInputChange}
+          >
+            <option selected disabled hidden value="">
+              Выбрать
+            </option>
+            <option value="allday">Ежедневно</option>
+            <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
+            <option value="weekend">Сб-Вс</option>
+            <option value="firstset">Пн-Ср-Пт</option>
+            <option value="secondset">ВТ-ЧТ-СБ</option>
+          </select>
+        </label>
+        <ButtonRemove type="button" handelClick={() => onClose()} />
         {ableDelete && (
           <button type="button" onClick={() => null}>
             Удалить привычку
           </button>
         )}
-        <button type="button" onClick={onClose}>
+        <div className={styles.btnFolder}>
+          <div className={styles.btnBox}>
+            <Button
+              type={'button'}
+              green={false}
+              handelClick={() => onClose()}
+              label={'Отмена'}
+            />
+          </div>
+          <div>
+            <Button
+              type={'submit'}
+              green={true}
+              // handelClick={() => onClose()}
+              label={'Сохранить'}
+            />
+          </div>
+        </div>
+
+        {/* <button type="button" onClick={onClose}>
           Отмена
         </button>
-        <button type="submit">Сохранить</button>
+        <button type="submit">Сохранить</button> */}
       </form>
     </div>
   );

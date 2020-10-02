@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
+// import { getSelectedDate } from './date/dateActions';
+import modalAction from './modal/modalActions';
+import authAction from './auth/authAction';
 
 const userInitialState = {
   firstName: '',
@@ -10,6 +13,7 @@ const userInitialState = {
   avatar: '',
   phone: '',
   id: '',
+  subscription: '',
 };
 
 const RootReducer = createReducer(userInitialState, {
@@ -22,8 +26,24 @@ const RootReducer = createReducer(userInitialState, {
       registerData: actions.payload.user.registerData,
       phone: actions.payload.user.phone,
       id: actions.payload.user.id,
+      subscription: actions.payload.user.subscription,
     };
   },
+  [actions.addUserInfoSuccess]: (_, { payload }) => {
+    return {
+      avatar: payload.avatar,
+      email: payload.email,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      phone: payload.phone,
+    };
+  },
+  [actions.addUserSubscriptionSuccess]: (state, { payload }) => ({
+    ...state,
+    subscription: payload.plan,
+  }),
+
+  [authAction.logoutSuccess]: () => userInitialState,
 });
 
 const habitsReducer = createReducer([], {
@@ -31,6 +51,7 @@ const habitsReducer = createReducer([], {
     return actions.payload.habits;
   },
   [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
+  [authAction.logoutSuccess]: () => [],
 });
 
 const cigarettesInitialStates = {
@@ -41,6 +62,7 @@ const cigarettesReducer = createReducer(cigarettesInitialStates, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return { ...actions.payload.user.cigarettes };
   },
+  [authAction.logoutSuccess]: () => cigarettesInitialStates,
 });
 
 const paymentsReducer = createReducer([], {
@@ -48,13 +70,14 @@ const paymentsReducer = createReducer([], {
     console.log(actions.payload.user.payments);
     return actions.payload.user.payments;
   },
+  [authAction.logoutSuccess]: () => [],
 });
 
 const quizInitialState = {
-  cigarettePackPrice: 1,
-  cigarettePerDay: 1,
-  cigarettePerTime: 1,
-  smokeYears: 1,
+  cigarettePackPrice: 0,
+  cigarettePerDay: 0,
+  cigarettePerTime: 0,
+  smokeYears: 0,
 };
 
 const quizReducer = createReducer(quizInitialState, {
@@ -62,12 +85,23 @@ const quizReducer = createReducer(quizInitialState, {
     console.log(actions.payload.user.quizInfo);
     return { ...actions.payload.user.quizInfo };
   },
+  [authAction.logoutSuccess]: () => quizInitialState,
 });
-// export default combineReducers({
-//   user: RootReducer,
-//   habits: habitsReducer,
-//   // error: errorReducer,
-// });
+
+const modalReducer = createReducer(false, {
+  [modalAction.toggleModal]: (state, _) => !state,
+  // [actions.getOwnHabitsSuccess]: (state, _) => !state,
+  [actions.addHabitSuccess]: (state, _) => !state,
+});
+
+const errorReducer = createReducer(null, {
+  [authAction.registrationError]: () => true,
+  [authAction.registrationRequest]: () => false,
+  [authAction.registrationSuccess]: () => false,
+  [authAction.loginError]: () => true,
+  [authAction.loginRequest]: () => false,
+  [authAction.loginSuccess]: () => false,
+});
 
 export default {
   user: RootReducer,
@@ -75,6 +109,6 @@ export default {
   cigarettes: cigarettesReducer,
   payments: paymentsReducer,
   quiz: quizReducer,
-
-  // error: errorReducer,
+  modal: modalReducer,
+  error: errorReducer,
 };

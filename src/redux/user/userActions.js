@@ -4,10 +4,22 @@ const getOwnHabitsRequest = createAction('user/getOwnHabitsRequest');
 const getOwnHabitsSuccess = createAction('user/getOwnHabitsSuccess');
 const getOwnHabitsError = createAction('user/getOwnHabitsError');
 
-const addHabitRequest = createAction('contacts/addHabitRequest');
-const addHabitSuccess = createAction('contacts/addHabitSuccess');
-const addHabitError = createAction('contacts/addHabitError');
+const addHabitRequest = createAction('habits/addHabitRequest');
+const addHabitSuccess = createAction('habits/addHabitSuccess');
+const addHabitError = createAction('habits/addHabitError');
 
+const addUserInfoRequest = createAction('contacts/addUserInfoRequest');
+const addUserInfoSuccess = createAction('contacts/addUserInfoSuccess');
+const addUserInfoError = createAction('contacts/addUserInfoError');
+const addUserSubscriptionRequest = createAction(
+  'subscription/addUserSubscriptionRequest',
+);
+const addUserSubscriptionSuccess = createAction(
+  'subscription/addUserSubscriptionSuccess',
+);
+const addUserSubscriptionError = createAction(
+  'subscription/addUserSubscriptionError',
+);
 export default {
   getOwnHabitsRequest,
   getOwnHabitsSuccess,
@@ -15,4 +27,10 @@ export default {
   addHabitRequest,
   addHabitSuccess,
   addHabitError,
+  addUserInfoRequest,
+  addUserInfoSuccess,
+  addUserInfoError,
+  addUserSubscriptionRequest,
+  addUserSubscriptionSuccess,
+  addUserSubscriptionError,
 };

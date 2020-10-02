@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-// // import styles from './AddHabbit.module.css';
+import React from 'react';
+import Button from '../UIcomponents/Button/Button';
+import styles from '../ModalContent/ModalContent.module.css';
 
-export default function HabitTemplateModal({
-  habits,
-  onClick,
-  onClose,
-  addData,
-}) {
+export default function HabitTemplateModal({ habits, onClick, addData }) {
   return (
-    <div>
-      <h2>Шаблонные привычки</h2>
-      <ul>
+    <div className={styles.modalContent}>
+      <h2 className={(styles.modalTitle, styles.modalTitleTemplate)}>
+        Шаблонные привычки
+      </h2>
+      <ul className={styles.modalList}>
         {habits.map(({ id, name }) => (
-          <li key={id}>
+          <li key={id} className={styles.modalListItem}>
             <button
+              className={styles.modalItem}
               type="button"
               onClick={() => {
                 onClick('CustomHabbitModal');
@@ -25,12 +24,12 @@ export default function HabitTemplateModal({
           </li>
         ))}
       </ul>
-      <button type="button" onClick={() => onClick('HabitChoiceModal')}>
-        Назад
-      </button>
-      {/* <button type="button" onClick={() => onClose()}>
-        X
-      </button> */}
+      <Button
+        type={'button'}
+        green={false}
+        handelClick={() => onClick('HabitChoiceModal')}
+        label={'Назад'}
+      />
     </div>
   );
 }
