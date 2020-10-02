@@ -241,7 +241,11 @@
 
 .react-datepicker__navigation--previous--disabled,
 .react-datepicker__navigation--previous--disabled:hover {
-  border-right-color: #e6e6e6;
+  background-image: url(../../../images/svg-icons/prev.svg),
+    url(../../../images/svg-icons/prev.svg);
+  background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center;
   cursor: default;
 }
 
