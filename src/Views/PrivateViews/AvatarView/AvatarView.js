@@ -5,11 +5,13 @@ import Header from '../../../components/Header/Header';
 import userOperation from '../../../redux/user/userOperation';
 import avatars from '../../../avatars';
 
-export default function AvatarView() {
+function AvatarView({ toggleModal, changeLayout }) {
   const dispatch = useDispatch();
 
   const handleClick = e => {
     const { dataset } = e.target;
+    toggleModal();
+    changeLayout('AvatarsModal');
     dispatch(userOperation.addUserInfo({ avatar: dataset.id }));
   };
 
@@ -36,4 +38,20 @@ export default function AvatarView() {
       </div>
     </>
   );
+}
+
+export default AvatarView;
+
+{
+  /* <h2>Вы действительно хотите изменить аватар?</h2>
+      <p>Выбраный аватар:</p>
+      {avatars.map(el => {
+        if (id === el.id) {
+          return <img key={el.id} src={el.avatar} alt="avatar" width='108' />;
+        }
+      })}
+      <button type="button">Изменить</button>
+      <button type="button" onClick={onClose}>
+        Отмена
+      </button> */
 }
