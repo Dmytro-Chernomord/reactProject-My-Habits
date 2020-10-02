@@ -28,10 +28,7 @@ const Navigation = ({ match }) => {
           </Link>
         </li>
         <li className={styles.linkBox}>
-          <Link
-            className={styles.iconBox}
-            to={`${match.url}/NotificationsPage`}
-          >
+          <Link className={styles.iconBox} to={`${match.url}/Notifications`}>
             <Bell />
             /notifications
           </Link>
