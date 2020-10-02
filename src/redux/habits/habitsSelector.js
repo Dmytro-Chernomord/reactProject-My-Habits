@@ -8,4 +8,10 @@ const getFilterHabits = state => {
   return onFilterHabits(dateForFilter, habits);
 };
 
-export default { getAllHabits, getFilterHabits };
+const getFilterTodayHabits = state => {
+  const dateForFilter = state.date.currentDate.slice(0, 10);
+  const habits = state.habits;
+  return onFilterHabits(dateForFilter, habits);
+};
+
+export default { getAllHabits, getFilterHabits, getFilterTodayHabits };

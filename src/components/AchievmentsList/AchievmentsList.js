@@ -61,6 +61,66 @@ const AchievmentsList = function () {
       >
         <p className={styles.text}>Не курю одну неделю</p>
       </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Не курю 2 недели</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Не курю 1 месяц</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Не курю 3 месяца</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Не курю 6 месяцев</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Не курю 1 год</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>+1 год без сигарет</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>3 года без сигарет</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Уже 5. Дай пять!</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Вперед к мечте!</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Сохранил 1 час</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Сохранил 3 часа</p>
+      </li>
+      <li
+        className={daysDontSmoke.length > 4 ? styles.item_success : styles.item}
+      >
+        <p className={styles.text}>Сохранил 5 часов</p>
+      </li>
     </ul>
   );
 };
