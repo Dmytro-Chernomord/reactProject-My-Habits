@@ -30,7 +30,7 @@ const addHabit = habit => async dispatch => {
 
 const addUserInfo = dataUser => async dispatch => {
   dispatch(actions.addUserInfoRequest());
-
+  console.log(dataUser);
   try {
     const response = await axios.patch('/users', { ...dataUser });
     dispatch(actions.addUserInfoSuccess(response.data));

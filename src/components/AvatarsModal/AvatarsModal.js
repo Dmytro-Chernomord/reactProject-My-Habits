@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import avatars from '../../avatars';
+import React from 'react';
+import AvatarUser from '../AvatarUser/AvatarUser';
+import styles from './AvatarsModal.module.css';
 
 function AvatarsModal({ onClose }) {
   return (
-    <div>
-      <h2>Вы действительно хотите изменить аватар?</h2>
-      <p>Выбраный аватар:</p>
-      {/* {avatars.map(el => {
-        if (id === el.id) {
-          return <img key={el.id} src={el.avatar} alt="avatar" width="108" />;
-        }
-      })} */}
-      <button type="button">Изменить</button>
-      <button type="button" onClick={onClose}>
-        Отмена
+    <div className={styles.boxAvatarsModal}>
+      <h2>Вы изменили аватар!</h2>
+      <AvatarUser width={'200'} />
+
+      <button className={styles.btn} type="button" onClick={onClose}>
+        Закрыть
       </button>
     </div>
   );
