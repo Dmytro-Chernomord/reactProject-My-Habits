@@ -18,7 +18,7 @@ export default function HabitsList() {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Привычки</h2>
-      <ul>
+      <ul className={styles.habitsList}>
         {habits.map(({ _id, name }) => (
           <HabitsListItem key={_id} text={name} />
         ))}

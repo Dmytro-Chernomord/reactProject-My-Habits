@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ReactComponent as Cup } from '../../../images/svg-icons/trash.svg';
-import { ReactComponent as Bell } from '../../../images/svg-icons/trash.svg';
-import { ReactComponent as Calendar } from '../../../images/svg-icons/trash.svg';
+import { ReactComponent as Cup } from '../../../images/svg-icons/trash-grey.svg';
+import { ReactComponent as Bell } from '../../../images/svg-icons/trash-grey.svg';
+import { ReactComponent as Calendar } from '../../../images/svg-icons/trash-grey.svg';
 // import calendar from '../../../images/menu-icons/calendar.svg';
 import styles from './NavigationBar.module.css';
 
