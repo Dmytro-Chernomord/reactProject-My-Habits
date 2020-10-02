@@ -19,5 +19,4 @@ export function ButtonRemoveHabit({ type, id, handelClick, title }) {
 ButtonRemoveHabit.propTypes = {
   type: PropTypes.string.isRequired,
   handelClick: PropTypes.func,
-  id: PropTypes.string.isRequired,
 };

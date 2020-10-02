@@ -219,14 +219,14 @@ const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {},
   },
-  select: {
-    height: 30,
-    width: 220,
-  },
+  // select: {
+  //   height: 30,
+  //   width: 220,
+  // },
 
-  inputBase: {
-    maxWidth: 220,
-  },
+  // inputBase: {
+  //   maxWidth: 220,
+  // },
 
   input: {
     width: 220,
@@ -297,8 +297,9 @@ export default function CustomHabbitModal({
     habit => dispatch(userOperations.addHabit(habit)),
     [dispatch],
   );
-  const planningTime = startDate + 'T' + time + ':00.000Z';
-  console.log(Date.parse(startDate));
+  const piece = startDate.toISOString().slice(0, 11);
+  const planningTime = piece + time + ':00.000Z';
+
   const handleInputChange = e => {
     const { name, value } = e.target;
 
@@ -357,8 +358,8 @@ export default function CustomHabbitModal({
             value={name}
             onChange={handleInputChange}
             className={styles.inputHabitName}
-            autofocus="autofocus"
-            autocomplete="off"
+            autoFocus="autofocus"
+            autoComplete="off"
           />
         </label>
         <div className={styles.dateBox}>
