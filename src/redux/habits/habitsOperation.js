@@ -28,4 +28,14 @@ const setSetting = id => dispatch => {
   // console.log('id', id);
 };
 
-export default { setData, setSetting };
+const removeHabit = id => dispatch => {
+  dispatch(habitsAction.removeHabitRequest());
+  axios
+    .delete(`/habits/${id}`)
+    .then(() => {
+      dispatch(habitsAction.removeHabitSuccess(id));
+    })
+    .catch(err => dispatch(habitsAction.removeHabitError(err)));
+};
+
+export default { setData, setSetting, removeHabit };

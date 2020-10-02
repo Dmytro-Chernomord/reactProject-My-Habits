@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
-// import { getSelectedDate } from './date/dateActions';
 import modalAction from './modal/modalActions';
 import authAction from './auth/authAction';
+import habitsActions from './habits/habitsAction';
 
 const userInitialState = {
   firstName: '',
@@ -51,6 +51,8 @@ const habitsReducer = createReducer([], {
     return actions.payload.habits;
   },
   [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
+  [habitsActions.removeHabitSuccess]: (state, action) =>
+    state.filter(habit => habit._id !== action.payload),
   [authAction.logoutSuccess]: () => [],
 });
 
