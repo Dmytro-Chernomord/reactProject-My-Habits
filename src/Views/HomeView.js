@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import authOperation from '../redux/auth/authOperation';
 import TempBut from '../components/TempBut';
-import NotificationsPage from '../components/NotificationsPage/NotificationsPage';
+import Notifications from './PrivateViews/NotificationsView';
 import Achievements from '../Views/PrivateViews/Achievements';
 import CheckListPage from '../components/CheckListPage/CheckListPage';
 import userOperation from '../redux/user/userOperation';
@@ -48,9 +48,7 @@ class HomeView extends Component {
             LeftSideBar
             <ul>
               <li>
-                <Link to={`${match.url}/NotificationsPage`}>
-                  NotificationsPage
-                </Link>
+                <Link to={`${match.url}/Notifications`}>NotificationsPage</Link>
               </li>
               <li>
                 <Link to={`${match.url}/ProfilePage`}>ProfilePage</Link>
@@ -75,8 +73,8 @@ class HomeView extends Component {
             <div>
               <Route path={`${match.path}`} exact component={CheckListPage} />
               <Route
-                path={`${match.path}/NotificationsPage`}
-                component={NotificationsPage}
+                path={`${match.path}/Notifications`}
+                component={Notifications}
               />
               <Route path={`${match.path}/ProfilePage`}>
                 <ProfilePage

@@ -2,7 +2,6 @@ import { element } from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from '../../Views/PrivateViews/achievments.module.css';
-import cigarettesSelectors from '../../redux/cigarettes/cigarettesSelector';
 
 const AchievmentsList = function () {
   const cigarettesData = useSelector(state => state.cigarettes.data);
