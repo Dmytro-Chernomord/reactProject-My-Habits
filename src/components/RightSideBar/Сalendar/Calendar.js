@@ -9,7 +9,7 @@ import { getSelectedDate } from '../../../redux/date/dateActions';
 // import "react-datepicker/dist/react-datepicker.css";
 
 const birthdayStyle = `
-  .react-datepicker__month-container {
+.calendar  .react-datepicker__month-container {
   font-family: "Rubik";
    display: flex;
    flex-direction: column;
@@ -19,10 +19,10 @@ const birthdayStyle = `
    border:none;
    border-bottom: 1px solid #D5E1DC;
   }
-  .react-datepicker__navigation--previous{
+  .calendar .react-datepicker__navigation--previous{
     margin-top: 19px;
   }
-  .react-datepicker__current-month {
+  .calendar .react-datepicker__current-month {
     font-weight: 500;
     font-size: 14px;
     padding: 0px;
@@ -33,7 +33,7 @@ const birthdayStyle = `
     border-radius: 5px;
     width: 120px;
   }
-  .react-datepicker__month {
+ .calendar  .react-datepicker__month {
   display: flex;
   width: 378px;
   max-height: 392px;
@@ -45,13 +45,13 @@ const birthdayStyle = `
   border: none;
   border-radius: 0px;
   }
-  .react-datepicker__header{
+  .calendar .react-datepicker__header{
   border-radius: 0%;
   background-color: #fff;
   border:none;
   border-top: 1px solid #D5E1DC;
   }
-  .react-datepicker__current-month{
+  .calendar .react-datepicker__current-month{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,47 +60,47 @@ const birthdayStyle = `
   margin-bottom: 15px;
   }
 
-  .react-datepicker__day--selected {
+  .calendar .react-datepicker__day--selected {
   background: #43D190;
   border-radius: 5px;
   border: 1px solid #43D190;
   color: white;
   }
-   .react-datepicker__day--keyboard-selected {
+  .calendar .react-datepicker__day--keyboard-selected {
   background: #fff;
   border-radius: 5px;
   border: 1px solid #43D190;
   color: #43D190;
   outline: 1px solid #43D190;
   }
-  .react-datepicker__day--keyboard-selected:hover{
+  .calendar .react-datepicker__day--keyboard-selected:hover{
   background: #43D190;
   border-radius: 5px;
   border: 1px solid #43D190;
   color: white;
   }
-  .react-datepicker{
+  .calendar .react-datepicker{
     border-radius: 0px;
     border: 0px; 
   }
-  .react-datepicker__day--selected:hover{
+  .calendar .react-datepicker__day--selected:hover{
   background: #43D190;
   border-radius: 5px;
   border: 1px solid #43D190;
     color: white;
   }
-  .react-datepicker__day--selected:default{
+  .calendar .react-datepicker__day--selected:default{
   border: 1px solid #43D190;
   }
-  .react-datepicker__day--keyboard-selected:default{
+ .calendar .react-datepicker__day--keyboard-selected:default{
   border: 1px solid #43D190;
   }
-  .react-datepicker__day:hover{
+.calendar  .react-datepicker__day:hover{
   border: 2px solid #43D190;
   background: #fff;
   color: #43D190;
   }
-  .react-datepicker__day{
+.calendar  .react-datepicker__day{
   border: 2px solid #fff;
   width: 30px;
   display: flex;
@@ -108,7 +108,7 @@ const birthdayStyle = `
   justify-content: center;
   align-items: center;
   }
-  .react-datepicker__day-names{
+.calendar  .react-datepicker__day-names{
   font-size: 14px;
   display: flex;
   justify-content: space-between;
@@ -117,10 +117,10 @@ const birthdayStyle = `
   border-top: 1px solid #D5E1DC;
   border-bottom: 1px solid #D5E1DC;
   }
-  .react-datepicker__day-name{
+ .calendar .react-datepicker__day-name{
   color: #BDBDBD;
   }
-  .react-datepicker__week {
+ .calendar .react-datepicker__week {
   font-style: normal;
   font-weight: normal;
   display: flex;
@@ -129,20 +129,20 @@ const birthdayStyle = `
   align-items: center;
   justify-content: space-between;
   }
-  .react-datepicker__navigation--next{
+ .calendar .react-datepicker__navigation--next{
     margin-top: 19px;
   }
-  .calendar-header {
+ .calendar .calendar-header {
       text-align: center;
   }
- .week-day{
+ .calendar .week-day{
     font-weight: 500;
     font-size: 26px;
     line-height: 1.19;
     text-align: center;
     color: #4F4F4F;
   }
-  .calendar-date{
+ .calendar .calendar-date{
     font-weight: 400;
     font-size: 26px;
     line-height: 1.19;
@@ -179,7 +179,7 @@ const WEEK_DAY_NAMES = [
   'Понедельник',
   'Вторник',
   'Среда',
-  'Четверг',
+  'Четерг',
   'Пятница',
   'Суббота',
 ];
@@ -207,21 +207,21 @@ export const Calendar = () => {
         <span className="week-day">{dayOfTheWeek} • </span>
         <span className="calendar-date">{dayOfTheMonth}</span>
       </p>
-      <DatePicker
-        selected={startDate}
-        onChange={handelDateChange}
-        locale="ru"
-        inline
-      />
-
       {/* <DatePicker
         selected={startDate}
         onChange={handelDateChange}
         locale="ru"
         inline
+      /> */}
+
+      <DatePicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+        locale="ru"
+        inline
         minDate={new Date()}
         showDisabledMonthNavigation
-      /> */}
+      />
     </div>
   );
 };

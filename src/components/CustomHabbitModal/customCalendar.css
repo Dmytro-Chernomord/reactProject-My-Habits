@@ -24,6 +24,7 @@
   border: 8px solid transparent;
   height: 0;
   width: 1px;
+  display: none;
 }
 
 .react-datepicker-popper[data-placement^='bottom']
@@ -228,8 +229,8 @@
 
 .react-datepicker__navigation--previous {
   left: 20px;
-  background-image: url(../../../images/svg-icons/prev.svg),
-    url(../../../images/svg-icons/prevhover.svg);
+  /* background-image: url(../../../images/svg-icons/prev.svg),
+    url(../../../images/svg-icons/prevhover.svg); */
   background-repeat: no-repeat;
   background-size: auto, 0;
   background-position: center;
@@ -241,15 +242,19 @@
 
 .react-datepicker__navigation--previous--disabled,
 .react-datepicker__navigation--previous--disabled:hover {
-  border-right-color: #e6e6e6;
+  /* background-image: url(../../../images/svg-icons/prev.svg),
+    url(../../../images/svg-icons/prev.svg); */
+  background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center;
   cursor: default;
 }
 
 .react-datepicker__navigation--next {
   right: 20px;
   /* border-left-color: #ccc; */
-  background-image: url(../../../images/svg-icons/next.svg),
-    url(../../../images/svg-icons/nexthover.svg);
+  /* background-image: url(../../../images/svg-icons/next.svg),
+    url(../../../images/svg-icons/nexthover.svg); */
   background-repeat: no-repeat;
   background-size: auto, 0;
   background-position: center;
@@ -295,8 +300,9 @@
   border-bottom-color: #b3b3b3;
 }
 
-.react-datepicker__month-container {
+.calendarBox .react-datepicker__month-container {
   float: left;
+  /* width: 280px; */
 }
 
 .react-datepicker__year {
@@ -316,10 +322,12 @@
   margin: 2px;
 }
 
-.react-datepicker__month {
+/* .react-datepicker__month {
+  width: 280px;
+
   margin: 0.4rem;
   text-align: center;
-}
+} */
 
 .react-datepicker__month .react-datepicker__month-text,
 .react-datepicker__month .react-datepicker__quarter-text {
@@ -935,4 +943,22 @@
 .react-datepicker__portal .react-datepicker__navigation--next--disabled:hover {
   border-left-color: #e6e6e6;
   cursor: default;
+}
+
+/* -------------------------------------------------------------------- */
+
+.react-datepicker__input-container::after {
+  content: '';
+  position: absolute;
+  background: url(../../images/svg-icons/calendar-grey.svg);
+  top: 12px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  background-size: auto, 0;
+}
+
+.react-datepicker__input-container:focus:after,
+.react-datepicker__input-container:hover:after {
+  background: url(../../images/svg-icons/calendar-green.svg);
 }
