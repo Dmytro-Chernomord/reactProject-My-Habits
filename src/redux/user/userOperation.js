@@ -47,4 +47,23 @@ const changePassword = data => async dispatch => {
     console.log(error.message);
   }
 };
-export default { getOwnHabits, addHabit, addUserInfo, changePassword };
+const changeSubscription = data => async dispatch => {
+  dispatch(actions.addUserSubscriptionRequest());
+
+  try {
+    await axios.post('/users/updateSubscription', {
+      ...data,
+    });
+    dispatch(actions.addUserSubscriptionSuccess(data));
+  } catch (error) {
+    dispatch(actions.addUserSubscriptionError(error.message));
+  }
+};
+
+export default {
+  getOwnHabits,
+  addHabit,
+  addUserInfo,
+  changePassword,
+  changeSubscription,
+};

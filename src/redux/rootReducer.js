@@ -3,6 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
 // import { getSelectedDate } from './date/dateActions';
 import modalAction from './modal/modalActions';
+import authAction from './auth/authAction';
 
 const userInitialState = {
   firstName: '',
@@ -12,6 +13,7 @@ const userInitialState = {
   avatar: '',
   phone: '',
   id: '',
+  subscription: '',
 };
 
 const RootReducer = createReducer(userInitialState, {
@@ -24,6 +26,7 @@ const RootReducer = createReducer(userInitialState, {
       registerData: actions.payload.user.registerData,
       phone: actions.payload.user.phone,
       id: actions.payload.user.id,
+      subscription: actions.payload.user.subscription,
     };
   },
   [actions.addUserInfoSuccess]: (_, { payload }) => {
@@ -35,6 +38,12 @@ const RootReducer = createReducer(userInitialState, {
       phone: payload.phone,
     };
   },
+  [actions.addUserSubscriptionSuccess]: (state, { payload }) => ({
+    ...state,
+    subscription: payload.plan,
+  }),
+
+  // [authAction.logoutSuccess]: (_, action) => console.log('action'),
 });
 
 const habitsReducer = createReducer([], {
@@ -62,10 +71,10 @@ const paymentsReducer = createReducer([], {
 });
 
 const quizInitialState = {
-  cigarettePackPrice: 1,
-  cigarettePerDay: 1,
-  cigarettePerTime: 1,
-  smokeYears: 1,
+  cigarettePackPrice: 0,
+  cigarettePerDay: 0,
+  cigarettePerTime: 0,
+  smokeYears: 0,
 };
 
 const quizReducer = createReducer(quizInitialState, {
@@ -74,19 +83,20 @@ const quizReducer = createReducer(quizInitialState, {
     return { ...actions.payload.user.quizInfo };
   },
 });
-// export default combineReducers({
-//   user: RootReducer,
-//   habits: habitsReducer,
-//   // error: errorReducer,
-// });
-// function getModal() {
-//   const modal = useSelector(state => state.modal)
-//   return true;
-// }
+
 const modalReducer = createReducer(false, {
   [modalAction.toggleModal]: (state, _) => !state,
   // [actions.getOwnHabitsSuccess]: (state, _) => !state,
   [actions.addHabitSuccess]: (state, _) => !state,
+});
+
+const errorReducer = createReducer(null, {
+  [authAction.registrationError]: () => true,
+  [authAction.registrationRequest]: () => false,
+  [authAction.registrationSuccess]: () => false,
+  [authAction.loginError]: () => true,
+  [authAction.loginRequest]: () => false,
+  [authAction.loginSuccess]: () => false,
 });
 
 export default {
@@ -96,5 +106,5 @@ export default {
   payments: paymentsReducer,
   quiz: quizReducer,
   modal: modalReducer,
-  // error: errorReducer,
+  error: errorReducer,
 };
