@@ -8,6 +8,10 @@ const setHabitsSettingRequest = createAction('habits/settingRequest');
 const setHabitsSettingSuccess = createAction('habits/settingSuccess');
 const setHabitsSettingError = createAction('habits/settingError');
 
+const removeHabitRequest = createAction('habits/removeRequest');
+const removeHabitSuccess = createAction('habits/removeSuccess');
+const removeHabitError = createAction('habits/removeError');
+
 export default {
   setHabitsDataRequest,
   setHabitsDataSuccess,
@@ -15,4 +19,7 @@ export default {
   setHabitsSettingRequest,
   setHabitsSettingSuccess,
   setHabitsSettingError,
+  removeHabitRequest,
+  removeHabitSuccess,
+  removeHabitError,
 };

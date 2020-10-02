@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 2%;
+  padding: 0;
+  width: 100%;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  margin: 5%;
+  padding: 0;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.linkBox {
+  display: flex;
+}
+
+.iconBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

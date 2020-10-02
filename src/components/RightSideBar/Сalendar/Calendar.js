@@ -1,160 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
-import './calendar.css';
-
 import { getSelectedDate } from '../../../redux/date/dateActions';
-
-// import "react-datepicker/dist/react-datepicker.css";
-
-const birthdayStyle = `
-.calendar  .react-datepicker__month-container {
-  font-family: "Rubik";
-   display: flex;
-   flex-direction: column;
-   width: 374px;
-   height: 400px;
-   border-radius: 0px;
-   border:none;
-   border-bottom: 1px solid #D5E1DC;
-  }
-  .calendar .react-datepicker__navigation--previous{
-    margin-top: 19px;
-  }
-  .calendar .react-datepicker__current-month {
-    font-weight: 500;
-    font-size: 14px;
-    padding: 0px;
-    display: flex;
-    background-color: #43D190;
-    margin-left: 120px;
-    color: #ffff;
-    border-radius: 5px;
-    width: 120px;
-  }
- .calendar  .react-datepicker__month {
-  display: flex;
-  width: 378px;
-  max-height: 392px;
-  height: 100%;
-  flex-direction: column;
-  padding: 20px;
-  margin: 0;
-  justify-content: space-between;
-  border: none;
-  border-radius: 0px;
-  }
-  .calendar .react-datepicker__header{
-  border-radius: 0%;
-  background-color: #fff;
-  border:none;
-  border-top: 1px solid #D5E1DC;
-  }
-  .calendar .react-datepicker__current-month{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  }
-
-  .calendar .react-datepicker__day--selected {
-  background: #43D190;
-  border-radius: 5px;
-  border: 1px solid #43D190;
-  color: white;
-  }
-  .calendar .react-datepicker__day--keyboard-selected {
-  background: #fff;
-  border-radius: 5px;
-  border: 1px solid #43D190;
-  color: #43D190;
-  outline: 1px solid #43D190;
-  }
-  .calendar .react-datepicker__day--keyboard-selected:hover{
-  background: #43D190;
-  border-radius: 5px;
-  border: 1px solid #43D190;
-  color: white;
-  }
-  .calendar .react-datepicker{
-    border-radius: 0px;
-    border: 0px; 
-  }
-  .calendar .react-datepicker__day--selected:hover{
-  background: #43D190;
-  border-radius: 5px;
-  border: 1px solid #43D190;
-    color: white;
-  }
-  .calendar .react-datepicker__day--selected:default{
-  border: 1px solid #43D190;
-  }
- .calendar .react-datepicker__day--keyboard-selected:default{
-  border: 1px solid #43D190;
-  }
-.calendar  .react-datepicker__day:hover{
-  border: 2px solid #43D190;
-  background: #fff;
-  color: #43D190;
-  }
-.calendar  .react-datepicker__day{
-  border: 2px solid #fff;
-  width: 30px;
-  display: flex;
-  height: 30px;
-  justify-content: center;
-  align-items: center;
-  }
-.calendar  .react-datepicker__day-names{
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  padding: 14px;
-  text-transform: uppercase;
-  border-top: 1px solid #D5E1DC;
-  border-bottom: 1px solid #D5E1DC;
-  }
- .calendar .react-datepicker__day-name{
-  color: #BDBDBD;
-  }
- .calendar .react-datepicker__week {
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  font-size: 14px;
-  line-height: 17px;
-  align-items: center;
-  justify-content: space-between;
-  }
- .calendar .react-datepicker__navigation--next{
-    margin-top: 19px;
-  }
- .calendar .calendar-header {
-      text-align: center;
-  }
- .calendar .week-day{
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 1.19;
-    text-align: center;
-    color: #4F4F4F;
-  }
- .calendar .calendar-date{
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 1.19;
-    text-align: center;
-    color: #4F4F4F;
-  }
-  .calendar {
-      width: 378px;
-  } `;
-
-// CSS Modules, react-datepicker-cssmodules.css
-// import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import './calendar.css';
 
 registerLocale('ru', ru);
 setDefaultLocale('ru');
@@ -186,14 +35,17 @@ const WEEK_DAY_NAMES = [
 
 export const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const registerData = useSelector(state => state.user.registerData);
   const dispatch = useDispatch();
-
   const today = new Date();
+
   useEffect(() => {
     dispatch(getSelectedDate(startDate.toISOString()));
   }, [dispatch, startDate]);
 
   const handelDateChange = date => setStartDate(date);
+
+  const clickToCurrentDay = () => setStartDate(today);
 
   const dayOfTheWeek = WEEK_DAY_NAMES[today.getDay()];
   const dayOfTheMonth = `${today.getDate()} ${
@@ -202,8 +54,7 @@ export const Calendar = () => {
 
   return (
     <div className="calendar">
-      <style>{birthdayStyle}</style>
-      <p className="calendar-header">
+      <p className="calendar-header" onClick={clickToCurrentDay}>
         <span className="week-day">{dayOfTheWeek} • </span>
         <span className="calendar-date">{dayOfTheMonth}</span>
       </p>
@@ -219,7 +70,7 @@ export const Calendar = () => {
         onChange={date => setStartDate(date)}
         locale="ru"
         inline
-        minDate={new Date()}
+        minDate={new Date(registerData)}
         showDisabledMonthNavigation
       />
     </div>
