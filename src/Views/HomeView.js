@@ -73,7 +73,16 @@ class HomeView extends Component {
               title <MainPrivateView />
             </header>
             <div>
-              <Route path={`${match.path}`} exact component={CheckListPage} />
+              <Route
+                path={`${match.path}`}
+                exact
+                // component={CheckListPage}
+              >
+                <CheckListPage
+                  toggleModal={this.props.toggleModal}
+                  changeLayout={this.changeLayout}
+                />
+              </Route>
               <Route
                 path={`${match.path}/NotificationsPage`}
                 component={NotificationsPage}

@@ -4,19 +4,23 @@
   overflow-y: auto;
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 33px 62px;
+  background: #ffffff;
+  border: 1px solid #d5e1dc;
+}
+
 .header {
   margin: 0;
-  padding: 40px 62px;
-
   font-style: normal;
   font-weight: 500;
   font-size: 26px;
   line-height: 31px;
 
   color: #4f4f4f;
-
-  background: #ffffff;
-  border: 1px solid #d5e1dc;
 }
 
 .list {
