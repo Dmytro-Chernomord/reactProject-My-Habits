@@ -12,6 +12,7 @@ import authSelector from '../redux/auth/authSelector';
 import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
 import ProfilePage from './PrivateViews/ProfilePage/ProfilePage';
 import { RightSideBar } from '../components/RightSideBar/RightSideBar';
+import LeftSideBarView from './LeftSideBarView';
 import Subscriptions from './PrivateViews/SubscriptionsViews/Subscriptions';
 import ModalBackdrop from '../components/Modal/Modal';
 import ModalContent from '../components/ModalContent/ModalContent';
@@ -45,25 +46,12 @@ class HomeView extends Component {
       <>
         <div style={styles}>
           <div style={styles.box}>
-            LeftSideBar
-            <ul>
-              <li>
-                <Link to={`${match.url}/Notifications`}>NotificationsPage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/ProfilePage`}>ProfilePage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}`}>CheckListPage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/Achievments`}>AchievmentsPage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
-              </li>
-            </ul>
-            <TempBut onClick={this.props.onLogOut}>Log Out</TempBut>
+
+            <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
+            <li>
+              <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
+            </li>
+
           </div>
 
           <div style={styles.box}>
@@ -71,7 +59,16 @@ class HomeView extends Component {
               title <MainPrivateView />
             </header>
             <div>
-              <Route path={`${match.path}`} exact component={CheckListPage} />
+              <Route
+                path={`${match.path}`}
+                exact
+                // component={CheckListPage}
+              >
+                <CheckListPage
+                  toggleModal={this.props.toggleModal}
+                  changeLayout={this.changeLayout}
+                />
+              </Route>
               <Route
                 path={`${match.path}/Notifications`}
                 component={Notifications}
