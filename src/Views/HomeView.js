@@ -17,6 +17,7 @@ import ModalBackdrop from '../components/Modal/Modal';
 import ModalContent from '../components/ModalContent/ModalContent';
 import toggle from '../redux/modal/modalOperation';
 import modalSelector from '../redux/modal/modalSelector';
+import NotFound from '../components/NotFound/NotFound';
 
 const styles = {
   display: 'flex',
@@ -42,7 +43,6 @@ class HomeView extends Component {
     const { match } = this.props;
     return (
       <>
-        <h2>Это домашняя страница залогиненного пользователя</h2>
         <div style={styles}>
           <div style={styles.box}>
             LeftSideBar

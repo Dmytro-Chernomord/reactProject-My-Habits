@@ -44,8 +44,26 @@ const changePassword = data => async dispatch => {
     const response = await axios.post('/auth/updatePassword', { ...data });
     console.log('Password', response);
   } catch (error) {
-    console.log(error);
-    // dispatch(actions.addUserInfoError(error.message));
+    console.log(error.message);
   }
 };
-export default { getOwnHabits, addHabit, addUserInfo, changePassword };
+const changeSubscription = data => async dispatch => {
+  dispatch(actions.addUserSubscriptionRequest());
+
+  try {
+    await axios.post('/users/updateSubscription', {
+      ...data,
+    });
+    dispatch(actions.addUserSubscriptionSuccess(data));
+  } catch (error) {
+    dispatch(actions.addUserSubscriptionError(error.message));
+  }
+};
+
+export default {
+  getOwnHabits,
+  addHabit,
+  addUserInfo,
+  changePassword,
+  changeSubscription,
+};
