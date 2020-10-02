@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   margin-right: 30px;
+  align-items: center;
 }
 
 .label {
@@ -45,10 +46,28 @@
   border-radius: 5px;
 }
 
+.boxPassword {
+  text-align: center;
+}
+
 .boxAvatar {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.btnPassword {
+  margin-top: 20px;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #bdbdbd;
+  background-color: transparent;
+  border: none;
+  margin-right: 30px;
+}
+.btnPassword:hover {
+  color: #43d190;
 }
 
 .linkPageAvatars {

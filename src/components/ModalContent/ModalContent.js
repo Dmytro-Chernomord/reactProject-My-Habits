@@ -4,7 +4,7 @@ import HabitTemplateModal from '../HabitTemplateModal/HabitTemplateModal';
 import CustomHabbitModal from '../CustomHabbitModal/CustomHabbitModal';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import InterviewModal from '../InterviewModal/InterviewModal';
-import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
+import AvatarsModal from '../AvatarsModal/AvatarsModal';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from './ModalContent.module.css';
 
@@ -49,9 +49,7 @@ export default function ModalContent({ onSave, layout, ableToDelete }) {
         />
       )}
       {view === 'DailyResultModal' && <DailyResultModal onClose={onSave} />}
-      {view === 'ChangePasswordModal' && (
-        <ChangePasswordModal onClose={onSave} />
-      )}
+      {view === 'AvatarsModal' && <AvatarsModal onClose={onSave} />}
       {view === 'InterviewModal' && <InterviewModal onClose={onSave} />}
       {view !== 'InterviewModal' && (
         <ButtonClose type="button" onClick={onSave} />
