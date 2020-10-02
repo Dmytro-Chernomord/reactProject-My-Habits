@@ -10,6 +10,7 @@ import userOperation from '../redux/user/userOperation';
 import setToken from '../redux/auth/authOperation';
 import authSelector from '../redux/auth/authSelector';
 import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
+import LeftSideBarView from './LeftSideBarView';
 import ProfilePage from './PrivateViews/ProfilePage';
 import Subscriptions from './PrivateViews/SubscriptionsViews/Subscriptions';
 
@@ -32,27 +33,10 @@ class HomeView extends Component {
         <h2>Это домашняя страница залогиненного пользователя</h2>
         <div style={styles}>
           <div style={styles.box}>
-            LeftSideBar
-            <ul>
-              <li>
-                <Link to={`${match.url}/NotificationsPage`}>
-                  NotificationsPage
-                </Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/ProfilePage`}>ProfilePage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}`}>CheckListPage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/Achievments`}>AchievmentsPage</Link>
-              </li>
-              <li>
-                <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
-              </li>
-            </ul>
-            <TempBut onClick={this.props.onLogOut}>Log Out</TempBut>
+            <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
+            <li>
+              <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
+            </li>
           </div>
 
           <div style={styles.box}>

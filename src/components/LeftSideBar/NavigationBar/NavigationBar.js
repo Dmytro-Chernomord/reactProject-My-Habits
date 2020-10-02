@@ -1,43 +1,83 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Route, Link, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import routes from '../../../routes';
 import styles from './NavigationBar.module.css';
 
-const Navigation = () => (
-  <nav>
-    <ul>
-      <li>
-        <NavLink
-          activeStyle={styles}
-          className={styles}
-          to={routes.checklist}
-          exact
-        >
-          checklist
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          activeStyle={styles}
-          className={styles}
-          to={routes.achievements}
-          exact
-        >
-          achievements
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          activeStyle={styles}
-          className={styles}
-          to={routes.notification}
-          exact
-        >
-          notification
-        </NavLink>
-      </li>
-    </ul>
-  </nav>
-);
+const Navigation = ({ match }) => {
+  console.log(match);
+  return (
+    <nav>
+      <ul>
+        <li>
+          <NavLink
+            activeStyle={styles}
+            className={styles}
+            to={`${match.url}`}
+            exact
+          >
+            checklist
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            activeStyle={styles}
+            className={styles}
+            to={`${match.url}/Achievments`}
+            exact
+          >
+            achievements
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            activeStyle={styles}
+            className={styles}
+            to={`${match.url}/NotificationsPage`}
+            exact
+          >
+            notification
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-export default Navigation;
+//   <nav>
+//     <ul>
+//       <li>
+//         {/* <NavLink
+//           activeStyle={styles}
+//           className={styles}
+//           to={routes.checklist}
+//           exact
+//         >
+//           checklist
+//         </NavLink> */}
+//       </li>
+//       <li>
+//         {/* <NavLink
+//           activeStyle={styles}
+//           className={styles}
+//           to={routes.achievements}
+//           exact
+//         >
+//           achievements
+//         </NavLink> */}
+//       </li>
+//       <li>
+//         <NavLink
+//           activeStyle={styles}
+//           className={styles}
+//           to={`${match.url}/NotificationsPage`}
+//           exact
+//         >
+//           notification
+//         </NavLink>
+//       </li>
+//     </ul>
+//   </nav>
+// );
+
+export default connect()(Navigation);
