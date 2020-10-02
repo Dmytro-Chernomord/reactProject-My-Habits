@@ -1,0 +1,42 @@
+.habitsCards {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.habitsCardsItems {
+  width: 90%;
+  font-weight: 400;
+  text-decoration: none;
+  font-size: 16px;
+  color: #bdbdbd;
+}
+
+.habitsCards::before {
+  content: '';
+  background: #28b62c;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  /* animation: pulse-animation 2s infinite linear; */
+}
+
+/* @keyframes pulse-animation {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  25% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+  }
+  75% {
+    -webkit-transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+} */

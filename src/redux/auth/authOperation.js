@@ -17,7 +17,6 @@ const logIn = userData => dispatch => {
       setToken(response.data.access_token);
       dispatch(authAction.loginSuccess(response.data));
     })
-    // .catch(er => er.message);
     .catch(error => dispatch(authAction.loginError(error.message)));
 };
 
@@ -27,7 +26,7 @@ const registration = userData => dispatch => {
   axios
     .post('/auth/registration', userData)
     .then(response => {
-      //? autologin?
+      //? autologin? error?
       axios
         .post('/auth/login', userData)
         .then(response => {

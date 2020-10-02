@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import habitsSelector from '../../redux/habits/habitsSelector';
 import ItemHabit from './ItemHabit';
+import Button from '../UIcomponents/Button/Button';
 import s from './CheckListPage.module.css';
 
 const generateColor = () => {
@@ -13,7 +14,18 @@ class CheckListPage extends Component {
     const { items } = this.props;
     return (
       <>
-        <h2 className={s.header}>Чек-лист привычек</h2>
+        <div className={s.headerContainer}>
+          <h2 className={s.header}>Чек-лист привычек</h2>
+          <Button
+            type={'button'}
+            green={false}
+            handelClick={() => {
+              this.props.toggleModal();
+              this.props.changeLayout('DailyResultModal');
+            }}
+            label={'+ Сигареты за сегодня'}
+          />
+        </div>
         <div className={s.container}>
           <ul className={s.list}>
             {items.map(item => (

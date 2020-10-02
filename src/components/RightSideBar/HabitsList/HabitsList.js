@@ -1,50 +1,30 @@
+//created by Elena
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import getHabits from '../../../redux/user/userSelector';
+import habitsSelector from '../../../redux/habits/habitsSelector';
 import HabitsListItem from '../HabitsListItem/HabitsListItem';
 import slideStyles from './slide.module.css';
 import styles from './HabitsList.module.css';
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
-const data = [
-  true,
-  false,
-  false,
-  true,
-  true,
-  false,
-  false,
-  true,
-  false,
-  false,
-  true,
-  true,
-  false,
-  false,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-];
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 export function HabitsList() {
-  const habits = useSelector(state => state.habits);
-  const tasks = [true, false, false, true, true, false, false];
+  const habits = useSelector(state => habitsSelector.getFilterHabits(state));
 
-  console.log('habits', habits);
+  const sortByTime = (a, b) => {
+    const aDay = new Date(b.planningTime).valueOf() % MS_PER_DAY;
+    const bDay = new Date(a.planningTime).valueOf() % MS_PER_DAY;
+    return bDay - aDay;
+  };
+
+  const sortedHabits = [...habits].sort(sortByTime);
 
   return (
     <TransitionGroup component="ul" className={styles.List}>
-      {habits.map(habit => (
+      {sortedHabits.map(habit => (
         <CSSTransition
-          in={habits.length > 0}
+          in={sortedHabits.length > 0}
           key={habit._id}
           timeout={250}
           classNames={slideStyles}
@@ -53,16 +33,10 @@ export function HabitsList() {
           <HabitsListItem
             key={habit._id}
             habit={habit}
-            completed={getRandomInt(2)}
+            completed={habit.completed}
           />
         </CSSTransition>
       ))}
     </TransitionGroup>
   );
 }
-
-// "allday" > Ежедневно
-// workday">Пн-Вт-Ср-Чт-Пт
-// weekend">Сб-Вс
-// "firstset" > Пн - Ср - Пт
-// secondset">ВТ-ЧТ-СБ
