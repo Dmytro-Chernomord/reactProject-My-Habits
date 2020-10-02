@@ -8,8 +8,8 @@ export const onFilterHabits = (date, habits) => {
   for (let i = 0; i < habits.length; i++) {
     const el = habits[i];
     const habitsDates = [];
-    const MyDate = el.createAt; //для теста пока ссылаюсь на дату создания привычки
-    // const MyDate = el.planningTime;
+    // const MyDate = el.createAt; //для теста пока ссылаюсь на дату создания привычки
+    const MyDate = el.planningTime;
     switch (el.iteration) {
       case 'allday':
         for (let g = 0; habitsDates.length < el.data.length; g++) {
@@ -69,11 +69,17 @@ export const onFilterHabits = (date, habits) => {
           habitsDates.push(dateToString.toISOString().slice(0, 10));
         }
         break;
+      case 'onceAWeek':
+        for (let g = 0; habitsDates.length < el.data.length; g++) {
+          const habbitDay = Date.parse(MyDate) + g * MS_PER_DAY * 7;
+          const dateToString = new Date(habbitDay);
+          habitsDates.push(dateToString.toISOString().slice(0, 10));
+        }
+        break;
       default:
         console.log('error type iteration');
     }
     /// вытягиваем статус привычки из массива data по индексу
-    console.log('habitsDates.indexOf(date)', habitsDates.indexOf(date));
     const indexOfCompletedData = habitsDates.indexOf(date); // возвращает индекс, под которым находится выбранная дата в массиве дат привычки(0-20), или -1
     const completed = el.data[indexOfCompletedData]; // возвращает статус привычки на выбранную дату
 
