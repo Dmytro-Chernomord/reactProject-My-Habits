@@ -298,7 +298,7 @@ export default function CustomHabbitModal({
     [dispatch],
   );
   const planningTime = startDate + 'T' + time + ':00.000Z';
-
+  console.log(Date.parse(startDate));
   const handleInputChange = e => {
     const { name, value } = e.target;
 
