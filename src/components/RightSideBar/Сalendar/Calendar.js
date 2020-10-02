@@ -179,7 +179,7 @@ const WEEK_DAY_NAMES = [
   'Понедельник',
   'Вторник',
   'Среда',
-  'Четерг',
+  'Четверг',
   'Пятница',
   'Суббота',
 ];
@@ -207,21 +207,21 @@ export const Calendar = () => {
         <span className="week-day">{dayOfTheWeek} • </span>
         <span className="calendar-date">{dayOfTheMonth}</span>
       </p>
+      <DatePicker
+        selected={startDate}
+        onChange={handelDateChange}
+        locale="ru"
+        inline
+      />
+
       {/* <DatePicker
         selected={startDate}
         onChange={handelDateChange}
         locale="ru"
         inline
-      /> */}
-
-      <DatePicker
-        selected={startDate}
-        onChange={date => setStartDate(date)}
-        locale="ru"
-        inline
         minDate={new Date()}
         showDisabledMonthNavigation
-      />
+      /> */}
     </div>
   );
 };
