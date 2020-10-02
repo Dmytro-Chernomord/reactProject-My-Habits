@@ -1,6 +1,5 @@
 import React from 'react';
 import './NotFound.css';
-import broken from './images/imbroken.gif';
 
 function NotFound(props) {
   return (
