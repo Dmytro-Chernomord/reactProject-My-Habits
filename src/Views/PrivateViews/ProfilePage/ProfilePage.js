@@ -9,17 +9,18 @@ import userOperation from '../../../redux/user/userOperation';
 import AvatarUser from '../../../components/AvatarUser/AvatarUser';
 import userSelector from '../../../redux/user/userSelector';
 import Subscriptions from '../SubscriptionsViews/Subscriptions';
+import ChangePassword from '../../../components/ChangePassword/ChangePassword';
+import { CSSTransition } from 'react-transition-group';
+import fadePasswordStyle from './FadeProfilePage.module.css';
 
-function ProfilePage({ match, location }) {
+function ProfilePage({ match, location, toggleModal, changeLayout }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [showAvatars, setShowAvatars] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
-
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
@@ -34,8 +35,10 @@ function ProfilePage({ match, location }) {
 
   useEffect(() => {
     if (location.pathname === '/home/ProfilePage/avatars') {
+      setShowPassword(false);
       setShowAvatars(true);
     } else if (location.pathname === '/home/ProfilePage/Subscriptions') {
+      setShowPassword(false);
       setShowSubscriptions(true);
     } else {
       setShowAvatars(false);
@@ -55,15 +58,6 @@ function ProfilePage({ match, location }) {
     );
   };
 
-  const handlePasswordSubmit = event => {
-    event.preventDefault();
-    dispatch(
-      userOperation.changePassword({
-        password: password,
-        confirmPassword: confirmPassword,
-      }),
-    );
-  };
   return (
     <>
       {showSubscriptions ? (
@@ -71,7 +65,15 @@ function ProfilePage({ match, location }) {
       ) : (
         <>
           {showAvatars ? (
-            <Route path={`${match.path}/avatars`} component={AvatarView} />
+            <Route
+              path={`${match.path}/avatars`}
+              render={() => (
+                <AvatarView
+                  toggleModal={toggleModal}
+                  changeLayout={changeLayout}
+                />
+              )}
+            />
           ) : (
             <>
               <Header title="Личный кабинет"></Header>
@@ -128,40 +130,25 @@ function ProfilePage({ match, location }) {
                           className={styles.input}
                         />
                       </label>
-                      <button type="submit">Изменить</button>
+                      <Button variety={'white'} text="Изменить" />
                     </form>
-                    <div>
-                      <form onSubmit={handlePasswordSubmit}>
-                        <label className={styles.label}>
-                          <span className={styles.textLabel}>Пароль</span>
-                          <input
-                            type="password"
-                            value={password}
-                            name="password"
-                            onChange={({ target: { value } }) =>
-                              setPassword(value)
-                            }
-                            className={styles.input}
-                            required
-                          />
-                        </label>
-                        <label className={styles.label}>
-                          <span className={styles.textLabel}>
-                            Повторите пароль
-                          </span>
-                          <input
-                            type="password"
-                            value={confirmPassword}
-                            name="confirmPassword"
-                            onChange={({ target: { value } }) =>
-                              setConfirmPassword(value)
-                            }
-                            className={styles.input}
-                            required
-                          />
-                        </label>
-                        <button type="submit">Изменить пароль</button>
-                      </form>
+
+                    <div className={styles.boxPassword}>
+                      <button
+                        type="button"
+                        className={styles.btnPassword}
+                        onClick={() => setShowPassword(prev => !prev)}
+                      >
+                        Изменить пароль
+                      </button>
+                      <CSSTransition
+                        in={showPassword}
+                        classNames={fadePasswordStyle}
+                        timeout={250}
+                        unmountOnExit
+                      >
+                        <ChangePassword />
+                      </CSSTransition>
                     </div>
                   </div>
 
