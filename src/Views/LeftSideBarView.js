@@ -6,7 +6,6 @@ import NavigationBar from '../components/LeftSideBar/NavigationBar/NavigationBar
 import HabitsList from '../components/LeftSideBar/Habits/HabitsList';
 
 export default function LeftSideBarView({ match, onLogOut }) {
-  console.log(match);
   const habits = { habits: [], id: 1 };
   return (
     <LeftSideBar>
