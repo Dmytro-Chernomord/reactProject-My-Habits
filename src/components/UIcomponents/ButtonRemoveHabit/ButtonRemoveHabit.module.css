@@ -1,0 +1,41 @@
+.button {
+  position: relative;
+  display: block;
+  width: 220px;
+  height: 44px;
+  padding: 2px;
+  border: 0;
+  cursor: pointer;
+  margin: 0 auto 30px;
+  color: #bdbdbd;
+  background-color: #fff;
+  /* background-image: url(../../../images/svg-icons/trash-grey.svg),
+    url(../../../images/svg-icons/trash-red.svg); */
+  /* background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center; */
+}
+.button:hover,
+.button:focus {
+  color: #fe6083;
+  /* background-size: 0, auto; */
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  background: url(../../../images/svg-icons/trash-grey.svg);
+  top: 13px;
+  left: 20px;
+  width: 16px;
+  height: 16px;
+  background-size: auto, 0;
+  background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center;
+}
+
+.button:focus:before,
+.button:hover:before {
+  background: url(../../../images/svg-icons/trash-red.svg);
+}
