@@ -1,34 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
 
-const modalRoot = document.querySelector('#modal-root');
+// const modalRoot = document.querySelector('#modal-root');
 
-export default function ModalBackdrop({ onClose, children }) {
-  useEffect(() => {
-    const handleKeyDown = e => {
-      if (e.code === 'Escape') {
-        onClose();
+const ModalBackdrop = SomeModal => {
+  return class Modal extends React.Component {
+    state = { isOpen: false };
+    // [isOpen, setIsOpen] = useState(false);
+
+    componentDidMount() {
+      this.setState({ isOpen: true });
+      window.addEventListener('keydown', this.handleEscapePress);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('keydown', this.handleEscapePress);
+    }
+
+    handleEscapePress = event => {
+      if (event.code === 'Escape') {
+        this.props.onClose();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+    handleBackdropClick = event => {
+      if (event.target === event.currentTarget) {
+        this.props.onClose();
+      }
     };
-  }, [onClose]);
 
-  const handleBackdropClick = event => {
-    if (event.currentTarget === event.target) {
-      onClose();
+    hideModal = () => {
+      this.props.onClose();
+    };
+
+    render() {
+      return (
+        <div
+          className={styles.Modal__backdrop}
+          onClick={this.handleBackdropClick}
+        >
+          <div className={styles.Modal__content}>
+            {this.state.isOpen && (
+              <SomeModal {...this.props} onClick={this.hideModal} />
+            )}
+          </div>
+        </div>
+      );
     }
   };
+};
 
-  return createPortal(
-    <div className={styles.Modal__backdrop} onClick={handleBackdropClick}>
-      <div className={styles.Modal__content}>{children}</div>
-    </div>,
-    modalRoot,
-  );
-}
+export default ModalBackdrop;
