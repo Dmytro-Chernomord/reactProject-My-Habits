@@ -1,17 +1,19 @@
 import axios from 'axios';
-import authAction from './authAction';
+import cigarettesActions from './cigarettesActions';
 
 const postDayCigarettes = userData => dispatch => {
-  dispatch(authAction.postDayCigarettesRequest());
+  dispatch(cigarettesActions.cigarettesAddRequest());
 
   axios
-    .post('/auth/login', userData)
+    .post('/users/updateCigarettes', userData)
     .then(response => {
-      // console.log(response);
+      console.log(response);
 
-      dispatch(authAction.loginSuccess(response.data));
+      dispatch(cigarettesActions.cigarettesAddSuccess(response.data));
     })
-    .catch(error => dispatch(authAction.loginError(error.message)));
+    .catch(error =>
+      dispatch(cigarettesActions.cigarettesAddError(error.message)),
+    );
 };
 
 export default {
