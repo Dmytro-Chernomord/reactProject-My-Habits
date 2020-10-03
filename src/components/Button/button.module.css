@@ -1,0 +1,43 @@
+.button {
+  width: 220px;
+  height: 44px;
+
+  border-radius: 5px;
+}
+.login {
+  composes: button;
+  background-color: white;
+  color: #43d190;
+  border: 2px solid white;
+}
+.login:hover {
+  background-color: #43d190;
+  color: white;
+  border: 2px solid white;
+}
+
+.white {
+  composes: button;
+  background-color: white;
+  color: #43d190;
+  border: 2px solid #43d190;
+}
+
+.white:hover {
+  background-color: #43d190;
+  color: white;
+  border: 2px solid #43d190;
+}
+
+.green {
+  composes: button;
+  background-color: #43d190;
+  border-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+.green:hover {
+  background-color: white;
+  color: #43d190;
+  border: 2px solid white;
+}

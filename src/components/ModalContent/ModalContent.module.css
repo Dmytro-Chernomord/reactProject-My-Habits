@@ -1,0 +1,151 @@
+.modalContent {
+}
+
+.modalWrapper {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 784px;
+  padding: 60px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+}
+
+.modalTitle {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 70px;
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+}
+
+.modalTitleTemplate {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.modalTitleCustom {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  margin: 0;
+}
+
+.modalText {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  color: #bdbdbd;
+  text-align: center;
+}
+
+.modalTextCustom {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 40px;
+  margin-top: 8px;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  color: #bdbdbd;
+  text-align: center;
+}
+
+.emptyDiv {
+  height: 118px;
+}
+
+.modalList {
+  list-style: none;
+  max-height: 340px;
+  overflow: scroll;
+}
+
+.modalItem {
+  width: 425px;
+  height: 44px;
+  margin-bottom: 15px;
+  color: #43d190;
+  background: #e9faf7;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.modalItem:hover,
+.modalItem:focus {
+  background: #cbf6e3;
+  color: #4f4f4f;
+  cursor: pointer;
+}
+
+.boxInfoProfile {
+  display: flex;
+}
+.formProfile {
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 30px; */
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.textLabel {
+  display: block;
+  width: 100px;
+  margin-right: 120px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.16;
+  text-align: left;
+}
+
+.input {
+  width: 220px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.inputHabitName {
+  width: 425px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.btnFolder {
+  display: flex;
+  justify-content: center;
+}
+
+.btnBox {
+  margin-right: 15px;
+}
