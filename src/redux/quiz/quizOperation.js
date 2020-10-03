@@ -7,8 +7,6 @@ const quizComplete = userData => dispatch => {
   axios
     .post('/users/updateQuizInfo', userData)
     .then(response => {
-      console.log(response.data);
-
       dispatch(quizAction.quizAddSuccess(response.data));
     })
     .catch(error => dispatch(quizAction.quizAddError(error.message)));
