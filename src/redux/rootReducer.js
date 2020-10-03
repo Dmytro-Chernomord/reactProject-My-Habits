@@ -73,6 +73,10 @@ const paymentsReducer = createReducer([], {
     // console.log(actions.payload.user.payments);
     return actions.payload.user.payments;
   },
+  [actions.addCreditCardSuccess]: (state, { payload }) => [
+    ...state,
+    { ...payload },
+  ],
   [authAction.logoutSuccess]: () => [],
 });
 
