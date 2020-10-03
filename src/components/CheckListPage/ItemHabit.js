@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import ProgressBar from '../UIcomponents/ProgressBar/ProgressBar';
+import CustomHabitModal from '../CustomHabbitModal/CustomHabbitModal';
 import s from './ItemHabit.module.css';
 
 class ItemHabit extends Component {
@@ -9,6 +10,15 @@ class ItemHabit extends Component {
     index: -1,
     enabled: false,
     data: [],
+    showModal: false,
+  };
+
+  toggleModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   componentDidMount = (key = 0) => {
@@ -64,7 +74,14 @@ class ItemHabit extends Component {
           "-"
         </button>
 
-        <button onClick={this.props.settingHabit(_id)}>настройка</button>
+        <button
+          onClick={() => {
+            this.props.settingHabit(_id);
+            this.toggleModal();
+          }}
+        >
+          настройка
+        </button>
 
         {enabled && (
           <>
@@ -82,6 +99,15 @@ class ItemHabit extends Component {
               </div>
             </div>
           </>
+        )}
+        {this.state.showModal && (
+          <CustomHabitModal onClose={this.closeModal}>
+            {/* <ModalContent
+            onSave={toggleModal}
+            layout={layout}
+            // ableToDelete={isAbleToDelete}
+          /> */}
+          </CustomHabitModal>
         )}
       </>
     );

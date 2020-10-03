@@ -27,13 +27,13 @@ const styles = {
 };
 
 class HomeView extends Component {
-  state = {
-    layout: 'HabitChoiceModal',
-  };
+  // state = {
+  //   layout: 'HabitChoiceModal',
+  // };
 
-  changeLayout = layout => {
-    this.setState({ layout });
-  };
+  // changeLayout = layout => {
+  //   this.setState({ layout });
+  // };
 
   componentDidMount() {
     // console.log(this.props.token);
@@ -50,9 +50,7 @@ class HomeView extends Component {
           </div>
 
           <div style={styles.box}>
-            <header style={styles.title}>
-              title <MainPrivateView />
-            </header>
+            {/* <header style={styles.title}>title</header> */}
             <div>
               <Route
                 path={`${match.path}`}
@@ -60,8 +58,8 @@ class HomeView extends Component {
                 // component={CheckListPage}
               >
                 <CheckListPage
-                  toggleModal={this.props.toggleModal}
-                  changeLayout={this.changeLayout}
+                // toggleModal={this.props.toggleModal}
+                // changeLayout={this.changeLayout}
                 />
               </Route>
               <Route
@@ -70,8 +68,8 @@ class HomeView extends Component {
               />
               <Route path={`${match.path}/ProfilePage`}>
                 <ProfilePage
-                  toggleModal={this.props.toggleModal}
-                  changeLayout={this.changeLayout}
+                // toggleModal={this.props.toggleModal}
+                // changeLayout={this.changeLayout}
                 />
               </Route>
               <Route
@@ -88,7 +86,7 @@ class HomeView extends Component {
             <RightSideBar />
           </div>
         </div>
-        {this.props.showModal && (
+        {/* {this.props.showModal && (
           <ModalBackdrop onClose={this.props.toggleModal}>
             <ModalContent
               onSave={this.props.toggleModal}
@@ -96,7 +94,7 @@ class HomeView extends Component {
               // ableToDelete={isAbleToDelete}
             />
           </ModalBackdrop>
-        )}
+        )} */}
       </>
     );
   }
