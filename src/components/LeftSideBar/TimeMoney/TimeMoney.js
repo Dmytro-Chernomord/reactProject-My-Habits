@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ReactComponent as Money } from '../../../images/svg-icons/trash-grey.svg';
-import { ReactComponent as Time } from '../../../images/svg-icons/trash-grey.svg';
+import { ReactComponent as Money } from '../../../images/svg-icons/hourglass.svg';
+import { ReactComponent as Time } from '../../../images/svg-icons/wallet.svg';
 import styles from './TimeMoney.module.css';
 
 function TimeMoney() {

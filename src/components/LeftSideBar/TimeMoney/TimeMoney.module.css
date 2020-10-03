@@ -2,37 +2,45 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  min-width: 378px;
+  /* height: 110px; */
+  background: #ffffff;
+  border: 1px solid #d5e1dc;
+  border-radius: 0px;
 }
 
 .timeMoneyBox {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 50%;
-  padding: 3%;
+  width: 125px;
+  padding: 0;
+  margin: 0;
 }
 
 .economyText {
   margin-top: 10px;
   text-decoration: none;
-  font-weight: normal;
-  font-size: 16px;
   color: #bdbdbd;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .dataView {
-  width: 100%;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 2%;
-  margin: 2%;
 }
 
 .numbers {
   padding: 0;
   margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #4f4f4f;
 }
