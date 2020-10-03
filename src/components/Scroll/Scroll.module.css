@@ -1,0 +1,10 @@
+.outer {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.inner {
+  flex: 1;
+  overflow-y: scroll;
+}

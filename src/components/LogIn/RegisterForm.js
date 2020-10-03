@@ -1,49 +1,140 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import authOperations from '../../redux/auth/authOperation';
+import styles from './rightModal.module.css';
+import { ReactComponent as Logo } from '../../images/homepage/svg/MakeitHabitblack.svg';
+import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
+import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
+import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const handleEmailChange = e => setEmail(e.currentTarget.value);
+  const [eyepass, setEyePass] = useState('password');
 
-  const login = useCallback(() => {
-    dispatch(authOperations.registration({ email, password }));
-  }, [dispatch, email, password]);
 
-  const handlePasswordChange = e => setPassword(e.currentTarget.value);
-  const handleSubmit = e => {
-    e.preventDefault();
-    login();
+  const { register, errors, handleSubmit } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmit = data => {
+    dispatch(authOperations.registration({ ...data }));
+  };
+
+  const showPassTougle = () => {
+    if (eyepass === 'text') {
+      setEyePass('password');
+    } else {
+      setEyePass('text');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>RegisterView</h1>
-      <label>
-        Email{' '}
-        <input
-          onChange={handleEmailChange}
+    <>
+      <div className={styles.RegistrationLogo}>
+        <div className={styles.RegistrationLogoSvg}>
+          <div className={styles.RegistrationLogoPng}>
+            <Svg />
+          </div>
+        </div>
+        <Logo />
+      </div>
+      <p className={styles.RegistrationHi}>Добро пожаловать!</p>
+      <p className={styles.RegistrationTxt}>
+        Введите свои данные, чтобы продолжить использовать наше приложение
+      </p>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.RegistrationForm}>
+        <div>
+        {errors.email && errors.email.type === 'required' && (
+          <p>*oбязательное поле ввода</p>
+        )}
+        {errors.email && errors.email.type === 'pattern' && (
+          <p>{errors.email.message}</p>
+        )}
+      </div>
+        <div className={styles.RegistrationInputForm}>
+          <p className={styles.RegistrationInputTxt}>E-mail</p>
+          <input
+className={styles.RegistrationInput}
+placeholder="Введите свой E-mail"
           name="email"
-          value={email}
           type="email"
-          placeholder="Email"
-          required
+          style={{
+            outlineColor: errors.email ? '#fe6083' : '#43d190',
+            borderColor: errors.email ? '#fe6083' : '#e0e0e0',
+          }}
+          ref={register({
+            required: true,
+            pattern: {
+              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]+$/i,
+              message: '*e-mail не валидный, пример: email@mail.com',
+            },
+          })}
         />
-      </label>
-      <label>
-        Password{' '}
-        <input
-          onChange={handlePasswordChange}
+        </div>
+               <div>
+        {errors.password && errors.password.type === 'minLength' && (
+          <p>{errors.password.message}</p>
+        )}
+        {errors.password && errors.password.type === 'pattern' && (
+          <p>{errors.password.message}</p>
+        )}
+        {errors.password && errors.password.type === 'required' && (
+          <p>*oбязательное поле ввода</p>
+        )}
+        {errors.password && errors.password.type === 'maxLength' && (
+          <p>{errors.password.message}</p>
+        )}
+      </div>
+        <div className={styles.RegistrationInputForm}>
+          <p className={styles.RegistrationInputTxt}>Пароль</p>
+          <label className={styles.RegistrationPassword}>
+            <div
+              onClick={showPassTougle}
+              className={styles.RegistrationPasswordBtn}
+            >
+              {eyepass === 'text' ? <OpenedEye /> : <ClosedEye />}
+            </div>
+
+            <input
+ className={styles.RegistrationInput}
+placeholder="Придумайте пароль"
           name="password"
-          value={password}
           type="password"
-          placeholder="Password"
-          required
+          style={{
+            outlineColor: errors.password ? '#fe6083' : '#43d190',
+            borderColor: errors.password ? '#fe6083' : '#e0e0e0',
+          }}
+          ref={register({
+            pattern: {
+              value: /[A-Za-z0-9]$/i,
+              message:
+                '*пароль может содержать только латинские буквы и/или цифры, он не должен содержать пробелы и знаки препинания',
+            },
+            minLength: {
+              value: 8,
+              message: '*пароль должен содержать не менее 8 символов',
+            },
+            maxLength: {
+              value: 16,
+              message: '*пароль может содержать не более 16 символов',
+            },
+            required: true,
+          })}
         />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+          </label>
+        </div>
+        <div className={styles.RegistrationButtonBlock}>
+          <button className={styles.RegistrationButton}>
+            <p className={styles.RegistrationButtonTxt}>Регистрация</p>
+          </button>
+        </div>
+      </form>
+      <div className={styles.RegistrationButtonBlock}>
+        <button className={styles.RegistrationButton}>
+          <p className={styles.RegistrationButtonTxt}>Войти</p>
+        </button>
+      </div>
+    </>
   );
 }
