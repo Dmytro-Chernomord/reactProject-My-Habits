@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './notification.module.css';
-import habitSelector from '../../redux/habits/habitsSelector';
+// import habitSelector from '../../redux/habits/habitsSelector';
 
 export default function Notifications() {
-  const filteredHabitsData = useSelector(state =>
-    habitSelector.getFilterTodayHabits(state),
-  );
-  console.log(filteredHabitsData);
+  // const filteredHabitsData = useSelector(state =>
+  //   habitSelector.getFilterTodayHabits(state),
+  // );
+  // console.log(filteredHabitsData);
   const habitsData = useSelector(state => state.habits);
-  console.log(habitsData);
+  // console.log(habitsData);
   const habits = habitsData.map(el => el.data);
   const activeDays = habits.map(el =>
     el.filter(elm => typeof elm === 'boolean'),

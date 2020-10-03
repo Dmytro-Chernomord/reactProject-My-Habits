@@ -13,7 +13,7 @@ const logIn = userData => dispatch => {
   axios
     .post('/auth/login', userData)
     .then(response => {
-      console.log(response);
+      // console.log(response);
       setToken(response.data.access_token);
       dispatch(authAction.loginSuccess(response.data));
     })
@@ -30,7 +30,7 @@ const registration = userData => dispatch => {
       axios
         .post('/auth/login', userData)
         .then(response => {
-          console.log(response);
+          // console.log(response);
           setToken(response.data.access_token);
           dispatch(authAction.loginSuccess(response.data));
         })
@@ -41,7 +41,7 @@ const registration = userData => dispatch => {
 };
 
 const logOut = () => dispatch => {
-  console.log('Hi');
+  // console.log('Hi');
   clearToken();
   dispatch(authAction.logoutSuccess());
 };

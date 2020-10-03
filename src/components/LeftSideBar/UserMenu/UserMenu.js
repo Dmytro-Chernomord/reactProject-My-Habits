@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './UserMenu.module.css';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import avatar4 from '../../../images/avatars/avatar4.png';
 import TempBut from '../../TempBut';

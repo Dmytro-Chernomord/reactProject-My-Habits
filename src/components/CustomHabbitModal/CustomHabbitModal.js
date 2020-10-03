@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { CSSTransition } from 'react-transition-group';
 import userOperations from '../../redux/user/userOperation';
 // import userSelectors from '../../redux/user/userSelector';
@@ -58,12 +58,12 @@ export default function CustomHabbitModal({
     // resetForm();
   };
 
-  const resetForm = () => {
-    setName('');
-    setDate('');
-    setTime('');
-    setIteration('');
-  };
+  // const resetForm = () => {
+  //   setName('');
+  //   setDate('');
+  //   setTime('');
+  //   setIteration('');
+  // };
 
   return (
     <div>

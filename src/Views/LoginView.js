@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import LoginForm from '../components/LogIn/LoginForm';
-import RegisterForm from '../components/LogIn/RegisterForm';
+// import LoginForm from '../components/LogIn/LoginForm';
+// import RegisterForm from '../components/LogIn/RegisterForm';
 import Main from '../components/LogIn/Main';
 const styles = {
   display: 'flex',

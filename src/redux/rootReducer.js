@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './user/userActions';
 import modalAction from './modal/modalActions';
@@ -70,7 +70,7 @@ const cigarettesReducer = createReducer(cigarettesInitialStates, {
 
 const paymentsReducer = createReducer([], {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
-    console.log(actions.payload.user.payments);
+    // console.log(actions.payload.user.payments);
     return actions.payload.user.payments;
   },
   [authAction.logoutSuccess]: () => [],
@@ -85,7 +85,7 @@ const quizInitialState = {
 
 const quizReducer = createReducer(quizInitialState, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
-    console.log(actions.payload.user.quizInfo);
+    // console.log(actions.payload.user.quizInfo);
     return { ...actions.payload.user.quizInfo };
   },
   [authAction.logoutSuccess]: () => quizInitialState,

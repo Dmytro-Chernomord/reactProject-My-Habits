@@ -1,4 +1,4 @@
-import { element } from 'prop-types';
+// import { element } from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from '../../Views/PrivateViews/achievments.module.css';
@@ -13,14 +13,14 @@ const AchievmentsList = function () {
   const fiveCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el > 4,
   );
-  const oneCigaretteLess = daysWhenSmoke.some(
-    el => quizCigarettesData - el >= 1,
-  );
+  // const oneCigaretteLess = daysWhenSmoke.some(
+  //   el => quizCigarettesData - el >= 1,
+  // );
   const threeCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el >= 3,
   );
 
-  console.log(daysDontSmoke.length > 0);
+  // console.log(daysDontSmoke.length > 0);
   return (
     <ul className={styles.list}>
       <li
