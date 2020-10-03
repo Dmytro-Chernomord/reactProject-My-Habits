@@ -5,7 +5,7 @@
   justify-content: center;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 23px 0;
   min-width: 378px;
   /* height: 110px; */
   background: #ffffff;
@@ -22,13 +22,13 @@
 }
 
 .economyText {
-  margin-top: 10px;
   text-decoration: none;
   color: #bdbdbd;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
+  margin-bottom: 15px;
 }
 
 .dataView {
@@ -36,7 +36,7 @@
 }
 
 .numbers {
-  padding: 0;
+  padding: 0 0 0 10px;
   margin: 0;
   font-style: normal;
   font-weight: 500;

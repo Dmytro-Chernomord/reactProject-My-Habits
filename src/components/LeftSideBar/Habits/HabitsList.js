@@ -17,28 +17,27 @@ export default function HabitsList() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Привычки</h2>
-      <ul className={styles.habitsList}>
-        {habits.map(({ _id, name }) => (
-          <HabitsListItem key={_id} text={name} />
-        ))}
-      </ul>
+      <div className={styles.wrapper}>
+        <h2 className={styles.title}>Привычки</h2>
+        <ul className={styles.habitsList}>
+          {habits.map(({ _id, name }) => (
+            <HabitsListItem key={_id} text={name} />
+          ))}
+        </ul>
+      </div>
       <button
+        className={styles.button}
         onClick={() => {
           setLayout('HabitChoiceModal');
           toggleModal();
         }}
         aria-label="Добавить привычку"
       >
-        Добавить привычку
+        Добавить привычку +
       </button>
       {showModal && (
         <ModalBackdrop onClose={toggleModal}>
-          <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          />
+          <ModalContent onSave={toggleModal} layout={layout} />
         </ModalBackdrop>
       )}
     </div>

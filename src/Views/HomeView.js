@@ -47,9 +47,6 @@ class HomeView extends Component {
         <div style={styles}>
           <div style={styles.box}>
             <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
-            <li>
-              <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
-            </li>
           </div>
 
           <div style={styles.box}>
