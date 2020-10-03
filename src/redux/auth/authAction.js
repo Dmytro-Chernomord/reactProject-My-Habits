@@ -8,9 +8,9 @@ const loginRequest = createAction('auth/loginRequest');
 const loginSuccess = createAction('auth/loginSuccess');
 const loginError = createAction('auth/loginError');
 
-// const logoutRequest = createAction('auth/logoutRequest');
+const logoutRequest = createAction('auth/logoutRequest');
 const logoutSuccess = createAction('auth/logoutSuccess');
-// const logoutError = createAction('auth/logoutError');
+const logoutError = createAction('auth/logoutError');
 
 // const clearError = createAction('error/clear');
 
@@ -21,8 +21,8 @@ export default {
   loginRequest,
   loginSuccess,
   loginError,
-  //   logoutRequest,
+  logoutRequest,
   logoutSuccess,
-  //   logoutError,
+  logoutError,
   //   clearError,
 };
