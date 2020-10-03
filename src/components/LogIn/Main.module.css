@@ -162,15 +162,13 @@
 }
 
 .backdrop {
-  background-color: #ffffff;
-  width: 70%;
+  background-color: #f6f6f6;
+  width: 1035px;
   display: block;
   position: absolute;
   top: 0;
   height: 100vh;
-  /* left: 8px; */
   left: 0;
-  bottom: 0;
   z-index: 101;
 }
 
