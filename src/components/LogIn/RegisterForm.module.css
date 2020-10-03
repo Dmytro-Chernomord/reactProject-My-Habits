@@ -1,0 +1,10 @@
+.boxError {
+  height: 30px;
+}
+
+.error {
+  font-size: 12px;
+  line-height: 1.12;
+  color: #fe6083;
+  margin: 0;
+}

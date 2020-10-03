@@ -78,7 +78,7 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                         timeout={250}
                         unmountOnExit
                       >
-                        <ChangePassword />
+                        <ChangePassword setShowPassword={setShowPassword} />
                       </CSSTransition>
                     </div>
                   </div>
