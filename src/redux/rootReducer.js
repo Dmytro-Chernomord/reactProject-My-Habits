@@ -29,8 +29,9 @@ const RootReducer = createReducer(userInitialState, {
       subscription: actions.payload.user.subscription,
     };
   },
-  [actions.addUserInfoSuccess]: (_, { payload }) => {
+  [actions.addUserInfoSuccess]: (state, { payload }) => {
     return {
+      ...state,
       avatar: payload.avatar,
       email: payload.email,
       firstName: payload.firstName,

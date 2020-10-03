@@ -1,37 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, Route, withRouter } from 'react-router-dom';
-import Button from '../../../components/Button/Button';
+import { CSSTransition } from 'react-transition-group';
 import styles from './ProfilePage.module.css';
+import fadePasswordStyle from './FadeProfilePage.module.css';
+import Button from '../../../components/Button/Button';
 import AvatarView from '../AvatarView/AvatarView';
 import Header from '../../../components/Header/Header';
-import userOperation from '../../../redux/user/userOperation';
 import AvatarUser from '../../../components/AvatarUser/AvatarUser';
 import userSelector from '../../../redux/user/userSelector';
 import Subscriptions from '../SubscriptionsViews/Subscriptions';
 import ChangePassword from '../../../components/ChangePassword/ChangePassword';
-import { CSSTransition } from 'react-transition-group';
-import fadePasswordStyle from './FadeProfilePage.module.css';
+import ProfileForm from '../../../components/ProfileForm/ProfileForm';
 
 function ProfilePage({ match, location, toggleModal, changeLayout }) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [showAvatars, setShowAvatars] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const dispatch = useDispatch();
   const state = useSelector(state => state);
-  const user = userSelector.getUser(state);
-
-  useEffect(() => {
-    setFirstName(user.firstName);
-    setLastName(user.lastName);
-    setPhone(user.phone);
-    setEmail(user.email);
-  }, [user.email, user.firstName, user.lastName, user.phone]);
+  const subscription = userSelector.getSubscription(state);
 
   useEffect(() => {
     if (location.pathname === '/home/ProfilePage/avatars') {
@@ -46,26 +34,19 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
     }
   }, [location.pathname]);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    dispatch(
-      userOperation.addUserInfo({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-      }),
-    );
-  };
-
   return (
     <>
       {showSubscriptions ? (
-        <Route path={`${match.path}/Subscriptions`} component={Subscriptions} />
+        <Route
+          exact
+          path={`${match.path}/Subscriptions`}
+          component={Subscriptions}
+        />
       ) : (
         <>
           {showAvatars ? (
             <Route
+              exact
               path={`${match.path}/avatars`}
               render={() => (
                 <AvatarView
@@ -81,57 +62,7 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                 <h2 className={styles.titleProfile}>Личная информация</h2>
                 <div className={styles.boxInfoProfile}>
                   <div>
-                    <form
-                      onSubmit={handleSubmit}
-                      className={styles.formProfile}
-                    >
-                      <label className={styles.label}>
-                        <span className={styles.textLabel}>Имя</span>
-                        <input
-                          type="text"
-                          value={firstName}
-                          name="firstName"
-                          onChange={({ target: { value } }) =>
-                            setFirstName(value)
-                          }
-                          className={styles.input}
-                        />
-                      </label>
-                      <label className={styles.label}>
-                        <span className={styles.textLabel}>Фамилия</span>
-                        <input
-                          type="text"
-                          value={lastName}
-                          name="lastName"
-                          onChange={({ target: { value } }) =>
-                            setLastName(value)
-                          }
-                          className={styles.input}
-                        />
-                      </label>
-                      <label className={styles.label}>
-                        <span className={styles.textLabel}>Телефон</span>
-                        <input
-                          type="tel"
-                          value={phone}
-                          name="phone"
-                          placeholder="380 _ _  _ _ _  _ _  _ _"
-                          onChange={({ target: { value } }) => setPhone(value)}
-                          className={styles.input}
-                        />
-                      </label>
-                      <label className={styles.label}>
-                        <span className={styles.textLabel}>E-mail</span>
-                        <input
-                          type="email"
-                          value={email}
-                          name="email"
-                          onChange={({ target: { value } }) => setEmail(value)}
-                          className={styles.input}
-                        />
-                      </label>
-                      <Button variety={'white'} text="Изменить" />
-                    </form>
+                    <ProfileForm />
 
                     <div className={styles.boxPassword}>
                       <button
@@ -156,6 +87,7 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                     <AvatarUser width="108" />
 
                     <NavLink
+                      exact
                       to={`${match.url}/avatars`}
                       className={styles.linkPageAvatars}
                       onClick={() => setShowAvatars(true)}
@@ -163,8 +95,14 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                       Выбрать другой аватар
                     </NavLink>
 
-                    <p className={styles.typeSubscription}>Basic</p>
+                    {subscription === '' ? (
+                      <p className={styles.typeSubscription}>Basic</p>
+                    ) : (
+                      <p className={styles.typeSubscription}>{subscription}</p>
+                    )}
+
                     <NavLink
+                      exact
                       to={`${match.url}/Subscriptions`}
                       onClick={() => setShowSubscriptions(true)}
                     >

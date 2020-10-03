@@ -1,0 +1,42 @@
+.formProfile {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  align-items: center;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.textLabel {
+  display: block;
+  width: 100px;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.16;
+}
+
+.input {
+  width: 345px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+.boxError {
+  height: 15px;
+  margin-left: 120px;
+}
+.error {
+  font-size: 12px;
+  line-height: 1.12;
+  color: #fe6083;
+  margin: 0;
+}
