@@ -1,17 +1,30 @@
 import React from 'react';
 import AvatarUser from '../AvatarUser/AvatarUser';
-import styles from './AvatarsModal.module.css';
+import ModalBackdrop from '../Modal/Modal';
+import Button from '../UIcomponents/Button/Button';
+import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
+
+import styles from '../ModalContent/ModalContent.module.css';
 
 function AvatarsModal({ onClose }) {
   return (
-    <div className={styles.boxAvatarsModal}>
-      <h2>Вы изменили аватар!</h2>
+    <div className={styles.modalWrapper}>
+      <h2 className={styles.modalTitleCustom}>Вы изменили аватар!</h2>
       <AvatarUser width={'200'} />
 
-      <button className={styles.btn} type="button" onClick={onClose}>
+      {/* <button className={styles.btn} type="button" onClick={onClose}>
         Закрыть
-      </button>
+      </button> */}
+      <div className={styles.btnFolder}>
+        <Button
+          type={'button'}
+          green={false}
+          handelClick={() => onClose()}
+          label={'Закрыть'}
+        />
+      </div>
+      <ButtonClose type="button" onClick={onClose} />
     </div>
   );
 }
-export default AvatarsModal;
+export default ModalBackdrop(AvatarsModal);

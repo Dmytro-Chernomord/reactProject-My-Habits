@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,6 +21,7 @@ import InputBase from '@material-ui/core/InputBase';
 import './customCalendar.css';
 import styles from '../ModalContent/ModalContent.module.css';
 import { teal } from '@material-ui/core/colors';
+import ModalBackdrop from '../Modal/Modal';
 
 const personalStyle = `
  .calendarBox .react-datepicker__input-container > input { 
@@ -279,8 +281,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomHabbitModal({
-  onClose,
+function CustomHabbitModal({
+  onClick,
   ableDelete = false,
   habitInfo,
   onDelete,
@@ -341,7 +343,7 @@ export default function CustomHabbitModal({
   // };
 
   return (
-    <div>
+    <div className={styles.modalWrapper}>
       <style>{personalStyle}</style>
       <h2 className={styles.modalTitleCustom}>Настройте привычку под себя</h2>
       <p className={styles.modalTextCustom}>
@@ -472,7 +474,8 @@ export default function CustomHabbitModal({
         <div className={styles.btnRemoveFolder}>
           <ButtonRemoveHabit
             type="button"
-            handelClick={() => onClose()}
+            // временный функционал кнопки Удалить привычку
+            handelClick={() => onClick()}
             title="Удалить привычку"
           />
         </div>
@@ -487,7 +490,7 @@ export default function CustomHabbitModal({
             <Button
               type={'button'}
               green={false}
-              handelClick={() => onClose()}
+              handelClick={() => onClick()}
               label={'Отмена'}
             />
           </div>
@@ -500,7 +503,10 @@ export default function CustomHabbitModal({
             />
           </div>
         </div>
-      </form>
+      </form>{' '}
+      <ButtonClose type="button" onClick={onClick} />
     </div>
   );
 }
+
+export default ModalBackdrop(CustomHabbitModal);
