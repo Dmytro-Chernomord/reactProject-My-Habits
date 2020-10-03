@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { CSSTransition } from 'react-transition-group';
 import userOperations from '../../redux/user/userOperation';
 import { TextField } from '@material-ui/core';
@@ -333,12 +333,12 @@ export default function CustomHabbitModal({
     // resetForm();
   };
 
-  const resetForm = () => {
-    setName('');
-    setStartDate('');
-    setTime('');
-    setIteration('');
-  };
+  // const resetForm = () => {
+  //   setName('');
+  //   setDate('');
+  //   setTime('');
+  //   setIteration('');
+  // };
 
   return (
     <div>

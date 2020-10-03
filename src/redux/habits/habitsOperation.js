@@ -1,16 +1,16 @@
 import axios from 'axios';
 import habitsAction from './habitsAction';
-import userOperation from '../user/userOperation';
+// import userOperation from '../user/userOperation';
 
-const sendData = ({ id, name, data }, index, key = false) => {
-  const newData = data;
-  newData[index] = key;
-  return {
-    id: id,
-    name: name,
-    data: newData,
-  };
-};
+// const sendData = ({ id, name, data }, index, key = false) => {
+//   const newData = data;
+//   newData[index] = key;
+//   return {
+//     id: id,
+//     name: name,
+//     data: newData,
+//   };
+// };
 
 const setData = data => dispatch => {
   // dispatch(habitsAction.setHabitsDataRequest());

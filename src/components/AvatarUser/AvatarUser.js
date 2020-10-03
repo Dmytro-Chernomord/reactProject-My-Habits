@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import userSelector from '../../redux/user/userSelector';
-import avatar4 from '../../images/avatars/avatar4.png';
+import avatarDefault from '../../images/avatars/avatar001.png';
 import avatars from '../../avatars';
 
 const AvatarUser = ({ width }) => {
@@ -10,7 +10,7 @@ const AvatarUser = ({ width }) => {
   return (
     <>
       {avatar === '' ? (
-        <img src={avatar4} alt="avatar" width={width} />
+        <img src={avatarDefault} alt="avatar" width={width} />
       ) : (
         <>
           {avatars.map(el => {

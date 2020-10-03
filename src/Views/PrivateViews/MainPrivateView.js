@@ -1,11 +1,11 @@
-import React, { Suspense, lazy, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import routes from '../../routes';
-import ProfilePage from './ProfilePage/ProfilePage';
-import Achievements from './Achievements';
-import CheckListView from '../PrivateViews/CheckListView';
-import LeftSideBar from '../LeftSideBarView';
-import Modal from '../../components/Modal/Modal';
+// import routes from '../../routes';
+// import ProfilePage from './ProfilePage/ProfilePage';
+// import Achievements from './Achievements';
+// import CheckListView from '../PrivateViews/CheckListView';
+// import LeftSideBar from '../LeftSideBarView';
+// import Modal from '../../components/Modal/Modal';
 import ModalBackdrop from '../../components/Modal/Modal';
 import ModalContent from '../../components/ModalContent/ModalContent';
 import toggle from '../../redux/modal/modalOperation';
@@ -22,7 +22,7 @@ export default function MainPrivateView() {
   // const [showModal, setShowModal] = useState(false);
   const [layout, setLayout] = useState(false);
   const [isAbleToDelete, setIsAbleToDelete] = useState(false);
-  console.log(showModal);
+  // console.log(showModal);
   // const toggleModal = useCallback(() => {
   //   setShowModal(prevShowModal => !prevShowModal);
   // }, []);

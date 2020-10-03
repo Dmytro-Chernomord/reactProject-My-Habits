@@ -1,0 +1,22 @@
+.boxAvatarsModal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.btn {
+  width: 220px;
+  height: 44px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #43d190;
+  border-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+.btn:hover {
+  background-color: white;
+  color: #43d190;
+  border: 2px solid white;
+}
