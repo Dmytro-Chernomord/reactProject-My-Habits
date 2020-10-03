@@ -4,6 +4,7 @@ import Button from '../UIcomponents/Button/Button';
 import imgFly from '../../images/logo/Fly.svg';
 import imgGirl from '../../images/logo/Girl.svg';
 import AddCreditCardForm from './CreditCardAdd/CreditCardAddForm';
+import TestModal from '../../redux/quiz/modalQuiztest';
 
 import Swipers from './CreditCardAdd/Swiper';
 
@@ -34,6 +35,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
+      <TestModal />
     </>
   );
 };

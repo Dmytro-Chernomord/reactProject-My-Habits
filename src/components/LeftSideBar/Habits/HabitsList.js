@@ -1,45 +1,57 @@
 import HabitsListItem from '../HabitsListItem/HabitsListItem';
 import { useSelector } from 'react-redux';
 import styles from './habitsList.module.css';
-import ModalBackdrop from '../../Modal/Modal';
 import ModalContent from '../../ModalContent/ModalContent';
 import React, { useState, useCallback } from 'react';
+import HabitChoiceModal from '../../HabitChoiceModal/HabitChoiceModal';
+import CustomHabbitModal from '../../CustomHabbitModal/CustomHabbitModal';
 
 export default function HabitsList() {
   const [showModal, setShowModal] = useState(false);
   const [layout, setLayout] = useState(false);
+  const [templateHabit, setTemplateHabit] = useState('');
 
-  const toggleModal = useCallback(() => {
+  const toggleModal = () => {
     setShowModal(prevShowModal => !prevShowModal);
-  }, []);
+  };
 
   const { habits } = useSelector(state => state);
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Привычки</h2>
-      <ul className={styles.habitsList}>
-        {habits.map(({ _id, name }) => (
-          <HabitsListItem key={_id} text={name} />
-        ))}
-      </ul>
+      <div className={styles.wrapper}>
+        <h2 className={styles.title}>Привычки</h2>
+        <ul className={styles.habitsList}>
+          {habits.map(({ _id, name }) => (
+            <HabitsListItem key={_id} text={name} />
+          ))}
+        </ul>
+      </div>
       <button
+        className={styles.button}
         onClick={() => {
-          setLayout('HabitChoiceModal');
-          toggleModal();
+          setShowModal(true);
+          // setLayout('HabitChoiceModal');
+          // toggleModal();
         }}
         aria-label="Добавить привычку"
       >
-        Добавить привычку
+        Добавить привычку +
       </button>
       {showModal && (
-        <ModalBackdrop onClose={toggleModal}>
-          <ModalContent
+        <HabitChoiceModal
+          onClose={toggleModal}
+          onClick={() => {
+            setTemplateHabit();
+            toggleModal();
+          }}
+        >
+          {/* <ModalContent
             onSave={toggleModal}
             layout={layout}
             // ableToDelete={isAbleToDelete}
-          />
-        </ModalBackdrop>
+          /> */}
+        </HabitChoiceModal>
       )}
     </div>
   );

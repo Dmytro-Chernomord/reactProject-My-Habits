@@ -1,58 +1,130 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import userOperation from '../../redux/user/userOperation';
 import Button from '../Button/Button';
 import styles from './ChangePassword.module.css';
 
-const ChangePassword = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const ChangePassword = ({ setShowPassword }) => {
   const [showError, setShowError] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handlePasswordSubmit = event => {
-    event.preventDefault();
-    if (password !== confirmPassword) {
+  const { register, errors, handleSubmit } = useForm({
+    mode: 'onChange',
+  });
+
+  useEffect(() => {
+    if (errors.password || errors.confirmPassword) {
+      setShowMessage(false);
+    }
+  }, [errors.password, errors.confirmPassword]);
+
+  const onSubmit = data => {
+    if (data.password !== data.confirmPassword) {
       setShowError(true);
       return;
     }
-    dispatch(
-      userOperation.changePassword({
-        password: password,
-        confirmPassword: confirmPassword,
-      }),
-    );
+    dispatch(userOperation.changePassword({ ...data }));
     setShowError(false);
     setShowMessage(true);
-    setPassword('');
-    setConfirmPassword('');
+    setTimeout(() => {
+      setShowPassword(false);
+    }, 2000);
   };
 
   return (
     <div className={styles.boxFormPassword}>
-      <form className={styles.formProfile} onSubmit={handlePasswordSubmit}>
+      <form className={styles.formProfile} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.boxError}>
+          {errors.password && errors.password.type === 'minLength' && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+          {errors.password && errors.password.type === 'pattern' && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+          {errors.password && errors.password.type === 'required' && (
+            <p className={styles.error}>*oбязательное поле ввода</p>
+          )}
+          {errors.password && errors.password.type === 'maxLength' && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+        </div>
         <label className={styles.label}>
           <span className={styles.textLabel}>Пароль</span>
+
           <input
             type="password"
-            value={password}
             name="password"
             className={styles.input}
-            onChange={({ target: { value } }) => setPassword(value)}
-            required
+            style={{
+              outlineColor: errors.password ? '#fe6083' : '#43d190',
+              borderColor: errors.password ? '#fe6083' : '#e0e0e0',
+            }}
+            ref={register({
+              pattern: {
+                value: /[A-Za-z0-9]$/i,
+                message:
+                  '*пароль может содержать только латинские буквы и/или цифры, он не должен содержать пробелы и знаки препинания',
+              },
+              minLength: {
+                value: 8,
+                message: '*пароль должен содержать не менее 8 символов',
+              },
+              maxLength: {
+                value: 16,
+                message: '*пароль может содержать не более 16 символов',
+              },
+              required: true,
+            })}
           />
         </label>
+        <div className={styles.boxError}>
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === 'minLength' && (
+              <p className={styles.error}>{errors.confirmPassword.message}</p>
+            )}
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === 'pattern' && (
+              <p className={styles.error}>{errors.confirmPassword.message}</p>
+            )}
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === 'required' && (
+              <p className={styles.error}>*oбязательное поле ввода</p>
+            )}
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === 'maxLength' && (
+              <p className={styles.error}>{errors.confirmPassword.message}</p>
+            )}
+        </div>
         <label className={styles.label}>
           <span className={styles.textLabel}>Повторите пароль</span>
           <input
             type="password"
-            value={confirmPassword}
             name="confirmPassword"
             className={styles.input}
-            onChange={({ target: { value } }) => setConfirmPassword(value)}
-            required
+            style={{
+              outlineColor: errors.confirmPassword ? '#fe6083' : '#43d190',
+              borderColor: errors.confirmPassword ? '#fe6083' : '#e0e0e0',
+              marginBottom: '20px',
+            }}
+            ref={register({
+              pattern: {
+                value: /[A-Za-z0-9]$/i,
+                message:
+                  '*пароль может содержать только латинские буквы и/или цифры, он не должен содержать пробелы и знаки препинания',
+              },
+              minLength: {
+                value: 8,
+                message: '*пароль должен содержать не менее 8 символов',
+              },
+              maxLength: {
+                value: 16,
+                message: '*пароль может содержать не более 16 символов',
+              },
+              required: true,
+            })}
           />
         </label>
         <Button variety={'white'} text="Изменить пароль" />

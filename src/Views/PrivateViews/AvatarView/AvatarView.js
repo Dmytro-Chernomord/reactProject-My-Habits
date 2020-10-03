@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './AvatarView.module.css';
 import Header from '../../../components/Header/Header';
 import userOperation from '../../../redux/user/userOperation';
 import avatars from '../../../avatars';
+import AvatarsModal from '../../../components/AvatarsModal/AvatarsModal';
 
-function AvatarView({ toggleModal, changeLayout }) {
+function AvatarView({ onClose, changeLayout }) {
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+
+  const toggleModal = () => {
+    setShowModal(prevShowModal => !prevShowModal);
+  };
 
   const handleClick = e => {
     const { dataset } = e.target;
     toggleModal();
-    changeLayout('AvatarsModal');
+    // changeLayout('AvatarsModal');
     dispatch(userOperation.addUserInfo({ avatar: dataset.id }));
   };
 
@@ -36,6 +42,21 @@ function AvatarView({ toggleModal, changeLayout }) {
           })}
         </ul>
       </div>
+      {showModal && (
+        <AvatarsModal
+          onClose={toggleModal}
+          // onClick={() => {
+          //   setTemplateHabit();
+          //   toggleModal();
+          // }}
+        >
+          {/* <ModalContent
+            onSave={toggleModal}
+            layout={layout}
+            // ableToDelete={isAbleToDelete}
+          /> */}
+        </AvatarsModal>
+      )}
     </>
   );
 }

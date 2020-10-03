@@ -1,25 +1,34 @@
-.habitsCards {
+.habitsCardsItem {
   display: flex;
   align-items: center;
-  margin: 0;
+  margin-bottom: 15px;
   padding: 0;
 }
 
-.habitsCardsItems {
-  width: 90%;
-  font-weight: 400;
-  text-decoration: none;
-  font-size: 16px;
-  color: #bdbdbd;
+.habitsCardsItem:last-child {
+  margin-bottom: 0;
 }
 
-.habitsCards::before {
+.habitsCardsText {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #bdbdbd;
+  flex-wrap: wrap;
+  width: 222px;
+}
+
+.habitsCardsItem::before {
   content: '';
   background: #28b62c;
   display: inline-block;
-  width: 1em;
-  height: 1em;
   border-radius: 50%;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  background: #b469fa;
   /* animation: pulse-animation 2s infinite linear; */
 }
 

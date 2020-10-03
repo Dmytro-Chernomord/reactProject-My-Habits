@@ -1,8 +1,10 @@
 import React from 'react';
+import ModalBackdrop from '../Modal/Modal';
+import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import Button from '../UIcomponents/Button/Button';
 import styles from '../ModalContent/ModalContent.module.css';
 
-export default function HabitTemplateModal({ habits, onClick, addData }) {
+function HabitTemplateModal({ habits, onClick, addData }) {
   return (
     <div className={styles.modalContent}>
       <h2 className={(styles.modalTitle, styles.modalTitleTemplate)}>
@@ -29,7 +31,10 @@ export default function HabitTemplateModal({ habits, onClick, addData }) {
         green={false}
         handelClick={() => onClick('HabitChoiceModal')}
         label={'Назад'}
-      />
+      />{' '}
+      <ButtonClose type="button" onClick={onClick} />
     </div>
   );
 }
+
+export default ModalBackdrop(HabitTemplateModal);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import habitsSelector from '../../redux/habits/habitsSelector';
+import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import ItemHabit from './ItemHabit';
 import Button from '../UIcomponents/Button/Button';
 import s from './CheckListPage.module.css';
@@ -10,6 +11,16 @@ const generateColor = () => {
 };
 
 class CheckListPage extends Component {
+  state = { showModal: false };
+  // const[showModal, setShowModal] = useState(false);
+  toggleModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
     const { items } = this.props;
     return (
@@ -19,10 +30,10 @@ class CheckListPage extends Component {
           <Button
             type={'button'}
             green={false}
-            handelClick={() => {
-              this.props.toggleModal();
-              this.props.changeLayout('DailyResultModal');
-            }}
+            handelClick={
+              this.toggleModal
+              // this.props.changeLayout('DailyResultModal');
+            }
             label={'+ Сигареты за сегодня'}
           />
         </div>
@@ -39,6 +50,15 @@ class CheckListPage extends Component {
             ))}
           </ul>
         </div>
+        {this.state.showModal && (
+          <DailyResultModal onClose={this.closeModal}>
+            {/* <ModalContent
+            onSave={toggleModal}
+            layout={layout}
+            // ableToDelete={isAbleToDelete}
+          /> */}
+          </DailyResultModal>
+        )}
       </>
     );
   }

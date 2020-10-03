@@ -4,6 +4,7 @@ import actions from './user/userActions';
 import modalAction from './modal/modalActions';
 import authAction from './auth/authAction';
 import habitsActions from './habits/habitsAction';
+import quizActions from './quiz/quizActions';
 
 const userInitialState = {
   firstName: '',
@@ -92,6 +93,8 @@ const quizReducer = createReducer(quizInitialState, {
     // console.log(actions.payload.user.quizInfo);
     return { ...actions.payload.user.quizInfo };
   },
+  [quizActions.quizAddSuccess]: (_, actions) => actions.payload,
+
   [authAction.logoutSuccess]: () => quizInitialState,
 });
 
@@ -108,6 +111,9 @@ const errorReducer = createReducer(null, {
   [authAction.loginError]: () => true,
   [authAction.loginRequest]: () => false,
   [authAction.loginSuccess]: () => false,
+  [quizActions.quizAddError]: () => true,
+  [quizActions.quizAddRequest]: () => false,
+  [quizActions.quizAddSuccess]: () => false,
 });
 
 const loadingReducer = createReducer(false, {
