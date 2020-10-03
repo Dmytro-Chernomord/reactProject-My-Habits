@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ReactComponent as Cup } from '../../../images/svg-icons/trash-grey.svg';
 import { ReactComponent as Bell } from '../../../images/svg-icons/trash-grey.svg';
@@ -8,7 +8,7 @@ import { ReactComponent as Calendar } from '../../../images/svg-icons/trash-grey
 import styles from './NavigationBar.module.css';
 
 const Navigation = ({ match }) => {
-  console.log(match);
+  // console.log(match);
   return (
     <nav className={styles.container}>
       <ul className={styles.navList}>

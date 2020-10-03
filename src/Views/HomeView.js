@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import authOperation from '../redux/auth/authOperation';
-import TempBut from '../components/TempBut';
+// import TempBut from '../components/TempBut';
 import Notifications from './PrivateViews/NotificationsView';
 import Achievements from '../Views/PrivateViews/Achievements';
 import CheckListPage from '../components/CheckListPage/CheckListPage';
@@ -18,7 +18,7 @@ import ModalBackdrop from '../components/Modal/Modal';
 import ModalContent from '../components/ModalContent/ModalContent';
 import toggle from '../redux/modal/modalOperation';
 import modalSelector from '../redux/modal/modalSelector';
-import NotFound from '../components/NotFound/NotFound';
+// import NotFound from '../components/NotFound/NotFound';
 
 const styles = {
   display: 'flex',
@@ -36,7 +36,7 @@ class HomeView extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.token);
+    // console.log(this.props.token);
     setToken.setToken(this.props.token);
     this.props.onGetOwnHabits();
   }
@@ -46,12 +46,10 @@ class HomeView extends Component {
       <>
         <div style={styles}>
           <div style={styles.box}>
-
             <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
             <li>
               <Link to={`${match.url}/Subscriptions`}>SubscriptionsPage</Link>
             </li>
-
           </div>
 
           <div style={styles.box}>

@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
   error: state.error,
 });
 
-const mapDispatchToProps = {};
+// const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, {
   onGetOwnHabits: userOperation.getOwnHabits,

@@ -1,7 +1,7 @@
 import actions from './modalActions';
 
 const toggleModal = () => dispatch => {
-  console.log('Hi');
+  // console.log('Hi');
 
   dispatch(actions.toggleModal());
 };

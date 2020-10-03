@@ -159,51 +159,49 @@ const ProfileForm = () => {
 };
 export default ProfileForm;
 
-{
-  /* <form onSubmit={handleSubmit} className={styles.formProfile}>
-  <label className={styles.label}>
-    <span className={styles.textLabel}>Имя</span>
-    <input
-      pattern="[A-Za-zА-Яа-яЁё]{2,}"
-      type="text"
-      value={firstName}
-      name="firstName"
-      onChange={({ target: { value } }) => setFirstName(value)}
-      className={styles.inputName}
-      placeholder="name"
-    />
-  </label>
-  <label className={styles.label}>
-    <span className={styles.textLabel}>Фамилия</span>
-    <input
-      type="text"
-      value={lastName}
-      name="lastName"
-      onChange={({ target: { value } }) => setLastName(value)}
-      className={styles.input}
-    />
-  </label>
-  <label className={styles.label}>
-    <span className={styles.textLabel}>Телефон</span>
-    <input
-      type="tel"
-      value={phone}
-      name="phone"
-      placeholder="380 _ _  _ _ _  _ _  _ _"
-      onChange={({ target: { value } }) => setPhone(value)}
-      className={styles.input}
-    />
-  </label>
-  <label className={styles.label}>
-    <span className={styles.textLabel}>E-mail</span>
-    <input
-      type="email"
-      value={email}
-      name="email"
-      onChange={({ target: { value } }) => setEmail(value)}
-      className={styles.input}
-    />
-  </label>
-  <Button variety={'white'} text="Изменить" />
-</form>; */
-}
+//    <form onSubmit={handleSubmit} className={styles.formProfile}>
+//   <label className={styles.label}>
+//     <span className={styles.textLabel}>Имя</span>
+//     <input
+//       pattern="[A-Za-zА-Яа-яЁё]{2,}"
+//       type="text"
+//       value={firstName}
+//       name="firstName"
+//       onChange={({ target: { value } }) => setFirstName(value)}
+//       className={styles.inputName}
+//       placeholder="name"
+//     />
+//   </label>
+//   <label className={styles.label}>
+//     <span className={styles.textLabel}>Фамилия</span>
+//     <input
+//       type="text"
+//       value={lastName}
+//       name="lastName"
+//       onChange={({ target: { value } }) => setLastName(value)}
+//       className={styles.input}
+//     />
+//   </label>
+//   <label className={styles.label}>
+//     <span className={styles.textLabel}>Телефон</span>
+//     <input
+//       type="tel"
+//       value={phone}
+//       name="phone"
+//       placeholder="380 _ _  _ _ _  _ _  _ _"
+//       onChange={({ target: { value } }) => setPhone(value)}
+//       className={styles.input}
+//     />
+//   </label>
+//   <label className={styles.label}>
+//     <span className={styles.textLabel}>E-mail</span>
+//     <input
+//       type="email"
+//       value={email}
+//       name="email"
+//       onChange={({ target: { value } }) => setEmail(value)}
+//       className={styles.input}
+//     />
+//   </label>
+//   <Button variety={'white'} text="Изменить" />
+// </form>;

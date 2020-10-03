@@ -19,7 +19,7 @@ export default function CustomHabbitForm({ onClose, ableDelete = false }) {
   );
   const planningTime = date + ' ' + time;
 
-  console.log(ableDelete);
+  // console.log(ableDelete);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
