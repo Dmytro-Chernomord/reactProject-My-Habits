@@ -28,7 +28,7 @@ const WEEK_DAY_NAMES = [
   'Понедельник',
   'Вторник',
   'Среда',
-  'Четерг',
+  'Четверг',
   'Пятница',
   'Суббота',
 ];
@@ -67,7 +67,7 @@ export const Calendar = () => {
 
       <DatePicker
         selected={startDate}
-        onChange={date => setStartDate(date)}
+        onChange={handelDateChange}
         locale="ru"
         inline
         minDate={new Date(registerData)}
