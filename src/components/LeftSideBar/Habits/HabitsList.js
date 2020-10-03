@@ -1,7 +1,6 @@
 import HabitsListItem from '../HabitsListItem/HabitsListItem';
 import { useSelector } from 'react-redux';
 import styles from './habitsList.module.css';
-import ModalBackdrop from '../../Modal/Modal';
 import ModalContent from '../../ModalContent/ModalContent';
 import React, { useState, useCallback } from 'react';
 import HabitChoiceModal from '../../HabitChoiceModal/HabitChoiceModal';
@@ -20,13 +19,16 @@ export default function HabitsList() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Привычки</h2>
-      <ul className={styles.habitsList}>
-        {habits.map(({ _id, name }) => (
-          <HabitsListItem key={_id} text={name} />
-        ))}
-      </ul>
+      <div className={styles.wrapper}>
+        <h2 className={styles.title}>Привычки</h2>
+        <ul className={styles.habitsList}>
+          {habits.map(({ _id, name }) => (
+            <HabitsListItem key={_id} text={name} />
+          ))}
+        </ul>
+      </div>
       <button
+        className={styles.button}
         onClick={() => {
           setShowModal(true);
           // setLayout('HabitChoiceModal');
@@ -34,7 +36,7 @@ export default function HabitsList() {
         }}
         aria-label="Добавить привычку"
       >
-        Добавить привычку
+        Добавить привычку +
       </button>
       {showModal && (
         <HabitChoiceModal

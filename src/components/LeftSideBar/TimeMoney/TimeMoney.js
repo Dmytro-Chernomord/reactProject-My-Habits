@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ReactComponent as Money } from '../../../images/svg-icons/trash-grey.svg';
-import { ReactComponent as Time } from '../../../images/svg-icons/trash-grey.svg';
+import { ReactComponent as Hourglass } from '../../../images/svg-icons/hourglass.svg';
+import { ReactComponent as Wallet } from '../../../images/svg-icons/wallet.svg';
 import styles from './TimeMoney.module.css';
 
 function TimeMoney() {
@@ -82,14 +82,16 @@ function TimeMoney() {
       <li className={styles.timeMoneyBox}>
         <p className={styles.economyText}>Сэкономленные деньги</p>
         <div className={styles.dataView}>
-          <Time />
-          <span className={styles.numbers}>{moneyEconomy(filtredArr)}</span>
+          <Wallet />
+          <span className={styles.numbers}>
+            {moneyEconomy(filtredArr)} &#8372;
+          </span>
         </div>
       </li>
       <li className={styles.timeMoneyBox}>
         <p className={styles.economyText}>Сэкономленное время</p>
         <div className={styles.dataView}>
-          <Money />
+          <Hourglass />
           <span className={styles.numbers}>{timeEconomy(filtredArr)}</span>
         </div>
       </li>
