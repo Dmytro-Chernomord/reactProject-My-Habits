@@ -30,7 +30,6 @@ const addHabit = habit => async dispatch => {
 
 const addUserInfo = dataUser => async dispatch => {
   dispatch(actions.addUserInfoRequest());
-  // console.log(dataUser);
   try {
     const response = await axios.patch('/users', { ...dataUser });
     dispatch(actions.addUserInfoSuccess(response.data));
@@ -41,8 +40,7 @@ const addUserInfo = dataUser => async dispatch => {
 
 const changePassword = data => async dispatch => {
   try {
-    // const response = await axios.post('/auth/updatePassword', { ...data });
-    // console.log('Password', response);
+    await axios.post('/auth/updatePassword', { ...data });
   } catch (error) {
     console.log(error.message);
   }
