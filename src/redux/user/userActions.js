@@ -20,6 +20,12 @@ const addUserSubscriptionSuccess = createAction(
 const addUserSubscriptionError = createAction(
   'subscription/addUserSubscriptionError',
 );
+
+const addCreditCardRequest = createAction('creditcard/addCreditCardRequest');
+
+const addCreditCardSuccess = createAction('creditcard/addCreditCardSuccess');
+
+const addCreditCardError = createAction('creditcard/addCreditCardError');
 export default {
   getOwnHabitsRequest,
   getOwnHabitsSuccess,
@@ -33,4 +39,7 @@ export default {
   addUserSubscriptionRequest,
   addUserSubscriptionSuccess,
   addUserSubscriptionError,
+  addCreditCardRequest,
+  addCreditCardSuccess,
+  addCreditCardError,
 };

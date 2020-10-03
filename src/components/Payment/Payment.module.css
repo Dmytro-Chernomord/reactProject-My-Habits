@@ -2,6 +2,9 @@ p {
   margin: 0;
 }
 
+ul {
+  list-style: none;
+}
 .background {
   background-color: #f6f6f6;
   padding-top: 60px;
@@ -24,7 +27,7 @@ p {
 }
 
 .cardText {
-  color: white;
+  color: rgb(218, 188, 188);
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 40px;
@@ -36,7 +39,7 @@ p {
   display: block;
   font-weight: 400;
   font-size: 18px;
-  color: white;
+  color: rgb(182, 162, 162);
   margin-bottom: 59px;
   margin-left: 21px;
   letter-spacing: 1px;
@@ -45,7 +48,7 @@ p {
   display: inline-block;
   font-weight: 500;
   font-size: 14px;
-  color: white;
+  color: rgb(179, 163, 163);
   margin-left: 21px;
   padding-bottom: 22px;
   margin-bottom: 0;
@@ -108,3 +111,10 @@ p {
 .fly {
   display: block;
 }
+.cardList {
+  display: flex;
+}
+/* 
+.swiper {
+  max-width: 600px;
+} */
