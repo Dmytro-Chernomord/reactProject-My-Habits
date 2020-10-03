@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './ButtonRemove.module.css';
+import styles from './ButtonRemoveHabit.module.css';
 import PropTypes from 'prop-types';
 
-export function ButtonRemove({ type, id, handelClick, title }) {
+export function ButtonRemoveHabit({ type, id, handelClick, title }) {
   return (
     <button
       className={styles.button}
@@ -16,8 +16,7 @@ export function ButtonRemove({ type, id, handelClick, title }) {
   );
 }
 
-ButtonRemove.propTypes = {
+ButtonRemoveHabit.propTypes = {
   type: PropTypes.string.isRequired,
   handelClick: PropTypes.func,
-  id: PropTypes.string.isRequired,
 };

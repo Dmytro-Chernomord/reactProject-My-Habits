@@ -57,6 +57,18 @@ const changeSubscription = data => async dispatch => {
     dispatch(actions.addUserSubscriptionError(error.message));
   }
 };
+const addCreditCard = data => async dispatch => {
+  dispatch(actions.addCreditCardRequest());
+
+  try {
+    await axios.post('/users/addPayment', {
+      ...data,
+    });
+    dispatch(actions.addCreditCardSuccess(data));
+  } catch (error) {
+    dispatch(actions.addCreditCardError(error.message));
+  }
+};
 
 export default {
   getOwnHabits,
@@ -64,4 +76,5 @@ export default {
   addUserInfo,
   changePassword,
   changeSubscription,
+  addCreditCard,
 };
