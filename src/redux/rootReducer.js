@@ -110,6 +110,24 @@ const errorReducer = createReducer(null, {
   [authAction.loginSuccess]: () => false,
 });
 
+const loadingReducer = createReducer(false, {
+  [authAction.loginRequest]: () => true,
+  [authAction.loginSuccess]: () => false,
+  [authAction.loginError]: () => false,
+
+  [authAction.registrationRequest]: () => true,
+  [authAction.registrationSuccess]: () => false,
+  [authAction.registrationError]: () => false,
+
+  [authAction.logoutRequest]: () => true,
+  [authAction.logoutSuccess]: () => false,
+  [authAction.logoutError]: () => false,
+
+  [habitsActions.removeHabitRequest]: () => true,
+  [habitsActions.removeHabitSuccess]: () => false,
+  [habitsActions.removeHabitError]: () => false,
+});
+
 export default {
   user: RootReducer,
   habits: habitsReducer,
@@ -118,4 +136,5 @@ export default {
   quiz: quizReducer,
   modal: modalReducer,
   error: errorReducer,
+  loading: loadingReducer,
 };
