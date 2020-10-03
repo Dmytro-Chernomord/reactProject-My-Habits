@@ -7,6 +7,7 @@ import PublicRoute from './PublicRoute';
 import NotFound from '../components/NotFound/NotFound';
 import userOperation from '../redux/user/userOperation';
 import Error from '../components/Error/Error';
+import { CustomLoader } from './UIcomponents/CustomLoader/CustomLoader';
 
 class App extends Component {
   // componentDidMount() {
@@ -17,7 +18,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         {this.props.error && <Error />}
-        <Suspense fallback={<h1>Loading</h1>}>
+        <Suspense fallback={<CustomLoader />}>
           <Switch>
             {routes.map(route =>
               route.private ? (

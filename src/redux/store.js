@@ -31,6 +31,7 @@ const store = configureStore({
     date: dateReducer,
     modal: userData.modal,
     error: userData.error,
+    loading: userData.loading,
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: getDefaultMiddleware({
