@@ -281,19 +281,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({
-  onClick,
-  ableDelete = false,
-  habitInfo,
-  onDelete,
-}) {
+function CustomHabbitModal({ data, onClick, ableToDelete }) {
   const classes = useStyles();
-  const [name, setName] = useState(habitInfo);
-  // const [date, setDate] = useState();
+  const [name, setName] = useState(data);
   const [time, setTime] = useState();
   const [iteration, setIteration] = useState('');
   const [startDate, setStartDate] = useState(new Date());
-  // const habits = useSelector(userSelectors.getHabits);
   const dispatch = useDispatch();
   const onSubmit = useCallback(
     habit => dispatch(userOperations.addHabit(habit)),
@@ -367,16 +360,6 @@ function CustomHabbitModal({
         <div className={styles.dateBox}>
           <label htmlFor="date" className={styles.label}>
             <span className={styles.textLabel}>Дата старта</span>
-            {/* 
-            <input
-              type="date"
-              name="date"
-              id="date"
-              value={date}
-              required
-              onChange={handleInputChange}
-              className={styles.input}
-            /> */}
             <div className={'calendarBox'}>
               <DatePicker
                 dateFormat="yyyy/MM/dd"
@@ -412,9 +395,6 @@ function CustomHabbitModal({
               onChange={handleInputChange}
               input={<BootstrapInput />}
             >
-              {/* <MenuItem value="">
-                <em>Выбрать</em>
-              </MenuItem> */}
               <MenuItem value="allday">Ежедневно</MenuItem>
               <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
               <MenuItem value="weekend">Сб-Вс</MenuItem>
@@ -424,66 +404,16 @@ function CustomHabbitModal({
               <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
             </Select>
           </FormControl>
-          {/* <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="outlined-age-native-simple">
-              Выбрать
-            </InputLabel>
-            <Select
-              native
-              value={iteration}
-              onChange={handleInputChange}
-              label="iteration"
-              inputProps={{
-                name: 'iteration',
-                id: 'outlined-age-native-simple',
-              }}
-              className={classes.formInput}
-            >
-              <option aria-label="None" value="" />
-              <option value="allday" className={styles.formOption}>
-                Ежедневно
-              </option>
-              <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
-              <option value="weekend">Сб-Вс</option>
-              <option value="firstset">Пн-Ср-Пт</option>
-              <option value="secondset">ВТ-ЧТ-СБ</option>
-              <option value="eachTwoDays">Раз в 2 дня</option>
-              <option value="onceAWeek">Раз в неделю</option>
-            </Select>
-          </FormControl> */}
-          {/* <select
-            className={styles.input}
-            name="iteration"
-            id="iteration"
-            size="1"
-            required="required"
-            onChange={handleInputChange}
-          >
-            <option selected disabled hidden value="">
-              Выбрать
-            </option>
-            <option value="allday">Ежедневно</option>
-            <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
-            <option value="weekend">Сб-Вс</option>
-            <option value="firstset">Пн-Ср-Пт</option>
-            <option value="secondset">ВТ-ЧТ-СБ</option>
-            <option value="eachTwoDays">Раз в 2 дня</option>
-            <option value="onceAWeek">Раз в неделю</option>
-          </select> */}
         </label>
-        <div className={styles.btnRemoveFolder}>
-          <ButtonRemoveHabit
-            type="button"
-            // временный функционал кнопки Удалить привычку
-            handelClick={() => onClick()}
-            title="Удалить привычку"
-          />
-        </div>
-
-        {ableDelete && (
-          <button type="button" onClick={() => null}>
-            Удалить привычку
-          </button>
+        {ableToDelete && (
+          <div className={styles.btnRemoveFolder}>
+            <ButtonRemoveHabit
+              type="button"
+              // временный функционал кнопки Удалить привычку
+              handelClick={() => onClick()}
+              title="Удалить привычку"
+            />
+          </div>
         )}
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>
@@ -495,12 +425,7 @@ function CustomHabbitModal({
             />
           </div>
           <div>
-            <Button
-              type={'submit'}
-              green={true}
-              // handelClick={() => onClose()}
-              label={'Сохранить'}
-            />
+            <Button type={'submit'} green={true} label={'Сохранить'} />
           </div>
         </div>
       </form>{' '}

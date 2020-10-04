@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React from 'react';
 import styles from './Modal.module.css';
-
-// const modalRoot = document.querySelector('#modal-root');
 
 const ModalBackdrop = SomeModal => {
   return class Modal extends React.Component {
     state = { isOpen: false };
-    // [isOpen, setIsOpen] = useState(false);
 
     componentDidMount() {
       this.setState({ isOpen: true });
@@ -19,13 +15,13 @@ const ModalBackdrop = SomeModal => {
     }
 
     handleEscapePress = event => {
-      if (event.code === 'Escape') {
+      if (event.code === 'Escape' && !this.props.notAbleToClose) {
         this.props.onClose();
       }
     };
 
     handleBackdropClick = event => {
-      if (event.target === event.currentTarget) {
+      if (event.target === event.currentTarget && !this.props.notAbleToClose) {
         this.props.onClose();
       }
     };
@@ -36,16 +32,18 @@ const ModalBackdrop = SomeModal => {
 
     render() {
       return (
-        <div
-          className={styles.Modal__backdrop}
-          onClick={this.handleBackdropClick}
-        >
-          <div className={styles.Modal__content}>
-            {this.state.isOpen && (
-              <SomeModal {...this.props} onClick={this.hideModal} />
-            )}
+        <>
+          <div
+            className={styles.Modal__backdrop}
+            onClick={this.handleBackdropClick}
+          >
+            <div className={styles.Modal__content}>
+              {this.state.isOpen && (
+                <SomeModal {...this.props} onClick={this.hideModal} />
+              )}
+            </div>
           </div>
-        </div>
+        </>
       );
     }
   };

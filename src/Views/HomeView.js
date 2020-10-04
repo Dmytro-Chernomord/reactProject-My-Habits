@@ -16,8 +16,10 @@ import LeftSideBarView from './LeftSideBarView';
 import Subscriptions from './PrivateViews/SubscriptionsViews/Subscriptions';
 import ModalBackdrop from '../components/Modal/Modal';
 import ModalContent from '../components/ModalContent/ModalContent';
+import InterviewModal from '../redux/quiz/modalQuiztest';
 import toggle from '../redux/modal/modalOperation';
 import modalSelector from '../redux/modal/modalSelector';
+import quizSelector from '../redux/quiz/quizSelector';
 // import NotFound from '../components/NotFound/NotFound';
 
 const styles = {
@@ -28,11 +30,15 @@ const styles = {
 
 class HomeView extends Component {
   // state = {
-  //   layout: 'HabitChoiceModal',
+  //   showModal: false,
   // };
 
-  // changeLayout = layout => {
-  //   this.setState({ layout });
+  // openModal = () => {
+  //   this.setState({ showModal: true });
+  // };
+
+  // closeModal = () => {
+  //   this.setState({ showModal: false });
   // };
 
   componentDidMount() {
@@ -40,6 +46,16 @@ class HomeView extends Component {
     setToken.setToken(this.props.token);
     this.props.onGetOwnHabits();
   }
+
+  // componentDidUpdate() {
+  //   if (
+  //     Object.values(this.props.quizInfo).includes(0) &&
+  //     this.state.showModal === false
+  //   ) {
+  //     this.openModal();
+  //   }
+  // }
+
   render() {
     const { match } = this.props;
     return (
@@ -95,6 +111,7 @@ class HomeView extends Component {
             />
           </ModalBackdrop>
         )} */}
+        {/* {this.state.showModal && <InterviewModal onClose={this.closeModal} />} */}
       </>
     );
   }
@@ -103,10 +120,11 @@ class HomeView extends Component {
 const mapStateToProps = state => ({
   token: authSelector.isAuthenticated(state),
   showModal: modalSelector.getModal(state),
+  // quizInfo: quizSelector.getQuizResult(state),
 });
 
 export default connect(mapStateToProps, {
   onLogOut: authOperation.logOut,
   onGetOwnHabits: userOperation.getOwnHabits,
-  toggleModal: toggle.toggleModal,
+  // toggleModal: toggle.toggleModal,
 })(HomeView);
