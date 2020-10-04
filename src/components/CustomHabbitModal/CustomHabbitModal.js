@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import userOperations from '../../redux/user/userOperation';
 import { TextField } from '@material-ui/core';
@@ -296,6 +297,10 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   );
   const piece = startDate.toISOString().slice(0, 11);
   const planningTime = piece + time + ':00.000Z';
+
+  // const { register, errors, handleSubmit } = useForm({
+  //   mode: 'onChange',
+  // });
 
   const handleInputChange = e => {
     const { name, value } = e.target;
