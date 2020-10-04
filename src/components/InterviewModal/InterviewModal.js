@@ -10,7 +10,6 @@ function InterviewModal({ onClose }) {
   const dispatch = useDispatch();
   const errorsState = useSelector(state => state.error);
 
-
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
@@ -37,9 +36,7 @@ function InterviewModal({ onClose }) {
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
         <div className={styles.boxError}>
           {errors.years && errors.years.type === 'required' && (
-            <p className={styles.error}>
-              *oбязательное поле, можно ввести только цифры
-            </p>
+            <p className={styles.error}>*oбязательное поле ввода</p>
           )}
           {errors.years && errors.years.type === 'min' && (
             <p className={styles.error}>*можно указать минимум 0</p>
