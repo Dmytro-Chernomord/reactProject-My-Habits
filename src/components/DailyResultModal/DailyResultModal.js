@@ -1,13 +1,34 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from '../ModalContent/ModalContent.module.css';
 import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
+import cigSelector from '../../redux/cigarettes/cigarettesSelector';
+
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 function DailyResultModal({ onClose }) {
+  const cigarettesStartedAt = useSelector(
+    cigSelector.getCigarettesDataStartedAt,
+  );
+  const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
+  console.log('array', cigarettesArray);
+  console.log(cigarettesStartedAt);
+
+  // const startedAt = '2020-09-27T09:11:03.448Z';
+  const today = new Date();
+  const parseStartedAt = new Date(cigarettesStartedAt);
+
+  const dif = Math.floor(
+    (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
+  );
+  const cigToday = cigarettesArray[dif];
+  console.log('zigaretHeute', cigToday);
+  console.log('dif', dif);
+
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
   const handleInputChange = e => {
@@ -16,11 +37,10 @@ function DailyResultModal({ onClose }) {
   };
   const onSubmit = e => {
     e.preventDefault();
-    console.log('hi');
     dispatch(
       cigarettesOperation.postDayCigarettes({
-        startedAt: '2020-09-15T09:11:03.448Z',
-        data: [12, 3, 1, 2, 13],
+        startedAt: '2020-10-04T09:11:03.448Z',
+        data: [12, 3, 1, 2, 13, 1, 1, 1, 1, 11, 1, 13, 12, 43, 34, 34],
       }),
     );
   };
