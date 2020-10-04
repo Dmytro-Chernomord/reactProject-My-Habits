@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../../components/Header/Header';
 import style from './Subscriptions.module.css';
 import Button from '../../../components/UIcomponents/Button/Button';
 import Payments from '../../../components/Payment/Payment';
 import operathions from '../../../redux/user/userOperation';
+import selector from '../../../redux/user/userSelector';
 
 const Subscriptions = () => {
   const [plan, setPlan] = useState('');
+  const [disabledBtn, setDisabled] = useState(false);
   const dispatch = useDispatch();
+  const subscription = useSelector(selector.getSubscription);
 
   const changeSubscription = useCallback(() => {
     dispatch(operathions.changeSubscription({ plan }));
@@ -16,22 +19,49 @@ const Subscriptions = () => {
 
   const handleSubscription = e => {
     setPlan(e.target.textContent);
+    setDisabled(true);
   };
 
   const pushSubsrpt = () => {
     changeSubscription();
+    setDisabled(false);
+  };
+
+  const changeColor = () => {
+    switch (subscription) {
+      case 'Noob':
+        return style.btnNoob;
+
+      case 'Basic':
+        return style.btnBasic;
+
+      case 'Standart':
+        return style.btnStandart;
+
+      case 'Premium':
+        return style.btnPremium;
+
+      case 'Ultra':
+        return style.btnUltra;
+
+      default:
+        return style.styleSubscpt;
+    }
   };
 
   return (
     <>
       <Header title="Подписки" />
       <div className={style.div}>
-        <h2 className={style.header}>Тип подписки</h2>
+        <h2 className={style.header}>Тип подписки:</h2>
+        <span className={changeColor()}>{subscription}</span>
 
         <div className={style.subscribe}>
           <button
             type="button"
-            className={style.btnNoob}
+            className={
+              disabledBtn && plan === 'Noob' ? style.test : style.btnNoob
+            }
             onClick={handleSubscription}
           >
             Noob
@@ -41,7 +71,9 @@ const Subscriptions = () => {
         <div className={style.subscribe}>
           <button
             type="button"
-            className={style.btnBasic}
+            className={
+              disabledBtn && plan === 'Basic' ? style.test : style.btnBasic
+            }
             onClick={handleSubscription}
           >
             Basic
@@ -53,7 +85,11 @@ const Subscriptions = () => {
         <div className={style.subscribe}>
           <button
             type="button"
-            className={style.btnStandart}
+            className={
+              disabledBtn && plan === 'Standart'
+                ? style.test
+                : style.btnStandart
+            }
             onClick={handleSubscription}
           >
             Standart
@@ -65,7 +101,9 @@ const Subscriptions = () => {
         <div className={style.subscribe}>
           <button
             type="button"
-            className={style.btnPremium}
+            className={
+              disabledBtn && plan === 'Premium' ? style.test : style.btnPremium
+            }
             onClick={handleSubscription}
           >
             Premium
@@ -77,7 +115,9 @@ const Subscriptions = () => {
         <div className={style.subscribe}>
           <button
             type="button"
-            className={style.btnUltra}
+            className={
+              disabledBtn && plan === 'Ultra' ? style.test : style.btnUltra
+            }
             onClick={handleSubscription}
           >
             Ultra
@@ -86,7 +126,6 @@ const Subscriptions = () => {
             12 месяцев — $53.89 <span className={style.span}>- 10%</span>
           </p>
         </div>
-
         <div className={style.position}>
           <Button
             type="button"

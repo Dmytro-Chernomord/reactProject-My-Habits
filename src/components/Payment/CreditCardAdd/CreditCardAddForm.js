@@ -1,7 +1,35 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import operations from '../../../redux/user/userOperation';
+import Button from '../../Button/Button';
+import styles from '../../ChangePassword/ChangePassword.module.css';
+import InputMask from 'react-input-mask';
 
+function CardNumbInput(props) {
+  return (
+    <InputMask
+      mask="9999 9999 9999 9999"
+      onChange={props.onChange}
+      value={props.value}
+      name="number"
+      className={styles.input}
+      placeholder={props.placeholder}
+    />
+  );
+}
+
+function ExpirationDateInput(props) {
+  return (
+    <InputMask
+      mask="99/9999"
+      onChange={props.onChange}
+      value={props.value}
+      name="timeExpiration"
+      className={styles.input}
+      placeholder={props.placeholder}
+    />
+  );
+}
 const AddCreditCardForm = () => {
   const [number, setNumber] = useState('');
   const [timeExpiration, setTimeExpiration] = useState('');
@@ -22,35 +50,40 @@ const AddCreditCardForm = () => {
   const onSubmit = e => {
     e.preventDefault();
     addCreditCard();
-    console.log({ number, timeExpiration });
+    setNumber('');
+    setTimeExpiration('');
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>
-        Card Number
-        <input
-          onChange={handleNumber}
-          name="number"
-          value={number}
-          type="data"
-          placeholder="0000 0000 0000 0000"
-          required
-        />
-      </label>
-      <label>
-        Expiration date
-        <input
-          onChange={handletimeExpiration}
-          name="timeExpiration"
-          value={timeExpiration}
-          type="data"
-          placeholder="00/00"
-          required
-        />
-      </label>
-      <button type="submit">Добавить</button>
-    </form>
+    <div className={styles.boxFormPassword}>
+      <form className={styles.formProfile} onSubmit={onSubmit}>
+        <label className={styles.label}>
+          Card Number
+          <CardNumbInput
+            onChange={handleNumber}
+            name="number"
+            value={number}
+            className={styles.input}
+            type="data"
+            placeholder="0000 0000 0000 0000"
+            required
+          />
+        </label>
+        <label className={styles.label}>
+          Expiration date
+          <ExpirationDateInput
+            onChange={handletimeExpiration}
+            name="timeExpiration"
+            value={timeExpiration}
+            className={styles.input}
+            type="data"
+            placeholder="00/0000"
+            required
+          />
+        </label>
+        <Button variety={'white'} text="Добавить" />
+      </form>
+    </div>
   );
 };
 export default AddCreditCardForm;

@@ -50,7 +50,7 @@ h2 {
   text-align: center;
 }
 .swiper-container {
-  width: 800px;
+  width: 850px;
 }
 
 .swiper-wrapper {
@@ -58,4 +58,8 @@ h2 {
 }
 .swiper-slide-next {
   transform: scale(0.7);
+}
+
+.swiper-slide-next:hover {
+  transform: scale(1);
 }
