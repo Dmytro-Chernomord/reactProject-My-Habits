@@ -4,6 +4,7 @@ button {
 }
 h2 {
   text-align: left;
+  margin: 0;
 }
 .span {
   color: #43d190;
@@ -25,6 +26,7 @@ h2 {
   color: #4f4f4f;
   font-size: 18px;
   font-weight: 500;
+  margin-top: 12px;
 }
 
 .header {
@@ -32,6 +34,10 @@ h2 {
   font-size: 26px;
   font-weight: 400;
   margin-left: 77px;
+  margin-bottom: 32px;
+  padding-top: 32px;
+  margin-right: 20px;
+  display: inline-block;
 }
 
 .btnNoob {
@@ -43,11 +49,38 @@ h2 {
   border: #43d190;
   font-size: 18px;
   margin-right: 30px;
+  padding: 4px;
+
+  /* margin-left: 30px; */
 }
+/* 
+.styleSubscpt {
+  background-color: #43d1919a;
+  border-radius: 5px;
+  border: #43d190;
+  color: white;
+  font-size: 18px;
+  margin-left: 20px;
+  padding-right: 4px;
+  padding-left: 4px;
+  display: inline;
+} */
+
 .btnNoob:hover {
   background-image: linear-gradient(#e9d078 3.75%, #6d6b6c 94.69%);
   color: #e2f0e9;
   border: 2px solid #43d190;
+}
+
+.test {
+  background-color: rgb(71, 68, 68);
+  width: 345px;
+  height: 44px;
+  color: white;
+  border-radius: 5px;
+  border: #0b0c0c;
+  font-size: 18px;
+  margin-right: 30px;
 }
 
 .btnBasic {
