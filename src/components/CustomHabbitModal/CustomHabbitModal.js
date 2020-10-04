@@ -20,7 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import './customCalendar.css';
 import styles from '../ModalContent/ModalContent.module.css';
-import { teal } from '@material-ui/core/colors';
+import { red, teal } from '@material-ui/core/colors';
 import ModalBackdrop from '../Modal/Modal';
 
 const personalStyle = `
@@ -284,12 +284,12 @@ const useStyles = makeStyles(theme => ({
 function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const classes = useStyles();
   const habits = useSelector(state => state.habits);
-  console.log(habits);
-  const ref = useRef(habits[habits.length - 1]._id);
-  console.log(ref);
+  const ref = useRef(habits.length);
 
-  console.log('cl', habits[habits.length - 1]._id === ref.current);
-
+  useEffect(() => {
+    console.log(ref.current === habits.length);
+    ref.current !== habits.length && onClick();
+  }, [habits, onClick]);
   const [name, setName] = useState(ableToDelete ? data.name : habitName);
   const [time, setTime] = useState(
     ableToDelete ? data.planningTime.slice(11, 16) : '',
@@ -329,15 +329,15 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
     }
   };
 
-  const handleFormSubmit = async e => {
+  const handleFormSubmit = e => {
     e.preventDefault();
     const data = { name, planningTime, iteration };
 
-    await onSubmit(data);
+    onSubmit(data);
 
-    if (habits[habits.length - 1]._id !== ref.current) {
-      onClick();
-    }
+    // if (habits[habits.length - 1]._id !== ref.current) {
+    //   onClick();
+    // }
     // resetForm();
   };
 
