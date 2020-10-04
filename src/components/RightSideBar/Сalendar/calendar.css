@@ -1,6 +1,12 @@
 .calendar .calendar-header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   cursor: pointer;
+  height: 110px;
+  border-bottom: 1px solid #d5e1dc;
+  width: 100%;
 }
 
 .calendar .react-datepicker__navigation--previous {
@@ -99,7 +105,6 @@
   border-radius: 0%;
   background-color: #fff;
   border: none;
-  border-top: 1px solid #d5e1dc;
 }
 .calendar .react-datepicker__current-month {
   display: flex;
@@ -220,6 +225,7 @@
   line-height: 1.19;
   text-align: center;
   color: #4f4f4f;
+  margin-left: 4px;
 }
 
 .calendar .calendar-date:hover {
@@ -244,5 +250,11 @@
   cursor: default;
 }
 .calendar {
-  width: 378px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 378px;
+  padding: 5px 0;
 }
