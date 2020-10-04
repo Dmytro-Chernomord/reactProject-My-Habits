@@ -8,7 +8,7 @@ import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
 
-export default function LoginForm() {
+export default function LoginForm({ rightchangeModal }) {
   const dispatch = useDispatch();
   const [eyepass, setEyePass] = useState('password');
 
@@ -19,7 +19,7 @@ export default function LoginForm() {
   const onSubmit = data => {
     dispatch(authOperations.logIn({ ...data }));
   };
-  const showPassTougle = () => {
+  const showPassToggle = () => {
     if (eyepass === 'text') {
       setEyePass('password');
     } else {
@@ -87,7 +87,7 @@ export default function LoginForm() {
         <div className={styles.LoginInputForm}>
           <p className={styles.LoginInputTxt}>Пароль</p>
           <label className={styles.LoginPassword}>
-            <div onClick={showPassTougle} className={styles.LoginPasswordBtn}>
+            <div onClick={showPassToggle} className={styles.LoginPasswordBtn}>
               {eyepass === 'text' ? <OpenedEye /> : <ClosedEye />}
             </div>
 
@@ -95,7 +95,7 @@ export default function LoginForm() {
               className={styles.LoginInput}
               placeholder="Введите пароль"
               name="password"
-              type="password"
+              type={eyepass}
               style={{
                 outlineColor: errors.password ? '#fe6083' : '#43d190',
                 borderColor: errors.password ? '#fe6083' : '#e0e0e0',
@@ -126,7 +126,7 @@ export default function LoginForm() {
         </div>
       </form>
       <div className={styles.LoginButtonBlock}>
-        <button className={styles.LoginButton}>
+        <button onClick={rightchangeModal} className={styles.LoginButton}>
           <p className={styles.LoginButtonTxt}>Регистрация</p>
         </button>
       </div>
