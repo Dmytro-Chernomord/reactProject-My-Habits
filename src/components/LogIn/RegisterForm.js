@@ -8,7 +8,7 @@ import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
 
-export default function RegisterForm() {
+export default function RegisterForm({ changeModal }) {
   const dispatch = useDispatch();
   const [eyepass, setEyePass] = useState('password');
 
@@ -20,7 +20,7 @@ export default function RegisterForm() {
     dispatch(authOperations.registration({ ...data }));
   };
 
-  const showPassTougle = () => {
+  const showPassToggle = () => {
     if (eyepass === 'text') {
       setEyePass('password');
     } else {
@@ -92,7 +92,7 @@ export default function RegisterForm() {
           <p className={styles.RegistrationInputTxt}>Пароль</p>
           <label className={styles.RegistrationPassword}>
             <div
-              onClick={showPassTougle}
+              onClick={showPassToggle}
               className={styles.RegistrationPasswordBtn}
             >
               {eyepass === 'text' ? <OpenedEye /> : <ClosedEye />}
@@ -102,7 +102,7 @@ export default function RegisterForm() {
               className={styles.RegistrationInput}
               placeholder="Придумайте пароль"
               name="password"
-              type="password"
+              type={eyepass}
               style={{
                 outlineColor: errors.password ? '#fe6083' : '#43d190',
                 borderColor: errors.password ? '#fe6083' : '#e0e0e0',
@@ -134,7 +134,9 @@ export default function RegisterForm() {
       </form>
       <div className={styles.RegistrationButtonBlock}>
         <button className={styles.RegistrationButton}>
-          <p className={styles.RegistrationButtonTxt}>Войти</p>
+          <p onClick={changeModal} className={styles.RegistrationButtonTxt}>
+            Войти
+          </p>
         </button>
       </div>
     </>
