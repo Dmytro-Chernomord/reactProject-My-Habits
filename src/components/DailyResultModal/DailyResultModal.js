@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
@@ -9,26 +9,43 @@ import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
+const checkSigaretteStatiscs = (cigarettesArray, dif) => {
+  let result = [];
+  const testValue = 3;
+  for (let i = 0; i < 21; i++) {
+    const element = cigarettesArray[i];
+
+    if (i - dif === 0) {
+      console.log(element);
+      console.log('segodnja');
+      if (element !== null) {
+        const newSigValue = element + testValue;
+        result.push(newSigValue);
+        continue;
+      }
+      if (element === null) {
+        result.push(testValue);
+        continue;
+      }
+    }
+    if (typeof cigarettesArray[dif] === 'number' && i === dif) {
+      // cigarettesArray[dif] = cigarettesArray[dif] + testInputValue;
+      console.log('iz for');
+      // const a = cigarettesArray[dif] - 3;
+      // return result;
+    }
+    if (element !== undefined) {
+      result.push(element);
+    }
+    if (element === undefined) {
+      result.push(null);
+    }
+  }
+
+  return result;
+};
 
 function DailyResultModal({ onClose }) {
-  const cigarettesStartedAt = useSelector(
-    cigSelector.getCigarettesDataStartedAt,
-  );
-  const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
-  console.log('array', cigarettesArray);
-  console.log(cigarettesStartedAt);
-
-  // const startedAt = '2020-09-27T09:11:03.448Z';
-  const today = new Date();
-  const parseStartedAt = new Date(cigarettesStartedAt);
-
-  const dif = Math.floor(
-    (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
-  );
-  const cigToday = cigarettesArray[dif];
-  console.log('zigaretHeute', cigToday);
-  console.log('dif', dif);
-
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
   const handleInputChange = e => {
@@ -39,11 +56,39 @@ function DailyResultModal({ onClose }) {
     e.preventDefault();
     dispatch(
       cigarettesOperation.postDayCigarettes({
-        startedAt: '2020-10-04T09:11:03.448Z',
-        data: [12, 3, 1, 2, 13, 1, 1, 1, 1, 11, 1, 13, 12, 43, 34, 34],
+        startedAt: '2020-09-28T09:11:03.448Z',
+        data: [12, 3, 3, null, 13, 6, null, 10, 1, 11, 1, 13, 12, 43, 34, 34],
       }),
     );
   };
+
+  const cigarettesStartedAt = useSelector(
+    cigSelector.getCigarettesDataStartedAt,
+  );
+  const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
+
+  // const startedAt = '2020-09-27T09:11:03.448Z';
+  const today = new Date();
+  const parseStartedAt = new Date(cigarettesStartedAt);
+  const testInputValue = 3;
+  const dif = Math.floor(
+    (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
+  );
+  console.log('dif', cigarettesArray[dif]);
+  const cigToday = cigarettesArray[0];
+
+  console.log('zigaretHeute', cigToday);
+  console.log('dif', dif);
+  useEffect(() => {
+    if (cigarettesArray) {
+      checkSigaretteStatiscs(cigarettesArray, dif);
+      console.log(checkSigaretteStatiscs(cigarettesArray, dif));
+    }
+    // return () => {
+    //   cleanup
+    // }
+  }, [cigarettesArray, dif]);
+
   return (
     <div className={styles.modalWrapper}>
       <h2 className={styles.modalTitleCustom}>
