@@ -14,10 +14,18 @@ const checkSigaretteStatiscs = (cigarettesArray, dif) => {
   const testValue = 3;
   for (let i = 0; i < 21; i++) {
     const element = cigarettesArray[i];
+    if (i - dif < 0 && element === null) {
+      const dayWthoutInfo = Date.parse(new Date()) - i * MS_PER_DAY;
+      //   (Date.parse(new Date()) - dif * MS_PER_DAY) / MS_PER_DAY;
 
+      // console.log('dayWthoutInfo', dayWthoutInfo);
+
+      // console.log(new Date());
+      console.log(new Date(dayWthoutInfo));
+      console.log('showModal');
+      console.log('element', element, 'i', i);
+    }
     if (i - dif === 0) {
-      console.log(element);
-      console.log('segodnja');
       if (element !== null) {
         const newSigValue = element + testValue;
         result.push(newSigValue);
