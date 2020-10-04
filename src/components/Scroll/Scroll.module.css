@@ -8,3 +8,7 @@
   flex: 1;
   overflow-y: scroll;
 }
+.centered {
+  width: 220px;
+  margin: 20px auto 35px;
+}

@@ -6,7 +6,7 @@ import styles from './CustomLoader.module.css';
 export function CustomLoader() {
   return (
     <div className={styles.wrap}>
-      <Loader type="Hearts" color="#43d190" height={100} width={100} />
+      <Loader type="Oval" color="#43d190" height={80} width={80} />
     </div>
   );
 }
