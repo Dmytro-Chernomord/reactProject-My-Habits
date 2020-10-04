@@ -11,10 +11,7 @@ function InterviewModal({ onClose }) {
   const [cigarettePerTime, setCigarettePerTime] = useState('');
   const [cigarettePackPrice, setCigarettePackPrice] = useState('');
   const dispatch = useDispatch();
-  const onSubmit = useCallback(
-    quiz => dispatch(quizOperation.quizComplete(quiz)),
-    [dispatch],
-  );
+  const onSubmit = quiz => dispatch(quizOperation.quizComplete(quiz));
 
   const handleInputChange = e => {
     const { name, value } = e.target;

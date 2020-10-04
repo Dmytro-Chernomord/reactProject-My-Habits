@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-// import { CSSTransition } from 'react-transition-group';
+import habitsOperation from '../../redux/habits/habitsOperation';
 import userOperations from '../../redux/user/userOperation';
 import { TextField } from '@material-ui/core';
 // import userSelectors from '../../redux/user/userSelector';
@@ -281,10 +281,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({ data, onClick, ableToDelete }) {
+function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const classes = useStyles();
-  const [name, setName] = useState(data);
-  const [time, setTime] = useState();
+  const [name, setName] = useState(ableToDelete ? data.name : habitName);
+  const [time, setTime] = useState(
+    ableToDelete ? data.planningTime.slice(11, 16) : '',
+  );
   const [iteration, setIteration] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
@@ -335,6 +337,10 @@ function CustomHabbitModal({ data, onClick, ableToDelete }) {
   //   setIteration('');
   // };
 
+  const deleteHabit = () => {
+    dispatch(habitsOperation.removeHabit(data._id));
+  };
+
   return (
     <div className={styles.modalWrapper}>
       <style>{personalStyle}</style>
@@ -367,6 +373,7 @@ function CustomHabbitModal({ data, onClick, ableToDelete }) {
                 onChange={date => setStartDate(date)}
                 locale="ru"
                 placeholder=" __.__.__"
+                disabled={ableToDelete}
               />
             </div>
           </label>
@@ -381,6 +388,7 @@ function CustomHabbitModal({ data, onClick, ableToDelete }) {
             required
             onChange={handleInputChange}
             className={styles.input}
+            disabled={ableToDelete}
           />
         </label>
         <label className={styles.label}>
@@ -394,6 +402,7 @@ function CustomHabbitModal({ data, onClick, ableToDelete }) {
               value={iteration}
               onChange={handleInputChange}
               input={<BootstrapInput />}
+              disabled={ableToDelete}
             >
               <MenuItem value="allday">Ежедневно</MenuItem>
               <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
@@ -410,7 +419,7 @@ function CustomHabbitModal({ data, onClick, ableToDelete }) {
             <ButtonRemoveHabit
               type="button"
               // временный функционал кнопки Удалить привычку
-              handelClick={() => onClick()}
+              handelClick={deleteHabit}
               title="Удалить привычку"
             />
           </div>

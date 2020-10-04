@@ -42,8 +42,9 @@ class ItemHabit extends Component {
   };
 
   render() {
-    const { name, efficiency, _id } = this.props;
+    const { name, efficiency, _id, iteration, planningTime } = this.props;
     const { data, index, enabled } = this.state;
+    const habitData = { _id, name, iteration, planningTime };
 
     const stateBut1 = data[index] === true ? true : false;
     const stateBut2 = data[index] === false ? true : false;
@@ -101,7 +102,11 @@ class ItemHabit extends Component {
           </>
         )}
         {this.state.showModal && (
-          <CustomHabitModal onClose={this.closeModal} ableToDelete={true}>
+          <CustomHabitModal
+            data={habitData}
+            onClose={this.closeModal}
+            ableToDelete={true}
+          >
             {/* <ModalContent
             onSave={toggleModal}
             layout={layout}
