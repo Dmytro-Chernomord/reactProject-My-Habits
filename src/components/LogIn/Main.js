@@ -12,10 +12,20 @@ export default function Authorization() {
   const [rightmodalView, setRightmodalView] = useState(false);
 
   const changeModal = () => {
-    setmodalView(!modalView);
+    if (!rightmodalView) {
+      setmodalView(!modalView);
+    } else {
+      setRightmodalView(!rightmodalView);
+      setmodalView(!modalView);
+    }
   };
   const rightchangeModal = () => {
-    setRightmodalView(!rightmodalView);
+    if (!modalView) {
+      setRightmodalView(!rightmodalView);
+    } else {
+      setRightmodalView(!rightmodalView);
+      setmodalView(!modalView);
+    }
   };
   const closeOnBackdop = event => {
     if (event.target === event.currentTarget && modalView) {
@@ -103,7 +113,7 @@ export default function Authorization() {
         >
           <div className={s.backdrop}>
             {' '}
-            <RegisterForm />
+            <RegisterForm changeModal={changeModal} />
           </div>
         </CSSTransition>{' '}
         <CSSTransition
@@ -113,7 +123,7 @@ export default function Authorization() {
           unmountOnExit
         >
           <div className={styles.backdrop}>
-            <LoginForm />
+            <LoginForm rightchangeModal={rightchangeModal} />
           </div>
         </CSSTransition>
       </div>
