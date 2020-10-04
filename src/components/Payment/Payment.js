@@ -36,7 +36,7 @@ const Payment = () => {
           timeout={250}
           unmountOnExit
         >
-          <AddCreditCardForm />
+          <AddCreditCardForm closeForm={onHandleCloseForm} />
         </CSSTransition>
 
         <div className={style.supportIcon}>

@@ -30,7 +30,7 @@ function ExpirationDateInput(props) {
     />
   );
 }
-const AddCreditCardForm = () => {
+const AddCreditCardForm = ({ closeForm }) => {
   const [number, setNumber] = useState('');
   const [timeExpiration, setTimeExpiration] = useState('');
   const dispatch = useDispatch();
@@ -52,6 +52,8 @@ const AddCreditCardForm = () => {
     addCreditCard();
     setNumber('');
     setTimeExpiration('');
+    //закрывать по ответу от бека
+    closeForm();
   };
 
   return (
