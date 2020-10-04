@@ -30,3 +30,7 @@
 
   color: #4f4f4f;
 }
+.hide {
+  display: none;
+  background-color: red;
+}

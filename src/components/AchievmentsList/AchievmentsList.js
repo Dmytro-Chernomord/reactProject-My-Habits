@@ -10,21 +10,26 @@ const AchievmentsList = function () {
   const daysDontSmoke = cigarettesData.filter(
     item => typeof item === 'boolean',
   );
+  console.log(daysDontSmoke);
   const fiveCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el > 4,
   );
-  // const oneCigaretteLess = daysWhenSmoke.some(
-  //   el => quizCigarettesData - el >= 1,
-  // );
-  const threeCigarettesLess = daysWhenSmoke.some(
-    el => quizCigarettesData - el >= 3,
+  const oneCigaretteLess = daysWhenSmoke.some(
+    el => quizCigarettesData - el >= 1,
   );
-
+  const threeCigarettesLess = daysWhenSmoke.some(
+    el => quizCigarettesData - el > 2,
+  );
+  console.log(cigarettesData);
   // console.log(daysDontSmoke.length > 0);
   return (
     <ul className={styles.list}>
       <li
-        className={daysDontSmoke.length > 0 ? styles.item_success : styles.item}
+        className={
+          daysDontSmoke.length > 0 || oneCigaretteLess
+            ? styles.item_success
+            : styles.item
+        }
       >
         <p className={styles.text}>Отказ от одной сигареты</p>
       </li>
