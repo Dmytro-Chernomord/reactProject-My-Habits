@@ -80,7 +80,7 @@ export default function HabitsList() {
       )}
       {showCustomModal && (
         <CustomHabbitModal
-          data={customModalData}
+          habitName={customModalData}
           isTemplateModal={isTemplateModal}
           isCustomModal={isCustomModal}
           onClose={closeAllModals}

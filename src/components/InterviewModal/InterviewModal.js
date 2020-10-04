@@ -10,6 +10,7 @@ function InterviewModal({ onClose }) {
   const dispatch = useDispatch();
   const errorsState = useSelector(state => state.error);
 
+
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
