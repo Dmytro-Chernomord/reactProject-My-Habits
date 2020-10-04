@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './notification.module.css';
 import habitSelector from '../../redux/habits/habitsSelector';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './transition.css';
 
 export default function Notifications() {
   const [isVisible, setIsVisible] = useState(false);
@@ -77,12 +78,12 @@ export default function Notifications() {
         )}
       </TransitionGroup>
       <TransitionGroup>
-        {youCanDoBetter && !isVisible && (
+        {!isVisible && youCanDoBetter && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
             <div onClick={handleClick} className={styles.box}>
-              <h2 className={styles.title}>Соберись!!</h2>
+              <h2 className={styles.title}>Не сдавайся!</h2>
               <p className={styles.text}>
-                Не забывай выполнять свои привычки!Я знаю у тебя получится!
+                Не забывай отмечать свои привычки!У тебя получится!
               </p>
             </div>
           </CSSTransition>
