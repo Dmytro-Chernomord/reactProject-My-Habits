@@ -8,11 +8,14 @@
   border-radius: 10px;
   padding-bottom: 18px;
   cursor: pointer;
+  color: #4f4f4f;
 }
+
 .container {
   margin-top: 60px;
   margin-left: 62px;
-  background: linear-gradient(180deg, #f6f6f6 0%, rgba(246, 246, 246, 0) 100%);
+  margin-right: 62px;
+  /* background: linear-gradient(180deg, #f6f6f6 0%, rgba(246, 246, 246, 0) 100%); */
   width: 844px;
 }
 
@@ -21,8 +24,6 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
-
-  color: #4f4f4f;
 }
 
 .text {
@@ -30,27 +31,4 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
-
-  color: #4f4f4f;
-}
-.enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.enterActive {
-  opacity: 1;
-  transform: translateX(0);
-  transition: all 250ms ease-in;
-}
-
-.exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.exitActive {
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all 250ms ease-out;
 }
