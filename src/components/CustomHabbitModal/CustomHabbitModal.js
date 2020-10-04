@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import userOperations from '../../redux/user/userOperation';
 import { TextField } from '@material-ui/core';
@@ -283,6 +283,13 @@ const useStyles = makeStyles(theme => ({
 
 function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const classes = useStyles();
+  const habits = useSelector(state => state.habits);
+  console.log(habits);
+  const ref = useRef(habits[habits.length - 1]._id);
+  console.log(ref);
+
+  console.log('cl', habits[habits.length - 1]._id === ref.current);
+
   const [name, setName] = useState(ableToDelete ? data.name : habitName);
   const [time, setTime] = useState(
     ableToDelete ? data.planningTime.slice(11, 16) : '',
@@ -322,11 +329,15 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
     }
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async e => {
     e.preventDefault();
     const data = { name, planningTime, iteration };
-    onSubmit(data);
 
+    await onSubmit(data);
+
+    if (habits[habits.length - 1]._id !== ref.current) {
+      onClick();
+    }
     // resetForm();
   };
 
@@ -355,7 +366,7 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
             type="text"
             name="name"
             id="name"
-            required
+            // required
             value={name}
             onChange={handleInputChange}
             className={styles.inputHabitName}
@@ -434,7 +445,12 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
             />
           </div>
           <div>
-            <Button type={'submit'} green={true} label={'Сохранить'} />
+            <Button
+              handelClick={handleFormSubmit}
+              type={'button'}
+              green={true}
+              label={'Сохранить'}
+            />
           </div>
         </div>
       </form>{' '}
