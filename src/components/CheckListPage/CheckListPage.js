@@ -12,7 +12,6 @@ const generateColor = () => {
 
 class CheckListPage extends Component {
   state = { showModal: false };
-  // const[showModal, setShowModal] = useState(false);
   toggleModal = () => {
     this.setState({ showModal: true });
   };
@@ -30,10 +29,7 @@ class CheckListPage extends Component {
           <Button
             type={'button'}
             green={false}
-            handelClick={
-              this.toggleModal
-              // this.props.changeLayout('DailyResultModal');
-            }
+            handelClick={this.toggleModal}
             label={'+ Сигареты за сегодня'}
           />
         </div>
@@ -51,13 +47,7 @@ class CheckListPage extends Component {
           </ul>
         </div>
         {this.state.showModal && (
-          <DailyResultModal onClose={this.closeModal}>
-            {/* <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          /> */}
-          </DailyResultModal>
+          <DailyResultModal onClose={this.closeModal}></DailyResultModal>
         )}
       </>
     );

@@ -227,3 +227,7 @@
 .btnRemoveFolder {
   position: relative;
 }
+
+.modalCenterLayout {
+  text-align: center;
+}

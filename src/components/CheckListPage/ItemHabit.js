@@ -101,7 +101,7 @@ class ItemHabit extends Component {
           </>
         )}
         {this.state.showModal && (
-          <CustomHabitModal onClose={this.closeModal}>
+          <CustomHabitModal onClose={this.closeModal} ableToDelete={true}>
             {/* <ModalContent
             onSave={toggleModal}
             layout={layout}

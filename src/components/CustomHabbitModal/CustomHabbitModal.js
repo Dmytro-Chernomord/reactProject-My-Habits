@@ -281,19 +281,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({
-  onClick,
-  ableDelete = false,
-  habitInfo,
-  onDelete,
-}) {
+function CustomHabbitModal({ data, onClick, ableToDelete }) {
   const classes = useStyles();
-  const [name, setName] = useState(habitInfo);
-  // const [date, setDate] = useState();
+  const [name, setName] = useState(data);
   const [time, setTime] = useState();
   const [iteration, setIteration] = useState('');
   const [startDate, setStartDate] = useState(new Date());
-  // const habits = useSelector(userSelectors.getHabits);
   const dispatch = useDispatch();
   const onSubmit = useCallback(
     habit => dispatch(userOperations.addHabit(habit)),
@@ -412,18 +405,15 @@ function CustomHabbitModal({
             </Select>
           </FormControl>
         </label>
-        <div className={styles.btnRemoveFolder}>
-          <ButtonRemoveHabit
-            type="button"
-            // временный функционал кнопки Удалить привычку
-            handelClick={() => onClick()}
-            title="Удалить привычку"
-          />
-        </div>
-        {ableDelete && (
-          <button type="button" onClick={() => null}>
-            Удалить привычку
-          </button>
+        {ableToDelete && (
+          <div className={styles.btnRemoveFolder}>
+            <ButtonRemoveHabit
+              type="button"
+              // временный функционал кнопки Удалить привычку
+              handelClick={() => onClick()}
+              title="Удалить привычку"
+            />
+          </div>
         )}
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>
@@ -435,12 +425,7 @@ function CustomHabbitModal({
             />
           </div>
           <div>
-            <Button
-              type={'submit'}
-              green={true}
-              // handelClick={() => onClose()}
-              label={'Сохранить'}
-            />
+            <Button type={'submit'} green={true} label={'Сохранить'} />
           </div>
         </div>
       </form>{' '}

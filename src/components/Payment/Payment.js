@@ -35,7 +35,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
-      <TestModal />
+      {/* <TestModal /> */}
     </>
   );
 };

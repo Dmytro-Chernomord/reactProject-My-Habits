@@ -29,17 +29,17 @@ const styles = {
 };
 
 class HomeView extends Component {
-  state = {
-    showModal: false,
-  };
+  // state = {
+  //   showModal: false,
+  // };
 
-  openModal = () => {
-    this.setState({ showModal: true });
-  };
+  // openModal = () => {
+  //   this.setState({ showModal: true });
+  // };
 
-  closeModal = () => {
-    this.setState({ showModal: false });
-  };
+  // closeModal = () => {
+  //   this.setState({ showModal: false });
+  // };
 
   componentDidMount() {
     // console.log(this.props.token);
@@ -47,14 +47,14 @@ class HomeView extends Component {
     this.props.onGetOwnHabits();
   }
 
-  componentDidUpdate() {
-    if (
-      Object.values(this.props.quizInfo).includes(0) &&
-      this.state.showModal === false
-    ) {
-      this.openModal();
-    }
-  }
+  // componentDidUpdate() {
+  //   if (
+  //     Object.values(this.props.quizInfo).includes(0) &&
+  //     this.state.showModal === false
+  //   ) {
+  //     this.openModal();
+  //   }
+  // }
 
   render() {
     const { match } = this.props;
@@ -111,7 +111,7 @@ class HomeView extends Component {
             />
           </ModalBackdrop>
         )} */}
-        {this.state.showModal && <InterviewModal onClose={this.closeModal} />}
+        {/* {this.state.showModal && <InterviewModal onClose={this.closeModal} />} */}
       </>
     );
   }
@@ -120,11 +120,11 @@ class HomeView extends Component {
 const mapStateToProps = state => ({
   token: authSelector.isAuthenticated(state),
   showModal: modalSelector.getModal(state),
-  quizInfo: quizSelector.getQuizResult(state),
+  // quizInfo: quizSelector.getQuizResult(state),
 });
 
 export default connect(mapStateToProps, {
   onLogOut: authOperation.logOut,
   onGetOwnHabits: userOperation.getOwnHabits,
-  toggleModal: toggle.toggleModal,
+  // toggleModal: toggle.toggleModal,
 })(HomeView);

@@ -1,18 +1,39 @@
 import HabitsListItem from '../HabitsListItem/HabitsListItem';
 import { useSelector } from 'react-redux';
 import styles from './habitsList.module.css';
-import ModalContent from '../../ModalContent/ModalContent';
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import HabitChoiceModal from '../../HabitChoiceModal/HabitChoiceModal';
 import CustomHabbitModal from '../../CustomHabbitModal/CustomHabbitModal';
+import HabitTemplateModal from '../../HabitTemplateModal/HabitTemplateModal';
 
 export default function HabitsList() {
-  const [showModal, setShowModal] = useState(false);
-  const [layout, setLayout] = useState(false);
-  const [templateHabit, setTemplateHabit] = useState('');
+  const [showChoiseModal, setShowChoiseModal] = useState(false);
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
+  const [showCustomModal, setShowCustomModal] = useState(false);
+  const [customModalData, setCustomModalData] = useState('');
 
-  const toggleModal = () => {
-    setShowModal(prevShowModal => !prevShowModal);
+  const closeAllModals = () => {
+    setShowChoiseModal(false);
+    setShowTemplateModal(false);
+    setShowCustomModal(false);
+  };
+
+  const returnToChoiseModal = () => {
+    setShowTemplateModal(false);
+    setShowChoiseModal(true);
+  };
+
+  const isTemplateModal = () => {
+    setShowTemplateModal(prevShowModal => !prevShowModal);
+  };
+
+  const isCustomModal = () => {
+    setShowCustomModal(prevShowModal => !prevShowModal);
+  };
+
+  const onChooseHabit = () => {
+    setShowTemplateModal(false);
+    setShowCustomModal(true);
   };
 
   const { habits } = useSelector(state => state);
@@ -30,28 +51,43 @@ export default function HabitsList() {
       <button
         className={styles.button}
         onClick={() => {
-          setShowModal(true);
-          // setLayout('HabitChoiceModal');
-          // toggleModal();
+          setCustomModalData('');
+          setShowChoiseModal(true);
         }}
         aria-label="Добавить привычку"
       >
         Добавить привычку +
       </button>
-      {showModal && (
+      {showChoiseModal && (
         <HabitChoiceModal
-          onClose={toggleModal}
+          isTemplateModal={isTemplateModal}
+          isCustomModal={isCustomModal}
+          onClose={closeAllModals}
           onClick={() => {
-            setTemplateHabit();
-            toggleModal();
+            closeAllModals();
           }}
-        >
-          {/* <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          /> */}
-        </HabitChoiceModal>
+        ></HabitChoiceModal>
+      )}
+      {showTemplateModal && (
+        <HabitTemplateModal
+          addData={setCustomModalData}
+          goBack={returnToChoiseModal}
+          onChooseHabit={onChooseHabit}
+          onClick={() => {
+            closeAllModals();
+          }}
+        ></HabitTemplateModal>
+      )}
+      {showCustomModal && (
+        <CustomHabbitModal
+          data={customModalData}
+          isTemplateModal={isTemplateModal}
+          isCustomModal={isCustomModal}
+          onClose={closeAllModals}
+          onClick={() => {
+            closeAllModals();
+          }}
+        ></CustomHabbitModal>
       )}
     </div>
   );
