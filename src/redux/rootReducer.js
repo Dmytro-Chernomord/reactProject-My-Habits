@@ -8,6 +8,19 @@ import quizActions from './quiz/quizActions';
 import userActions from './user/userActions';
 import generateColor from '../helpers/generateHabitsColor';
 
+const myLog = (state, action) => {
+  console.log(state);
+  console.log(action.payload.updatedHabit);
+};
+
+const upData = (state, action) => {
+  state.find(habits => {
+    if (habits._id !== action.payload.updatedHabit._id) {
+      return [...habits, action.payload.updatedHabit];
+    }
+  });
+};
+
 const userInitialState = {
   firstName: '',
   lastName: '',
@@ -58,6 +71,7 @@ const habitsReducer = createReducer([], {
     }));
     return coloredArrHabits;
   },
+
   [actions.addHabitSuccess]: (state, action) => [
     ...state,
     { ...action.payload, habitColor: generateColor() },
@@ -72,6 +86,7 @@ const habitsReducer = createReducer([], {
     console.log(state);
     return [...state, action.payload];
   },
+
 });
 
 const cigarettesInitialStates = {
@@ -147,6 +162,10 @@ const loadingReducer = createReducer(false, {
   [authAction.logoutRequest]: () => true,
   [authAction.logoutSuccess]: () => false,
   [authAction.logoutError]: () => false,
+
+  [habitsActions.setHabitsDataRequest]: () => true,
+  [habitsActions.setHabitsDataSuccess]: () => false,
+  [habitsActions.setHabitsDataError]: () => false,
 
   [habitsActions.removeHabitRequest]: () => true,
   [habitsActions.removeHabitSuccess]: () => false,
