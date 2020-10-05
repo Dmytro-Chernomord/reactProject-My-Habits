@@ -102,3 +102,56 @@ h2 {
   composes: btnNoob;
   background-image: linear-gradient(#b469fa 3.75%, #655de6 94.69%);
 }
+
+.buttonSub {
+  border-radius: 5px;
+  border: #43d190;
+  font-size: 18px;
+  margin-right: 30px;
+  padding: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: white;
+  widows: 70px;
+  display: inline-block;
+}
+.Noob {
+  composes: buttonSub;
+  background-color: #43d190;
+}
+.Basic {
+  composes: buttonSub;
+  background-image: linear-gradient(#2eebda 3.75%, #7cf7a3 94.69%);
+}
+
+.Standart {
+  composes: buttonSub;
+  background-image: linear-gradient(#f8c102 3.75%, #fe6083 94.69%);
+}
+
+.Premium {
+  composes: buttonSub;
+  background-image: linear-gradient(#fe6083 3.75%, #b469fa 94.69%);
+}
+
+.Ultra {
+  composes: buttonSub;
+  background-image: linear-gradient(#b469fa 3.75%, #655de6 94.69%);
+}
+.timer {
+  background-image: linear-gradient(#fe6083 3.75%, #b469fa 94.69%);
+  color: white;
+  border-radius: 5px;
+  display: inline-block;
+
+  font-size: 20px;
+  margin-left: 100px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+.Text {
+  font-size: 10px;
+  margin-right: 6px;
+}
