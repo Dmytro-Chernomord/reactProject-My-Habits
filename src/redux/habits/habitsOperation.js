@@ -11,7 +11,7 @@ const setHabitsDataDay = (item, key, index) => dispatch => {
   axios
     .patch(`/habits`, { id: item._id, name: item.name, data: newData })
     .then(res => {
-      dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+      // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
       dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
     })
     .catch(err => dispatch(habitsAction.setHabitsDataError(err)));
@@ -36,7 +36,7 @@ const setHabitsData = (items, date) => dispatch => {
     axios
       .patch(`/habits`, { id: item._id, name: item.name, data: newData })
       .then(res => {
-        dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+        // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
         dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
       })
       .catch(err => dispatch(habitsAction.setHabitsDataError(err)));
@@ -77,7 +77,7 @@ const updateHabit = data => dispatch => {
     .patch('/habits', data)
     .then(res => {
       // const dispatch = useDispatch();
-      dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+      // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
       // console.log(res.data.updatedHabit._id);
       dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
     })
@@ -87,6 +87,4 @@ const updateHabit = data => dispatch => {
     });
 };
 
-
 export default { setHabitsDataDay, setHabitsData, removeHabit, updateHabit };
-
