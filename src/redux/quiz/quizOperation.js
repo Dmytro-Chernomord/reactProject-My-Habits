@@ -9,7 +9,10 @@ const quizComplete = userData => dispatch => {
     .then(response => {
       dispatch(quizAction.quizAddSuccess(response.data));
     })
-    .catch(error => dispatch(quizAction.quizAddError(error.message)));
+    .catch(error => {
+      console.log(error.message);
+      dispatch(quizAction.quizAddError(error.message));
+    });
 };
 
 export default {

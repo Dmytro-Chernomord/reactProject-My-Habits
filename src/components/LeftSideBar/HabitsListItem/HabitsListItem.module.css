@@ -20,19 +20,16 @@
   width: 222px;
 }
 
-.habitsCardsItem::before {
-  content: '';
-  background: #28b62c;
+.circle {
   display: inline-block;
   border-radius: 50%;
   margin-right: 10px;
   width: 18px;
   height: 18px;
-  background: #b469fa;
-  /* animation: pulse-animation 2s infinite linear; */
+  animation: pulse-animation 2s infinite linear;
 }
 
-/* @keyframes pulse-animation {
+@keyframes pulse-animation {
   0% {
     -webkit-transform: scale(1);
   }
@@ -48,4 +45,4 @@
   100% {
     -webkit-transform: scale(1);
   }
-} */
+}

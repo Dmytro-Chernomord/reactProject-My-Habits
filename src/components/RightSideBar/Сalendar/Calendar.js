@@ -55,7 +55,7 @@ export const Calendar = () => {
   return (
     <div className="calendar">
       <p className="calendar-header" onClick={clickToCurrentDay}>
-        <span className="week-day">{dayOfTheWeek} • </span>
+        <span className="week-day">{`${dayOfTheWeek} • `}</span>
         <span className="calendar-date">{dayOfTheMonth}</span>
       </p>
       {/* <DatePicker

@@ -4,10 +4,13 @@ import { useForm } from 'react-hook-form';
 import userOperation from '../../redux/user/userOperation';
 import Button from '../Button/Button';
 import styles from './ChangePassword.module.css';
+import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
+import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
 
 const ChangePassword = ({ setShowPassword }) => {
   const [showError, setShowError] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [eyepass, setEyePass] = useState('password');
 
   const dispatch = useDispatch();
 
@@ -33,7 +36,13 @@ const ChangePassword = ({ setShowPassword }) => {
       setShowPassword(false);
     }, 2000);
   };
-
+  const showPassToggle = () => {
+    if (eyepass === 'text') {
+      setEyePass('password');
+    } else {
+      setEyePass('text');
+    }
+  };
   return (
     <div className={styles.boxFormPassword}>
       <form className={styles.formProfile} onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +64,7 @@ const ChangePassword = ({ setShowPassword }) => {
           <span className={styles.textLabel}>Пароль</span>
 
           <input
-            type="password"
+            type={eyepass}
             name="password"
             className={styles.input}
             style={{
@@ -79,6 +88,9 @@ const ChangePassword = ({ setShowPassword }) => {
               required: true,
             })}
           />
+          <div onClick={showPassToggle} className={styles.LoginPasswordBtn}>
+            {eyepass === 'text' ? <OpenedEye /> : <ClosedEye />}
+          </div>
         </label>
         <div className={styles.boxError}>
           {errors.confirmPassword &&
@@ -100,8 +112,11 @@ const ChangePassword = ({ setShowPassword }) => {
         </div>
         <label className={styles.label}>
           <span className={styles.textLabel}>Повторите пароль</span>
+          <div onClick={showPassToggle} className={styles.LoginPasswordBtn}>
+            {eyepass === 'text' ? <OpenedEye /> : <ClosedEye />}
+          </div>
           <input
-            type="password"
+            type={eyepass}
             name="confirmPassword"
             className={styles.input}
             style={{

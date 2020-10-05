@@ -1,10 +1,97 @@
 .outer {
   height: 100vh;
+  min-height: 900px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
+
+.centered {
+  width: 220px;
+  margin: 20px auto 35px;
+}
 .inner {
   flex: 1;
+  overflow-x: hidden;
   overflow-y: scroll;
+}
+.inner:hover {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+}
+.inner::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+}
+
+.inner::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  -webkit-box-shadow: 0 0 1px transparent;
+}
+.inner:hover::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+
+  background: -webkit-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: -moz-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+}
+
+.inner:hover::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+}
+
+.innerLeft {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 270px;
+  margin: 0 auto;
+
+  border-radius: 7px;
+  padding: 10px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.innerLeft:hover {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+
+  -webkit-box-shadow: 0px 0px 14px 6px rgba(233, 250, 247, 1);
+  -moz-box-shadow: 0px 0px 14px 6px rgba(233, 250, 247, 1);
+  box-shadow: 0px 0px 14px 6px rgba(233, 250, 247, 1);
+}
+.innerLeft::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+}
+
+.innerLeft::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: transparent;
+  -webkit-box-shadow: 0 0 1px transparent;
+}
+.innerLeft:hover::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+
+  background: -webkit-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: -moz-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+}
+.innerLeft:hover::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
 }

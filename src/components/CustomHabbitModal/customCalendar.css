@@ -329,6 +329,14 @@
   text-align: center;
 } */
 
+.react-datepicker {
+  opacity: 70%;
+}
+
+.react-datepicker-popper {
+  backdrop-filter: blur(2px);
+}
+
 .react-datepicker__month .react-datepicker__month-text,
 .react-datepicker__month .react-datepicker__quarter-text {
   display: inline-block;

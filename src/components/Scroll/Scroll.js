@@ -2,17 +2,26 @@ import React from 'react';
 import styles from './Scroll.module.css';
 
 export const Scroll = ({
-  staticComponent: StaticComponent,
+  staticComponentBefore: StaticComponentBefore,
   scrolledComponent: ScrolledComponent,
+  staticComponentAfter: StaticComponentAfter,
+  isLeftBar,
+  ...scrollProps
 }) => (
   <>
     <div className={styles.outer}>
       <div>
-        <StaticComponent />
+        <StaticComponentBefore {...scrollProps} />
       </div>
-      <div className={styles.inner}>
-        <ScrolledComponent />
+      <div className={isLeftBar ? styles.innerLeft : styles.inner}>
+        <div>{ScrolledComponent && <ScrolledComponent {...scrollProps} />}</div>
       </div>
+
+      {StaticComponentAfter && (
+        <div className={styles.centered}>
+          <StaticComponentAfter {...scrollProps} />
+        </div>
+      )}
     </div>
   </>
 );

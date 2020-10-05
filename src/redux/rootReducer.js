@@ -5,6 +5,8 @@ import modalAction from './modal/modalActions';
 import authAction from './auth/authAction';
 import habitsActions from './habits/habitsAction';
 import quizActions from './quiz/quizActions';
+import userActions from './user/userActions';
+import generateColor from '../helpers/generateHabitsColor';
 
 const userInitialState = {
   firstName: '',
@@ -50,12 +52,26 @@ const RootReducer = createReducer(userInitialState, {
 
 const habitsReducer = createReducer([], {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
-    return actions.payload.habits;
+    const coloredArrHabits = actions.payload.habits.map(habit => ({
+      ...habit,
+      habitColor: generateColor(),
+    }));
+    return coloredArrHabits;
   },
-  [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
+  [actions.addHabitSuccess]: (state, action) => [
+    ...state,
+    { ...action.payload, habitColor: generateColor() },
+  ],
   [habitsActions.removeHabitSuccess]: (state, action) =>
     state.filter(habit => habit._id !== action.payload),
   [authAction.logoutSuccess]: () => [],
+  [habitsActions.newHabitsArray]: (state, actions) =>
+    state.filter(habit => habit._id !== actions.payload),
+  [habitsActions.setHabitsDataSuccess]: (state, action) => {
+    console.log(action.payload);
+    console.log(state);
+    return [...state, action.payload];
+  },
 });
 
 const cigarettesInitialStates = {
@@ -83,7 +99,7 @@ const paymentsReducer = createReducer([], {
 
 const quizInitialState = {
   cigarettePackPrice: 0,
-  cigarettePerDay: 0,
+  cigarettePerDay: 1,
   cigarettePerTime: 0,
   smokeYears: 0,
 };
@@ -114,6 +130,9 @@ const errorReducer = createReducer(null, {
   [quizActions.quizAddError]: () => true,
   [quizActions.quizAddRequest]: () => false,
   [quizActions.quizAddSuccess]: () => false,
+  [userActions.addHabitError]: () => true,
+  [userActions.addHabitRequest]: () => false,
+  [userActions.addHabitSuccess]: () => false,
 });
 
 const loadingReducer = createReducer(false, {

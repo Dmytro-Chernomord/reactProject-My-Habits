@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import habitsSelector from '../../redux/habits/habitsSelector';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
+import { CheckListPageHeader } from './CheckListPageHeader/CheckListPageHeader';
 import ItemHabit from './ItemHabit';
-import Button from '../UIcomponents/Button/Button';
+// import Button from '../UIcomponents/Button/Button';
 import s from './CheckListPage.module.css';
-
-const generateColor = () => {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
+import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
+import { Scroll } from '../Scroll/Scroll';
 
 class CheckListPage extends Component {
   state = { showModal: false };
-  // const[showModal, setShowModal] = useState(false);
   toggleModal = () => {
     this.setState({ showModal: true });
   };
@@ -25,39 +23,39 @@ class CheckListPage extends Component {
     const { items } = this.props;
     return (
       <>
-        <div className={s.headerContainer}>
+        <Scroll
+          staticComponentBefore={CheckListPageHeader}
+          scrolledComponent={HabitsListInHome}
+          toggleModal={this.toggleModal}
+        />
+        {/* <CheckListPageHeader toggleModal={this.toggleModal} /> */}
+        {/* <div className={s.headerContainer}>
           <h2 className={s.header}>Чек-лист привычек</h2>
           <Button
             type={'button'}
             green={false}
-            handelClick={
-              this.toggleModal
-              // this.props.changeLayout('DailyResultModal');
-            }
+            handelClick={this.toggleModal}
             label={'+ Сигареты за сегодня'}
           />
-        </div>
-        <div className={s.container}>
+        </div> */}
+        {/* <HabitsListInHome /> */}
+
+        {/* <div className={s.container}>
           <ul className={s.list}>
             {items.map(item => (
               <li
                 key={item._id}
                 className={s.item}
-                style={{ borderLeftColor: generateColor() }}
+                style={{ borderLeftColor: item.habitColor }}
               >
                 <ItemHabit {...item} />
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
+
         {this.state.showModal && (
-          <DailyResultModal onClose={this.closeModal}>
-            {/* <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          /> */}
-          </DailyResultModal>
+          <DailyResultModal onClose={this.closeModal}></DailyResultModal>
         )}
       </>
     );

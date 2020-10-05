@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-// import { CSSTransition } from 'react-transition-group';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import habitsOperation from '../../redux/habits/habitsOperation';
 import userOperations from '../../redux/user/userOperation';
 import { TextField } from '@material-ui/core';
 // import userSelectors from '../../redux/user/userSelector';
@@ -50,6 +51,7 @@ const personalStyle = `
    border:none;
    box-shadow: 0px 6px 26px rgba(24, 28, 39, 0.1);
   margin-left: -3px;
+  
   }
   .calendarBox .react-datepicker__navigation--previous{
     margin-top: 12px;
@@ -71,11 +73,10 @@ const personalStyle = `
     height: 40px;
   }
   .calendarBox .react-datepicker__month {
-    backdrop-filter: blur(24px);
+    
     font-family: "Montserrat";
      background-color: rgba(255, 255, 255, 0.7);
     color: #181c27;
-
   display: flex;
   max-height: 200px;
   height: 100%;
@@ -86,6 +87,7 @@ const personalStyle = `
   border: none;
   border-radius: 10px;
   }
+
   .calendarBox .react-datepicker__header{
   border-radius: 0%;
   background-color: #fff;
@@ -93,6 +95,7 @@ const personalStyle = `
 border-top-right-radius: 10px;
     border-top-left-radius: 10px;
   }
+
   .calendarBox .react-datepicker__current-month{
   display: flex;
   justify-content: center;
@@ -122,7 +125,7 @@ border-top-right-radius: 10px;
     box-shadow: 0px 6px 26px rgba(24, 28, 39, 0.1);
     height: 280px;
     border-radius: 10px;
-    border: 0px; 
+    border: 0px;    
   }
   .calendarBox .react-datepicker__day--selected:hover{
   background: #43D190;
@@ -195,7 +198,6 @@ border-top-right-radius: 10px;
     color: #BDBDBD;
   }
 
-  // .react-datepicker-popper{display: none;}
 
   .calendarBox {
   position: absolute;
@@ -281,59 +283,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({
-  onClick,
-  ableDelete = false,
-  habitInfo,
-  onDelete,
-}) {
+function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const classes = useStyles();
-  const [name, setName] = useState(habitInfo);
-  // const [date, setDate] = useState();
-  const [time, setTime] = useState();
-  const [iteration, setIteration] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  // const habits = useSelector(userSelectors.getHabits);
+  // const [name, setName] = useState(ableToDelete ? data.name : habitName);
+  // const [time, setTime] = useState(
+  //   ableToDelete ? data.planningTime.slice(11, 16) : '',
+  // );
+  // const [iteration, setIteration] = useState('');
+  // const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
-  const onSubmit = useCallback(
-    habit => dispatch(userOperations.addHabit(habit)),
-    [dispatch],
-  );
-  const piece = startDate.toISOString().slice(0, 11);
-  const planningTime = piece + time + ':00.000Z';
+  const errorsState = useSelector(state => state.error);
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'date':
-        setStartDate(value);
-        break;
-
-      case 'time':
-        setTime(value);
-        break;
-
-      case 'iteration':
-        setIteration(value);
-        break;
-
-      default:
-        console.warn(`Тип поля name - ${name} не обрабатывается`);
-    }
-  };
-
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    const data = { name, planningTime, iteration };
-    onSubmit(data);
-
-    // resetForm();
-  };
+  const { register, errors, handleSubmit, control } = useForm({
+    mode: 'onChange',
+  });
+  const name = ableToDelete ? info.name : habitName;
+  const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
+  const startDate = new Date();
 
   // const resetForm = () => {
   //   setName('');
@@ -341,6 +307,44 @@ function CustomHabbitModal({
   //   setTime('');
   //   setIteration('');
   // };
+  const onSubmit = data => {
+    const piece = data.datePicker.toISOString().slice(0, 11);
+    const planningTime = piece + data.time + ':00.000Z';
+    console.log(ableToDelete);
+    if (ableToDelete) {
+      console.log(info);
+      dispatch(
+        habitsOperation.updateHabit({
+          id: info._id,
+          data: info.data,
+          name: data.name,
+        }),
+      );
+    } else {
+      dispatch(
+        userOperations.addHabit({
+          name: data.name,
+          planningTime: planningTime,
+          iteration: data.iteration,
+        }),
+      );
+    }
+  };
+
+  const deleteHabit = () => {
+    dispatch(habitsOperation.removeHabit(info._id));
+  };
+
+  const habits = useSelector(state => state.habits);
+  console.log(habits);
+  const ref = useRef(habits.length);
+  console.log(ref);
+  // console.log('cl', habits[habits.length - 1]._id === ref.current);
+
+  useEffect(() => {
+    console.log(ref.current === habits.length);
+    ref.current !== habits.length && onClick();
+  }, [habits, onClick]);
 
   return (
     <div className={styles.modalWrapper}>
@@ -349,7 +353,210 @@ function CustomHabbitModal({
       <p className={styles.modalTextCustom}>
         так Вам будет удобнее достичь своей цели
       </p>
-      <form onSubmit={handleFormSubmit} className={styles.formProfile}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
+        <div className={styles.boxErrorHabbit}>
+          {errors.name && errors.name.type === 'minLength' && (
+            <p className={styles.error}>{errors.name.message}</p>
+          )}
+          {errors.name && errors.name.type === 'required' && (
+            <p className={styles.error}>{errors.name.message}</p>
+          )}
+        </div>
+        <label htmlFor="name" className={styles.label}>
+          <span className={styles.textLabel}>Название</span>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            defaultValue={name}
+            className={styles.inputHabitName}
+            autoFocus="autofocus"
+            autoComplete="off"
+            ref={register({
+              required: { value: true, message: '*обязательное поле ввода' },
+              minLength: {
+                value: 2,
+                message: '*название должно содержать не менее двух значений',
+              },
+            })}
+            style={{
+              outlineColor: errors.name ? '#fe6083' : '#43d190',
+            }}
+          />
+        </label>
+        <div className={styles.boxErrorHabbit}>
+          {errors.datePicker && errors.datePicker.type === 'required' && (
+            <p className={styles.error}>{errors.datePicker.message}</p>
+          )}
+        </div>
+        <div className={styles.dateBox}>
+          <label htmlFor="date" className={styles.label}>
+            <span className={styles.textLabel}>Дата старта</span>
+            <div className={'calendarBox'}>
+              <Controller
+                control={control}
+                name="datePicker"
+                defaultValue={startDate}
+                as={({ onChange, value }) => (
+                  <DatePicker
+                    onChange={onChange}
+                    selected={value}
+                    dateFormat="yyyy/MM/dd"
+                    placeholder=" __.__.__"
+                    disabled={ableToDelete}
+                    locale="ru"
+                    minDate={startDate}
+                  />
+                )}
+                rules={{
+                  required: {
+                    value: true,
+                    message: '*обязательное поле ввода',
+                  },
+                }}
+              />
+            </div>
+          </label>
+        </div>
+        <div className={styles.boxErrorHabbit}>
+          {errors.time && errors.time.type === 'required' && (
+            <p className={styles.error}>{errors.time.message}</p>
+          )}
+        </div>
+        <label htmlFor="time" className={styles.label}>
+          <span className={styles.textLabel}>Время</span>
+          <input
+            type="time"
+            name="time"
+            id="time"
+            defaultValue={time}
+            className={styles.input}
+            disabled={ableToDelete}
+            ref={register({
+              required: { value: true, message: '*обязательное поле ввода' },
+            })}
+            style={{
+              outlineColor: errors.time ? '#fe6083' : '#43d190',
+            }}
+          />
+        </label>
+        <div className={styles.boxErrorHabbit}>
+          {errors.iteration && errors.iteration.type === 'required' && (
+            <p className={styles.error}>{errors.iteration.message}</p>
+          )}
+        </div>
+        <label className={styles.label}>
+          <span className={styles.textLabel}>Повторение</span>
+          <FormControl className={classes.margin}>
+            <InputLabel id="demo-customized-select-label"></InputLabel>
+            <Controller
+              control={control}
+              name="iteration"
+              as={({ onChange, value }) => (
+                <Select
+                  labelId="demo-customized-select-label"
+                  id="demo-customized-select"
+                  value={value}
+                  onChange={onChange}
+                  input={<BootstrapInput />}
+                  disabled={ableToDelete}
+                >
+                  <MenuItem value="allday">Ежедневно</MenuItem>
+                  <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
+                  <MenuItem value="weekend">Сб-Вс</MenuItem>
+                  <MenuItem value="firstset">Пн-Ср-Пт</MenuItem>
+                  <MenuItem value="secondset">Вт-Чт-Сб</MenuItem>
+                  <MenuItem value="eachTwoDays">Раз в 2 дня</MenuItem>
+                  <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
+                </Select>
+              )}
+              // rules={{
+              //   required: {
+              //     value: true,
+              //     message: '*обязательное поле ввода',
+              //   },
+              // }}
+            />
+          </FormControl>
+        </label>
+        {ableToDelete && (
+          <div className={styles.btnRemoveFolder}>
+            <ButtonRemoveHabit
+              type="button"
+              // временный функционал кнопки Удалить привычку
+              handelClick={deleteHabit}
+              title="Удалить привычку"
+            />
+          </div>
+        )}
+        <div className={styles.boxErrorHabbit}>
+          {errorsState && (
+            <p className={styles.error}>
+              *извините, произошла ошибка сервера, попробуйте позже
+            </p>
+          )}
+        </div>
+        <div className={styles.btnFolder}>
+          <div className={styles.btnBox}>
+            <Button
+              type={'button'}
+              green={false}
+              handelClick={() => onClick()}
+              label={'Отмена'}
+            />
+          </div>
+          <div>
+            <Button type={'submit'} green={true} label={'Сохранить'} />
+          </div>
+        </div>
+      </form>{' '}
+      <ButtonClose type="button" onClick={onClick} />
+    </div>
+  );
+}
+
+export default ModalBackdrop(CustomHabbitModal);
+
+// const piece = startDate.toISOString().slice(0, 11);
+// const planningTime = piece + time + ':00.000Z';
+// const onSubmit = useCallback(
+//   habit => dispatch(userOperations.addHabit(habit)),
+//   [dispatch],
+// );
+// const handleInputChange = e => {
+//   const { name, value } = e.target;
+
+//   switch (name) {
+//     case 'name':
+//       setName(value);
+//       break;
+
+//     case 'date':
+//       setStartDate(value);
+//       break;
+
+//     case 'time':
+//       setTime(value);
+//       break;
+
+//     case 'iteration':
+//       setIteration(value);
+//       break;
+
+//     default:
+//       console.warn(`Тип поля name - ${name} не обрабатывается`);
+//   }
+// };
+
+// const handleFormSubmit = e => {
+//   e.preventDefault();
+//   const data = { name, planningTime, iteration };
+//   onSubmit(data);
+
+//   // resetForm();
+// };
+{
+  /* <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
         <label htmlFor="name" className={styles.label}>
           <span className={styles.textLabel}>Название</span>
           <input
@@ -367,16 +574,6 @@ function CustomHabbitModal({
         <div className={styles.dateBox}>
           <label htmlFor="date" className={styles.label}>
             <span className={styles.textLabel}>Дата старта</span>
-            {/* 
-            <input
-              type="date"
-              name="date"
-              id="date"
-              value={date}
-              required
-              onChange={handleInputChange}
-              className={styles.input}
-            /> */}
             <div className={'calendarBox'}>
               <DatePicker
                 dateFormat="yyyy/MM/dd"
@@ -384,6 +581,7 @@ function CustomHabbitModal({
                 onChange={date => setStartDate(date)}
                 locale="ru"
                 placeholder=" __.__.__"
+                disabled={ableToDelete}
               />
             </div>
           </label>
@@ -398,6 +596,7 @@ function CustomHabbitModal({
             required
             onChange={handleInputChange}
             className={styles.input}
+            disabled={ableToDelete}
           />
         </label>
         <label className={styles.label}>
@@ -411,10 +610,8 @@ function CustomHabbitModal({
               value={iteration}
               onChange={handleInputChange}
               input={<BootstrapInput />}
+              disabled={ableToDelete}
             >
-              {/* <MenuItem value="">
-                <em>Выбрать</em>
-              </MenuItem> */}
               <MenuItem value="allday">Ежедневно</MenuItem>
               <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
               <MenuItem value="weekend">Сб-Вс</MenuItem>
@@ -424,66 +621,16 @@ function CustomHabbitModal({
               <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
             </Select>
           </FormControl>
-          {/* <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="outlined-age-native-simple">
-              Выбрать
-            </InputLabel>
-            <Select
-              native
-              value={iteration}
-              onChange={handleInputChange}
-              label="iteration"
-              inputProps={{
-                name: 'iteration',
-                id: 'outlined-age-native-simple',
-              }}
-              className={classes.formInput}
-            >
-              <option aria-label="None" value="" />
-              <option value="allday" className={styles.formOption}>
-                Ежедневно
-              </option>
-              <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
-              <option value="weekend">Сб-Вс</option>
-              <option value="firstset">Пн-Ср-Пт</option>
-              <option value="secondset">ВТ-ЧТ-СБ</option>
-              <option value="eachTwoDays">Раз в 2 дня</option>
-              <option value="onceAWeek">Раз в неделю</option>
-            </Select>
-          </FormControl> */}
-          {/* <select
-            className={styles.input}
-            name="iteration"
-            id="iteration"
-            size="1"
-            required="required"
-            onChange={handleInputChange}
-          >
-            <option selected disabled hidden value="">
-              Выбрать
-            </option>
-            <option value="allday">Ежедневно</option>
-            <option value="workday">Пн-Вт-Ср-Чт-Пт</option>
-            <option value="weekend">Сб-Вс</option>
-            <option value="firstset">Пн-Ср-Пт</option>
-            <option value="secondset">ВТ-ЧТ-СБ</option>
-            <option value="eachTwoDays">Раз в 2 дня</option>
-            <option value="onceAWeek">Раз в неделю</option>
-          </select> */}
         </label>
-        <div className={styles.btnRemoveFolder}>
-          <ButtonRemoveHabit
-            type="button"
-            // временный функционал кнопки Удалить привычку
-            handelClick={() => onClick()}
-            title="Удалить привычку"
-          />
-        </div>
-
-        {ableDelete && (
-          <button type="button" onClick={() => null}>
-            Удалить привычку
-          </button>
+        {ableToDelete && (
+          <div className={styles.btnRemoveFolder}>
+            <ButtonRemoveHabit
+              type="button"
+              // временный функционал кнопки Удалить привычку
+              handelClick={deleteHabit}
+              title="Удалить привычку"
+            />
+          </div>
         )}
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>
@@ -495,18 +642,10 @@ function CustomHabbitModal({
             />
           </div>
           <div>
-            <Button
-              type={'submit'}
-              green={true}
-              // handelClick={() => onClose()}
-              label={'Сохранить'}
-            />
+            <Button type={'submit'} green={true} label={'Сохранить'} />
           </div>
         </div>
       </form>{' '}
       <ButtonClose type="button" onClick={onClick} />
-    </div>
-  );
+    </div> */
 }
-
-export default ModalBackdrop(CustomHabbitModal);
