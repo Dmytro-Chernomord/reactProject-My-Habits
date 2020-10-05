@@ -51,6 +51,7 @@ const personalStyle = `
    border:none;
    box-shadow: 0px 6px 26px rgba(24, 28, 39, 0.1);
   margin-left: -3px;
+  
   }
   .calendarBox .react-datepicker__navigation--previous{
     margin-top: 12px;
@@ -72,11 +73,10 @@ const personalStyle = `
     height: 40px;
   }
   .calendarBox .react-datepicker__month {
-    backdrop-filter: blur(24px);
+    
     font-family: "Montserrat";
      background-color: rgba(255, 255, 255, 0.7);
     color: #181c27;
-
   display: flex;
   max-height: 200px;
   height: 100%;
@@ -87,6 +87,7 @@ const personalStyle = `
   border: none;
   border-radius: 10px;
   }
+
   .calendarBox .react-datepicker__header{
   border-radius: 0%;
   background-color: #fff;
@@ -94,6 +95,7 @@ const personalStyle = `
 border-top-right-radius: 10px;
     border-top-left-radius: 10px;
   }
+
   .calendarBox .react-datepicker__current-month{
   display: flex;
   justify-content: center;
@@ -123,7 +125,7 @@ border-top-right-radius: 10px;
     box-shadow: 0px 6px 26px rgba(24, 28, 39, 0.1);
     height: 280px;
     border-radius: 10px;
-    border: 0px; 
+    border: 0px;    
   }
   .calendarBox .react-datepicker__day--selected:hover{
   background: #43D190;
@@ -196,7 +198,6 @@ border-top-right-radius: 10px;
     color: #BDBDBD;
   }
 
-  // .react-datepicker-popper{display: none;}
 
   .calendarBox {
   position: absolute;
