@@ -38,4 +38,20 @@ const removeHabit = id => dispatch => {
     .catch(err => dispatch(habitsAction.removeHabitError(err)));
 };
 
-export default { setData, setSetting, removeHabit };
+const updateHabit = data => dispatch => {
+  dispatch(habitsAction.setHabitsDataRequest());
+  axios
+    .patch('/habits', data)
+    .then(res => {
+      // const dispatch = useDispatch();
+      dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+      // console.log(res.data.updatedHabit._id);
+      dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
+    })
+    .catch(error => {
+      console.log('aus operation', error.message);
+      // dispatch(habitsAction.setHabitsDataError(error.message));
+    });
+};
+
+export default { setData, setSetting, removeHabit, updateHabit };
