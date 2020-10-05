@@ -5,6 +5,8 @@ const setHabitsDataSuccess = createAction('habits/setSuccess');
 const setHabitsDataError = createAction('habits/setError');
 const newHabitsArray = createAction('habits/newHabitsArray');
 
+const newHabitsArray = createAction('habits/newHabitsArray');
+
 const setHabitsSettingRequest = createAction('habits/settingRequest');
 const setHabitsSettingSuccess = createAction('habits/settingSuccess');
 const setHabitsSettingError = createAction('habits/settingError');
@@ -17,6 +19,7 @@ export default {
   setHabitsDataRequest,
   setHabitsDataSuccess,
   setHabitsDataError,
+  newHabitsArray,
   setHabitsSettingRequest,
   setHabitsSettingSuccess,
   setHabitsSettingError,

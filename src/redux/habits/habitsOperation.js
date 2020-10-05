@@ -87,4 +87,6 @@ const updateHabit = data => dispatch => {
     });
 };
 
+
 export default { setHabitsDataDay, setHabitsData, removeHabit, updateHabit };
+
