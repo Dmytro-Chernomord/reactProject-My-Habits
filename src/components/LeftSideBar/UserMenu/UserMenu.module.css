@@ -48,19 +48,30 @@
 
 .button {
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* align-items: flex-start; */
   background: linear-gradient(222.27deg, #2eebda 3.75%, #7cf7a3 94.69%);
   border-radius: 5px;
-  font-style: normal;
-  font-weight: normal;
+  /* font-style: normal; */
+  font-weight: 400;
   font-size: 14px;
-  line-height: 17px;
-  align-items: center;
+  /* line-height: 17px; */
+  /* align-items: center; */
   text-align: center;
   color: #ffffff;
-  flex: none;
-  align-self: center;
+  /* flex: none; */
+  /* align-self: center; */
   cursor: pointer;
+  height: 20px;
+  font-family: 'Rubik';
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:hover,
+.button:focus {
+  background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+}
+.button:focus {
+  border: 1px solid #4f4f4f;
 }
