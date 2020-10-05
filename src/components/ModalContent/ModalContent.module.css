@@ -103,7 +103,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .labelDailyResult {
@@ -235,6 +235,11 @@
 .boxError {
   height: 15px;
   margin-left: 415px;
+  text-align: start;
+}
+.boxErrorHabbit {
+  height: 15px;
+  margin-left: 220px;
   text-align: start;
 }
 .error {
