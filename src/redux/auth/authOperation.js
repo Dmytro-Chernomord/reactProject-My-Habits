@@ -17,7 +17,11 @@ const logIn = userData => dispatch => {
       setToken(response.data.access_token);
       dispatch(authAction.loginSuccess(response.data));
     })
-    .catch(error => dispatch(authAction.loginError(error.message)));
+    .catch(error => {
+      console.log(error);
+      console.log(error.message);
+      dispatch(authAction.loginError(error.message));
+    });
 };
 
 const registration = userData => dispatch => {

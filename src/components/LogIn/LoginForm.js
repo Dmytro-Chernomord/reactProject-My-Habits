@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { CSSTransition } from 'react-transition-group';
 import authOperations from '../../redux/auth/authOperation';
 import styles from './Login.module.css';
 import { ReactComponent as Logo } from '../../images/homepage/svg/MakeitHabitblack.svg';
 import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
+import fadeStyle from '../../Views/PrivateViews/ProfilePage/FadeProfilePage.module.css';
 
 export default function LoginForm({ rightchangeModal }) {
   const dispatch = useDispatch();
+  const errorsState = useSelector(state => state.error);
+
   const [eyepass, setEyePass] = useState('password');
+  const [email, setEmail] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
 
   const onSubmit = data => {
+    setEmail(data.email);
     dispatch(authOperations.logIn({ ...data }));
   };
   const showPassToggle = () => {
@@ -40,16 +47,15 @@ export default function LoginForm({ rightchangeModal }) {
       <p className={styles.LoginTxt}>
         Введите свои данные, чтобы продолжить использовать наше приложение
       </p>
-
+      <div className={styles.boxError}>
+        {errors.email && errors.email.type === 'required' && (
+          <p className={styles.error}>*oбязательное поле ввода</p>
+        )}
+        {errors.email && errors.email.type === 'pattern' && (
+          <p className={styles.error}>{errors.email.message}</p>
+        )}
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.LoginForm}>
-        <div>
-          {errors.email && errors.email.type === 'required' && (
-            <p>*oбязательное поле ввода</p>
-          )}
-          {errors.email && errors.email.type === 'pattern' && (
-            <p>{errors.email.message}</p>
-          )}
-        </div>
         <div className={styles.LoginInputForm}>
           <p className={styles.LoginInputTxt}>E-mail</p>
           <input
@@ -70,18 +76,18 @@ export default function LoginForm({ rightchangeModal }) {
             })}
           />
         </div>
-        <div>
+        <div className={styles.boxErrorPass}>
           {errors.password && errors.password.type === 'minLength' && (
-            <p>{errors.password.message}</p>
+            <p className={styles.error}>{errors.password.message}</p>
           )}
           {errors.password && errors.password.type === 'pattern' && (
-            <p>{errors.password.message}</p>
+            <p className={styles.error}>{errors.password.message}</p>
           )}
           {errors.password && errors.password.type === 'required' && (
-            <p>*oбязательное поле ввода</p>
+            <p className={styles.error}>*oбязательное поле ввода</p>
           )}
           {errors.password && errors.password.type === 'maxLength' && (
-            <p>{errors.password.message}</p>
+            <p className={styles.error}>{errors.password.message}</p>
           )}
         </div>
         <div className={styles.LoginInputForm}>
@@ -119,12 +125,38 @@ export default function LoginForm({ rightchangeModal }) {
             />
           </label>
         </div>
+        <div className={styles.boxErrorMessage}>
+          {errorsState && (
+            <p className={styles.error}>
+              *неверный e-mail или пароль, введите другой E-mail или
+              зарегистрируйтесь.
+              <button
+                className={styles.btnError}
+                onClick={() => setShowError(prev => !prev)}
+              >
+                E-mail правильный...
+              </button>
+            </p>
+          )}
+          <CSSTransition
+            in={showError}
+            classNames={fadeStyle}
+            timeout={250}
+            unmountOnExit
+          >
+            <p className={styles.error}>
+              Ошибка 400: извините, произошла ошибка сервера, попробуйте позже
+            </p>
+          </CSSTransition>
+        </div>
+
         <div className={styles.LoginButtonBlock}>
           <button className={styles.LoginButton}>
             <p className={styles.LoginButtonTxt}>Войти</p>
           </button>
         </div>
       </form>
+
       <div className={styles.LoginButtonBlock}>
         <button onClick={rightchangeModal} className={styles.LoginButton}>
           <p className={styles.LoginButtonTxt}>Регистрация</p>

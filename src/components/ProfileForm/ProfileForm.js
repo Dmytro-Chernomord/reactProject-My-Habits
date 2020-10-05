@@ -13,6 +13,7 @@ const ProfileForm = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [errorPhone, setErrorPhone] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
@@ -27,7 +28,14 @@ const ProfileForm = () => {
     setLastName(user.lastName);
     setPhone(user.phone);
     setEmail(user.email);
+    setShowMessage(false);
   }, [user.email, user.firstName, user.lastName, user.phone]);
+
+  useEffect(() => {
+    if (user.error === true) {
+      setShowMessage(false);
+    }
+  }, [user.error]);
 
   const handlePhoneChange = ({ target: { value } }) => {
     if (value.split('_').length !== 1) {
@@ -43,6 +51,7 @@ const ProfileForm = () => {
 
   const onSubmit = data => {
     const phoneUser = phone.slice(1, 17).split('-').join('');
+    console.log(phoneUser);
     if (errorPhone) {
       return;
     }
@@ -52,6 +61,11 @@ const ProfileForm = () => {
         phone: phoneUser,
       }),
     );
+
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 2000);
   };
 
   return (
@@ -170,6 +184,17 @@ const ProfileForm = () => {
           })}
         />
       </label>
+      <div className={styles.boxMessage}>
+        {showMessage && (
+          <span className={styles.validText}>Данные изменены!</span>
+        )}
+        {state.error && (
+          <p className={styles.error}>
+            *извините, произошла ошибка,данные не изменены, попробуйте позже
+          </p>
+        )}
+      </div>
+
       <Button variety={'white'} text="Изменить" />
     </form>
   );

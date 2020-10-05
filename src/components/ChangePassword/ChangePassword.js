@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import userOperation from '../../redux/user/userOperation';
 import Button from '../Button/Button';
@@ -13,29 +13,26 @@ const ChangePassword = ({ setShowPassword }) => {
   const [eyepass, setEyePass] = useState('password');
 
   const dispatch = useDispatch();
+  const errorsState = useSelector(state => state.error);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
 
   useEffect(() => {
-    if (errors.password || errors.confirmPassword) {
-      setShowMessage(false);
-    }
-  }, [errors.password, errors.confirmPassword]);
+    setShowMessage(false);
+  }, [errorsState]);
 
   const onSubmit = data => {
     if (data.password !== data.confirmPassword) {
       setShowError(true);
       return;
     }
-    dispatch(userOperation.changePassword({ ...data }));
+    dispatch(userOperation.changePassword({ ...data, data }));
     setShowError(false);
     setShowMessage(true);
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 2000);
   };
+
   const showPassToggle = () => {
     if (eyepass === 'text') {
       setEyePass('password');
@@ -122,7 +119,6 @@ const ChangePassword = ({ setShowPassword }) => {
             style={{
               outlineColor: errors.confirmPassword ? '#fe6083' : '#43d190',
               borderColor: errors.confirmPassword ? '#fe6083' : '#e0e0e0',
-              marginBottom: '20px',
             }}
             ref={register({
               pattern: {
@@ -142,13 +138,20 @@ const ChangePassword = ({ setShowPassword }) => {
             })}
           />
         </label>
+        <div className={styles.boxErrorValid}>
+          {showError && (
+            <span className={styles.notValidText}>Пароли не совпадают</span>
+          )}
+          {showMessage && (
+            <span className={styles.validText}>Пароль изменён!</span>
+          )}
+        </div>
+        {errorsState && (
+          <p className={styles.error}>
+            *извините, произошла ошибка,пароль не изменен, попробуйте позже
+          </p>
+        )}
         <Button variety={'white'} text="Изменить пароль" />
-        {showError && (
-          <span className={styles.notValidText}>Пароли не совпадают</span>
-        )}
-        {showMessage && (
-          <span className={styles.validText}>Пароль изменён!</span>
-        )}
       </form>
     </div>
   );
