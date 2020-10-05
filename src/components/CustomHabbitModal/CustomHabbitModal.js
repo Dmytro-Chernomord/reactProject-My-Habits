@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import habitsOperation from '../../redux/habits/habitsOperation';
@@ -51,6 +51,7 @@ const personalStyle = `
    border:none;
    box-shadow: 0px 6px 26px rgba(24, 28, 39, 0.1);
   margin-left: -3px;
+  
   }
   .calendarBox .react-datepicker__navigation--previous{
     margin-top: 12px;
@@ -72,11 +73,10 @@ const personalStyle = `
     height: 40px;
   }
   .calendarBox .react-datepicker__month {
-    backdrop-filter: blur(24px);
+    
     font-family: "Montserrat";
      background-color: rgba(255, 255, 255, 0.7);
     color: #181c27;
-
   display: flex;
   max-height: 200px;
   height: 100%;
@@ -87,6 +87,7 @@ const personalStyle = `
   border: none;
   border-radius: 10px;
   }
+
   .calendarBox .react-datepicker__header{
   border-radius: 0%;
   background-color: #fff;
@@ -94,6 +95,7 @@ const personalStyle = `
 border-top-right-radius: 10px;
     border-top-left-radius: 10px;
   }
+
   .calendarBox .react-datepicker__current-month{
   display: flex;
   justify-content: center;
@@ -123,7 +125,7 @@ border-top-right-radius: 10px;
     box-shadow: 0px 6px 26px rgba(24, 28, 39, 0.1);
     height: 280px;
     border-radius: 10px;
-    border: 0px; 
+    border: 0px;    
   }
   .calendarBox .react-datepicker__day--selected:hover{
   background: #43D190;
@@ -196,7 +198,6 @@ border-top-right-radius: 10px;
     color: #BDBDBD;
   }
 
-  // .react-datepicker-popper{display: none;}
 
   .calendarBox {
   position: absolute;
@@ -282,7 +283,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
+function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const classes = useStyles();
   // const [name, setName] = useState(ableToDelete ? data.name : habitName);
   // const [time, setTime] = useState(
@@ -296,9 +297,11 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const { register, errors, handleSubmit, control } = useForm({
     mode: 'onChange',
   });
-  const name = ableToDelete ? data.name : habitName;
-  const time = ableToDelete ? data.planningTime.slice(11, 16) : '';
+
+  const name = ableToDelete ? info.name : habitName;
+  const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
   const startDate = new Date();
+
 
   // const resetForm = () => {
   //   setName('');
@@ -309,18 +312,41 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const onSubmit = data => {
     const piece = data.datePicker.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
-    dispatch(
-      userOperations.addHabit({
-        name: data.name,
-        planningTime: planningTime,
-        iteration: data.iteration,
-      }),
-    );
+    console.log(ableToDelete);
+    if (ableToDelete) {
+      console.log(info);
+      dispatch(
+        habitsOperation.updateHabit({
+          id: info._id,
+          data: info.data,
+          name: data.name,
+        }),
+      );
+    } else {
+      dispatch(
+        userOperations.addHabit({
+          name: data.name,
+          planningTime: planningTime,
+          iteration: data.iteration,
+        }),
+      );
+    }
   };
 
   const deleteHabit = () => {
-    dispatch(habitsOperation.removeHabit(data._id));
+    dispatch(habitsOperation.removeHabit(info._id));
   };
+
+  const habits = useSelector(state => state.habits);
+  console.log(habits);
+  const ref = useRef(habits.length);
+  console.log(ref);
+  // console.log('cl', habits[habits.length - 1]._id === ref.current);
+
+  useEffect(() => {
+    console.log(ref.current === habits.length);
+    ref.current !== habits.length && onClick();
+  }, [habits, onClick]);
 
   return (
     <div className={styles.modalWrapper}>
@@ -446,12 +472,12 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
                   <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
                 </Select>
               )}
-              rules={{
-                required: {
-                  value: true,
-                  message: '*обязательное поле ввода',
-                },
-              }}
+              // rules={{
+              //   required: {
+              //     value: true,
+              //     message: '*обязательное поле ввода',
+              //   },
+              // }}
             />
           </FormControl>
         </label>

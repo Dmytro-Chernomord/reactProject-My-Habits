@@ -4,7 +4,7 @@
   height: 44px;
   padding: 12px 18px;
   border-radius: 5px;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -29,8 +29,8 @@
 
 .ButtonGreen:hover,
 .ButtonGreen:focus {
-  background-color: #e5fafa;
-  color: #43d190;
+  background-color: #cbf7e3;
+  color: #333333;
 }
 
 .ButtonWhite:hover,

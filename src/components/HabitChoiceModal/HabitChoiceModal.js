@@ -43,7 +43,7 @@ function HabitChoiceModal({
           green={false}
           handelClick={() => onClose()}
           label={'Отмена'}
-        />{' '}
+        />
         <ButtonClose type="button" onClick={onClose} />
       </div>
     </>

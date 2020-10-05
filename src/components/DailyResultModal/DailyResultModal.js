@@ -1,29 +1,58 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from '../ModalContent/ModalContent.module.css';
 import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
+import cigSelector from '../../redux/cigarettes/cigarettesSelector';
+import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 
+////----------------------------------------------------------
 function DailyResultModal({ onClose }) {
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
+
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
   const handleInputChange = e => {
     const { value } = e.target;
     setAmount(value);
   };
+
+  const cigarettesStartedAt = useSelector(
+    cigSelector.getCigarettesDataStartedAt,
+  );
+  const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
+
+  const today = new Date();
+  const parseStartedAt = new Date(cigarettesStartedAt);
+  const dif = Math.floor(
+    (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
+  );
+
+  // useEffect(() => {
+  //   if (cigarettesArray) {
+  //     checkSigaretteStatiscs(cigarettesArray, dif);
+  //     console.log(checkSigaretteStatiscs(cigarettesArray, dif));
+  //   }
+  //   // return () => {
+  //   //   cleanup
+  //   // }
+  // }, [cigarettesArray, dif]);
+
   const onSubmit = e => {
     e.preventDefault();
-    console.log('hi');
     dispatch(
       cigarettesOperation.postDayCigarettes({
-        startedAt: '2020-09-15T09:11:03.448Z',
-        data: [12, 3, 1, 2, 13],
+        startedAt: cigarettesStartedAt,
+        data: checkSigaretteStatiscs(cigarettesArray, dif, Number(amount)),
       }),
     );
+    onClose();
   };
+
   return (
     <div className={styles.modalWrapper}>
       <h2 className={styles.modalTitleCustom}>
@@ -62,14 +91,9 @@ function DailyResultModal({ onClose }) {
               label={'Сохранить'}
             />
           </div>
-        </div>{' '}
+        </div>
         <ButtonClose type="button" onClick={onClose} />
       </form>
-      {/* 
-      <button type="button" onClick={onClose}>
-        Отмена
-      </button>
-      <button type="submit">Сохранить</button> */}
     </div>
   );
 }

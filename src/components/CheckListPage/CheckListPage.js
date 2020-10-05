@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import dateSelector from '../../redux/date/dateSelector';
 import habitsSelector from '../../redux/habits/habitsSelector';
-import DailyResultModal from '../DailyResultModal/DailyResultModal';
-import ItemHabit from './ItemHabit';
-import Button from '../UIcomponents/Button/Button';
-import s from './CheckListPage.module.css';
+import habitsOperation from '../../redux/habits/habitsOperation';
 
-const generateColor = () => {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
+import DailyResultModal from '../DailyResultModal/DailyResultModal';
+import { CheckListPageHeader } from './CheckListPageHeader/CheckListPageHeader';
+import ItemHabit from './ItemHabit';
+// import Button from '../UIcomponents/Button/Button';
+import s from './CheckListPage.module.css';
+import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
+import { Scroll } from '../Scroll/Scroll';
 
 class CheckListPage extends Component {
-  state = { showModal: false };
+  state = { showModal: false, updata: false };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.items !== null && this.props.items.length > 0) {
+      if (prevState.updata === false) {
+        this.props.setHabitsData(this.props.items, this.props.currentDate);
+        this.setState({ updata: true });
+      }
+    }
+  }
+
   toggleModal = () => {
     this.setState({ showModal: true });
   };
@@ -24,7 +36,13 @@ class CheckListPage extends Component {
     const { items } = this.props;
     return (
       <>
-        <div className={s.headerContainer}>
+        <Scroll
+          staticComponentBefore={CheckListPageHeader}
+          scrolledComponent={HabitsListInHome}
+          toggleModal={this.toggleModal}
+        />
+        {/* <CheckListPageHeader toggleModal={this.toggleModal} /> */}
+        {/* <div className={s.headerContainer}>
           <h2 className={s.header}>Чек-лист привычек</h2>
           <Button
             type={'button'}
@@ -32,20 +50,23 @@ class CheckListPage extends Component {
             handelClick={this.toggleModal}
             label={'+ Сигареты за сегодня'}
           />
-        </div>
-        <div className={s.container}>
+        </div> */}
+        {/* <HabitsListInHome /> */}
+
+        {/* <div className={s.container}>
           <ul className={s.list}>
             {items.map(item => (
               <li
                 key={item._id}
                 className={s.item}
-                style={{ borderLeftColor: generateColor() }}
+                style={{ borderLeftColor: item.habitColor }}
               >
                 <ItemHabit {...item} />
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
+
         {this.state.showModal && (
           <DailyResultModal onClose={this.closeModal}></DailyResultModal>
         )}
@@ -56,6 +77,11 @@ class CheckListPage extends Component {
 
 const mapStateToProps = state => ({
   items: habitsSelector.getFilterHabits(state),
+  currentDate: dateSelector.getCurrentDate(state),
 });
 
-export default connect(mapStateToProps)(CheckListPage);
+const mapDispatchToprops = {
+  setHabitsData: habitsOperation.setHabitsData,
+};
+
+export default connect(mapStateToProps, mapDispatchToprops)(CheckListPage);

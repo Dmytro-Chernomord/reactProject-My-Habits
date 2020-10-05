@@ -6,6 +6,11 @@ import authAction from './auth/authAction';
 import habitsActions from './habits/habitsAction';
 import quizActions from './quiz/quizActions';
 import userActions from './user/userActions';
+import generateColor from '../helpers/generateHabitsColor';
+import cigarettesActions from './cigarettes/cigarettesActions';
+
+const upData = (state, { payload }) =>
+  state.map(el => (el._id === payload._id ? (el = { ...el, ...payload }) : el));
 
 const userInitialState = {
   firstName: '',
@@ -51,12 +56,23 @@ const RootReducer = createReducer(userInitialState, {
 
 const habitsReducer = createReducer([], {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
-    return actions.payload.habits;
+    const coloredArrHabits = actions.payload.habits.map(habit => ({
+      ...habit,
+      habitColor: generateColor(),
+    }));
+    return coloredArrHabits;
   },
-  [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
+
+  [actions.addHabitSuccess]: (state, action) => [
+    ...state,
+    { ...action.payload, habitColor: generateColor() },
+  ],
   [habitsActions.removeHabitSuccess]: (state, action) =>
     state.filter(habit => habit._id !== action.payload),
   [authAction.logoutSuccess]: () => [],
+  [habitsActions.newHabitsArray]: (state, actions) =>
+    state.filter(habit => habit._id !== actions.payload),
+  [habitsActions.setHabitsDataSuccess]: upData,
 });
 
 const cigarettesInitialStates = {
@@ -66,6 +82,9 @@ const cigarettesInitialStates = {
 const cigarettesReducer = createReducer(cigarettesInitialStates, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return { ...actions.payload.user.cigarettes };
+  },
+  [cigarettesActions.cigarettesAddSuccess]: (state, actions) => {
+    return { ...state, data: [...actions.payload] };
   },
   [authAction.logoutSuccess]: () => cigarettesInitialStates,
 });
@@ -137,6 +156,10 @@ const loadingReducer = createReducer(false, {
   [authAction.logoutRequest]: () => true,
   [authAction.logoutSuccess]: () => false,
   [authAction.logoutError]: () => false,
+
+  [habitsActions.setHabitsDataRequest]: () => true,
+  [habitsActions.setHabitsDataSuccess]: () => false,
+  [habitsActions.setHabitsDataError]: () => false,
 
   [habitsActions.removeHabitRequest]: () => true,
   [habitsActions.removeHabitSuccess]: () => false,
