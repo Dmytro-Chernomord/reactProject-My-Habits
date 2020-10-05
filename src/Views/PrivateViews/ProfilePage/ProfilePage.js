@@ -12,6 +12,7 @@ import userSelector from '../../../redux/user/userSelector';
 import Subscriptions from '../SubscriptionsViews/Subscriptions';
 import ChangePassword from '../../../components/ChangePassword/ChangePassword';
 import ProfileForm from '../../../components/ProfileForm/ProfileForm';
+import subCss from '../../PrivateViews/SubscriptionsViews/Subscriptions.module.css';
 
 function ProfilePage({ match, location, toggleModal, changeLayout }) {
   const [showAvatars, setShowAvatars] = useState(false);
@@ -33,7 +34,27 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
       setShowSubscriptions(false);
     }
   }, [location.pathname]);
+  const changeColor = () => {
+    switch (subscription) {
+      case 'Noob':
+        return subCss.Noob;
 
+      case 'Basic':
+        return subCss.Basic;
+
+      case 'Standart':
+        return subCss.Standart;
+
+      case 'Premium':
+        return subCss.Premium;
+
+      case 'Ultra':
+        return subCss.Ultra;
+
+      default:
+        return subCss.styleSubscpt;
+    }
+  };
   return (
     <>
       {showSubscriptions ? (
@@ -85,7 +106,6 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
 
                   <div className={styles.boxAvatar}>
                     <AvatarUser width="108" />
-
                     <NavLink
                       exact
                       to={`${match.url}/avatars`}
@@ -94,12 +114,9 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                     >
                       Выбрать другой аватар
                     </NavLink>
-
-                    {subscription === '' ? (
-                      <p className={styles.typeSubscription}>Basic</p>
-                    ) : (
-                      <p className={styles.typeSubscription}>{subscription}</p>
-                    )}
+                    <div className={styles.subDiv}>
+                      <p className={changeColor()}>{subscription}</p>
+                    </div>
 
                     <NavLink
                       exact
