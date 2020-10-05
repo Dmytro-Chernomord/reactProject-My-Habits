@@ -11,6 +11,7 @@ import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const checkSigaretteStatiscs = (cigarettesArray, dif) => {
   let result = [];
+  //получение данных с инпута
   const testValue = 3;
   for (let i = 0; i < 21; i++) {
     const element = cigarettesArray[i];
@@ -32,16 +33,17 @@ const checkSigaretteStatiscs = (cigarettesArray, dif) => {
         continue;
       }
       if (element === null) {
+        // тоже выводить модалку с вопросом курил ли он сегодня
         result.push(testValue);
         continue;
       }
     }
-    if (typeof cigarettesArray[dif] === 'number' && i === dif) {
-      // cigarettesArray[dif] = cigarettesArray[dif] + testInputValue;
-      console.log('iz for');
-      // const a = cigarettesArray[dif] - 3;
-      // return result;
-    }
+    // if (typeof cigarettesArray[dif] === 'number' && i === dif) {
+    //   // cigarettesArray[dif] = cigarettesArray[dif] + testInputValue;
+    //   console.log('iz for');
+    //   // const a = cigarettesArray[dif] - 3;
+    //   // return result;
+    // }
     if (element !== undefined) {
       result.push(element);
     }
@@ -65,6 +67,7 @@ function DailyResultModal({ onClose }) {
     dispatch(
       cigarettesOperation.postDayCigarettes({
         startedAt: '2020-09-28T09:11:03.448Z',
+        //заменить на result из checkSigaretteStatiscs
         data: [12, 3, 3, null, 13, 6, null, 10, 1, 11, 1, 13, 12, 43, 34, 34],
       }),
     );
@@ -85,7 +88,7 @@ function DailyResultModal({ onClose }) {
   console.log('dif', cigarettesArray[dif]);
   const cigToday = cigarettesArray[0];
 
-  console.log('zigaretHeute', cigToday);
+  console.log('сигарет сегодня', cigToday);
   console.log('dif', dif);
   useEffect(() => {
     if (cigarettesArray) {
