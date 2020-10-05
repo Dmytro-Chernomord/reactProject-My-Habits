@@ -69,7 +69,43 @@
 .modalList {
   list-style: none;
   max-height: 340px;
-  overflow: scroll;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0 10px;
+  width: 452px;
+  margin: 0 auto;
+}
+
+.modalList:hover {
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+}
+
+.modalList::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+}
+
+.modalList::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: transparent;
+  -webkit-box-shadow: 0 0 1px transparent;
+}
+.modalList:hover::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+
+  background: -webkit-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: -moz-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+}
+.modalList:hover::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
 }
 
 .modalItemDisabled {
