@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import habitsOperation from '../../redux/habits/habitsOperation';
@@ -333,6 +333,17 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const deleteHabit = () => {
     dispatch(habitsOperation.removeHabit(info._id));
   };
+
+  const habits = useSelector(state => state.habits);
+  console.log(habits);
+  const ref = useRef(habits.length);
+  console.log(ref);
+  // console.log('cl', habits[habits.length - 1]._id === ref.current);
+
+  useEffect(() => {
+    console.log(ref.current === habits.length);
+    ref.current !== habits.length && onClick();
+  }, [habits, onClick]);
 
   return (
     <div className={styles.modalWrapper}>
