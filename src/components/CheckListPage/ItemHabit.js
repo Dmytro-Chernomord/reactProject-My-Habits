@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import ProgressBar from '../UIcomponents/ProgressBar/ProgressBar';
 import CustomHabitModal from '../CustomHabbitModal/CustomHabbitModal';
+import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
 
 class ItemHabit extends Component {
@@ -11,14 +12,26 @@ class ItemHabit extends Component {
     enabled: false,
     data: [],
     showModal: false,
+    habitSuccess: false,
+    flagForCongratModalOpen: false,
   };
 
   toggleModal = () => {
     this.setState({ showModal: true });
   };
 
+  onHabitSuccess = () => {
+    this.setState({ habitSuccess: true });
+  };
+
+  onRepeatHabit = () => {
+    this.setState({ habitSuccess: false });
+    this.setState({ showModal: true });
+  };
+
   closeModal = () => {
     this.setState({ showModal: false });
+    this.setState({ habitSuccess: false });
   };
 
   componentDidMount = (key = 0) => {
@@ -62,7 +75,13 @@ class ItemHabit extends Component {
           disabled={stateBut1}
           style={{ backgroundColor: color1 }}
           className={s.button1}
-          onClick={this.show}
+          onClick={() => {
+            this.show();
+            this.props.settingHabit(_id);
+            if (this.state.flagForCongratModalOpen) {
+              this.onHabitSuccess();
+            }
+          }}
         >
           "+"
         </button>
@@ -105,14 +124,15 @@ class ItemHabit extends Component {
           <CustomHabitModal
             data={habitData}
             onClose={this.closeModal}
-            ableToDelete={true}
-          >
-            {/* <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          /> */}
-          </CustomHabitModal>
+            ableToDelete={!this.state.flagForCongratModalOpen}
+          ></CustomHabitModal>
+        )}
+        {this.state.habitSuccess && (
+          <CongratulationModal
+            data={habitData}
+            onClose={this.closeModal}
+            onRepeat={this.onRepeatHabit}
+          />
         )}
       </>
     );
