@@ -18,9 +18,7 @@ class CheckListPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.items !== null && this.props.items.length > 0) {
       if (prevState.updata === false) {
-        //todo закоментировано чтоб не пугать
-        // решить проблему перерендера
-        // this.props.setHabitsData(this.props.items, this.props.currentDate);
+        this.props.setHabitsData(this.props.items, this.props.currentDate);
         this.setState({ updata: true });
       }
     }
