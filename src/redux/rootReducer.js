@@ -5,6 +5,7 @@ import modalAction from './modal/modalActions';
 import authAction from './auth/authAction';
 import habitsActions from './habits/habitsAction';
 import quizActions from './quiz/quizActions';
+import userActions from './user/userActions';
 
 const userInitialState = {
   firstName: '',
@@ -114,6 +115,9 @@ const errorReducer = createReducer(null, {
   [quizActions.quizAddError]: () => true,
   [quizActions.quizAddRequest]: () => false,
   [quizActions.quizAddSuccess]: () => false,
+  [userActions.addHabitError]: () => true,
+  [userActions.addHabitRequest]: () => false,
+  [userActions.addHabitSuccess]: () => false,
 });
 
 const loadingReducer = createReducer(false, {
