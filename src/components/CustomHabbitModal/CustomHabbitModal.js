@@ -290,13 +290,13 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const [iteration, setIteration] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
-  const onSubmit = useCallback(
+  const onSubmitAdd = useCallback(
     habit => dispatch(userOperations.addHabit(habit)),
     [dispatch],
   );
   const piece = startDate.toISOString().slice(0, 11);
   const planningTime = piece + time + ':00.000Z';
-
+  // console.log(data.data);
   const handleInputChange = e => {
     const { name, value } = e.target;
 
@@ -322,10 +322,21 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
     }
   };
 
+  const [id, setId] = useState(ableToDelete ? data._id : '');
+  const [dailyData, setDailyData] = useState(ableToDelete ? data.data : '');
+
+  const onSubmitUpdate = useCallback(
+    habit => dispatch(habitsOperation.updateHabit(habit)),
+    [dispatch],
+  );
+
   const handleFormSubmit = e => {
     e.preventDefault();
-    const data = { name, planningTime, iteration };
-    onSubmit(data);
+    const dataForFetch = ableToDelete
+      ? { id, name, data: dailyData }
+      : { name, planningTime, iteration };
+
+    ableToDelete ? onSubmitUpdate(dataForFetch) : onSubmitAdd(dataForFetch);
 
     // resetForm();
   };

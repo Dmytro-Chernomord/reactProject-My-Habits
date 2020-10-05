@@ -73,6 +73,7 @@ export default function HabitsList() {
           addData={setCustomModalData}
           goBack={returnToChoiseModal}
           onChooseHabit={onChooseHabit}
+          onClose={closeAllModals}
           onClick={() => {
             closeAllModals();
           }}
