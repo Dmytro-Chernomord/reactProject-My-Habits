@@ -9,10 +9,6 @@ import s from './CheckListPage.module.css';
 import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
 import { Scroll } from '../Scroll/Scroll';
 
-const generateColor = () => {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
-
 class CheckListPage extends Component {
   state = { showModal: false };
   toggleModal = () => {
@@ -50,7 +46,7 @@ class CheckListPage extends Component {
               <li
                 key={item._id}
                 className={s.item}
-                style={{ borderLeftColor: generateColor() }}
+                style={{ borderLeftColor: item.habitColor }}
               >
                 <ItemHabit {...item} />
               </li>

@@ -6,6 +6,7 @@ import authAction from './auth/authAction';
 import habitsActions from './habits/habitsAction';
 import quizActions from './quiz/quizActions';
 import userActions from './user/userActions';
+import generateColor from '../helpers/generateHabitsColor';
 
 const userInitialState = {
   firstName: '',
@@ -51,9 +52,16 @@ const RootReducer = createReducer(userInitialState, {
 
 const habitsReducer = createReducer([], {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
-    return actions.payload.habits;
+    const coloredArrHabits = actions.payload.habits.map(habit => ({
+      ...habit,
+      habitColor: generateColor(),
+    }));
+    return coloredArrHabits;
   },
-  [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
+  [actions.addHabitSuccess]: (state, action) => [
+    ...state,
+    { ...action.payload, habitColor: generateColor() },
+  ],
   [habitsActions.removeHabitSuccess]: (state, action) =>
     state.filter(habit => habit._id !== action.payload),
   [authAction.logoutSuccess]: () => [],
