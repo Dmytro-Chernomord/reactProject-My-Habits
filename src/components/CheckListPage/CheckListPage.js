@@ -6,10 +6,6 @@ import ItemHabit from './ItemHabit';
 import Button from '../UIcomponents/Button/Button';
 import s from './CheckListPage.module.css';
 
-const generateColor = () => {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
-
 class CheckListPage extends Component {
   state = { showModal: false };
   toggleModal = () => {
@@ -39,7 +35,7 @@ class CheckListPage extends Component {
               <li
                 key={item._id}
                 className={s.item}
-                style={{ borderLeftColor: generateColor() }}
+                style={{ borderLeftColor: item.habitColor }}
               >
                 <ItemHabit {...item} />
               </li>

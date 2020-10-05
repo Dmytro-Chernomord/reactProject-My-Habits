@@ -47,8 +47,8 @@ export default function HabitsList() {
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <ul className={styles.habitsList}>
-          {habits.map(({ _id, name }) => (
-            <HabitsListItem key={_id} text={name} />
+          {habits.map(({ _id, name, habitColor }) => (
+            <HabitsListItem key={_id} text={name} habitColor={habitColor} />
           ))}
         </ul>
       </div>
