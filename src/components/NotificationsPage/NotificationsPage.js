@@ -54,7 +54,7 @@ export default function Notifications() {
   const daysLeft = habits.map(el => el.filter(elm => elm === null));
   const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
   const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
-  const halfWayTrough = daysLeft.some(el => el.length === 10);
+  const halfWayTrough = daysLeft.some(el => el.length > 10);
 
   const presentActiveDays = activeDays.filter(elm => elm.length > 0);
 
@@ -78,21 +78,20 @@ export default function Notifications() {
     if (ref.current === count && youCanDoBetter) {
       setCount(prevCount => prevCount + 1);
     }
-
-    if (ref.current === count && halfWayTrough) {
-      setCount(prevCount => prevCount + 1);
-    }
-    if (ref.current === count && oneDayLeft) {
-      setCount(prevCount => prevCount + 1);
-    }
     if (ref.current === count && youHaveFiveDaysLeft) {
       setCount(prevCount => prevCount + 1);
     }
     if (ref.current === count && youHaveThreeDaysLeft) {
       setCount(prevCount => prevCount + 1);
     }
+    if (ref.current === count && oneDayLeft) {
+      setCount(prevCount => prevCount + 1);
+    }
+    if (ref.current === count && halfWayTrough) {
+      setCount(prevCount => prevCount + 1);
+    }
     return () => {};
-  }, [count, halfWayTrough, oneDayLeft, ref, youCanDoBetter, youGotAchievment, youHaveFiveDaysLeft, youHaveThreeDaysLeft]);
+  }, [ref, youGotAchievment, youCanDoBetter, count, youHaveFiveDaysLeft, youHaveThreeDaysLeft, oneDayLeft, halfWayTrough]);
 
   console.log(count);
   console.log(ref);

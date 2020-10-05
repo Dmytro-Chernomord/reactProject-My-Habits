@@ -77,7 +77,7 @@ export const onFilterHabits = (date, habits) => {
         }
         break;
       default:
-        console.log('error type iteration');
+        console.log('error type iteration', el.name);
     }
     /// вытягиваем статус привычки из массива data по индексу
     const indexOfCompletedData = habitsDates.indexOf(date); // возвращает индекс, под которым находится выбранная дата в массиве дат привычки(0-20), или -1

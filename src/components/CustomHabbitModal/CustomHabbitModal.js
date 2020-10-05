@@ -297,9 +297,11 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const { register, errors, handleSubmit, control } = useForm({
     mode: 'onChange',
   });
+
   const name = ableToDelete ? info.name : habitName;
   const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
   const startDate = new Date();
+
 
   // const resetForm = () => {
   //   setName('');

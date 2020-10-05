@@ -1,31 +1,64 @@
 import axios from 'axios';
 import habitsAction from './habitsAction';
-// import userOperation from '../user/userOperation';
 
-// const sendData = ({ id, name, data }, index, key = false) => {
-//   const newData = data;
-//   newData[index] = key;
-//   return {
-//     id: id,
-//     name: name,
-//     data: newData,
-//   };
-// };
+const setHabitsDataDay = (item, key, index) => dispatch => {
+  const newData = [];
+  for (let i = 0; i < 21; i++) {
+    newData[i] = i === index ? key : item.data[i];
+  }
 
-const setData = data => dispatch => {
-  // dispatch(habitsAction.setHabitsDataRequest());
+  dispatch(habitsAction.setHabitsDataRequest());
   axios
-    .patch('/habits', {
-      id: '5f74b4af9394970017f7a655',
-      name: 'Test water',
-      data: [true, null, false, true, null, null],
+    .patch(`/habits`, { id: item._id, name: item.name, data: newData })
+    .then(res => {
+      // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+      dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
     })
-    .then(res => console.log(res.data))
-    .catch(error => console.log(error));
+    .catch(err => dispatch(habitsAction.setHabitsDataError(err)));
 };
 
-const setSetting = id => dispatch => {
-  // console.log('id', id);
+const setHabitsData = (items, date) => dispatch => {
+  const nowDate = date.slice(0, 10);
+  items.forEach(item => {
+    const index = item.habitsDates.findIndex(el => el === nowDate);
+    const newData = [];
+    for (let i = 0; i < 21; i++) {
+      newData[i] = null;
+    }
+    for (let i = 0; i < index; i++) {
+      item.data[i] === null
+        ? (newData[i] = false)
+        : (newData[i] = item.data[i]);
+    }
+    newData[index] = item.data[index];
+
+    dispatch(habitsAction.setHabitsDataRequest());
+    axios
+      .patch(`/habits`, { id: item._id, name: item.name, data: newData })
+      .then(res => {
+        // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+        dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
+      })
+      .catch(err => dispatch(habitsAction.setHabitsDataError(err)));
+  });
+  // const nowDate = date.slice(0, 10);
+  // const index = item.habitsDates.findIndex(el => el === nowDate);
+  // const newData = [];
+  // for (let i = 0; i < 21; i++) {
+  //   newData[i] = null;
+  // }
+  // for (let i = 0; i < index; i++) {
+  //   item.data[i] === null ? (newData[i] = false) : (newData[i] = item.data[i]);
+  // }
+
+  // dispatch(habitsAction.setHabitsDataRequest());
+  // axios
+  //   .patch(`/habits`, { id: item._id, name: item.name, data: newData })
+  //   .then(res => {
+  //     dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+  //     dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
+  //   })
+  //   .catch(err => dispatch(habitsAction.setHabitsDataError(err)));
 };
 
 const removeHabit = id => dispatch => {
@@ -44,7 +77,7 @@ const updateHabit = data => dispatch => {
     .patch('/habits', data)
     .then(res => {
       // const dispatch = useDispatch();
-      dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
+      // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
       // console.log(res.data.updatedHabit._id);
       dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
     })
@@ -54,4 +87,4 @@ const updateHabit = data => dispatch => {
     });
 };
 
-export default { setData, setSetting, removeHabit, updateHabit };
+export default { setHabitsDataDay, setHabitsData, removeHabit, updateHabit };

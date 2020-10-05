@@ -9,6 +9,9 @@ import userActions from './user/userActions';
 import generateColor from '../helpers/generateHabitsColor';
 import cigarettesActions from './cigarettes/cigarettesActions';
 
+const upData = (state, { payload }) =>
+  state.map(el => (el._id === payload._id ? (el = { ...el, ...payload }) : el));
+
 const userInitialState = {
   firstName: '',
   lastName: '',
@@ -59,6 +62,7 @@ const habitsReducer = createReducer([], {
     }));
     return coloredArrHabits;
   },
+
   [actions.addHabitSuccess]: (state, action) => [
     ...state,
     { ...action.payload, habitColor: generateColor() },
@@ -68,11 +72,7 @@ const habitsReducer = createReducer([], {
   [authAction.logoutSuccess]: () => [],
   [habitsActions.newHabitsArray]: (state, actions) =>
     state.filter(habit => habit._id !== actions.payload),
-  [habitsActions.setHabitsDataSuccess]: (state, action) => {
-    console.log(action.payload);
-    console.log(state);
-    return [...state, action.payload];
-  },
+  [habitsActions.setHabitsDataSuccess]: upData,
 });
 
 const cigarettesInitialStates = {
@@ -151,6 +151,10 @@ const loadingReducer = createReducer(false, {
   [authAction.logoutRequest]: () => true,
   [authAction.logoutSuccess]: () => false,
   [authAction.logoutError]: () => false,
+
+  [habitsActions.setHabitsDataRequest]: () => true,
+  [habitsActions.setHabitsDataSuccess]: () => false,
+  [habitsActions.setHabitsDataError]: () => false,
 
   [habitsActions.removeHabitRequest]: () => true,
   [habitsActions.removeHabitSuccess]: () => false,
