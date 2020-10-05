@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import dateSelector from '../../redux/date/dateSelector';
 import habitsSelector from '../../redux/habits/habitsSelector';
+import habitsOperation from '../../redux/habits/habitsOperation';
+
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import ItemHabit from './ItemHabit';
 import Button from '../UIcomponents/Button/Button';
@@ -11,7 +14,17 @@ const generateColor = () => {
 };
 
 class CheckListPage extends Component {
-  state = { showModal: false };
+  state = { showModal: false, updata: false };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.items !== null && this.props.items.length > 0) {
+      if (prevState.updata === false) {
+        this.props.setHabitsData(this.props.items, this.props.currentDate);
+        this.setState({ updata: true });
+      }
+    }
+  }
+
   toggleModal = () => {
     this.setState({ showModal: true });
   };
@@ -58,6 +71,11 @@ class CheckListPage extends Component {
 
 const mapStateToProps = state => ({
   items: habitsSelector.getFilterHabits(state),
+  currentDate: dateSelector.getCurrentDate(state),
 });
 
-export default connect(mapStateToProps)(CheckListPage);
+const mapDispatchToprops = {
+  setHabitsData: habitsOperation.setHabitsData,
+};
+
+export default connect(mapStateToProps, mapDispatchToprops)(CheckListPage);

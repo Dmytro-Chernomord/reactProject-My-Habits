@@ -10,9 +10,6 @@ import s from './ItemHabit.module.css';
 
 class ItemHabit extends Component {
   state = {
-    index: -1,
-    enabled: false,
-    data: [],
     showModal: false,
     habitSuccess: false,
     flagForCongratModalOpen: false,
@@ -36,51 +33,32 @@ class ItemHabit extends Component {
     this.setState({ habitSuccess: false });
   };
 
-  componentDidMount = () => {
-    const nowDate = this.props.currentDate.slice(0, 10);
-    const key = this.props.habitsDates.findIndex(el => el === nowDate);
-    this.setState({
-      index: key,
-      enabled: this.props.data[key] == null ? false : true,
-      data: this.props.data,
-    });
+  getIndex = () => {
+    const nowDate = this.props.selectedDate.slice(0, 10);
+    return this.props.habitsDates.findIndex(el => el === nowDate);
   };
 
-  show = () => {
-    this.setState({ enabled: !this.state.enabled });
-  };
-
-  countDataSuccess = data => {
-    return data.filter(el => el === true).length;
-  };
-
-  countDataSkip = data => {
-    return data.filter(el => el === false).length;
+  countData = (data, key) => {
+    return data.filter(el => el === key).length;
   };
 
   render() {
-    const {
-      name,
-      efficiency,
-      _id,
-      iteration,
-      planningTime,
-      currentDate,
-    } = this.props;
-    const { data, index, enabled } = this.state;
+    const { name, efficiency, _id, iteration, data, planningTime } = this.props;
     const habitData = { _id, name, iteration, planningTime };
+
+    const index = this.getIndex();
+    const enabled = data[index] === null ? false : true;
 
     const stateBut1 = data[index] === true ? true : false;
     const stateBut2 = data[index] === false ? true : false;
     const color1 = stateBut1 && '#43D190';
     const color2 = stateBut2 && '#FE6083';
-
     return (
       <>
         <h3 className={s.title}>{name}</h3>
         <ProgressBar completed={efficiency} />
         <span className={s.progressNumber}>{efficiency}%</span>
-        <span>{this.state.index}</span>
+        <span>{index}</span>
         <p className={s.text}>Прогресс привития привычки</p>
 
         <button
@@ -88,8 +66,7 @@ class ItemHabit extends Component {
           style={{ backgroundColor: color1 }}
           className={s.button1}
           onClick={() => {
-            this.show();
-            this.props.setHabitsData(this.props, currentDate);
+            this.props.setHabitsDataDay(this.props, true, index);
             if (this.state.flagForCongratModalOpen) {
               this.onHabitSuccess();
             }
@@ -101,7 +78,9 @@ class ItemHabit extends Component {
           disabled={stateBut2}
           style={{ backgroundColor: color2 }}
           className={s.button2}
-          onClick={this.show}
+          onClick={() => {
+            this.props.setHabitsDataDay(this.props, false, index);
+          }}
         >
           "-"
         </button>
@@ -121,12 +100,14 @@ class ItemHabit extends Component {
               <div>
                 <p className={s.text}>К-во выполненных дней</p>
                 <samp className={s.numberGreen}>
-                  {this.countDataSuccess(data)}
+                  {this.countData(data, true)}
                 </samp>
               </div>
               <div>
                 <p className={s.text}>К-во пропущенных дней</p>
-                <samp className={s.numberRed}>{this.countDataSkip(data)}</samp>
+                <samp className={s.numberRed}>
+                  {this.countData(data, false)}
+                </samp>
               </div>
             </div>
           </>
@@ -151,11 +132,11 @@ class ItemHabit extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentDate: dateSelector.getCurrentDate(state),
+  selectedDate: dateSelector.getSelectedDate(state),
 });
 
 const mapDispatchToprops = {
-  setHabitsData: habitsOperation.setHabitsData,
+  setHabitsDataDay: habitsOperation.setHabitsDataDay,
 };
 
 export default connect(mapStateToProps, mapDispatchToprops)(ItemHabit);

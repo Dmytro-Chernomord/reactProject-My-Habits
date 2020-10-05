@@ -298,7 +298,7 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   });
   const name = ableToDelete ? data.name : habitName;
   const time = ableToDelete ? data.planningTime.slice(11, 16) : '';
-  const startDate = new Date();
+  const startDate = new Date() - 1000 * 60 * 60 * 24 * 21;
 
   // const resetForm = () => {
   //   setName('');

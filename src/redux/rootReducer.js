@@ -67,10 +67,17 @@ const habitsReducer = createReducer([], {
     return actions.payload.habits;
   },
   [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
-  [habitsActions.setHabitsDataSuccess]: myLog,
+  // [habitsActions.setHabitsDataSuccess]: myLog,
   [habitsActions.removeHabitSuccess]: (state, action) =>
     state.filter(habit => habit._id !== action.payload),
   [authAction.logoutSuccess]: () => [],
+  [habitsActions.newHabitsArray]: (state, actions) =>
+    state.filter(habit => habit._id !== actions.payload),
+
+  [habitsActions.setHabitsDataSuccess]: (state, action) => [
+    ...state,
+    action.payload,
+  ],
 });
 
 const cigarettesInitialStates = {
