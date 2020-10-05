@@ -1,17 +1,20 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InputMask, { beforeMaskedStateChange } from 'react-input-mask';
 import operations from '../../../redux/user/userOperation';
 import Button from '../../Button/Button';
 import styles from '../../ChangePassword/ChangePassword.module.css';
-import InputMask from 'react-input-mask';
 
 function CardNumbInput(props) {
   return (
     <InputMask
-      mask="9999 XXXX XXXX XXXX"
+      mask={props.mask}
+      // mask="9999 XXXX XXXX XXXX"
+      defaultValue={props.ee}
       onChange={props.onChange}
       value={props.value}
       name="number"
+      onBlur={props.handleBlur}
       className={styles.input}
       placeholder={props.placeholder}
       style={{
@@ -47,6 +50,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   const [errorRequiredDate, setErrorRequiredDate] = useState(false);
   const [errorShow, setErrorShow] = useState(false);
   const [dateValid, setDateValid] = useState(null);
+  const [mask, setMask] = useState('9999/9999/9999/9999');
 
   const dispatch = useDispatch();
   const errorsState = useSelector(state => state.error);
@@ -56,6 +60,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   }, [dispatch, number, timeExpiration]);
 
   const handleNumber = ({ target: { value } }) => {
+    setMask('9999/9999/9999/9999');
     if (value.split('_').length === 17) {
       setErrorRequiredNumber(true);
       setErrorNumber(false);
@@ -69,6 +74,14 @@ const AddCreditCardForm = ({ closeForm }) => {
       setErrorShow(false);
     }
     setNumber(value);
+  };
+
+  const handleBlur = () => {
+    const num = number.split('/');
+    const xxxx = ['XXXX', 'XXXX', 'XXXX'];
+    num.splice(1, 3, ...xxxx);
+    setMask(num.join('/'));
+    setNumber(num.join('/'));
   };
 
   const handletimeExpiration = ({ target: { value } }) => {
@@ -103,8 +116,8 @@ const AddCreditCardForm = ({ closeForm }) => {
     if (monthValue > 12) {
       setDateValid('*ошибка! В году всего 12 месяцов');
       return;
-    } else if (yearValue < year) {
-      setDateValid('*ошибка!срок действия карты истек');
+    } else if (yearValue < year && dateValue.length !== 0) {
+      setDateValid('*ошибка! Cрок действия карты истек');
       return;
     } else if (yearValue === year && monthValue < month) {
       setDateValid('*ошибка! Проверте срок действия карты');
@@ -112,6 +125,7 @@ const AddCreditCardForm = ({ closeForm }) => {
     } else {
       setDateValid(null);
     }
+    console.log(numberValue);
     if (numberValue.length === 0 || dateValue.length === 0) {
       setErrorShow(true);
       return;
@@ -145,7 +159,6 @@ const AddCreditCardForm = ({ closeForm }) => {
             <p className={styles.error}>*обязательные поля ввода</p>
           )}
         </div>
-
         <label className={styles.label}>
           <span className={styles.textLabelCard}>Card Number</span>
           <CardNumbInput
@@ -153,12 +166,13 @@ const AddCreditCardForm = ({ closeForm }) => {
             name="number"
             value={number}
             type="data"
+            mask={mask}
+            handleBlur={handleBlur}
             placeholder="0000 0000 0000 0000"
             required
             error={errorNumber || errorRequiredNumber}
           />
         </label>
-
         <div className={styles.boxErrorCard}>
           {errorDate && (
             <p className={styles.error}>*дата не правилого формата</p>
@@ -168,7 +182,6 @@ const AddCreditCardForm = ({ closeForm }) => {
           )}
           {dateValid && <p className={styles.error}>{dateValid}</p>}
         </div>
-
         <label className={styles.label}>
           <span className={styles.textLabelCard}>Expiration date</span>
           <ExpirationDateInput
@@ -181,6 +194,7 @@ const AddCreditCardForm = ({ closeForm }) => {
             error={errorDate || errorRequiredDate || dateValid}
           />
         </label>
+
         <div className={styles.boxErrorCard}>
           {errorShow && (
             <p className={styles.error}>*необходимо заполнить все поля</p>

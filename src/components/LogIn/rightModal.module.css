@@ -95,13 +95,11 @@
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  outline: none;
 }
 
 .RegistrationInputForm {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
 }
 
 .RegistrationPassword {
@@ -122,6 +120,8 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
+  width: 70px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   color: #4f4f4f;
@@ -129,10 +129,9 @@
 
 .RegistrationButton {
   cursor: pointer;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   width: 220px;
   height: 44px;
-  margin-bottom: 20px;
   background: #43d190;
   border-radius: 5px;
   border: #43d190 2px solid;
@@ -168,4 +167,45 @@
   font-size: 9px;
   font-weight: 400;
   color: #fe6083;
+}
+
+.boxError {
+  height: 15px;
+  margin-left: 100px;
+  text-align: start;
+}
+.boxErrorPass {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 30px;
+  padding-bottom: 2px;
+  margin-left: 100px;
+  text-align: start;
+}
+.error {
+  font-size: 12px;
+  line-height: 1.12;
+  color: #fe6083;
+  margin: 0;
+}
+
+.boxErrorMessage {
+  width: 400px;
+  margin-left: 50px;
+}
+
+.btnError {
+  display: inline;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.12;
+  color: #bdbdbd;
+  background-color: transparent;
+  border: none;
+  margin-right: 30px;
+}
+.btnError:hover {
+  color: #43d190;
 }

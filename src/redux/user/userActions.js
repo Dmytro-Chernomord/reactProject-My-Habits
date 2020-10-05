@@ -8,9 +8,13 @@ const addHabitRequest = createAction('habits/addHabitRequest');
 const addHabitSuccess = createAction('habits/addHabitSuccess');
 const addHabitError = createAction('habits/addHabitError');
 
-const addUserInfoRequest = createAction('contacts/addUserInfoRequest');
-const addUserInfoSuccess = createAction('contacts/addUserInfoSuccess');
-const addUserInfoError = createAction('contacts/addUserInfoError');
+const addUserInfoRequest = createAction('user/addUserInfoRequest');
+const addUserInfoSuccess = createAction('user/addUserInfoSuccess');
+const addUserInfoError = createAction('user/addUserInfoError');
+
+const changePasswordRequest = createAction('user/changePasswordRequest');
+const changePasswordError = createAction('user/changePasswordError');
+
 const addUserSubscriptionRequest = createAction(
   'subscription/addUserSubscriptionRequest',
 );
@@ -42,4 +46,6 @@ export default {
   addCreditCardRequest,
   addCreditCardSuccess,
   addCreditCardError,
+  changePasswordRequest,
+  changePasswordError,
 };

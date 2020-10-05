@@ -39,10 +39,11 @@ const addUserInfo = dataUser => async dispatch => {
 };
 
 const changePassword = data => async dispatch => {
+  dispatch(actions.changePasswordRequest());
   try {
     await axios.post('/auth/updatePassword', { ...data });
   } catch (error) {
-    console.log(error.message);
+    dispatch(actions.changePasswordError(error.message));
   }
 };
 const changeSubscription = data => async dispatch => {

@@ -137,6 +137,11 @@ const errorReducer = createReducer(null, {
   [userActions.addHabitError]: () => true,
   [userActions.addHabitRequest]: () => false,
   [userActions.addHabitSuccess]: () => false,
+  [userActions.changePasswordError]: () => true,
+  [userActions.changePasswordRequest]: () => false,
+  [userActions.addUserInfoError]: () => true,
+  [userActions.addUserInfoRequest]: () => false,
+  [userActions.addUserInfoSuccess]: () => false,
 });
 
 const loadingReducer = createReducer(false, {
