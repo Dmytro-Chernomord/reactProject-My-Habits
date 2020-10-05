@@ -1,13 +1,18 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ModalBackdrop from '../Modal/Modal';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import Button from '../UIcomponents/Button/Button';
+import habitsSelector from '../../redux/habits/habitsSelector';
 import habits from '../../templateHabitsList.json';
 import styles from '../ModalContent/ModalContent.module.css';
 
 function HabitTemplateModal({ onClick, addData, goBack, onChooseHabit }) {
+  const userHabits = useSelector(habitsSelector.getAllHabits);
+  const userHabitsNames = userHabits.map(({ name }) => name);
+
   return (
-    <div className={styles.modalContent}>
+    <div className={styles.modalWrapper}>
       <div className={styles.modalCenterLayout}>
         <h2 className={(styles.modalTitle, styles.modalTitleTemplate)}>
           Шаблонные привычки
@@ -16,12 +21,17 @@ function HabitTemplateModal({ onClick, addData, goBack, onChooseHabit }) {
           {habits.map(({ id, name }) => (
             <li key={id} className={styles.modalListItem}>
               <button
-                className={styles.modalItem}
+                className={
+                  userHabitsNames.includes(name)
+                    ? styles.modalItemDisabled
+                    : styles.modalItem
+                }
                 type="button"
                 onClick={() => {
                   onChooseHabit();
                   addData(name);
                 }}
+                disabled={userHabitsNames.includes(name)}
               >
                 {name}
               </button>
