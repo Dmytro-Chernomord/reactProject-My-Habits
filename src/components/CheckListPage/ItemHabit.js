@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import ProgressBar from '../UIcomponents/ProgressBar/ProgressBar';
 import CustomHabitModal from '../CustomHabbitModal/CustomHabbitModal';
+import dateSelector from '../../redux/date/dateSelector';
+
 import s from './ItemHabit.module.css';
 
 class ItemHabit extends Component {
@@ -21,7 +23,9 @@ class ItemHabit extends Component {
     this.setState({ showModal: false });
   };
 
-  componentDidMount = (key = 0) => {
+  componentDidMount = () => {
+    const nowDate = this.props.currentDate.slice(0, 10);
+    const key = this.props.habitsDates.findIndex(el => el === nowDate);
     this.setState({
       index: key,
       enabled: this.props.data[key] == null ? false : true,
@@ -42,7 +46,14 @@ class ItemHabit extends Component {
   };
 
   render() {
-    const { name, efficiency, _id, iteration, planningTime } = this.props;
+    const {
+      name,
+      efficiency,
+      _id,
+      iteration,
+      planningTime,
+      currentDate,
+    } = this.props;
     const { data, index, enabled } = this.state;
     const habitData = { _id, name, iteration, planningTime };
 
@@ -56,13 +67,20 @@ class ItemHabit extends Component {
         <h3 className={s.title}>{name}</h3>
         <ProgressBar completed={efficiency} />
         <span className={s.progressNumber}>{efficiency}%</span>
+        <span>{this.state.index}</span>
         <p className={s.text}>Прогресс привития привычки</p>
 
         <button
           disabled={stateBut1}
           style={{ backgroundColor: color1 }}
           className={s.button1}
-          onClick={this.show}
+          onClick={() => {
+            this.show();
+            if (this.state.flagForCongratModalOpen) {
+              this.onHabitSuccess();
+            }
+            this.props.setHabitsData(this.props, currentDate);
+          }}
         >
           "+"
         </button>
@@ -77,7 +95,6 @@ class ItemHabit extends Component {
 
         <button
           onClick={() => {
-            this.props.settingHabit(_id);
             this.toggleModal();
           }}
         >
@@ -119,6 +136,12 @@ class ItemHabit extends Component {
   }
 }
 
-export default connect(null, { settingHabit: habitsOperation.setSetting })(
-  ItemHabit,
-);
+const mapStateToProps = state => ({
+  currentDate: dateSelector.getCurrentDate(state),
+});
+
+const mapDispatchToprops = {
+  setHabitsData: habitsOperation.setHabitsData,
+};
+
+export default connect(mapStateToProps, mapDispatchToprops)(ItemHabit);

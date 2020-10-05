@@ -6,6 +6,19 @@ import authAction from './auth/authAction';
 import habitsActions from './habits/habitsAction';
 import quizActions from './quiz/quizActions';
 
+const myLog = (state, action) => {
+  console.log(state);
+  console.log(action.payload.updatedHabit);
+};
+
+const upData = (state, action) => {
+  state.find(habits => {
+    if (habits._id !== action.payload.updatedHabit._id) {
+      return [...habits, action.payload.updatedHabit];
+    }
+  });
+};
+
 const userInitialState = {
   firstName: '',
   lastName: '',
@@ -53,6 +66,7 @@ const habitsReducer = createReducer([], {
     return actions.payload.habits;
   },
   [actions.addHabitSuccess]: (state, action) => [...state, action.payload],
+  [habitsActions.setHabitsDataSuccess]: myLog,
   [habitsActions.removeHabitSuccess]: (state, action) =>
     state.filter(habit => habit._id !== action.payload),
   [authAction.logoutSuccess]: () => [],
@@ -128,6 +142,10 @@ const loadingReducer = createReducer(false, {
   [authAction.logoutRequest]: () => true,
   [authAction.logoutSuccess]: () => false,
   [authAction.logoutError]: () => false,
+
+  [habitsActions.setHabitsDataRequest]: () => true,
+  [habitsActions.setHabitsDataSuccess]: () => false,
+  [habitsActions.setHabitsDataError]: () => false,
 
   [habitsActions.removeHabitRequest]: () => true,
   [habitsActions.removeHabitSuccess]: () => false,

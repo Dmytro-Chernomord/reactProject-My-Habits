@@ -34,17 +34,19 @@ class CheckListPage extends Component {
           />
         </div>
         <div className={s.container}>
-          <ul className={s.list}>
-            {items.map(item => (
-              <li
-                key={item._id}
-                className={s.item}
-                style={{ borderLeftColor: generateColor() }}
-              >
-                <ItemHabit {...item} />
-              </li>
-            ))}
-          </ul>
+          {items.length > 0 && (
+            <ul className={s.list}>
+              {items.map(item => (
+                <li
+                  key={item._id}
+                  className={s.item}
+                  style={{ borderLeftColor: generateColor() }}
+                >
+                  <ItemHabit {...item} />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         {this.state.showModal && (
           <DailyResultModal onClose={this.closeModal}></DailyResultModal>
