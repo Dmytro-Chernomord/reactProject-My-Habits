@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './notification.module.css';
 import habitSelector from '../../redux/habits/habitsSelector';
@@ -6,36 +6,45 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './transition.css';
 
 export default function Notifications() {
+  const [count, setCount] = useState(0);
+
   const [isVisibleCompleted, setIsVisibleCompleted] = useState(false);
   const handleClickCompleted = () => {
     setIsVisibleCompleted(true);
+    setCount(count - 1);
   };
   const [isVisibleHalfWay, setIsVisibleHalfWay] = useState(false);
   const handleClickHalfWay = () => {
     setIsVisibleHalfWay(true);
+    setCount(count - 1);
   };
   const [isVisibleThreeDays, setIsVisibleThreeDays] = useState(false);
   const handleClickThreeDays = () => {
     setIsVisibleThreeDays(true);
+    setCount(count - 1);
   };
   const [isVisibleFiveDays, setIsVisibleFiveDays] = useState(false);
   const handleClickFiveDays = () => {
     setIsVisibleFiveDays(true);
+    setCount(count - 1);
   };
   const [isVisibleOneDay, setIsVisibleOneDay] = useState(false);
   const handleClickOneDay = () => {
     setIsVisibleOneDay(true);
+    setCount(count - 1);
   };
   const [isVisibleReminder, setIsVisibleReminder] = useState(false);
   const handleClickReminder = () => {
     setIsVisibleReminder(true);
+    setCount(count - 1);
   };
+
   const filteredHabitsData = useSelector(state =>
     habitSelector.getFilterTodayHabits(state),
   );
   const habitsData = useSelector(state => state.habits);
 
-  const habits = filteredHabitsData.map(el => el.data);
+  const habits = habitsData.map(el => el.data);
 
   const activeDays = habits.filter(el =>
     el.filter(elm => typeof elm === 'boolean'),
@@ -59,9 +68,42 @@ export default function Notifications() {
   const oneDayLeft = daysLeft.some(el => el.length === 1);
 
   const youGotAchievment = successfullDays.some(el => el.length > 20);
-  console.log(youGotAchievment);
+
+  const ref = useRef(count);
+
+  useEffect(() => {
+    if (ref.current === count && youGotAchievment) {
+      setCount(prevCount => prevCount + 1);
+    }
+    if (ref.current === count && youCanDoBetter) {
+      setCount(prevCount => prevCount + 1);
+    }
+
+    if (ref.current === count && halfWayTrough) {
+      setCount(prevCount => prevCount + 1);
+    }
+    if (ref.current === count && oneDayLeft) {
+      setCount(prevCount => prevCount + 1);
+    }
+    if (ref.current === count && youHaveFiveDaysLeft) {
+      setCount(prevCount => prevCount + 1);
+    }
+    if (ref.current === count && youHaveThreeDaysLeft) {
+      setCount(prevCount => prevCount + 1);
+    }
+    return () => {};
+  }, [count, halfWayTrough, oneDayLeft, ref, youCanDoBetter, youGotAchievment, youHaveFiveDaysLeft, youHaveThreeDaysLeft]);
+
+  console.log(count);
+  console.log(ref);
+  // useEffect(() => {
+  //   effect
+
+  // }, [input])
+
   return (
     <div className={styles.container}>
+      <h2>You have {count} notifications</h2>
       <TransitionGroup>
         {youHaveThreeDaysLeft && !isVisibleThreeDays && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
@@ -119,7 +161,12 @@ export default function Notifications() {
         )}
 
         {oneDayLeft && !isVisibleOneDay && (
-          <CSSTransition classNames="option" timeout={250} unmountOnExit>
+          <CSSTransition
+            classNames="option"
+            timeout={250}
+            in={() => setCount(count => count + 1)}
+            unmountOnExit
+          >
             <div onClick={handleClickOneDay} className={styles.box}>
               <h2 className={styles.title}>Ура!!! Остался один день.</h2>
               <p className={styles.text}>
