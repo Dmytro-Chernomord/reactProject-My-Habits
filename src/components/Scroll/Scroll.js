@@ -5,6 +5,7 @@ export const Scroll = ({
   staticComponentBefore: StaticComponentBefore,
   scrolledComponent: ScrolledComponent,
   staticComponentAfter: StaticComponentAfter,
+  isLeftBar,
   ...scrollProps
 }) => (
   <>
@@ -12,7 +13,7 @@ export const Scroll = ({
       <div>
         <StaticComponentBefore {...scrollProps} />
       </div>
-      <div className={styles.inner}>
+      <div className={isLeftBar ? styles.innerLeft : styles.inner}>
         <div>{ScrolledComponent && <ScrolledComponent {...scrollProps} />}</div>
       </div>
       <div className={styles.centered}>

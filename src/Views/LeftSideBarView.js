@@ -77,6 +77,7 @@ export default function LeftSideBarView({ match, onLogOut }) {
         staticComponentBefore={LeftSideBarStatic}
         scrolledComponent={HabitsList}
         staticComponentAfter={LeftSideBarButton}
+        isLeftBar={true}
       />
       {showChoiseModal && (
         <HabitChoiceModal
