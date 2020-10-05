@@ -23,7 +23,7 @@ export const RightSideBar = () => {
 
   return (
     <>
-      <Scroll staticComponent={Calendar} scrolledComponent={HabitsList} />
+      <Scroll staticComponentBefore={Calendar} scrolledComponent={HabitsList} />
       {showModal && (
         <InterviewModal
           notAbleToClose={true}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import habitsOperation from '../../../redux/habits/habitsOperation';
 import { ButtonRemove } from '../../UIcomponents/ButtonRemove/ButtonRemove';
 import styles from './HabitsListItem.module.css';
