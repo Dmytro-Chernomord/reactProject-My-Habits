@@ -91,6 +91,7 @@ export default function LeftSideBarView({ match, onLogOut }) {
           addData={setCustomModalData}
           goBack={returnToChoiseModal}
           onChooseHabit={onChooseHabit}
+          onClose={closeAllModals}
           onClick={() => {
             closeAllModals();
           }}
