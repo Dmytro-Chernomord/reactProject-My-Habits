@@ -4,10 +4,6 @@ import habitsSelector from '../../../redux/habits/habitsSelector';
 import ItemHabit from '../ItemHabit';
 import s from './HabitsListInHome.module.css';
 
-const generateColor = () => {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
-
 class HabitsListInHome extends Component {
   render() {
     const { items } = this.props;
@@ -18,8 +14,7 @@ class HabitsListInHome extends Component {
             <li
               key={item._id}
               className={s.item}
-              style={{ borderLeftColor: generateColor() }}
-              //   style={{ borderLeftColor: item.habitColor }}
+              style={{ borderLeftColor: item.habitColor }}
             >
               <ItemHabit {...item} />
             </li>

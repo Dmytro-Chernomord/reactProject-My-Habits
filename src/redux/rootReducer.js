@@ -7,6 +7,7 @@ import habitsActions from './habits/habitsAction';
 import quizActions from './quiz/quizActions';
 import userActions from './user/userActions';
 import generateColor from '../helpers/generateHabitsColor';
+import cigarettesActions from './cigarettes/cigarettesActions';
 
 const userInitialState = {
   firstName: '',
@@ -81,6 +82,9 @@ const cigarettesInitialStates = {
 const cigarettesReducer = createReducer(cigarettesInitialStates, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
     return { ...actions.payload.user.cigarettes };
+  },
+  [cigarettesActions.cigarettesAddSuccess]: (state, actions) => {
+    return { ...state, data: [...actions.payload] };
   },
   [authAction.logoutSuccess]: () => cigarettesInitialStates,
 });

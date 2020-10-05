@@ -9,7 +9,7 @@ const postDayCigarettes = userData => dispatch => {
     .then(response => {
       console.log(response);
 
-      dispatch(cigarettesActions.cigarettesAddSuccess(response.data));
+      dispatch(cigarettesActions.cigarettesAddSuccess(response.data.data));
     })
     .catch(error =>
       dispatch(cigarettesActions.cigarettesAddError(error.message)),
