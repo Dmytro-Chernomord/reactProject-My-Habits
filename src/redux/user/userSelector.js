@@ -5,6 +5,7 @@ const getHabits = state => state.user.habits;
 const getAvatar = state => state.user.avatar;
 const getSubscription = state => state.user.subscription;
 const getCreditCard = state => state.payments;
+const getRegisterDate = state => state.user.registerData;
 
 export default {
   getHabits,
@@ -12,4 +13,5 @@ export default {
   getAvatar,
   getSubscription,
   getCreditCard,
+  getRegisterDate,
 };

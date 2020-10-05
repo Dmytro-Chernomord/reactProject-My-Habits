@@ -5,6 +5,7 @@ import ProgressBar from '../UIcomponents/ProgressBar/ProgressBar';
 import CustomHabitModal from '../CustomHabbitModal/CustomHabbitModal';
 import dateSelector from '../../redux/date/dateSelector';
 
+import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
 
 class ItemHabit extends Component {
@@ -13,14 +14,26 @@ class ItemHabit extends Component {
     enabled: false,
     data: [],
     showModal: false,
+    habitSuccess: false,
+    flagForCongratModalOpen: false,
   };
 
   toggleModal = () => {
     this.setState({ showModal: true });
   };
 
+  onHabitSuccess = () => {
+    this.setState({ habitSuccess: true });
+  };
+
+  onRepeatHabit = () => {
+    this.setState({ habitSuccess: false });
+    this.setState({ showModal: true });
+  };
+
   closeModal = () => {
     this.setState({ showModal: false });
+    this.setState({ habitSuccess: false });
   };
 
   componentDidMount = () => {
@@ -76,10 +89,10 @@ class ItemHabit extends Component {
           className={s.button1}
           onClick={() => {
             this.show();
+            this.props.setHabitsData(this.props, currentDate);
             if (this.state.flagForCongratModalOpen) {
               this.onHabitSuccess();
             }
-            this.props.setHabitsData(this.props, currentDate);
           }}
         >
           "+"
@@ -122,14 +135,15 @@ class ItemHabit extends Component {
           <CustomHabitModal
             data={habitData}
             onClose={this.closeModal}
-            ableToDelete={true}
-          >
-            {/* <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          /> */}
-          </CustomHabitModal>
+            ableToDelete={!this.state.flagForCongratModalOpen}
+          ></CustomHabitModal>
+        )}
+        {this.state.habitSuccess && (
+          <CongratulationModal
+            data={habitData}
+            onClose={this.closeModal}
+            onRepeat={this.onRepeatHabit}
+          />
         )}
       </>
     );

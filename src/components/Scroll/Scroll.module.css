@@ -6,8 +6,37 @@
 }
 .inner {
   flex: 1;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
+.inner:hover {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+}
+.inner::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+}
+
+.inner::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: transparent;
+  -webkit-box-shadow: 0 0 1px transparent;
+}
+.inner:hover::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+
+  background: -webkit-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: -moz-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+}
+
 .centered {
   width: 220px;
   margin: 20px auto 35px;

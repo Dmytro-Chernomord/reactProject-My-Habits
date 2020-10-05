@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import LogoBox from '../components/LeftSideBar/LogoBox/LogoBox';
-import UserMenu from '../components/LeftSideBar/UserMenu/UserMenu';
-import TimeMoney from '../components/LeftSideBar/TimeMoney/TimeMoney';
-import NavigationBar from '../components/LeftSideBar/NavigationBar/NavigationBar';
+// import LogoBox from '../components/LeftSideBar/LogoBox/LogoBox';
+// import UserMenu from '../components/LeftSideBar/UserMenu/UserMenu';
+// import TimeMoney from '../components/LeftSideBar/TimeMoney/TimeMoney';
+// import NavigationBar from '../components/LeftSideBar/NavigationBar/NavigationBar';
 import HabitsList from '../components/LeftSideBar/Habits/HabitsList';
 import { Scroll } from '../components/Scroll/Scroll';
 import Button from '../components/UIcomponents/Button/Button';
 import HabitChoiceModal from '../components/HabitChoiceModal/HabitChoiceModal';
 import HabitTemplateModal from '../components/HabitTemplateModal/HabitTemplateModal';
 import CustomHabbitModal from '../components/CustomHabbitModal/CustomHabbitModal';
+import LeftSideBarStatic from '../components/LeftSideBar/LeftSideBarstatic/LeftSideBarStatic';
 
-const LeftSideBarStatic = ({ match, onLogOut }) => {
-  return (
-    <div>
-      <LogoBox />
-      <UserMenu match={match} onLogOut={onLogOut} />
-      <TimeMoney />
-      <NavigationBar match={match} />
-    </div>
-  );
-};
+// const LeftSideBarStatic = ({ match, onLogOut }) => {
+//   return (
+//     <div>
+//       <LogoBox />
+//       <UserMenu match={match} onLogOut={onLogOut} />
+//       <TimeMoney />
+//       <NavigationBar match={match} />
+//       <h2>Привычки</h2>
+//     </div>
+//   );
+// };
 
 const LeftSideBarButton = ({ handelClick }) => {
   return (
@@ -91,6 +93,7 @@ export default function LeftSideBarView({ match, onLogOut }) {
           addData={setCustomModalData}
           goBack={returnToChoiseModal}
           onChooseHabit={onChooseHabit}
+          onClose={closeAllModals}
           onClick={() => {
             closeAllModals();
           }}

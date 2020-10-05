@@ -16,7 +16,7 @@
 .timeMoneyBox {
   display: flex;
   flex-direction: column;
-  width: 125px;
+  width: 135px;
   padding: 0;
   margin: 0;
 }
@@ -40,7 +40,7 @@
   margin: 0;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 21px;
   color: #4f4f4f;
 }
