@@ -90,8 +90,21 @@ export default function Notifications() {
     if (ref.current === count && halfWayTrough) {
       setCount(prevCount => prevCount + 1);
     }
-    return () => {};
-  }, [ref, youGotAchievment, youCanDoBetter, count, youHaveFiveDaysLeft, youHaveThreeDaysLeft, oneDayLeft, halfWayTrough]);
+    return () => {
+      if (count === 1) {
+        setCount(prevCount => prevCount - 1);
+      }
+    };
+  }, [
+    ref,
+    youGotAchievment,
+    youCanDoBetter,
+    count,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+    oneDayLeft,
+    halfWayTrough,
+  ]);
 
   console.log(count);
   console.log(ref);
