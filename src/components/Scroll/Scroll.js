@@ -16,9 +16,12 @@ export const Scroll = ({
       <div className={isLeftBar ? styles.innerLeft : styles.inner}>
         <div>{ScrolledComponent && <ScrolledComponent {...scrollProps} />}</div>
       </div>
-      <div className={styles.centered}>
-        {StaticComponentAfter && <StaticComponentAfter {...scrollProps} />}
-      </div>
+
+      {StaticComponentAfter && (
+        <div className={styles.centered}>
+          <StaticComponentAfter {...scrollProps} />
+        </div>
+      )}
     </div>
   </>
 );
