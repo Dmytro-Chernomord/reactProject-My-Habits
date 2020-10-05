@@ -8,7 +8,7 @@ import InputMask from 'react-input-mask';
 function CardNumbInput(props) {
   return (
     <InputMask
-      mask="9999 9999 9999 9999"
+      mask="9999 XXXX XXXX XXXX"
       onChange={props.onChange}
       value={props.value}
       name="number"
@@ -104,7 +104,7 @@ const AddCreditCardForm = ({ closeForm }) => {
       setDateValid('*ошибка! В году всего 12 месяцов');
       return;
     } else if (yearValue < year) {
-      setDateValid('*ошибка! проверте введенный год');
+      setDateValid('*ошибка!срок действия карты истек');
       return;
     } else if (yearValue === year && monthValue < month) {
       setDateValid('*ошибка! Проверте срок действия карты');
