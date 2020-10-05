@@ -282,7 +282,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
+function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const classes = useStyles();
   // const [name, setName] = useState(ableToDelete ? data.name : habitName);
   // const [time, setTime] = useState(
@@ -296,8 +296,8 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const { register, errors, handleSubmit, control } = useForm({
     mode: 'onChange',
   });
-  const name = ableToDelete ? data.name : habitName;
-  const time = ableToDelete ? data.planningTime.slice(11, 16) : '';
+  const name = ableToDelete ? info.name : habitName;
+  const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
   const startDate = new Date();
 
   // const resetForm = () => {
@@ -309,17 +309,29 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
   const onSubmit = data => {
     const piece = data.datePicker.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
-    dispatch(
-      userOperations.addHabit({
-        name: data.name,
-        planningTime: planningTime,
-        iteration: data.iteration,
-      }),
-    );
+    console.log(ableToDelete);
+    if (ableToDelete) {
+      console.log(info);
+      dispatch(
+        habitsOperation.updateHabit({
+          id: info._id,
+          data: info.data,
+          name: data.name,
+        }),
+      );
+    } else {
+      dispatch(
+        userOperations.addHabit({
+          name: data.name,
+          planningTime: planningTime,
+          iteration: data.iteration,
+        }),
+      );
+    }
   };
 
   const deleteHabit = () => {
-    dispatch(habitsOperation.removeHabit(data._id));
+    dispatch(habitsOperation.removeHabit(info._id));
   };
 
   return (
@@ -446,12 +458,12 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, data }) {
                   <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
                 </Select>
               )}
-              rules={{
-                required: {
-                  value: true,
-                  message: '*обязательное поле ввода',
-                },
-              }}
+              // rules={{
+              //   required: {
+              //     value: true,
+              //     message: '*обязательное поле ввода',
+              //   },
+              // }}
             />
           </FormControl>
         </label>
