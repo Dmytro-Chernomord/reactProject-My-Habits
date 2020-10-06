@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 import styles from './ChangePassword.module.css';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
+import NotificationModal from '../../components/notifications/NotificationModal';
 
 const ChangePassword = ({ setShowPassword }) => {
   const [showError, setShowError] = useState(false);
@@ -25,10 +26,6 @@ const ChangePassword = ({ setShowPassword }) => {
     }
     dispatch(userOperation.changePassword({ ...data }));
     setShowError(false);
-    setShowMessage(true);
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 1000);
   };
 
   const showPassToggle = () => {
@@ -37,6 +34,10 @@ const ChangePassword = ({ setShowPassword }) => {
     } else {
       setEyePass('text');
     }
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowPassword(false);
+    }, 1000);
   };
   return (
     <div className={styles.boxFormPassword}>
@@ -144,6 +145,9 @@ const ChangePassword = ({ setShowPassword }) => {
             <span className={styles.validText}>Пароль изменён!</span>
           )}
         </div>
+        {/* <div style={{ marginBottom: '5px' }}>
+          <NotificationModal />
+        </div> */}
         <Button variety={'white'} text="Изменить пароль" />
       </form>
     </div>

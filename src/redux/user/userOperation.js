@@ -43,6 +43,7 @@ const changePassword = data => async dispatch => {
   dispatch(actions.changePasswordRequest());
   try {
     await axios.post('/auth/updatePassword', { ...data });
+    dispatch(actions.changePasswordSuccess(true));
   } catch (error) {
     dispatch(actions.changePasswordError(error.message));
   }
@@ -54,6 +55,7 @@ const changeSubscription = data => async dispatch => {
     await axios.post('/users/updateSubscription', {
       ...data,
     });
+
     dispatch(actions.addUserSubscriptionSuccess(data));
   } catch (error) {
     dispatch(actions.addUserSubscriptionError(error.message));

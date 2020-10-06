@@ -149,7 +149,11 @@ const errorsModalReducer = createReducer(null, {
   [userActions.addCreditCardError]: () => true,
   [userActions.addCreditCardRequest]: () => false,
   [userActions.addCreditCardSuccess]: () => false,
+  [userActions.changePasswordError]: () => true,
+  [userActions.changePasswordRequest]: () => false,
+  [userActions.changePasswordSuccess]: () => false,
 });
+
 const loadingReducer = createReducer(false, {
   [authAction.loginRequest]: () => true,
   [authAction.loginSuccess]: () => false,
