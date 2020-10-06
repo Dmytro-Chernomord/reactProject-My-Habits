@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
@@ -31,16 +31,6 @@ function DailyResultModal({ onClose }) {
   const dif = Math.floor(
     (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
   );
-
-  // useEffect(() => {
-  //   if (cigarettesArray) {
-  //     checkSigaretteStatiscs(cigarettesArray, dif);
-  //     console.log(checkSigaretteStatiscs(cigarettesArray, dif));
-  //   }
-  //   // return () => {
-  //   //   cleanup
-  //   // }
-  // }, [cigarettesArray, dif]);
 
   const onSubmit = e => {
     e.preventDefault();
