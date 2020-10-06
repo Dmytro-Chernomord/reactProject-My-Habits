@@ -10,28 +10,35 @@ import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
 export default function Authorization() {
   const [modalView, setmodalView] = useState(false);
   const [rightmodalView, setRightmodalView] = useState(false);
+  const [banNotification, setBanNotification] = useState(false);
 
   const changeModal = () => {
     if (!rightmodalView) {
       setmodalView(!modalView);
+      setBanNotification(true);
     } else {
       setRightmodalView(!rightmodalView);
       setmodalView(!modalView);
+      setBanNotification(true);
     }
   };
   const rightchangeModal = () => {
     if (!modalView) {
       setRightmodalView(!rightmodalView);
+      setBanNotification(true);
     } else {
       setRightmodalView(!rightmodalView);
       setmodalView(!modalView);
+      setBanNotification(true);
     }
   };
   const closeOnBackdop = event => {
     if (event.target === event.currentTarget && modalView) {
       changeModal();
+      setBanNotification(true);
     } else if (event.target === event.currentTarget && rightmodalView) {
       rightchangeModal();
+      setBanNotification(true);
     }
   };
 
@@ -112,8 +119,11 @@ export default function Authorization() {
           unmountOnExit
         >
           <div className={s.backdrop}>
-            {' '}
-            <RegisterForm changeModal={changeModal} />
+            <RegisterForm
+              changeModal={changeModal}
+              setBanNotification={setBanNotification}
+              banNotification={banNotification}
+            />
           </div>
         </CSSTransition>{' '}
         <CSSTransition
@@ -123,7 +133,11 @@ export default function Authorization() {
           unmountOnExit
         >
           <div className={styles.backdrop}>
-            <LoginForm rightchangeModal={rightchangeModal} />
+            <LoginForm
+              rightchangeModal={rightchangeModal}
+              setBanNotification={setBanNotification}
+              banNotification={banNotification}
+            />
           </div>
         </CSSTransition>
       </div>

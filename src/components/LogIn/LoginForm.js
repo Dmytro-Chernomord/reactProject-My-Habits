@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { CSSTransition } from 'react-transition-group';
 import authOperations from '../../redux/auth/authOperation';
 import styles from './Login.module.css';
 import { ReactComponent as Logo } from '../../images/homepage/svg/MakeitHabitblack.svg';
 import { ReactComponent as Svg } from '../../images/homepage/svg/Subtract.svg';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
+import { CSSTransition } from 'react-transition-group';
 import fadeStyle from '../../Views/PrivateViews/ProfilePage/FadeProfilePage.module.css';
+import NotificationLogin from '../notifications/NotificationLogin';
 
-export default function LoginForm({ rightchangeModal }) {
+export default function LoginForm({
+  rightchangeModal,
+  banNotification,
+  setBanNotification,
+}) {
   const dispatch = useDispatch();
   const errorsState = useSelector(state => state.error);
 
   const [eyepass, setEyePass] = useState('password');
-  const [email, setEmail] = useState('');
   const [showError, setShowError] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
 
+  useEffect(() => {
+    if (banNotification === false) {
+      if (errorsState === true) {
+        setShowNotification(true);
+      }
+    }
+  }, [banNotification, errorsState]);
+
   const onSubmit = data => {
-    setEmail(data.email);
     dispatch(authOperations.logIn({ ...data }));
+    setShowNotification(false);
+    setBanNotification(false);
   };
   const showPassToggle = () => {
     if (eyepass === 'text') {
@@ -32,6 +46,11 @@ export default function LoginForm({ rightchangeModal }) {
     } else {
       setEyePass('text');
     }
+  };
+
+  const onClickClose = () => {
+    setBanNotification(true);
+    setShowNotification(false);
   };
   return (
     <>
@@ -125,28 +144,23 @@ export default function LoginForm({ rightchangeModal }) {
             />
           </label>
         </div>
+
         <div className={styles.boxErrorMessage}>
-          {errorsState && (
-            <p className={styles.error}>
-              *неверный e-mail или пароль, введите другой E-mail или
-              зарегистрируйтесь.
-              <button
-                className={styles.btnError}
-                onClick={() => setShowError(prev => !prev)}
-              >
-                E-mail правильный...
-              </button>
-            </p>
-          )}
           <CSSTransition
-            in={showError}
+            in={showNotification}
             classNames={fadeStyle}
             timeout={250}
             unmountOnExit
           >
-            <p className={styles.error}>
-              Ошибка 400: извините, произошла ошибка сервера, попробуйте позже
-            </p>
+            <NotificationLogin
+              setShowError={setShowError}
+              showError={showError}
+              onClickClose={onClickClose}
+              text={
+                '*неверный e-mail или пароль, введите другой E-mail или зарегистрируйтесь.'
+              }
+              textPort="E-mail правильный..."
+            />
           </CSSTransition>
         </div>
 
@@ -158,7 +172,13 @@ export default function LoginForm({ rightchangeModal }) {
       </form>
 
       <div className={styles.LoginButtonBlock}>
-        <button onClick={rightchangeModal} className={styles.LoginButton}>
+        <button
+          onClick={() => {
+            rightchangeModal();
+            setShowNotification(false);
+          }}
+          className={styles.LoginButton}
+        >
           <p className={styles.LoginButtonTxt}>Регистрация</p>
         </button>
       </div>

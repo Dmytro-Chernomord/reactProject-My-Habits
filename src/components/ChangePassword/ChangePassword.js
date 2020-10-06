@@ -13,24 +13,22 @@ const ChangePassword = ({ setShowPassword }) => {
   const [eyepass, setEyePass] = useState('password');
 
   const dispatch = useDispatch();
-  const errorsState = useSelector(state => state.error);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
-
-  useEffect(() => {
-    setShowMessage(false);
-  }, [errorsState]);
 
   const onSubmit = data => {
     if (data.password !== data.confirmPassword) {
       setShowError(true);
       return;
     }
-    dispatch(userOperation.changePassword({ ...data, data }));
+    dispatch(userOperation.changePassword({ ...data }));
     setShowError(false);
     setShowMessage(true);
+    setTimeout(() => {
+      setShowPassword(false);
+    }, 1000);
   };
 
   const showPassToggle = () => {
@@ -146,11 +144,6 @@ const ChangePassword = ({ setShowPassword }) => {
             <span className={styles.validText}>Пароль изменён!</span>
           )}
         </div>
-        {errorsState && (
-          <p className={styles.error}>
-            *извините, произошла ошибка,пароль не изменен, попробуйте позже
-          </p>
-        )}
         <Button variety={'white'} text="Изменить пароль" />
       </form>
     </div>
