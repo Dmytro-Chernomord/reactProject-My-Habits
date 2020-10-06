@@ -13,15 +13,15 @@ import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
 import { Scroll } from '../Scroll/Scroll';
 
 class CheckListPage extends Component {
-  state = { showModal: false, updata: false };
+  state = { showModal: '', updata: false };
 
-  toggleModal = () => {
-    this.setState({ showModal: true });
+  toggleModal = value => {
+    this.setState({ showModal: value });
   };
 
-  closeModal = () => {
-    this.setState({ showModal: false });
-  };
+  // closeModal = () => {
+  //   this.setState({ showModal: false });
+  // };
 
   render() {
     const { items } = this.props;
@@ -30,7 +30,12 @@ class CheckListPage extends Component {
         <Scroll
           staticComponentBefore={CheckListPageHeader}
           scrolledComponent={HabitsListInHome}
-          toggleModal={this.toggleModal}
+          dailyModal={() => {
+            this.toggleModal('daily');
+          }}
+          // missedDays={() => {
+          //   this.toggleModal('missedDays');
+          // }}
         />
         {/* <CheckListPageHeader toggleModal={this.toggleModal} /> */}
         {/* <div className={s.headerContainer}>
@@ -58,8 +63,10 @@ class CheckListPage extends Component {
           </ul>
         </div> */}
 
-        {this.state.showModal && (
-          <DailyResultModal onClose={this.closeModal}></DailyResultModal>
+        {this.state.showModal === 'daily' && (
+          <DailyResultModal
+            onClose={() => this.toggleModal('')}
+          ></DailyResultModal>
         )}
       </>
     );

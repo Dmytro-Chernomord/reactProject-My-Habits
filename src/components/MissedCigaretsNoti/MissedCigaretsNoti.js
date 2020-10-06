@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../UIcomponents/Button/Button';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
+import CigarettesRemindModal from '../CigarettesRemindModal/CigarettesRemindModal';
 import styles from './MissedCigaretsNoti.module.css';
 // import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 
@@ -29,7 +30,9 @@ export function MissedCigaretsNoti({ amountDays, closeNoti }) {
           label={'+ за прошлые даты'}
         />
       </div>
-      {showModal && <DailyResultModal onClose={closeModal}></DailyResultModal>}
+      {showModal && (
+        <CigarettesRemindModal onClose={closeModal}></CigarettesRemindModal>
+      )}
     </div>
   );
 }

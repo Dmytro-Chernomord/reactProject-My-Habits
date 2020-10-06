@@ -12,7 +12,7 @@ import s from './CheckListPageHeader.module.css';
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-export const CheckListPageHeader = ({ toggleModal }) => {
+export const CheckListPageHeader = ({ dailyModal, missedDays }) => {
   const [missedDates, setMissedDates] = useState([]);
   const [notiIsShown, setNotiIsShown] = useState(false);
 
@@ -52,7 +52,7 @@ export const CheckListPageHeader = ({ toggleModal }) => {
       <Button
         type={'button'}
         green={false}
-        handelClick={toggleModal}
+        handelClick={dailyModal}
         label={'+ Сигареты за сегодня'}
       />
       <CSSTransition
