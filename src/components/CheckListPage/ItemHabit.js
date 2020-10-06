@@ -8,30 +8,35 @@ import dateSelector from '../../redux/date/dateSelector';
 import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
 import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
+import habitsSelector from '../../redux/habits/habitsSelector';
+
 
 class ItemHabit extends Component {
   state = {
     showModal: false,
-    habitSuccess: false,
-    flagForCongratModalOpen: false,
+    modalUpdate: false,
+    repeatHabit: false,
+    flagForCongratModalOpen: true,
+    uniqueId: '',
   };
 
-  toggleModal = () => {
-    this.setState({ showModal: true });
+  componentDidUpdate() {
+    // const data = this.props.habits.find(
+    //   habit => habit._id === this.state.uniqueId,
+    // );
+    // console.log(data.data);
+  }
+
+  openModal = data => {
+    this.setState({ showModal: data });
   };
 
-  onHabitSuccess = () => {
-    this.setState({ habitSuccess: true });
+  ableToUpdate = value => {
+    this.setState({ modalUpdate: value });
   };
 
-  onRepeatHabit = () => {
-    this.setState({ habitSuccess: false });
-    this.setState({ showModal: true });
-  };
-
-  closeModal = () => {
-    this.setState({ showModal: false });
-    this.setState({ habitSuccess: false });
+  repeatHabit = value => {
+    this.setState({ repeatHabit: value });
   };
 
   getIndex = () => {
@@ -44,6 +49,7 @@ class ItemHabit extends Component {
   };
 
   render() {
+
     const {
       name,
       efficiency,
@@ -56,6 +62,7 @@ class ItemHabit extends Component {
     } = this.props;
     // console.log('data ', data);
     // data это массив с null / true / false
+
     const habitData = { _id, name, iteration, planningTime, data };
 
     const index = this.getIndex();
@@ -125,9 +132,8 @@ class ItemHabit extends Component {
           className={s.button1}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, true, index);
-            if (this.state.flagForCongratModalOpen) {
-              this.onHabitSuccess();
-            }
+            this.openModal('congrats');
+            this.setState({ uniqueId: this.props._id });
           }}
         >
           "+"
@@ -138,6 +144,7 @@ class ItemHabit extends Component {
           className={s.button2}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, false, index);
+            this.openModal('congrats');
           }}
         >
           "-"
@@ -148,7 +155,8 @@ class ItemHabit extends Component {
           type="button"
           aria-label="settings"
           onClick={() => {
-            this.toggleModal();
+            this.ableToUpdate(true);
+            this.openModal('custom');
           }}
         ></button>
 
@@ -171,18 +179,33 @@ class ItemHabit extends Component {
             </div>
           </>
         )}
-        {this.state.showModal && (
+        {this.state.showModal === 'custom' && (
           <CustomHabitModal
             info={habitData}
-            onClose={this.closeModal}
-            ableToDelete={!this.state.flagForCongratModalOpen}
+            onClose={() => {
+              this.openModal('');
+              this.repeatHabit(false);
+            }}
+            ableToDelete={this.state.modalUpdate}
+            repeatHabit={this.state.repeatHabit}
           ></CustomHabitModal>
         )}
-        {this.state.habitSuccess && (
+        {this.state.showModal === 'congrats' && (
           <CongratulationModal
             data={habitData}
-            onClose={this.closeModal}
-            onRepeat={this.onRepeatHabit}
+            onClose={() => {
+              this.openModal('');
+              this.repeatHabit(false);
+            }}
+            onRepeat={() => {
+              this.openModal('custom');
+              this.ableToUpdate(false);
+              this.repeatHabit(true);
+            }}
+            onNewHabit={() => {
+              this.openModal('custom');
+              this.ableToUpdate(false);
+            }}
           />
         )}
       </>
@@ -192,7 +215,11 @@ class ItemHabit extends Component {
 
 const mapStateToProps = state => ({
   selectedDate: dateSelector.getSelectedDate(state),
+
+  habits: habitsSelector.getAllHabits(state),
+
   currentDate: dateSelector.getCurrentDate(state),
+
 });
 
 const mapDispatchToprops = {

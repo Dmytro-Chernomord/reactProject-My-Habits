@@ -19,9 +19,10 @@ function CongratulationModal({
   data,
   addData,
   onRepeat,
+  onNewHabit,
 }) {
   return (
-    <div className={styles.modalWrapper}>
+    <div className={styles.modalWrapperGreen}>
       <div className={styles.modalCenterLayout}>
         <h2 className={(styles.modalTitle, styles.modalTitleTemplate)}>
           Поздравляем!
@@ -43,7 +44,12 @@ function CongratulationModal({
             />
           </div>
           <div>
-            <Button type={'button'} green={false} label={'Добавить новую'} />
+            <Button
+              type={'button'}
+              green={false}
+              handelClick={() => onNewHabit()}
+              label={'Добавить новую'}
+            />
           </div>
         </div>
         <ButtonClose type="button" onClick={onClick} />

@@ -12,20 +12,15 @@ const Subscriptions = () => {
   const [plan, setPlan] = useState('');
   const [disabledBtn, setDisabled] = useState(false);
   const [disabledTimer, setTimer] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
 
   const dispatch = useDispatch();
   const subscription = useSelector(selector.getSubscription);
   const RegisterDate = useSelector(selector.getRegisterDate);
 
-  let UserDateRegiste = new Date(RegisterDate);
-  // console.log(RegisterDate);
-  // console.log(UserDateRegiste);
-  // console.log(new Date(Date.now()));
-  const normalDate = Date.parse(UserDateRegiste);
-  const TimeLoop = Date.now() - normalDate;
+  const UserDateRegiste = Date.parse(RegisterDate);
 
-  const sevenDays = 653440000;
+  const TimeLoop = Date.now() - UserDateRegiste;
+  const sevenDays = 620050000;
 
   useEffect(() => {
     if (TimeLoop < sevenDays) {
@@ -59,12 +54,6 @@ const Subscriptions = () => {
     setDisabled(false);
   };
 
-  const onMouseIn = () => {
-    setShowInfo(true);
-  };
-  const onMouseLeave = () => {
-    setShowInfo(false);
-  };
   const changeColor = () => {
     switch (subscription) {
       case 'Noob':
@@ -104,7 +93,7 @@ const Subscriptions = () => {
               </div>
               <div>
                 <Countdown
-                  date={normalDate + sevenDays}
+                  date={UserDateRegiste + sevenDays}
                   onComplete={changeAfterCoundown}
                 />
               </div>
@@ -112,91 +101,75 @@ const Subscriptions = () => {
             </div>
           </>
         )}
-        <div
-          onMouseEnter={TimeLoop < sevenDays ? onMouseIn : undefined}
-          onMouseLeave={TimeLoop < sevenDays ? onMouseLeave : undefined}
-        >
-          <div className={style.subscribe}>
-            {showInfo && (
-              <div className={style.Info}>
-                Мы дарим Вам на первую неделю использования нашу лучшую
-                подписку! <br />
-                По истечению таймера Ваша подписка будет автоматически изменена
-                на Noob, или Вы сможете выбрать любую удобную Вам подписку.
-                <br /> Желаем успехов в достижении Ваших целей!
-              </div>
-            )}
-            <button
-              type="button"
-              className={
-                disabledBtn && plan === 'Noob' ? style.test : style.btnNoob
-              }
-              onClick={handleSubscription}
-            >
-              Noob
-            </button>
-            <p className={style.color}> 30 дней — $4.99</p>
-          </div>
-          <div className={style.subscribe}>
-            <button
-              type="button"
-              className={
-                disabledBtn && plan === 'Basic' ? style.test : style.btnBasic
-              }
-              onClick={handleSubscription}
-            >
-              Basic
-            </button>
-            <p className={style.color}>
-              1 месяц — $4.80 <span className={style.span}>- 3%</span>
-            </p>
-          </div>
-          <div className={style.subscribe}>
-            <button
-              type="button"
-              className={
-                disabledBtn && plan === 'Standart'
-                  ? style.test
-                  : style.btnStandart
-              }
-              onClick={handleSubscription}
-            >
-              Standart
-            </button>
-            <p className={style.color}>
-              3 месяца — $14.20 <span className={style.span}>- 5%</span>
-            </p>
-          </div>
-          <div className={style.subscribe}>
-            <button
-              type="button"
-              className={
-                disabledBtn && plan === 'Premium'
-                  ? style.test
-                  : style.btnPremium
-              }
-              onClick={handleSubscription}
-            >
-              Premium
-            </button>
-            <p className={style.color}>
-              6 месяцев — $27.84 <span className={style.span}>- 7%</span>
-            </p>
-          </div>
-          <div className={style.subscribe}>
-            <button
-              type="button"
-              className={
-                disabledBtn && plan === 'Ultra' ? style.test : style.btnUltra
-              }
-              onClick={handleSubscription}
-            >
-              Ultra
-            </button>
-            <p className={style.color}>
-              12 месяцев — $53.89 <span className={style.span}>- 10%</span>
-            </p>
-          </div>
+        <div className={style.subscribe}>
+          <button
+            type="button"
+            className={
+              disabledBtn && plan === 'Noob' ? style.test : style.btnNoob
+            }
+            onClick={handleSubscription}
+          >
+            Noob
+          </button>
+          <p className={style.color}> 30 дней — $4.99</p>
+        </div>
+        <div className={style.subscribe}>
+          <button
+            type="button"
+            className={
+              disabledBtn && plan === 'Basic' ? style.test : style.btnBasic
+            }
+            onClick={handleSubscription}
+          >
+            Basic
+          </button>
+          <p className={style.color}>
+            1 месяц — $4.80 <span className={style.span}>- 3%</span>
+          </p>
+        </div>
+        <div className={style.subscribe}>
+          <button
+            type="button"
+            className={
+              disabledBtn && plan === 'Standart'
+                ? style.test
+                : style.btnStandart
+            }
+            onClick={handleSubscription}
+          >
+            Standart
+          </button>
+          <p className={style.color}>
+            3 месяца — $14.20 <span className={style.span}>- 5%</span>
+          </p>
+        </div>
+        <div className={style.subscribe}>
+          <button
+            type="button"
+            className={
+              disabledBtn && plan === 'Premium' ? style.test : style.btnPremium
+            }
+            onClick={handleSubscription}
+          >
+            Premium
+          </button>
+          <p className={style.color}>
+            6 месяцев — $27.84 <span className={style.span}>- 7%</span>
+          </p>
+        </div>
+        <div className={style.subscribe}>
+          <button
+            type="button"
+            className={
+              disabledBtn && plan === 'Ultra' ? style.test : style.btnUltra
+            }
+            onClick={handleSubscription}
+          >
+            Ultra
+          </button>
+          <p className={style.color}>
+            12 месяцев — $53.89 <span className={style.span}>- 10%</span>
+          </p>
         </div>
         <div className={style.position}>
           <Button
