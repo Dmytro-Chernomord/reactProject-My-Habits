@@ -82,10 +82,10 @@ class ItemHabit extends Component {
     stateBut2 = enabledDate ? true : stateBut2;
 
     // const MS_PER_DAY = 1000 * 60 * 60 * 24;
-    // const currentDateToNum = Math.round(
+    // const currentDateToNum = Math.floor(
     //   new Date(currentDate).valueOf() / MS_PER_DAY,
     // );
-    // const selectedDateToNum = Math.round(
+    // const selectedDateToNum = Math.floor(
     //   new Date(selectedDate).valueOf() / MS_PER_DAY,
     // );
     // const isDisabledDate = selectedDateToNum > currentDateToNum ? true : false;
