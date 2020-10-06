@@ -7,10 +7,7 @@ import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from '../ModalContent/ModalContent.module.css';
 import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
-import {
-  checkSigaretteStatiscs,
-  checkSigaretteMissedDates,
-} from '../../helpers/checkSigaretteStatiscs';
+import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 
 ////----------------------------------------------------------
 function DailyResultModal({ onClose }) {
@@ -34,16 +31,6 @@ function DailyResultModal({ onClose }) {
   const dif = Math.floor(
     (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
   );
-
-  useEffect(() => {
-    if (cigarettesArray) {
-      checkSigaretteMissedDates(cigarettesArray, dif, parseStartedAt);
-      console.log(
-        'checkSigaretteMissedDates:',
-        checkSigaretteMissedDates(cigarettesArray, dif, parseStartedAt),
-      );
-    }
-  }, [cigarettesArray, dif, parseStartedAt]);
 
   const onSubmit = e => {
     e.preventDefault();
