@@ -38,7 +38,6 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
     }
   }, [location.pathname]);
 
-
   return (
     <>
       {showSubscriptions ? (

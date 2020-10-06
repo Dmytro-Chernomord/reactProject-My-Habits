@@ -16,6 +16,7 @@
   box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
   text-align: center;
   background-color: #43d190;
+  border-radius: 10px;
 }
 
 .modalCloseBtn {
@@ -41,6 +42,15 @@
   font-family: 'Rubik', sans-serif;
   text-align: center;
   margin-bottom: 40px;
+}
+
+.modalTitleCongrats {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  /* margin-bottom: 40px; */
+  color: #fff;
 }
 
 .modalTitleCustom {
@@ -71,6 +81,23 @@
   font-family: 'Rubik', sans-serif;
   color: #bdbdbd;
   text-align: center;
+}
+
+.modalTextCongrats {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.percent {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 26px;
 }
 
 .emptyDiv {
@@ -306,4 +333,9 @@
   line-height: 1.12;
   color: #fe6083;
   margin: 0;
+}
+
+.imgWrapper {
+  margin-top: 10px;
+  margin-bottom: 25px;
 }

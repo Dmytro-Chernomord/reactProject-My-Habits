@@ -7,6 +7,7 @@ import dateSelector from '../../redux/date/dateSelector';
 
 import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
+import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
 import habitsSelector from '../../redux/habits/habitsSelector';
 
 class ItemHabit extends Component {
@@ -17,13 +18,6 @@ class ItemHabit extends Component {
     flagForCongratModalOpen: true,
     uniqueId: '',
   };
-
-  componentDidUpdate() {
-    // const data = this.props.habits.find(
-    //   habit => habit._id === this.state.uniqueId,
-    // );
-    // console.log(data.data);
-  }
 
   openModal = data => {
     this.setState({ showModal: data });
@@ -47,7 +41,6 @@ class ItemHabit extends Component {
   };
 
   render() {
-
     const {
       name,
       efficiency,
@@ -58,9 +51,10 @@ class ItemHabit extends Component {
       selectedDate,
       currentDate,
     } = this.props;
+    // console.log('data ', data);
+    // data это массив с null / true / false
 
-
-    const habitData = { _id, name, iteration, planningTime, data };
+    const habitData = { _id, name, iteration, planningTime, data, efficiency };
 
     const index = this.getIndex();
 
@@ -68,30 +62,76 @@ class ItemHabit extends Component {
 
     let stateBut1 = data[index] === true ? true : false;
     let stateBut2 = data[index] === false ? true : false;
+
     const color1 = stateBut1 && '#43D190';
     const color2 = stateBut2 && '#FE6083';
 
-    //нельзя отметить выполнение на перед
+    const statusOfHabit = data[index];
+
+    //нельзя отметить выполнение наперед
     const enabledDate =
       currentDate.slice(0, 10) < selectedDate.slice(0, 10) ? true : false;
     stateBut1 = enabledDate ? true : stateBut1;
     stateBut2 = enabledDate ? true : stateBut2;
+
+    // const MS_PER_DAY = 1000 * 60 * 60 * 24;
+    // const currentDateToNum = Math.floor(
+    //   new Date(currentDate).valueOf() / MS_PER_DAY,
+    // );
+    // const selectedDateToNum = Math.floor(
+    //   new Date(selectedDate).valueOf() / MS_PER_DAY,
+    // );
+    // const isDisabledDate = selectedDateToNum > currentDateToNum ? true : false;
+
     return (
       <>
-        <h3 className={s.title}>{name}</h3>
-        <ProgressBar completed={efficiency} />
-        <span className={s.progressNumber}>{efficiency}%</span>
-        <span>{index}</span>
-        <p className={s.text}>Прогресс привития привычки</p>
-
-        <button
+        <div className={s.habitBox}>
+          <div>
+            <h3 className={s.title}>{name}</h3>
+            <ProgressBar completed={efficiency} />
+            <span className={s.progressNumber}>{efficiency}%</span>
+            <span>{index}</span>
+            <p className={s.text}>Прогресс привития привычки</p>
+          </div>
+          <div className={s.btnBox}>
+            <CheckListButton
+              isDisabled={stateBut1}
+              handelClick={() => {
+                this.props.setHabitsDataDay(this.props, true, index);
+                if (index === 1) {
+                  this.openModal('congrats');
+                  this.setState({ uniqueId: this.props._id });
+                }
+              }}
+              status={statusOfHabit}
+              isCheckMark={true}
+              label={'mark habit as done'}
+            />
+            <CheckListButton
+              isDisabled={stateBut2}
+              handelClick={() => {
+                this.props.setHabitsDataDay(this.props, false, index);
+                if (index === 1) {
+                  this.openModal('congrats');
+                  this.setState({ uniqueId: this.props._id });
+                }
+              }}
+              status={statusOfHabit}
+              isCheckMark={false}
+              label={'mark habit as unfulfilled'}
+            />
+          </div>
+        </div>
+        {/* <button
           disabled={stateBut1}
           style={{ backgroundColor: color1 }}
           className={s.button1}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, true, index);
-            this.openModal('congrats');
-            this.setState({ uniqueId: this.props._id });
+            if (index === 1) {
+              this.openModal('congrats');
+              this.setState({ uniqueId: this.props._id });
+            }
           }}
         >
           "+"
@@ -102,20 +142,23 @@ class ItemHabit extends Component {
           className={s.button2}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, false, index);
-            this.openModal('congrats');
+            if (index === 1) {
+              this.openModal('congrats');
+            }
           }}
         >
           "-"
-        </button>
+        </button> */}
 
         <button
+          className={s.settings}
+          type="button"
+          aria-label="settings"
           onClick={() => {
             this.ableToUpdate(true);
             this.openModal('custom');
           }}
-        >
-          настройка
-        </button>
+        ></button>
 
         {enabled && (
           <>
@@ -149,7 +192,7 @@ class ItemHabit extends Component {
         )}
         {this.state.showModal === 'congrats' && (
           <CongratulationModal
-            data={habitData}
+            info={habitData}
             onClose={() => {
               this.openModal('');
               this.repeatHabit(false);
@@ -172,11 +215,8 @@ class ItemHabit extends Component {
 
 const mapStateToProps = state => ({
   selectedDate: dateSelector.getSelectedDate(state),
-
-  habits: habitsSelector.getAllHabits(state),
-
+  // habits: habitsSelector.getAllHabits(state),
   currentDate: dateSelector.getCurrentDate(state),
-
 });
 
 const mapDispatchToprops = {
