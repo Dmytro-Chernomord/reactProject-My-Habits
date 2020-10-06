@@ -10,7 +10,6 @@ import s from './ItemHabit.module.css';
 import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
 import habitsSelector from '../../redux/habits/habitsSelector';
 
-
 class ItemHabit extends Component {
   state = {
     showModal: false,
@@ -49,7 +48,6 @@ class ItemHabit extends Component {
   };
 
   render() {
-
     const {
       name,
       efficiency,
@@ -107,9 +105,9 @@ class ItemHabit extends Component {
               isDisabled={stateBut1}
               handelClick={() => {
                 this.props.setHabitsDataDay(this.props, true, index);
-                if (this.state.flagForCongratModalOpen) {
-                  this.onHabitSuccess();
-                }
+                // if (this.state.flagForCongratModalOpen) {
+                //   this.onHabitSuccess();
+                // }
               }}
               status={statusOfHabit}
               isCheckMark={true}
@@ -219,7 +217,6 @@ const mapStateToProps = state => ({
   habits: habitsSelector.getAllHabits(state),
 
   currentDate: dateSelector.getCurrentDate(state),
-
 });
 
 const mapDispatchToprops = {
