@@ -65,12 +65,16 @@
   cursor: pointer;
   height: 20px;
   font-family: 'Rubik';
+  /* add Styles */
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 2px 2px 5px 0px rgba(69, 67, 67, 0.75);
+  margin-top: 5px;
 }
 
 .button:hover,
 .button:focus {
   background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  transform: scale(1.1);
 }
 .button:focus {
   border: 1px solid #4f4f4f;

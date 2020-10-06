@@ -20,7 +20,7 @@ const userInitialState = {
   avatar: '',
   phone: '',
   id: '',
-  subscription: '',
+  subscription: ' ',
 };
 
 const RootReducer = createReducer(userInitialState, {
