@@ -308,9 +308,15 @@ function CustomHabbitModal({
 
   const name = ableToDelete || repeatHabit ? info.name : habitName;
   const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
+
   const iteration = ableToDelete ? info.iteration : '';
 
   const startDate = new Date();
+
+
+  // @Ihor _21DAY очень нужно для тестирования
+  // const _21DAY = 1000 * 60 * 60 * 24 * 21;
+  // const startDate = new Date() - _21DAY;
 
   // const resetForm = () => {
   //   setName('');
