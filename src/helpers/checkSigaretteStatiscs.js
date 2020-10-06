@@ -53,13 +53,14 @@ const checkSigaretteMissedDates = (cigarettesArray, dif, parseStartedAt) => {
       //   ' new Date dayWthoutInfo',
       //   new Date(dayWthoutInfo).toISOString(),
       // );
-      result.push(new Date(dayWthoutInfo).toISOString());
+      result.push({ date: new Date(dayWthoutInfo).toISOString(), index: i });
       continue;
 
       // console.log('showModal');
       // console.log('element : ', element, 'i : ', i);
       // эта логика будет пушить информацию для будущей модалки с вопросами о пропущенных днях
     }
+    // console.log(result);
   }
   return result;
 };
