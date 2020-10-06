@@ -76,11 +76,13 @@
     url(../../../images/svg-icons/chechlist-marks/cross-red.svg);
   background-size: auto, 0;
 }
+
 .ButtonCrossActive {
   composes: button;
-  background-image: url(../../../images/svg-icons/chechlist-marks/cross-red.svg);
-  background-size: auto;
+  background-color: #fe6083;
   border-color: #fe6083;
+  background-image: url(../../../images/svg-icons/chechlist-marks/cross-white.svg);
+  background-size: auto;
   cursor: default;
 }
 .ButtonCross[disabled] {
