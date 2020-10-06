@@ -323,25 +323,27 @@ function CustomHabbitModal({
   //   setTime('');
   //   setIteration('');
   // };
-  const onSubmit = data => {
+  const onSubmit = async data => {
     const piece = data.datePicker.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
     if (ableToDelete) {
-      dispatch(
+      await dispatch(
         habitsOperation.updateHabit({
           id: info._id,
           data: info.data,
           name: data.name,
         }),
       );
+      onClose();
     } else {
-      dispatch(
+      await dispatch(
         userOperations.addHabit({
           name: data.name,
           planningTime: planningTime,
           iteration: data.iteration,
         }),
       );
+      onClose();
     }
   };
 
@@ -349,16 +351,16 @@ function CustomHabbitModal({
     dispatch(habitsOperation.removeHabit(info._id));
   };
 
-  const habits = useSelector(state => state.habits);
+  // const habits = useSelector(state => state.habits);
   // console.log(habits);
-  const ref = useRef(habits.length);
+  // const ref = useRef(habits.length);
   // console.log(ref);
   // console.log('cl', habits[habits.length - 1]._id === ref.current);
 
-  useEffect(() => {
-    // console.log(ref.current === habits.length);
-    ref.current !== habits.length && onClose();
-  }, [habits, onClose]);
+  // useEffect(() => {
+  //   // console.log(ref.current === habits.length);
+  //   ref.current !== habits.length && onClose();
+  // }, [habits, onClose]);
 
   return (
     <div className={styles.modalWrapper}>
