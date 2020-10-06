@@ -148,20 +148,6 @@
   margin: 0;
 }
 .boxErrorMessage {
-  width: 400px;
-  margin-left: 50px;
-}
-.btnError {
-  display: inline;
-  text-decoration: none;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 1.12;
-  color: #bdbdbd;
-  background-color: transparent;
-  border: none;
-  margin-right: 30px;
-}
-.btnError:hover {
-  color: #43d190;
+  width: 345px;
+  margin-left: 93px;
 }

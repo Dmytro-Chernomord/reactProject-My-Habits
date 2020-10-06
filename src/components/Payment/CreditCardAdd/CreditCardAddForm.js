@@ -53,7 +53,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   const [mask, setMask] = useState('9999/9999/9999/9999');
 
   const dispatch = useDispatch();
-  const errorsState = useSelector(state => state.error);
+  // const errorsState = useSelector(state => state.error);
 
   const addCreditCard = useCallback(() => {
     dispatch(operations.addCreditCard({ number, timeExpiration }));
@@ -125,7 +125,7 @@ const AddCreditCardForm = ({ closeForm }) => {
     } else {
       setDateValid(null);
     }
-    console.log(numberValue);
+
     if (numberValue.length === 0 || dateValue.length === 0) {
       setErrorShow(true);
       return;
@@ -199,11 +199,11 @@ const AddCreditCardForm = ({ closeForm }) => {
           {errorShow && (
             <p className={styles.error}>*необходимо заполнить все поля</p>
           )}
-          {errorsState && (
+          {/* {errorsState && (
             <p className={styles.error}>
               *извините, произошла ошибка сервера, попробуйте позже
             </p>
-          )}
+          )} */}
         </div>
         <Button variety={'white'} text="Добавить" />
       </form>

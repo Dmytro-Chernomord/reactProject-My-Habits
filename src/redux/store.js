@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from '../redux/auth/authReducer';
 import userData from '../redux/rootReducer';
 import dateReducer from './date/dateReducer';
+import notificationsReducer from './notifications/notificationsReducer';
 
 const authPersistConfig = {
   key: 'auth',
@@ -32,6 +33,7 @@ const store = configureStore({
     modal: userData.modal,
     error: userData.error,
     loading: userData.loading,
+    notifications: notificationsReducer,
   },
   devTools: process.env.NODE_ENV === 'development',
   middleware: getDefaultMiddleware({

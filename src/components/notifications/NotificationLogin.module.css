@@ -1,0 +1,43 @@
+.box {
+  background-color: #fadadd;
+  padding: 10px;
+  border-radius: 3px;
+  display: flex;
+}
+
+.btnClose {
+  display: block;
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+  width: 27px;
+  height: 26px;
+}
+.btnClose:hover {
+  background-color: rgba(76, 114, 38, 0.2);
+}
+
+.boxError {
+  padding-left: 10px;
+}
+.error {
+  font-size: 12px;
+  line-height: 1.12;
+  color: #fe6083;
+  margin: 0;
+}
+
+.btnError {
+  display: inline;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.12;
+  color: #bdbdbd;
+  background-color: transparent;
+  border: none;
+  margin-right: 30px;
+}
+.btnError:hover {
+  color: #43d190;
+}
