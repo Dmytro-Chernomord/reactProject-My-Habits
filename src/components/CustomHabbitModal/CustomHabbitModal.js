@@ -24,6 +24,7 @@ import styles from '../ModalContent/ModalContent.module.css';
 import { teal } from '@material-ui/core/colors';
 import ModalBackdrop from '../Modal/Modal';
 import convertIteration from '../../helpers/convertIteration';
+import NotificationModal from '../notifications/NotificationModal';
 
 const personalStyle = `
  .calendarBox .react-datepicker__input-container > input { 
@@ -300,7 +301,6 @@ function CustomHabbitModal({
   // const [iteration, setIteration] = useState('');
   // const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
-  const errorsState = useSelector(state => state.error);
 
   const { register, errors, handleSubmit, control } = useForm({
     mode: 'onChange',
@@ -323,25 +323,27 @@ function CustomHabbitModal({
   //   setTime('');
   //   setIteration('');
   // };
-  const onSubmit = data => {
+  const onSubmit = async data => {
     const piece = data.datePicker.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
     if (ableToDelete) {
-      dispatch(
+      await dispatch(
         habitsOperation.updateHabit({
           id: info._id,
           data: info.data,
           name: data.name,
         }),
       );
+      onClose();
     } else {
-      dispatch(
+      await dispatch(
         userOperations.addHabit({
           name: data.name,
           planningTime: planningTime,
           iteration: data.iteration,
         }),
       );
+      onClose();
     }
   };
 
@@ -349,16 +351,16 @@ function CustomHabbitModal({
     dispatch(habitsOperation.removeHabit(info._id));
   };
 
-  const habits = useSelector(state => state.habits);
+  // const habits = useSelector(state => state.habits);
   // console.log(habits);
-  const ref = useRef(habits.length);
+  // const ref = useRef(habits.length);
   // console.log(ref);
   // console.log('cl', habits[habits.length - 1]._id === ref.current);
 
-  useEffect(() => {
-    // console.log(ref.current === habits.length);
-    ref.current !== habits.length && onClose();
-  }, [habits, onClose]);
+  // useEffect(() => {
+  //   // console.log(ref.current === habits.length);
+  //   ref.current !== habits.length && onClose();
+  // }, [habits, onClose]);
 
   return (
     <div className={styles.modalWrapper}>
@@ -527,12 +529,8 @@ function CustomHabbitModal({
             />
           </div>
         )}
-        <div className={styles.boxErrorHabbit}>
-          {errorsState && (
-            <p className={styles.error}>
-              *извините, произошла ошибка сервера, попробуйте позже
-            </p>
-          )}
+        <div style={{ height: '20px', marginBottom: '5px' }}>
+          <NotificationModal />
         </div>
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>

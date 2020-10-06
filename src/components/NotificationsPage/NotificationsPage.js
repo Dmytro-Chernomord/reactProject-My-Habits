@@ -104,6 +104,7 @@ function Notifications({}) {
       //       dispatch(notificationsActions.removeNotification());
       //     }
     };
+
   }, [dispatch, halfWayTrough, oneDayLeft, setNotification, stateNotification, youCanDoBetter, youGotAchievment, youHaveFiveDaysLeft, youHaveThreeDaysLeft]);
 
   useEffect(() => {
@@ -113,6 +114,18 @@ function Notifications({}) {
 
     return () => {};
   }, [dispatch, stateNotification]);
+
+  }, [
+    dispatch,
+    halfWayTrough,
+    oneDayLeft,
+    setNotification,
+    youCanDoBetter,
+    youGotAchievment,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+  ]);
+
 
   return (
     <div className={styles.container}>

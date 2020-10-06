@@ -31,6 +31,7 @@ const store = configureStore({
     quiz: userData.quiz,
     date: dateReducer,
     modal: userData.modal,
+    errors: userData.errorsModal,
     error: userData.error,
     loading: userData.loading,
     notifications: notificationsReducer,
