@@ -7,6 +7,7 @@ import dateSelector from '../../redux/date/dateSelector';
 
 import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
+import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
 
 class ItemHabit extends Component {
   state = {
@@ -53,7 +54,8 @@ class ItemHabit extends Component {
       selectedDate,
       currentDate,
     } = this.props;
-
+    // console.log('data ', data);
+    // data это массив с null / true / false
     const habitData = { _id, name, iteration, planningTime, data };
 
     const index = this.getIndex();
@@ -62,23 +64,62 @@ class ItemHabit extends Component {
 
     let stateBut1 = data[index] === true ? true : false;
     let stateBut2 = data[index] === false ? true : false;
+
     const color1 = stateBut1 && '#43D190';
     const color2 = stateBut2 && '#FE6083';
 
-    //нельзя отметить выполнение на перед
+    const statusOfHabit = data[index];
+
+    //нельзя отметить выполнение наперед
     const enabledDate =
       currentDate.slice(0, 10) < selectedDate.slice(0, 10) ? true : false;
     stateBut1 = enabledDate ? true : stateBut1;
     stateBut2 = enabledDate ? true : stateBut2;
+
+    // const MS_PER_DAY = 1000 * 60 * 60 * 24;
+    // const currentDateToNum = Math.round(
+    //   new Date(currentDate).valueOf() / MS_PER_DAY,
+    // );
+    // const selectedDateToNum = Math.round(
+    //   new Date(selectedDate).valueOf() / MS_PER_DAY,
+    // );
+    // const isDisabledDate = selectedDateToNum > currentDateToNum ? true : false;
+
     return (
       <>
-        <h3 className={s.title}>{name}</h3>
-        <ProgressBar completed={efficiency} />
-        <span className={s.progressNumber}>{efficiency}%</span>
-        <span>{index}</span>
-        <p className={s.text}>Прогресс привития привычки</p>
-
-        <button
+        <div className={s.habitBox}>
+          <div>
+            <h3 className={s.title}>{name}</h3>
+            <ProgressBar completed={efficiency} />
+            <span className={s.progressNumber}>{efficiency}%</span>
+            <span>{index}</span>
+            <p className={s.text}>Прогресс привития привычки</p>
+          </div>
+          <div className={s.btnBox}>
+            <CheckListButton
+              isDisabled={stateBut1}
+              handelClick={() => {
+                this.props.setHabitsDataDay(this.props, true, index);
+                if (this.state.flagForCongratModalOpen) {
+                  this.onHabitSuccess();
+                }
+              }}
+              status={statusOfHabit}
+              isCheckMark={true}
+              label={'mark habit as done'}
+            />
+            <CheckListButton
+              isDisabled={stateBut2}
+              handelClick={() => {
+                this.props.setHabitsDataDay(this.props, false, index);
+              }}
+              status={statusOfHabit}
+              isCheckMark={false}
+              label={'mark habit as unfulfilled'}
+            />
+          </div>
+        </div>
+        {/* <button
           disabled={stateBut1}
           style={{ backgroundColor: color1 }}
           className={s.button1}
@@ -100,15 +141,16 @@ class ItemHabit extends Component {
           }}
         >
           "-"
-        </button>
+        </button> */}
 
         <button
+          className={s.settings}
+          type="button"
+          aria-label="settings"
           onClick={() => {
             this.toggleModal();
           }}
-        >
-          настройка
-        </button>
+        ></button>
 
         {enabled && (
           <>

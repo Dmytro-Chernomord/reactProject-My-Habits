@@ -54,7 +54,7 @@
 }
 
 .numberGreen {
-  font-family: Rubik;
+  font-family: 'Rubik';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -64,7 +64,7 @@
 }
 
 .numberRed {
-  font-family: Rubik;
+  font-family: 'Rubik';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -73,34 +73,32 @@
   color: #fe6083;
 }
 
-.button1 {
+.habitBox {
+  display: flex;
+  align-items: center;
+}
+.btnBox {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.settings {
   position: absolute;
-  top: 30px;
-  right: 105px;
-  width: 44px;
-  height: 44px;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  border: 0;
+  background-color: #ffffff;
+  background-image: url(../../images/svg-icons/settings.svg),
+    url(../../images/svg-icons/settings-green.svg);
+  background-size: auto, 0;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
-.button1:focus,
-.button1:hover {
-  border-color: #43d190;
-}
-
-.button2 {
-  position: absolute;
-  top: 30px;
-  right: 45px;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-}
-
-.button2:focus,
-.button2:hover {
-  border-color: #fe6083;
+.settings:hover,
+.settings:focus {
+  transform: rotate(45deg);
+  background-size: 0, auto;
 }

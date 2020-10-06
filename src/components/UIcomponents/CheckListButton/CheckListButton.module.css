@@ -1,0 +1,91 @@
+.button {
+  /* position: absolute;
+  top: 30px;
+  right: 105px; */
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  border: 1px solid #d5e1dc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.button:last-child {
+  margin-left: 15px;
+}
+
+.ButtonCheck {
+  composes: button;
+  background-image: url(../../../images/svg-icons/chechlist-marks/mark-black.svg),
+    url(../../../images/svg-icons/chechlist-marks/mark-green.svg);
+  background-size: auto, 0;
+}
+.ButtonCheck:focus,
+.ButtonCheck:hover,
+.ButtonCheckDisabled:focus,
+.ButtonCheckDisabled:hover {
+  border-color: #43d190;
+  background-size: 0, auto;
+}
+
+.ButtonCheck[disabled] {
+  border-color: #d5e1dc;
+  background-image: url(../../../images/svg-icons/chechlist-marks/mark-grey.svg);
+  background-size: auto;
+  cursor: default;
+}
+
+.ButtonCheckActive {
+  composes: button;
+  background-color: #43d190;
+  border-color: #43d190;
+  background-image: url(../../../images/svg-icons/chechlist-marks/mark.svg);
+  background-size: auto;
+}
+
+.ButtonCheckActive:focus,
+.ButtonCheckActive:hover {
+  cursor: default;
+}
+
+.ButtonCheckDisabled {
+  composes: button;
+  background-image: url(../../../images/svg-icons/chechlist-marks/mark-grey.svg),
+    url(../../../images/svg-icons/chechlist-marks/mark-green.svg);
+  background-size: auto, 0;
+}
+
+.ButtonCross {
+  composes: button;
+  background-image: url(../../../images/svg-icons/chechlist-marks/cross-black.svg),
+    url(../../../images/svg-icons/chechlist-marks/cross-red.svg);
+  background-size: auto, 0;
+}
+
+.ButtonCross:focus,
+.ButtonCross:hover,
+.ButtonCrossDisabled:focus,
+.ButtonCrossDisabled:hover {
+  border-color: #fe6083;
+  background-size: 0, auto;
+}
+.ButtonCrossDisabled {
+  composes: button;
+  background-image: url(../../../images/svg-icons/chechlist-marks/cross-grey.svg),
+    url(../../../images/svg-icons/chechlist-marks/cross-red.svg);
+  background-size: auto, 0;
+}
+.ButtonCrossActive {
+  composes: button;
+  background-image: url(../../../images/svg-icons/chechlist-marks/cross-red.svg);
+  background-size: auto;
+  border-color: #fe6083;
+  cursor: default;
+}
+.ButtonCross[disabled] {
+  border-color: #d5e1dc;
+  background-image: url(../../../images/svg-icons/chechlist-marks/cross-grey.svg);
+  background-size: auto;
+  cursor: default;
+}
