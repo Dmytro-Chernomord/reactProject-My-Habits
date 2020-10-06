@@ -131,17 +131,25 @@ const errorReducer = createReducer(null, {
   [authAction.loginError]: () => true,
   [authAction.loginRequest]: () => false,
   [authAction.loginSuccess]: () => false,
-  [quizActions.quizAddError]: () => true,
-  [quizActions.quizAddRequest]: () => false,
-  [quizActions.quizAddSuccess]: () => false,
-  [userActions.addHabitError]: () => true,
-  [userActions.addHabitRequest]: () => false,
-  [userActions.addHabitSuccess]: () => false,
   [userActions.addUserInfoError]: () => true,
   [userActions.addUserInfoRequest]: () => false,
   [userActions.addUserInfoSuccess]: () => false,
 });
 
+const errorsModalReducer = createReducer(null, {
+  [userActions.addHabitError]: () => true,
+  [userActions.addHabitRequest]: () => false,
+  [userActions.addHabitSuccess]: () => false,
+  [habitsActions.setHabitsDataError]: () => true,
+  [habitsActions.setHabitsDataRequest]: () => false,
+  [habitsActions.setHabitsDataSuccess]: () => false,
+  [quizActions.quizAddError]: () => true,
+  [quizActions.quizAddRequest]: () => false,
+  [quizActions.quizAddSuccess]: () => false,
+  [userActions.addCreditCardError]: () => true,
+  [userActions.addCreditCardRequest]: () => false,
+  [userActions.addCreditCardSuccess]: () => false,
+});
 const loadingReducer = createReducer(false, {
   [authAction.loginRequest]: () => true,
   [authAction.loginSuccess]: () => false,
@@ -172,5 +180,6 @@ export default {
   quiz: quizReducer,
   modal: modalReducer,
   error: errorReducer,
+  errorsModal: errorsModalReducer,
   loading: loadingReducer,
 };

@@ -20,7 +20,6 @@ export default function LoginForm({
   const errorsState = useSelector(state => state.error);
 
   const [eyepass, setEyePass] = useState('password');
-  const [showError, setShowError] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
   const { register, errors, handleSubmit } = useForm({
@@ -153,13 +152,10 @@ export default function LoginForm({
             unmountOnExit
           >
             <NotificationLogin
-              setShowError={setShowError}
-              showError={showError}
               onClickClose={onClickClose}
               text={
                 '*неверный e-mail или пароль, введите другой E-mail или зарегистрируйтесь.'
               }
-              textPort="E-mail правильный..."
             />
           </CSSTransition>
         </div>

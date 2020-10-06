@@ -6,9 +6,9 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import NotFound from '../components/NotFound/NotFound';
 import userOperation from '../redux/user/userOperation';
-import Error from '../components/Error/Error';
 import { CustomLoader } from './UIcomponents/CustomLoader/CustomLoader';
 import Layout from '../components/Layout/Layout';
+// import NotificationErrors from './notifications/NotificationErrors';
 
 class App extends Component {
   // componentDidMount() {
@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <Layout>
         <BrowserRouter>
-          {this.props.error && <Error />}
+          {/* <NotificationErrors /> */}
           <Suspense fallback={<CustomLoader />}>
             <Switch>
               {routes.map(route =>
@@ -37,12 +37,9 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  error: state.error,
-});
 
 // const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, {
+export default connect(null, {
   onGetOwnHabits: userOperation.getOwnHabits,
 })(App);

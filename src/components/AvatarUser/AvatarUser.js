@@ -10,7 +10,12 @@ const AvatarUser = ({ width }) => {
   return (
     <>
       {avatar === '' ? (
-        <img src={avatarDefault} alt="avatar" width={width} />
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTXcjDki0ASw-dUe8jphmsojPfgSO1CeI3qTQ&usqp=CAU"
+          alt="avatar"
+          width={width}
+          style={{ borderRadius: '50%' }}
+        />
       ) : (
         <>
           {avatars.map(el => {
