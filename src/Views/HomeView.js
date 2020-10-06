@@ -24,6 +24,8 @@ import quizSelector from '../redux/quiz/quizSelector';
 
 const styles = {
   display: 'flex',
+  box: { outline: '1px solid teal' },
+  title: { backgroundColor: 'gray' },
 };
 
 class HomeView extends Component {
@@ -59,11 +61,11 @@ class HomeView extends Component {
     return (
       <>
         <div style={styles}>
-          <div>
+          <div style={styles.box}>
             <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
           </div>
 
-          <div>
+          <div style={styles.box}>
             {/* <header style={styles.title}>title</header> */}
             <div>
               <Route
