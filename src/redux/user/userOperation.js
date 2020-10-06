@@ -24,6 +24,7 @@ const addHabit = habit => async dispatch => {
     );
     dispatch(actions.addHabitSuccess(response.data));
   } catch (error) {
+    console.log(error.message);
     dispatch(actions.addHabitError(error.message));
   }
 };

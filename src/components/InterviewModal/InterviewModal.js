@@ -5,10 +5,10 @@ import quizOperation from '../../redux/quiz/quizOperation';
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import styles from '../ModalContent/ModalContent.module.css';
+import NotificationModal from '../notifications/NotificationModal';
 
 function InterviewModal({ onClose }) {
   const dispatch = useDispatch();
-  const errorsState = useSelector(state => state.error);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
@@ -144,15 +144,12 @@ function InterviewModal({ onClose }) {
             style={{
               outlineColor: errors.price ? '#fe6083' : '#43d190',
               borderColor: errors.price ? '#fe6083' : '#e0e0e0',
-              marginBottom: '20px',
             }}
           />
         </label>
-        {errorsState && (
-          <p className={styles.error}>
-            *извините, произошла ошибка сервера, попробуйте позже
-          </p>
-        )}
+        <div style={{ height: '20px', marginBottom: '5px' }}>
+          <NotificationModal />
+        </div>
         <div>
           <Button
             type={'submit'}

@@ -21,7 +21,6 @@ export default function RegisterForm({
 
   const [eyepass, setEyePass] = useState('password');
   const [email, setEmail] = useState('');
-  const [showError, setShowError] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
   const { register, errors, handleSubmit } = useForm({
@@ -162,11 +161,8 @@ export default function RegisterForm({
             unmountOnExit
           >
             <NotificationLogin
-              setShowError={setShowError}
-              showError={showError}
               onClickClose={onClickClose}
               text={`*пользователь ${email} уже существует, введите другой E-mail или войдите.`}
-              textPort="E-mail не зарегистрирован..."
             />
           </CSSTransition>
         </div>
