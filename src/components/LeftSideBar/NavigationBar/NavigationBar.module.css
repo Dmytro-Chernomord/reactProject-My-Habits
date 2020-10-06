@@ -7,7 +7,9 @@
   padding: 0;
   width: 100%;
   background: #ffffff;
-  border: 1px solid #d5e1dc;
+  border-top: 1px solid #d5e1dc;
+  border-bottom: 1px solid #d5e1dc;
+
   border-radius: 0px;
 }
 
