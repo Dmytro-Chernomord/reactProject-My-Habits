@@ -41,7 +41,7 @@ function Notifications({
     setIsVisibleReminder(true);
     onRemoveNotification();
   };
-
+  const stateNotification = useSelector(state => state.notifications);
   const filteredHabitsData = useSelector(state =>
     habitSelector.getFilterTodayHabits(state),
   );
@@ -97,11 +97,22 @@ function Notifications({
         onRemoveNotification();
       }
     };
-  }, [ref, youGotAchievment, youCanDoBetter, notifications, youHaveFiveDaysLeft, youHaveThreeDaysLeft, oneDayLeft, halfWayTrough, onAddNotification, onRemoveNotification]);
+  }, [
+    ref,
+    youGotAchievment,
+    youCanDoBetter,
+    notifications,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+    oneDayLeft,
+    halfWayTrough,
+    onAddNotification,
+    onRemoveNotification,
+  ]);
 
   return (
     <div className={styles.container}>
-      <h2>You have {notifications} notifications</h2>
+      <h2>You have {stateNotification} notifications</h2>
       <TransitionGroup>
         {youHaveThreeDaysLeft && !isVisibleThreeDays && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
@@ -227,7 +238,7 @@ function Notifications({
 //     </div>
 
 const mapStateToPops = state => ({
-  notifications: state.notifications,
+  // notifications: state.notifications,
 });
 const mapDispatchToProps = dispatch => ({
   onAddNotification: value =>
