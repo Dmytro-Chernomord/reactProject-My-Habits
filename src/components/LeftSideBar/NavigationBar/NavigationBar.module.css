@@ -22,6 +22,7 @@
 }
 
 .linkBox {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,4 +52,29 @@
 .iconBox:hover,
 .iconBox:focus {
   background: #333333;
+}
+.notifications {
+  position: absolute;
+  top: -6px;
+  left: 54px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 50%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: tomato;
+
+  color: #ffffff;
+}
+
+.notificationsHidden {
+  display: none;
 }
