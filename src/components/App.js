@@ -8,6 +8,7 @@ import NotFound from '../components/NotFound/NotFound';
 import userOperation from '../redux/user/userOperation';
 import Error from '../components/Error/Error';
 import { CustomLoader } from './UIcomponents/CustomLoader/CustomLoader';
+import Layout from '../components/Layout/Layout';
 
 class App extends Component {
   // componentDidMount() {
@@ -16,21 +17,23 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        {this.props.error && <Error />}
-        <Suspense fallback={<CustomLoader />}>
-          <Switch>
-            {routes.map(route =>
-              route.private ? (
-                <PrivateRoute key={route.label} {...route} />
-              ) : (
-                <PublicRoute key={route.label} {...route} />
-              ),
-            )}
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
+      <Layout>
+        <BrowserRouter>
+          {this.props.error && <Error />}
+          <Suspense fallback={<CustomLoader />}>
+            <Switch>
+              {routes.map(route =>
+                route.private ? (
+                  <PrivateRoute key={route.label} {...route} />
+                ) : (
+                  <PublicRoute key={route.label} {...route} />
+                ),
+              )}
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+      </Layout>
     );
   }
 }

@@ -17,6 +17,7 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
   const [showAvatars, setShowAvatars] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [banNotification, setBanNotification] = useState(false);
 
   const state = useSelector(state => state);
   const subscription = userSelector.getSubscription(state);
@@ -31,6 +32,9 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
     } else {
       setShowAvatars(false);
       setShowSubscriptions(false);
+    }
+    if (location.pathname !== '/home/ProfilePage') {
+      setBanNotification(true);
     }
   }, [location.pathname]);
 
@@ -62,7 +66,10 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                 <h2 className={styles.titleProfile}>Личная информация</h2>
                 <div className={styles.boxInfoProfile}>
                   <div>
-                    <ProfileForm />
+                    <ProfileForm
+                      setBanNotification={setBanNotification}
+                      banNotification={banNotification}
+                    />
 
                     <div className={styles.boxPassword}>
                       <button

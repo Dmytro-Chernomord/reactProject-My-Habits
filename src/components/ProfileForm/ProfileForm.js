@@ -6,14 +6,18 @@ import userSelector from '../../redux/user/userSelector';
 import userOperation from '../../redux/user/userOperation';
 import styles from './ProfileForm.module.css';
 import Button from '../Button/Button';
+import { CSSTransition } from 'react-transition-group';
+import fadeStyle from '../../Views/PrivateViews/ProfilePage/FadeProfilePage.module.css';
+import NotificationProfile from '../notifications/NotificationProfile';
 
-const ProfileForm = () => {
+const ProfileForm = ({ banNotification, setBanNotification }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [errorPhone, setErrorPhone] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const dispatch = useDispatch();
   const state = useSelector(state => state);
@@ -24,9 +28,17 @@ const ProfileForm = () => {
   });
 
   useEffect(() => {
+    if (banNotification === false) {
+      if (state.error === true) {
+        setShowNotification(true);
+      }
+    }
+  }, [banNotification, state.error]);
+
+  useEffect(() => {
     setFirstName(user.firstName);
     setLastName(user.lastName);
-    setPhone(user.phone);
+    setPhone(`+${user.phone}`);
     setEmail(user.email);
     setShowMessage(false);
   }, [user.email, user.firstName, user.lastName, user.phone]);
@@ -51,7 +63,7 @@ const ProfileForm = () => {
 
   const onSubmit = data => {
     const phoneUser = phone.slice(1, 17).split('-').join('');
-    console.log(phoneUser);
+
     if (errorPhone) {
       return;
     }
@@ -66,8 +78,12 @@ const ProfileForm = () => {
     setTimeout(() => {
       setShowMessage(false);
     }, 2000);
+    setBanNotification(false);
   };
-
+  const onClickClose = () => {
+    setBanNotification(true);
+    setShowNotification(false);
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
       {/* //-----------------------------------------------------------------Name */}
@@ -184,14 +200,24 @@ const ProfileForm = () => {
           })}
         />
       </label>
+      <div className={styles.boxErrorMessage}>
+        <CSSTransition
+          in={showNotification}
+          classNames={fadeStyle}
+          timeout={250}
+          unmountOnExit
+        >
+          <NotificationProfile
+            onClickClose={onClickClose}
+            text={
+              '*извините, произошла ошибка,данные не изменены, попробуйте позже.'
+            }
+          />
+        </CSSTransition>
+      </div>
       <div className={styles.boxMessage}>
         {showMessage && (
           <span className={styles.validText}>Данные изменены!</span>
-        )}
-        {state.error && (
-          <p className={styles.error}>
-            *извините, произошла ошибка,данные не изменены, попробуйте позже
-          </p>
         )}
       </div>
 
