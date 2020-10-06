@@ -93,7 +93,16 @@ function Notifications({}) {
         dispatch(notificationsActions.removeNotification());
       }
     };
-  }, [youGotAchievment, youCanDoBetter, youHaveFiveDaysLeft, youHaveThreeDaysLeft, oneDayLeft, halfWayTrough, dispatch, stateNotification]);
+  }, [
+    youGotAchievment,
+    youCanDoBetter,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+    oneDayLeft,
+    halfWayTrough,
+    dispatch,
+    stateNotification,
+  ]);
 
   return (
     <div className={styles.container}>

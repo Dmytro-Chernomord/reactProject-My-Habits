@@ -19,13 +19,6 @@ class ItemHabit extends Component {
     uniqueId: '',
   };
 
-  componentDidUpdate() {
-    // const data = this.props.habits.find(
-    //   habit => habit._id === this.state.uniqueId,
-    // );
-    // console.log(data.data);
-  }
-
   openModal = data => {
     this.setState({ showModal: data });
   };
@@ -61,7 +54,7 @@ class ItemHabit extends Component {
     // console.log('data ', data);
     // data это массив с null / true / false
 
-    const habitData = { _id, name, iteration, planningTime, data };
+    const habitData = { _id, name, iteration, planningTime, data, efficiency };
 
     const index = this.getIndex();
 
@@ -105,9 +98,10 @@ class ItemHabit extends Component {
               isDisabled={stateBut1}
               handelClick={() => {
                 this.props.setHabitsDataDay(this.props, true, index);
-                // if (this.state.flagForCongratModalOpen) {
-                //   this.onHabitSuccess();
-                // }
+                if (index === 1) {
+                  this.openModal('congrats');
+                  this.setState({ uniqueId: this.props._id });
+                }
               }}
               status={statusOfHabit}
               isCheckMark={true}
@@ -117,6 +111,10 @@ class ItemHabit extends Component {
               isDisabled={stateBut2}
               handelClick={() => {
                 this.props.setHabitsDataDay(this.props, false, index);
+                if (index === 1) {
+                  this.openModal('congrats');
+                  this.setState({ uniqueId: this.props._id });
+                }
               }}
               status={statusOfHabit}
               isCheckMark={false}
@@ -130,8 +128,10 @@ class ItemHabit extends Component {
           className={s.button1}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, true, index);
-            this.openModal('congrats');
-            this.setState({ uniqueId: this.props._id });
+            if (index === 1) {
+              this.openModal('congrats');
+              this.setState({ uniqueId: this.props._id });
+            }
           }}
         >
           "+"
@@ -142,7 +142,9 @@ class ItemHabit extends Component {
           className={s.button2}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, false, index);
-            this.openModal('congrats');
+            if (index === 1) {
+              this.openModal('congrats');
+            }
           }}
         >
           "-"
@@ -190,7 +192,7 @@ class ItemHabit extends Component {
         )}
         {this.state.showModal === 'congrats' && (
           <CongratulationModal
-            data={habitData}
+            info={habitData}
             onClose={() => {
               this.openModal('');
               this.repeatHabit(false);
@@ -213,9 +215,7 @@ class ItemHabit extends Component {
 
 const mapStateToProps = state => ({
   selectedDate: dateSelector.getSelectedDate(state),
-
-  habits: habitsSelector.getAllHabits(state),
-
+  // habits: habitsSelector.getAllHabits(state),
   currentDate: dateSelector.getCurrentDate(state),
 });
 
