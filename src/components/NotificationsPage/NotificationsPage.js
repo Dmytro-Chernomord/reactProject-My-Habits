@@ -104,8 +104,17 @@ function Notifications({}) {
       //       dispatch(notificationsActions.removeNotification());
       //     }
     };
-
-  }, [dispatch, halfWayTrough, oneDayLeft, setNotification, stateNotification, youCanDoBetter, youGotAchievment, youHaveFiveDaysLeft, youHaveThreeDaysLeft]);
+  }, [
+    dispatch,
+    halfWayTrough,
+    oneDayLeft,
+    setNotification,
+    stateNotification,
+    youCanDoBetter,
+    youGotAchievment,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+  ]);
 
   useEffect(() => {
     if (stateNotification == 0) {
@@ -115,17 +124,16 @@ function Notifications({}) {
     return () => {};
   }, [dispatch, stateNotification]);
 
-  }, [
-    dispatch,
-    halfWayTrough,
-    oneDayLeft,
-    setNotification,
-    youCanDoBetter,
-    youGotAchievment,
-    youHaveFiveDaysLeft,
-    youHaveThreeDaysLeft,
-  ]);
-
+  // }, [
+  //   dispatch,
+  //   halfWayTrough,
+  //   oneDayLeft,
+  //   setNotification,
+  //   youCanDoBetter,
+  //   youGotAchievment,
+  //   youHaveFiveDaysLeft,
+  //   youHaveThreeDaysLeft,
+  // ];
 
   return (
     <div className={styles.container}>
