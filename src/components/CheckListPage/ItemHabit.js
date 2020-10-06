@@ -18,13 +18,6 @@ class ItemHabit extends Component {
     uniqueId: '',
   };
 
-  componentDidUpdate() {
-    // const data = this.props.habits.find(
-    //   habit => habit._id === this.state.uniqueId,
-    // );
-    // console.log(data.data);
-  }
-
   openModal = data => {
     this.setState({ showModal: data });
   };
@@ -47,7 +40,6 @@ class ItemHabit extends Component {
   };
 
   render() {
-
     const {
       name,
       efficiency,
@@ -59,8 +51,7 @@ class ItemHabit extends Component {
       currentDate,
     } = this.props;
 
-
-    const habitData = { _id, name, iteration, planningTime, data };
+    const habitData = { _id, name, iteration, planningTime, data, efficiency };
 
     const index = this.getIndex();
 
@@ -90,8 +81,10 @@ class ItemHabit extends Component {
           className={s.button1}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, true, index);
-            this.openModal('congrats');
-            this.setState({ uniqueId: this.props._id });
+            if (index === 1) {
+              this.openModal('congrats');
+              this.setState({ uniqueId: this.props._id });
+            }
           }}
         >
           "+"
@@ -102,7 +95,9 @@ class ItemHabit extends Component {
           className={s.button2}
           onClick={() => {
             this.props.setHabitsDataDay(this.props, false, index);
-            this.openModal('congrats');
+            if (index === 1) {
+              this.openModal('congrats');
+            }
           }}
         >
           "-"
@@ -149,7 +144,7 @@ class ItemHabit extends Component {
         )}
         {this.state.showModal === 'congrats' && (
           <CongratulationModal
-            data={habitData}
+            info={habitData}
             onClose={() => {
               this.openModal('');
               this.repeatHabit(false);
@@ -176,7 +171,6 @@ const mapStateToProps = state => ({
   habits: habitsSelector.getAllHabits(state),
 
   currentDate: dateSelector.getCurrentDate(state),
-
 });
 
 const mapDispatchToprops = {

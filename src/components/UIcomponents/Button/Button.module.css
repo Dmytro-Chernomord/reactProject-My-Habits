@@ -27,6 +27,20 @@
   color: #43d190;
 }
 
+.ButtonTransparent {
+  composes: button;
+  border: 2px solid #ffffff;
+  background-color: #43d190;
+  color: #ffffff;
+}
+
+.ButtonHoverWhite {
+  composes: button;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+  color: #43d190;
+}
+
 .ButtonGreen:hover,
 .ButtonGreen:focus {
   background-color: #cbf7e3;
@@ -37,4 +51,17 @@
 .ButtonWhite:focus {
   background-color: #3dbf84;
   color: #ffffff;
+}
+
+.ButtonTransparent:hover,
+.ButtonTransparent:focus {
+  background-color: #ffffff;
+  color: #3dbf84;
+}
+
+.ButtonHoverWhite:hover,
+.ButtonHoverWhite:focus {
+  background-color: #3dbf84;
+  color: #ffffff;
+  border: 2px solid #ffffff;
 }
