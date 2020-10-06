@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, connect, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './notification.module.css';
 import habitSelector from '../../redux/habits/habitsSelector';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -89,11 +89,19 @@ function Notifications({}) {
       dispatch(notificationsActions.addNotification());
     }
     return () => {
-      if (stateNotification === 1) {
-        dispatch(notificationsActions.removeNotification());
-      }
+      //     if (stateNotification === 1) {
+      //       dispatch(notificationsActions.removeNotification());
+      //     }
     };
-  }, [youGotAchievment, youCanDoBetter, youHaveFiveDaysLeft, youHaveThreeDaysLeft, oneDayLeft, halfWayTrough, dispatch, stateNotification]);
+  }, [
+    dispatch,
+    halfWayTrough,
+    oneDayLeft,
+    youCanDoBetter,
+    youGotAchievment,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+  ]);
 
   return (
     <div className={styles.container}>

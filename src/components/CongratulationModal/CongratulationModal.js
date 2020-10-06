@@ -2,6 +2,7 @@ import React from 'react';
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
+import medal from '../../images/homepage/medal.png';
 
 import styles from '../ModalContent/ModalContent.module.css';
 
@@ -12,33 +13,54 @@ import styles from '../ModalContent/ModalContent.module.css';
 // addData -----  добавляет данный в state для открытия новой модалки. Нужно будет новый state
 
 function CongratulationModal({
-  habitName,
+  // habitName,
   onClick,
-  onClose,
-  ableToDelete,
-  data,
-  addData,
+  // onClose,
+  // ableToDelete,
+  info,
+  // addData,
   onRepeat,
   onNewHabit,
 }) {
   return (
     <div className={styles.modalWrapperGreen}>
       <div className={styles.modalCenterLayout}>
-        <h2 className={(styles.modalTitle, styles.modalTitleTemplate)}>
-          Поздравляем!
-        </h2>
-        <p className={styles.modalTextCustom}>
-          Вы успешно освоили привычку и стали на шаг ближе к своей цели.
-        </p>
-        <p>{data.name}</p>
-        <p>{data._id}</p>
-        <p>{data.iteration}</p>
-        <p>{data.planningTime}</p>
+        {info.efficiency < 70 && (
+          <p className={styles.percent}>
+            Уровень закрепления привычки: {info.efficiency}%
+          </p>
+        )}
+        {info.efficiency >= 70 && (
+          <h2 className={styles.modalTitleCongrats}>Поздравляем!</h2>
+        )}
+        {info.efficiency <= 20 && (
+          <>
+            <p className={styles.modalTextCongrats}>
+              Мы уверены, что ты можешь лучше! Давай повторим привычку для
+              закрепления?
+            </p>
+          </>
+        )}
+        {info.efficiency > 20 && info.efficiency < 70 && (
+          <>
+            <p className={styles.modalTextCongrats}>
+              Неплохо, но попробуй еще, ты сможешь улучшить свой результат!
+            </p>
+          </>
+        )}
+        {info.efficiency >= 70 && (
+          <p className={styles.modalTextCongrats}>
+            Вы успешно освоили привычку и стали на шаг ближе к своей цели.
+          </p>
+        )}
+        <div className={styles.imgWrapper}>
+          <img src={medal} alt="avatar" width="450" />
+        </div>
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>
             <Button
               type={'button'}
-              green={true}
+              transparent={true}
               handelClick={() => onRepeat()}
               label={'Повторить'}
             />
@@ -46,13 +68,13 @@ function CongratulationModal({
           <div>
             <Button
               type={'button'}
-              green={false}
+              hoverWhite={true}
               handelClick={() => onNewHabit()}
               label={'Добавить новую'}
             />
           </div>
         </div>
-        <ButtonClose type="button" onClick={onClick} />
+        <ButtonClose type="button" onClick={onClick} white={true} />
       </div>
     </div>
   );
