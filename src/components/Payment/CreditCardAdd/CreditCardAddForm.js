@@ -4,6 +4,7 @@ import InputMask, { beforeMaskedStateChange } from 'react-input-mask';
 import operations from '../../../redux/user/userOperation';
 import Button from '../../Button/Button';
 import styles from '../../ChangePassword/ChangePassword.module.css';
+import NotificationModal from '../../notifications/NotificationModal';
 
 function CardNumbInput(props) {
   return (
@@ -53,7 +54,6 @@ const AddCreditCardForm = ({ closeForm }) => {
   const [mask, setMask] = useState('9999/9999/9999/9999');
 
   const dispatch = useDispatch();
-  // const errorsState = useSelector(state => state.error);
 
   const addCreditCard = useCallback(() => {
     dispatch(operations.addCreditCard({ number, timeExpiration }));
@@ -199,11 +199,9 @@ const AddCreditCardForm = ({ closeForm }) => {
           {errorShow && (
             <p className={styles.error}>*необходимо заполнить все поля</p>
           )}
-          {/* {errorsState && (
-            <p className={styles.error}>
-              *извините, произошла ошибка сервера, попробуйте позже
-            </p>
-          )} */}
+          <div style={{ marginBottom: '5px' }}>
+            <NotificationModal />
+          </div>
         </div>
         <Button variety={'white'} text="Добавить" />
       </form>

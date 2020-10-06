@@ -24,6 +24,7 @@ import styles from '../ModalContent/ModalContent.module.css';
 import { teal } from '@material-ui/core/colors';
 import ModalBackdrop from '../Modal/Modal';
 import convertIteration from '../../helpers/convertIteration';
+import NotificationModal from '../notifications/NotificationModal';
 
 const personalStyle = `
  .calendarBox .react-datepicker__input-container > input { 
@@ -300,7 +301,6 @@ function CustomHabbitModal({
   // const [iteration, setIteration] = useState('');
   // const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
-  const errorsState = useSelector(state => state.error);
 
   const { register, errors, handleSubmit, control } = useForm({
     mode: 'onChange',
@@ -527,12 +527,8 @@ function CustomHabbitModal({
             />
           </div>
         )}
-        <div className={styles.boxErrorHabbit}>
-          {errorsState && (
-            <p className={styles.error}>
-              *извините, произошла ошибка сервера, попробуйте позже
-            </p>
-          )}
+        <div style={{ height: '20px', marginBottom: '5px' }}>
+          <NotificationModal />
         </div>
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>
