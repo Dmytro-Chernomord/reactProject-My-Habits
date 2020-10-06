@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import dateSelector from '../../redux/date/dateSelector';
 import habitsSelector from '../../redux/habits/habitsSelector';
 import habitsOperation from '../../redux/habits/habitsOperation';
-
+import CigaretteRemindModal from '../CigaretteRemindModal/CigaretteRemindModal';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import { CheckListPageHeader } from './CheckListPageHeader/CheckListPageHeader';
 import ItemHabit from './ItemHabit';
@@ -13,7 +13,7 @@ import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
 import { Scroll } from '../Scroll/Scroll';
 
 class CheckListPage extends Component {
-  state = { showModal: false, updata: false };
+  state = { showModal: '', updata: false };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.items !== null && this.props.items.length > 0) {
@@ -24,13 +24,13 @@ class CheckListPage extends Component {
     }
   }
 
-  toggleModal = () => {
-    this.setState({ showModal: true });
+  toggleModal = value => {
+    this.setState({ showModal: value });
   };
 
-  closeModal = () => {
-    this.setState({ showModal: false });
-  };
+  // closeModal = () => {
+  //   this.setState({ showModal: false });
+  // };
 
   render() {
     const { items } = this.props;
@@ -39,7 +39,12 @@ class CheckListPage extends Component {
         <Scroll
           staticComponentBefore={CheckListPageHeader}
           scrolledComponent={HabitsListInHome}
-          toggleModal={this.toggleModal}
+          dailyModal={() => {
+            this.toggleModal('daily');
+          }}
+          missedDays={() => {
+            this.toggleModal('missedDays');
+          }}
         />
         {/* <CheckListPageHeader toggleModal={this.toggleModal} /> */}
         {/* <div className={s.headerContainer}>
@@ -66,9 +71,20 @@ class CheckListPage extends Component {
             ))}
           </ul>
         </div> */}
+        {this.state.showModal === 'missedDays' && (
+          <CigaretteRemindModal
+            onClose={() => {
+              this.toggleModal('');
+            }}
+          ></CigaretteRemindModal>
+        )}
 
-        {this.state.showModal && (
-          <DailyResultModal onClose={this.closeModal}></DailyResultModal>
+        {this.state.showModal === 'daily' && (
+          <DailyResultModal
+            onClose={() => {
+              this.toggleModal('');
+            }}
+          ></DailyResultModal>
         )}
       </>
     );
