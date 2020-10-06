@@ -76,20 +76,19 @@ const removeHabit = id => dispatch => {
     .catch(err => dispatch(habitsAction.removeHabitError(err)));
 };
 
-const updateHabit = data => dispatch => {
+const updateHabit = data => async dispatch => {
   dispatch(habitsAction.setHabitsDataRequest());
-  axios
-    .patch('/habits', data)
-    .then(res => {
+  try {
+    await axios.patch('/habits', data).then(res => {
       // const dispatch = useDispatch();
       // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
       // console.log(res.data.updatedHabit._id);
       dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
-    })
-    .catch(error => {
-      console.log('aus operation', error.message);
-      // dispatch(habitsAction.setHabitsDataError(error.message));
     });
+  } catch (error) {
+    console.log('aus operation', error.message);
+    // dispatch(habitsAction.setHabitsDataError(error.message));
+  }
 };
 
 export default { setHabitsDataDay, setHabitsData, removeHabit, updateHabit };
