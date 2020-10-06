@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
@@ -10,23 +10,41 @@ import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 
 function CigaretteRemindModal({ onClose }) {
-  const [amount, setAmount] = useState([]);
+  const [amount, setAmount] = useState({});
   const dispatch = useDispatch();
 
   //   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const missedDates = useSelector(cigSelector.getMissedDatesArray);
   //   console.log(missedDates);
-
-  let data = {};
-
+  let arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   const handleInputChange = e => {
-    // const { value, name } = e.target;
+    let data = {};
+
+    const { value, name } = e.target;
     // const test = { data[name]: value };
     // data = { ...test };
     // setAmount({ id: name, number: value });
+    // setAmount({ id: name, number: value });
+    // console.log('value', value, 'name', name);
+    data[name] = value;
+    // console.log(data);
+    setAmount(prev => ({ ...prev, ...data }));
+    console.log(arr);
+    // for (let i = 0; i < arr.length; i++) {
+    //   const element = arr[i];
+    //   console.log(element);
+    //   if (i === name) {
+    //     console.log(name);
+    //   }
+    //   arr.splice(`${name}`, 0, `${value}`);
+    // }
+    // setAmount(data);
+    // data[name] = value;
+    // setAmount(prev => [...prev, ...data]);
   };
+  console.log(amount);
 
-  console.log(data);
+  // console.log(amount);
 
   //   const cigarettesStartedAt = useSelector(
   //     cigSelector.getCigarettesDataStartedAt,
@@ -65,7 +83,7 @@ function CigaretteRemindModal({ onClose }) {
             <input
               type="number"
               name={index}
-              value={amount}
+              // value={amount}
               onChange={handleInputChange}
               className={styles.input}
             />
