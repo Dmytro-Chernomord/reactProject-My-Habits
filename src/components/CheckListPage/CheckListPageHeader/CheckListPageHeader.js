@@ -22,14 +22,13 @@ export const CheckListPageHeader = ({ toggleModal }) => {
   );
   const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
 
-  const today = new Date();
-  const parseStartedAt = new Date(cigarettesStartedAt);
-  const dif = Math.floor(
-    (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
-  );
-
   useEffect(() => {
     if (cigarettesArray) {
+      const today = new Date();
+      const parseStartedAt = new Date(cigarettesStartedAt);
+      const dif = Math.floor(
+        (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
+      );
       const dates = checkSigaretteMissedDates(
         cigarettesArray,
         dif,
@@ -41,7 +40,7 @@ export const CheckListPageHeader = ({ toggleModal }) => {
         setNotiIsShown(true);
       }
     }
-  }, [cigarettesArray, dif, dispatch, parseStartedAt]);
+  }, [cigarettesArray, cigarettesStartedAt, dispatch]);
 
   const onCloseNoti = () => {
     setNotiIsShown(false);
