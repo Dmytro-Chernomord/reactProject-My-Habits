@@ -43,19 +43,33 @@ class ItemHabit extends Component {
   };
 
   render() {
-
-    const { name, efficiency, _id, iteration, data, planningTime } = this.props;
+    const {
+      name,
+      efficiency,
+      _id,
+      iteration,
+      data,
+      planningTime,
+      selectedDate,
+      currentDate,
+    } = this.props;
 
     const habitData = { _id, name, iteration, planningTime, data };
 
-
     const index = this.getIndex();
+
     const enabled = data[index] === null ? false : true;
 
-    const stateBut1 = data[index] === true ? true : false;
-    const stateBut2 = data[index] === false ? true : false;
+    let stateBut1 = data[index] === true ? true : false;
+    let stateBut2 = data[index] === false ? true : false;
     const color1 = stateBut1 && '#43D190';
     const color2 = stateBut2 && '#FE6083';
+
+    //нельзя отметить выполнение на перед
+    const enabledDate =
+      currentDate.slice(0, 10) < selectedDate.slice(0, 10) ? true : false;
+    stateBut1 = enabledDate ? true : stateBut1;
+    stateBut2 = enabledDate ? true : stateBut2;
     return (
       <>
         <h3 className={s.title}>{name}</h3>
@@ -136,6 +150,7 @@ class ItemHabit extends Component {
 
 const mapStateToProps = state => ({
   selectedDate: dateSelector.getSelectedDate(state),
+  currentDate: dateSelector.getCurrentDate(state),
 });
 
 const mapDispatchToprops = {
