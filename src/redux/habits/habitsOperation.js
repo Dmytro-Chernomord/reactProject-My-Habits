@@ -1,23 +1,28 @@
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import habitsAction from './habitsAction';
 
-const setHabitsDataDay = (item, key, index) => dispatch => {
+const setHabitsDataDay = (item, key, index) => async dispatch => {
   const newData = [];
   for (let i = 0; i < 21; i++) {
     newData[i] = i === index ? key : item.data[i];
   }
 
   dispatch(habitsAction.setHabitsDataRequest());
-  axios
-    .patch(`/habits`, { id: item._id, name: item.name, data: newData })
-    .then(res => {
-      // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
-      dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
-    })
-    .catch(err => dispatch(habitsAction.setHabitsDataError(err)));
+  const response = await axios.patch(`/habits`, {
+    id: item._id,
+    name: item.name,
+    data: newData,
+  });
+  try {
+    dispatch(habitsAction.setHabitsDataSuccess(response.data.updatedHabit));
+  } catch (err) {
+    dispatch(habitsAction.setHabitsDataError(err));
+  }
 };
 
-const setHabitsData = (items, date) => dispatch => {
+const setHabitsData = items => dispatch => {
+  const date = useSelector(state => state.data.currentDate);
   const nowDate = date.slice(0, 10);
   items.forEach(item => {
     const index = item.habitsDates.findIndex(el => el === nowDate);
