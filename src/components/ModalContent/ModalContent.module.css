@@ -7,11 +7,22 @@
   text-align: center;
 }
 
+.modalWrapperGreen {
+  position: relative;
+  box-sizing: border-box;
+  width: 784px;
+  height: 580px;
+  padding: 60px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  background-color: #43d190;
+}
+
 .modalCloseBtn {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .modalTitle {

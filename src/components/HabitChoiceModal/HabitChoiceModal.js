@@ -5,12 +5,7 @@ import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 
 import styles from '../ModalContent/ModalContent.module.css';
 
-function HabitChoiceModal({
-  onClick,
-  onClose,
-  isTemplateModal,
-  isCustomModal,
-}) {
+function HabitChoiceModal({ onClose, openCustom, openTemplate }) {
   return (
     <>
       <div className={styles.modalWrapper}>
@@ -21,27 +16,21 @@ function HabitChoiceModal({
         <Button
           type={'button'}
           green={true}
-          handelClick={() => {
-            onClick();
-            isTemplateModal();
-          }}
+          handelClick={openTemplate}
           label={'Выбрать шаблонную привычку +'}
         />
         <p className={styles.modalText}>Или создать свою собственную</p>
         <Button
           type={'button'}
           green={true}
-          handelClick={() => {
-            onClick();
-            isCustomModal();
-          }}
+          handelClick={openCustom}
           label={'Добавить свою привычку +'}
         />
         <div className={styles.emptyDiv}></div>
         <Button
           type={'button'}
           green={false}
-          handelClick={() => onClose()}
+          handelClick={onClose}
           label={'Отмена'}
         />
         <ButtonClose type="button" onClick={onClose} />
