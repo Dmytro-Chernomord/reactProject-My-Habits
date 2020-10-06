@@ -38,77 +38,78 @@ export default function LeftSideBarView({ match, onLogOut }) {
   const [showChoiseModal, setShowChoiseModal] = useState(false);
   const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [showCustomModal, setShowCustomModal] = useState(false);
+
   const [customModalData, setCustomModalData] = useState('');
+  const [openModal, setOpenModal] = useState('');
 
-  const closeAllModals = () => {
-    setShowChoiseModal(false);
-    setShowTemplateModal(false);
-    setShowCustomModal(false);
-  };
+  // const closeAllModals = () => {
+  //   setShowChoiseModal(false);
+  //   setShowTemplateModal(false);
+  //   setShowCustomModal(false);
+  // };
 
-  const returnToChoiseModal = () => {
-    setShowTemplateModal(false);
-    setShowChoiseModal(true);
-  };
+  // const returnToChoiseModal = () => {
+  //   setShowTemplateModal(false);
+  //   setShowChoiseModal(true);
+  // };
 
-  const isTemplateModal = () => {
-    setShowTemplateModal(prevShowModal => !prevShowModal);
-  };
+  // const isTemplateModal = () => {
+  //   setShowTemplateModal(prevShowModal => !prevShowModal);
+  // };
 
-  const isCustomModal = () => {
-    setShowCustomModal(prevShowModal => !prevShowModal);
-  };
+  // const isCustomModal = () => {
+  //   setShowCustomModal(prevShowModal => !prevShowModal);
+  // };
 
-  const onChooseHabit = () => {
-    setShowTemplateModal(false);
-    setShowCustomModal(true);
-  };
+  // const onChooseHabit = () => {
+  //   setShowTemplateModal(false);
+  //   setShowCustomModal(true);
+  // };
 
-  const handelClick = () => {
+  const handelClick = value => {
     setCustomModalData('');
-    setShowChoiseModal(true);
+    setOpenModal(value);
   };
   return (
     <>
       <Scroll
         match={match}
         onLogOut={onLogOut}
-        handelClick={handelClick}
+        handelClick={() => handelClick('add')}
         staticComponentBefore={LeftSideBarStatic}
         scrolledComponent={HabitsList}
         staticComponentAfter={LeftSideBarButton}
         isLeftBar={true}
       />
-      {showChoiseModal && (
+      {openModal === 'add' && (
         <HabitChoiceModal
-          isTemplateModal={isTemplateModal}
-          isCustomModal={isCustomModal}
-          onClose={closeAllModals}
-          onClick={() => {
-            closeAllModals();
-          }}
+          // isTemplateModal={isTemplateModal}
+          // isCustomModal={isCustomModal}
+          onClose={() => handelClick('')}
+          openCustom={() => handelClick('custom')}
+          openTemplate={() => handelClick('template')}
         ></HabitChoiceModal>
       )}
-      {showTemplateModal && (
+      {openModal === 'template' && (
         <HabitTemplateModal
           addData={setCustomModalData}
-          goBack={returnToChoiseModal}
-          onChooseHabit={onChooseHabit}
-          onClose={closeAllModals}
-          onClick={() => {
-            closeAllModals();
-          }}
+          goBack={() => handelClick('add')}
+          onChooseHabit={() => handelClick('custom')}
+          onClose={() => handelClick('')}
+          // onClick={() => {
+          //   closeAllModals();
+          // }}
         ></HabitTemplateModal>
       )}
-      {showCustomModal && (
+      {openModal === 'custom' && (
         <CustomHabbitModal
           habitName={customModalData}
-          isTemplateModal={isTemplateModal}
-          isCustomModal={isCustomModal}
-          onClose={closeAllModals}
-          onClick={() => {
-            closeAllModals();
-          }}
+          // isTemplateModal={isTemplateModal}
+          // isCustomModal={isCustomModal}
+          onClose={() => handelClick('')}
+          // onClick={() => {
+          //   closeAllModals();
+          // }}
         ></CustomHabbitModal>
       )}
     </>
