@@ -9,17 +9,19 @@ class HabitsListInHome extends Component {
     const { items } = this.props;
     return (
       <div className={s.container}>
-        <ul className={s.list}>
-          {items.map(item => (
-            <li
-              key={item._id}
-              className={s.item}
-              style={{ borderLeftColor: item.habitColor }}
-            >
-              <ItemHabit {...item} />
-            </li>
-          ))}
-        </ul>
+        {items !== null && items.length > 0 && (
+          <ul className={s.list}>
+            {items.map(item => (
+              <li
+                key={item._id}
+                className={s.item}
+                style={{ borderLeftColor: item.habitColor }}
+              >
+                <ItemHabit {...item} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }

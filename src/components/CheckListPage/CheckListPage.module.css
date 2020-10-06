@@ -1,6 +1,6 @@
 .container {
   background: #f6f6f6;
-  max-height: 800px;
+  /* max-height: 800px; */
   overflow-y: auto;
 }
 
