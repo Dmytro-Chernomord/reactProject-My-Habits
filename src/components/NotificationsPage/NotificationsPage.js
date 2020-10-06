@@ -1,47 +1,45 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, connect } from 'react-redux';
+import { useSelector, connect, useDispatch } from 'react-redux';
 import styles from './notification.module.css';
 import habitSelector from '../../redux/habits/habitsSelector';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './transition.css';
 import notificationsActions from '../../redux/notifications/notificationsActions';
 
-function Notifications({
-  onAddNotification,
-  notifications,
-  onRemoveNotification,
-}) {
+function Notifications({}) {
   const [isVisibleCompleted, setIsVisibleCompleted] = useState(false);
   const handleClickCompleted = () => {
     setIsVisibleCompleted(true);
-    onRemoveNotification();
+    dispatch(notificationsActions.removeNotification());
   };
   const [isVisibleHalfWay, setIsVisibleHalfWay] = useState(false);
   const handleClickHalfWay = () => {
     setIsVisibleHalfWay(true);
-    onRemoveNotification();
+    dispatch(notificationsActions.removeNotification());
   };
   const [isVisibleThreeDays, setIsVisibleThreeDays] = useState(false);
   const handleClickThreeDays = () => {
     setIsVisibleThreeDays(true);
-    onRemoveNotification();
+    dispatch(notificationsActions.removeNotification());
   };
   const [isVisibleFiveDays, setIsVisibleFiveDays] = useState(false);
   const handleClickFiveDays = () => {
     setIsVisibleFiveDays(true);
-    onRemoveNotification();
+    dispatch(notificationsActions.removeNotification());
   };
   const [isVisibleOneDay, setIsVisibleOneDay] = useState(false);
   const handleClickOneDay = () => {
     setIsVisibleOneDay(true);
-    onRemoveNotification();
+    dispatch(notificationsActions.removeNotification());
   };
   const [isVisibleReminder, setIsVisibleReminder] = useState(false);
   const handleClickReminder = () => {
     setIsVisibleReminder(true);
-    onRemoveNotification();
+    dispatch(notificationsActions.removeNotification());
   };
   const stateNotification = useSelector(state => state.notifications);
+  const dispatch = useDispatch();
+
   const filteredHabitsData = useSelector(state =>
     habitSelector.getFilterTodayHabits(state),
   );
@@ -63,7 +61,7 @@ function Notifications({
   const uncompletedDays = presentActiveDays.map(el =>
     el.filter(elm => elm === false),
   );
-  const youCanDoBetter = uncompletedDays.some(el => el.length > 0);
+  const youCanDoBetter = uncompletedDays.some(el => el.length > 7);
   const successfullDays = presentActiveDays.map(el =>
     el.filter(elm => elm === true),
   );
@@ -71,44 +69,31 @@ function Notifications({
 
   const youGotAchievment = successfullDays.some(el => el.length > 20);
 
-  const ref = useRef(notifications);
-
   useEffect(() => {
-    if (ref.current === notifications && youGotAchievment) {
-      onAddNotification();
+    if (youGotAchievment) {
+      dispatch(notificationsActions.addNotification());
     }
-    if (ref.current === notifications && youCanDoBetter) {
-      onAddNotification();
+    if (youCanDoBetter) {
+      dispatch(notificationsActions.addNotification());
     }
-    if (ref.current === notifications && youHaveFiveDaysLeft) {
-      onAddNotification();
+    if (youHaveFiveDaysLeft) {
+      dispatch(notificationsActions.addNotification());
     }
-    if (ref.current === notifications && youHaveThreeDaysLeft) {
-      onAddNotification();
+    if (youHaveThreeDaysLeft) {
+      dispatch(notificationsActions.addNotification());
     }
-    if (ref.current === notifications && oneDayLeft) {
-      onAddNotification();
+    if (oneDayLeft) {
+      dispatch(notificationsActions.addNotification());
     }
-    if (ref.current === notifications && halfWayTrough) {
-      onAddNotification();
+    if (halfWayTrough) {
+      dispatch(notificationsActions.addNotification());
     }
     return () => {
-      if (notifications === 1) {
-        onRemoveNotification();
+      if (stateNotification === 1) {
+        dispatch(notificationsActions.removeNotification());
       }
     };
-  }, [
-    ref,
-    youGotAchievment,
-    youCanDoBetter,
-    notifications,
-    youHaveFiveDaysLeft,
-    youHaveThreeDaysLeft,
-    oneDayLeft,
-    halfWayTrough,
-    onAddNotification,
-    onRemoveNotification,
-  ]);
+  }, [youGotAchievment, youCanDoBetter, youHaveFiveDaysLeft, youHaveThreeDaysLeft, oneDayLeft, halfWayTrough, dispatch, stateNotification]);
 
   return (
     <div className={styles.container}>
@@ -184,67 +169,4 @@ function Notifications({
   );
 }
 
-//  <div className={styles.container}>
-//       <TransitionGroup component="ul">
-//         {activeDays.map(el => (
-//           <CSSTransition
-//             classNames="option"
-//             timeout={250}
-//             key={el._id}
-//             unmountOnExit
-//           >
-//             <li className>
-//               {el.length === 0 &&
-//                 isVisible &&
-//                 ((
-//                   <div onClick={handleClick} className={styles.box}>
-//                     <h2 className={styles.title}>Привычка успешно освоена!</h2>
-
-//                     <p className={styles.text}>
-//                       Поздравляем! Вы успешно освоили свою привычку
-//                     </p>
-//                   </div>
-//                 ) ||
-//                   (el.length === 10 && (
-//                     <div onClick={handleClick} className={styles.box}>
-//                       <h2 className={styles.title}>
-//                         Поздравляем! Вы на половине пути!
-//                       </h2>
-//                       <p className={styles.text}>Большая часть позади!</p>
-//                     </div>
-//                   )) ||
-//                   (el.length === 18 && (
-//                     <div onClick={handleClick} className={styles.box}>
-//                       <h2 className={styles.title}>Осталось совсем немного!</h2>
-
-//                       <p className={styles.text}>
-//                         Осталось 3 дня чтобы завершить привычку!
-//                       </p>
-//                     </div>
-//                   )) ||
-//                   (el.length === 16 && isVisible && (
-//                     <div onClick={handleClick} className={styles.box}>
-//                       <h2 className={styles.title}>Осталось совсем немного!</h2>
-
-//                       <p className={styles.text}>
-//                         // Осталось 5 дня чтобы завершить привычку!
-//                       </p>
-//                     </div>
-//                   )))}
-//             </li>
-//           </CSSTransition>
-//         ))}
-//       </TransitionGroup>
-//     </div>
-
-const mapStateToPops = state => ({
-  // notifications: state.notifications,
-});
-const mapDispatchToProps = dispatch => ({
-  onAddNotification: value =>
-    dispatch(notificationsActions.addNotification(value)),
-  onRemoveNotification: value =>
-    dispatch(notificationsActions.removeNotification(value)),
-});
-
-export default connect(mapStateToPops, mapDispatchToProps)(Notifications);
+export default Notifications;
