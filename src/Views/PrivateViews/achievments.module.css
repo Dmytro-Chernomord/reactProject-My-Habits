@@ -1,7 +1,8 @@
 .container {
-  width: 842px;
-  margin-left: auto;
+  /* width: 842px; */
+  /* margin-left: auto;
   margin-right: auto;
+  width: 716px; */
 }
 .header {
   display: flex;
