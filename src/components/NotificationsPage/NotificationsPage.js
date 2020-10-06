@@ -89,19 +89,18 @@ function Notifications({}) {
       dispatch(notificationsActions.addNotification());
     }
     return () => {
-      if (stateNotification === 1) {
-        dispatch(notificationsActions.removeNotification());
-      }
+      //     if (stateNotification === 1) {
+      //       dispatch(notificationsActions.removeNotification());
+      //     }
     };
   }, [
-    youGotAchievment,
+    dispatch,
+    halfWayTrough,
+    oneDayLeft,
     youCanDoBetter,
+    youGotAchievment,
     youHaveFiveDaysLeft,
     youHaveThreeDaysLeft,
-    oneDayLeft,
-    halfWayTrough,
-    dispatch,
-    stateNotification,
   ]);
 
   return (
