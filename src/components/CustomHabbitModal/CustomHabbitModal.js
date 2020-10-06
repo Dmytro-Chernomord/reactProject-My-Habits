@@ -301,9 +301,9 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const name = ableToDelete ? info.name : habitName;
   const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
   // @Ihor _21DAY очень нужно для тестирования
-  const _21DAY = 1000 * 60 * 60 * 24 * 21;
-  const startDate = new Date() - _21DAY;
-
+  // const _21DAY = 1000 * 60 * 60 * 24 * 21;
+  // const startDate = new Date() - _21DAY;
+  const startDate = new Date();
   // const resetForm = () => {
   //   setName('');
   //   setDate('');
