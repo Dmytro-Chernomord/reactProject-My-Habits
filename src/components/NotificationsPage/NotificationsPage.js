@@ -8,6 +8,9 @@ import notificationsActions from '../../redux/notifications/notificationsActions
 
 function Notifications({}) {
   const stateNotification = useSelector(state => state.notifications.count);
+  const renderNotification = useSelector(
+    state => state.notifications.renderNotification,
+  );
   const setNotification = useSelector(
     state => state.notifications.setNotification,
   );
@@ -74,22 +77,26 @@ function Notifications({}) {
   const youGotAchievment = successfullDays.some(el => el.length > 20);
 
   useEffect(() => {
-    if (youGotAchievment && !setNotification) {
+    if (youGotAchievment && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (youCanDoBetter && !setNotification) {
+    if (youCanDoBetter && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (youHaveFiveDaysLeft && !setNotification) {
+    if (youHaveFiveDaysLeft && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (youHaveThreeDaysLeft && !setNotification) {
+    if (
+      youHaveThreeDaysLeft &&
+      !setNotification &&
+      stateNotification === null
+    ) {
       dispatch(notificationsActions.addNotification());
     }
-    if (oneDayLeft && !setNotification) {
+    if (oneDayLeft && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (halfWayTrough && !setNotification) {
+    if (halfWayTrough && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
     return () => {
@@ -97,6 +104,17 @@ function Notifications({}) {
       //       dispatch(notificationsActions.removeNotification());
       //     }
     };
+
+  }, [dispatch, halfWayTrough, oneDayLeft, setNotification, stateNotification, youCanDoBetter, youGotAchievment, youHaveFiveDaysLeft, youHaveThreeDaysLeft]);
+
+  useEffect(() => {
+    if (stateNotification == 0) {
+      dispatch(notificationsActions.setNotification());
+    }
+
+    return () => {};
+  }, [dispatch, stateNotification]);
+
   }, [
     dispatch,
     halfWayTrough,
@@ -107,6 +125,7 @@ function Notifications({}) {
     youHaveFiveDaysLeft,
     youHaveThreeDaysLeft,
   ]);
+
 
   return (
     <div className={styles.container}>
