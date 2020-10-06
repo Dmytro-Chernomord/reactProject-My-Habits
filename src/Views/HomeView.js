@@ -21,12 +21,13 @@ import toggle from '../redux/modal/modalOperation';
 import modalSelector from '../redux/modal/modalSelector';
 import quizSelector from '../redux/quiz/quizSelector';
 // import NotFound from '../components/NotFound/NotFound';
+import Layout from '../components/Layout/Layout';
 
-const styles = {
-  display: 'flex',
-  box: { outline: '1px solid teal' },
-  title: { backgroundColor: 'gray' },
-};
+// const styles = {
+//   display: 'flex',
+//   box: { outline: '1px solid teal' },
+//   title: { backgroundColor: 'gray' },
+// };
 
 class HomeView extends Component {
   // state = {
@@ -60,48 +61,50 @@ class HomeView extends Component {
     const { match } = this.props;
     return (
       <>
-        <div style={styles}>
-          <div style={styles.box}>
-            <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
-          </div>
-
-          <div style={styles.box}>
-            {/* <header style={styles.title}>title</header> */}
-            <div>
-              <Route
-                path={`${match.path}`}
-                exact
-                // component={CheckListPage}
-              >
-                <CheckListPage
-                // toggleModal={this.props.toggleModal}
-                // changeLayout={this.changeLayout}
-                />
-              </Route>
-              <Route
-                path={`${match.path}/Notifications`}
-                component={Notifications}
-              />
-              <Route path={`${match.path}/ProfilePage`}>
-                <ProfilePage
-                // toggleModal={this.props.toggleModal}
-                // changeLayout={this.changeLayout}
-                />
-              </Route>
-              <Route
-                path={`${match.path}/Achievments`}
-                component={Achievements}
-              />{' '}
-              <Route
-                path={`${match.path}/Subscriptions`}
-                component={Subscriptions}
-              />
-            </div>
-          </div>
-          <div style={styles.box}>
-            <RightSideBar />
-          </div>
-        </div>
+        {/* <div style={styles}>
+          <div style={styles.box}> */}
+        <Layout sections={'sides'}>
+          <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
+        </Layout>
+        {/* </div> */}
+        {/* <div style={styles.box}> */}
+        {/* <header style={styles.title}>title</header> */}
+        {/* <div> */}
+        <Layout sections={'middle'}>
+          <Route
+            path={`${match.path}`}
+            exact
+            // component={CheckListPage}
+          >
+            <CheckListPage
+            // toggleModal={this.props.toggleModal}
+            // changeLayout={this.changeLayout}
+            />
+          </Route>
+          <Route
+            path={`${match.path}/Notifications`}
+            component={Notifications}
+          />
+          <Route path={`${match.path}/ProfilePage`}>
+            <ProfilePage
+            // toggleModal={this.props.toggleModal}
+            // changeLayout={this.changeLayout}
+            />
+          </Route>
+          <Route path={`${match.path}/Achievments`} component={Achievements} />{' '}
+          <Route
+            path={`${match.path}/Subscriptions`}
+            component={Subscriptions}
+          />
+        </Layout>
+        {/* </div> */}
+        {/* </div> */}
+        {/* <div style={styles.box}> */}
+        <Layout sections={'sides'}>
+          <RightSideBar />
+        </Layout>
+        {/* </div> */}
+        {/* </div> */}
         {/* {this.props.showModal && (
           <ModalBackdrop onClose={this.props.toggleModal}>
             <ModalContent
