@@ -8,7 +8,7 @@ import s from './HabitsListInHome.module.css';
 class HabitsListInHome extends Component {
   render() {
     const { items } = this.props;
-    const sortItems = [...items].sort(sortByTime);
+    const sortItems = sortByTime(items);
     return (
       <div className={s.container}>
         {sortItems !== null && sortItems.length > 0 && (

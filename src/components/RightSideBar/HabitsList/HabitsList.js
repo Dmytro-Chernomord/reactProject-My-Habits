@@ -11,7 +11,7 @@ import styles from './HabitsList.module.css';
 export function HabitsList() {
   const habits = useSelector(state => habitsSelector.getFilterHabits(state));
 
-  const sortedHabits = [...habits].sort(sortByTime);
+  const sortedHabits = sortByTime(habits);
 
   return (
     <TransitionGroup component="ul" className={styles.List}>
