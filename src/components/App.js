@@ -7,8 +7,6 @@ import PublicRoute from './PublicRoute';
 import NotFound from '../components/NotFound/NotFound';
 import userOperation from '../redux/user/userOperation';
 import { CustomLoader } from './UIcomponents/CustomLoader/CustomLoader';
-import Layout from '../components/Layout/Layout';
-// import NotificationErrors from './notifications/NotificationErrors';
 
 class App extends Component {
   // componentDidMount() {
@@ -17,23 +15,20 @@ class App extends Component {
 
   render() {
     return (
-      <Layout>
-        <BrowserRouter>
-          {/* <NotificationErrors /> */}
-          <Suspense fallback={<CustomLoader />}>
-            <Switch>
-              {routes.map(route =>
-                route.private ? (
-                  <PrivateRoute key={route.label} {...route} />
-                ) : (
-                  <PublicRoute key={route.label} {...route} />
-                ),
-              )}
-              <Route component={NotFound} />
-            </Switch>
-          </Suspense>
-        </BrowserRouter>
-      </Layout>
+      <BrowserRouter>
+        <Suspense fallback={<CustomLoader />}>
+          <Switch>
+            {routes.map(route =>
+              route.private ? (
+                <PrivateRoute key={route.label} {...route} />
+              ) : (
+                <PublicRoute key={route.label} {...route} />
+              ),
+            )}
+            <Route component={NotFound} />
+          </Switch>
+        </Suspense>
+      </BrowserRouter>
     );
   }
 }

@@ -59,6 +59,7 @@
   font-family: 'Rubik', sans-serif;
   text-align: center;
   margin: 0;
+  color: black;
 }
 
 .modalText {
@@ -219,6 +220,7 @@
 }
 
 .textLabelDailyResult {
+  color: black;
   display: block;
   width: 180px;
   margin-right: 40px;
@@ -242,6 +244,7 @@
   width: 220px;
   padding: 10px 20px;
   background-color: #ffffff;
+  color: black;
   font-weight: normal;
   font-size: 18px;
   line-height: 1.16;

@@ -8,7 +8,7 @@ import notificationsActions from '../../../redux/notifications/notificationsActi
 import styles from './NavigationBar.module.css';
 
 const Navigation = ({ match }) => {
-  const notifications = useSelector(state => state.notifications);
+  const notifications = useSelector(state => state.notifications.count);
   return (
     <nav className={styles.container}>
       <ul className={styles.navList}>

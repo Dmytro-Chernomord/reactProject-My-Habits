@@ -78,6 +78,7 @@ const habitsReducer = createReducer([], {
 const cigarettesInitialStates = {
   data: [],
   startedAt: '',
+  missedDates: [],
 };
 const cigarettesReducer = createReducer(cigarettesInitialStates, {
   [actions.getOwnHabitsSuccess]: (_, actions) => {
@@ -85,6 +86,9 @@ const cigarettesReducer = createReducer(cigarettesInitialStates, {
   },
   [cigarettesActions.cigarettesAddSuccess]: (state, actions) => {
     return { ...state, data: [...actions.payload] };
+  },
+  [cigarettesActions.setMissedDates]: (state, actions) => {
+    return { ...state, missedDates: [...actions.payload] };
   },
   [authAction.logoutSuccess]: () => cigarettesInitialStates,
 });

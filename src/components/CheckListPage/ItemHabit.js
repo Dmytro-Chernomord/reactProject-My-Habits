@@ -51,8 +51,6 @@ class ItemHabit extends Component {
       selectedDate,
       currentDate,
     } = this.props;
-    // console.log('data ', data);
-    // data это массив с null / true / false
 
     const habitData = { _id, name, iteration, planningTime, data, efficiency };
 
@@ -63,25 +61,13 @@ class ItemHabit extends Component {
     let stateBut1 = data[index] === true ? true : false;
     let stateBut2 = data[index] === false ? true : false;
 
-    const color1 = stateBut1 && '#43D190';
-    const color2 = stateBut2 && '#FE6083';
-
     const statusOfHabit = data[index];
 
     //нельзя отметить выполнение наперед
-    const enabledDate =
+    let enabledDate =
       currentDate.slice(0, 10) < selectedDate.slice(0, 10) ? true : false;
-    stateBut1 = enabledDate ? true : stateBut1;
-    stateBut2 = enabledDate ? true : stateBut2;
-
-    // const MS_PER_DAY = 1000 * 60 * 60 * 24;
-    // const currentDateToNum = Math.floor(
-    //   new Date(currentDate).valueOf() / MS_PER_DAY,
-    // );
-    // const selectedDateToNum = Math.floor(
-    //   new Date(selectedDate).valueOf() / MS_PER_DAY,
-    // );
-    // const isDisabledDate = selectedDateToNum > currentDateToNum ? true : false;
+    // stateBut1 = enabledDate ? true : stateBut1;
+    // stateBut2 = enabledDate ? true : stateBut2;
 
     return (
       <>
@@ -94,32 +80,36 @@ class ItemHabit extends Component {
             <p className={s.text}>Прогресс привития привычки</p>
           </div>
           <div className={s.btnBox}>
-            <CheckListButton
-              isDisabled={stateBut1}
-              handelClick={() => {
-                this.props.setHabitsDataDay(this.props, true, index);
-                if (index === 1) {
-                  this.openModal('congrats');
-                  this.setState({ uniqueId: this.props._id });
-                }
-              }}
-              status={statusOfHabit}
-              isCheckMark={true}
-              label={'mark habit as done'}
-            />
-            <CheckListButton
-              isDisabled={stateBut2}
-              handelClick={() => {
-                this.props.setHabitsDataDay(this.props, false, index);
-                if (index === 1) {
-                  this.openModal('congrats');
-                  this.setState({ uniqueId: this.props._id });
-                }
-              }}
-              status={statusOfHabit}
-              isCheckMark={false}
-              label={'mark habit as unfulfilled'}
-            />
+            {!enabledDate && (
+              <CheckListButton
+                isDisabled={stateBut1}
+                handelClick={() => {
+                  this.props.setHabitsDataDay(this.props, true, index);
+                  if (index === 1) {
+                    this.openModal('congrats');
+                    this.setState({ uniqueId: this.props._id });
+                  }
+                }}
+                status={statusOfHabit}
+                isCheckMark={true}
+                label={'mark habit as done'}
+              />
+            )}
+            {!enabledDate && (
+              <CheckListButton
+                isDisabled={stateBut2}
+                handelClick={() => {
+                  this.props.setHabitsDataDay(this.props, false, index);
+                  if (index === 1) {
+                    this.openModal('congrats');
+                    this.setState({ uniqueId: this.props._id });
+                  }
+                }}
+                status={statusOfHabit}
+                isCheckMark={false}
+                label={'mark habit as unfulfilled'}
+              />
+            )}
           </div>
         </div>
         {/* <button

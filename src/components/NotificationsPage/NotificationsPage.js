@@ -7,6 +7,15 @@ import './transition.css';
 import notificationsActions from '../../redux/notifications/notificationsActions';
 
 function Notifications({}) {
+  const stateNotification = useSelector(state => state.notifications.count);
+  const renderNotification = useSelector(
+    state => state.notifications.renderNotification,
+  );
+  const setNotification = useSelector(
+    state => state.notifications.setNotification,
+  );
+  const dispatch = useDispatch();
+
   const [isVisibleCompleted, setIsVisibleCompleted] = useState(false);
   const handleClickCompleted = () => {
     setIsVisibleCompleted(true);
@@ -37,8 +46,6 @@ function Notifications({}) {
     setIsVisibleReminder(true);
     dispatch(notificationsActions.removeNotification());
   };
-  const stateNotification = useSelector(state => state.notifications);
-  const dispatch = useDispatch();
 
   const filteredHabitsData = useSelector(state =>
     habitSelector.getFilterTodayHabits(state),
@@ -70,22 +77,26 @@ function Notifications({}) {
   const youGotAchievment = successfullDays.some(el => el.length > 20);
 
   useEffect(() => {
-    if (youGotAchievment) {
+    if (youGotAchievment && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (youCanDoBetter) {
+    if (youCanDoBetter && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (youHaveFiveDaysLeft) {
+    if (youHaveFiveDaysLeft && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (youHaveThreeDaysLeft) {
+    if (
+      youHaveThreeDaysLeft &&
+      !setNotification &&
+      stateNotification === null
+    ) {
       dispatch(notificationsActions.addNotification());
     }
-    if (oneDayLeft) {
+    if (oneDayLeft && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
-    if (halfWayTrough) {
+    if (halfWayTrough && !setNotification && stateNotification === null) {
       dispatch(notificationsActions.addNotification());
     }
     return () => {
@@ -97,17 +108,38 @@ function Notifications({}) {
     dispatch,
     halfWayTrough,
     oneDayLeft,
+    setNotification,
+    stateNotification,
     youCanDoBetter,
     youGotAchievment,
     youHaveFiveDaysLeft,
     youHaveThreeDaysLeft,
   ]);
 
+  useEffect(() => {
+    if (stateNotification == 0) {
+      dispatch(notificationsActions.setNotification());
+    }
+
+    return () => {};
+  }, [dispatch, stateNotification]);
+
+  // }, [
+  //   dispatch,
+  //   halfWayTrough,
+  //   oneDayLeft,
+  //   setNotification,
+  //   youCanDoBetter,
+  //   youGotAchievment,
+  //   youHaveFiveDaysLeft,
+  //   youHaveThreeDaysLeft,
+  // ];
+
   return (
     <div className={styles.container}>
       <h2>You have {stateNotification} notifications</h2>
       <TransitionGroup>
-        {youHaveThreeDaysLeft && !isVisibleThreeDays && (
+        {youHaveThreeDaysLeft && !setNotification && !isVisibleThreeDays && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
             <div onClick={handleClickThreeDays} className={styles.box}>
               <h2 className={styles.title}>Осталось совсем немного!</h2>
@@ -118,7 +150,7 @@ function Notifications({}) {
           </CSSTransition>
         )}
 
-        {halfWayTrough && !isVisibleHalfWay && (
+        {halfWayTrough && !setNotification && !isVisibleHalfWay && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
             <div onClick={handleClickHalfWay} className={styles.box}>
               <h2 className={styles.title}>
@@ -129,7 +161,7 @@ function Notifications({}) {
           </CSSTransition>
         )}
 
-        {youHaveFiveDaysLeft && !isVisibleFiveDays && (
+        {youHaveFiveDaysLeft && !setNotification && !isVisibleFiveDays && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
             <div onClick={handleClickFiveDays} className={styles.box}>
               <h2 className={styles.title}>Осталось совсем немного!</h2>
@@ -140,7 +172,7 @@ function Notifications({}) {
           </CSSTransition>
         )}
 
-        {youCanDoBetter && !isVisibleReminder && (
+        {youCanDoBetter && !setNotification && !isVisibleReminder && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
             <div onClick={handleClickReminder} className={styles.box}>
               <h2 className={styles.title}>Не сдавайся!</h2>
@@ -151,7 +183,7 @@ function Notifications({}) {
           </CSSTransition>
         )}
 
-        {youGotAchievment && !isVisibleCompleted && (
+        {youGotAchievment && !setNotification && !isVisibleCompleted && (
           <CSSTransition classNames="option" timeout={250}>
             <div onClick={handleClickCompleted} className={styles.box}>
               <h2 className={styles.title}>Привычка успешно освоена!</h2>
@@ -162,7 +194,7 @@ function Notifications({}) {
           </CSSTransition>
         )}
 
-        {oneDayLeft && !isVisibleOneDay && (
+        {oneDayLeft && !setNotification && !isVisibleOneDay && (
           <CSSTransition classNames="option" timeout={250} unmountOnExit>
             <div onClick={handleClickOneDay} className={styles.box}>
               <h2 className={styles.title}>Ура!!! Остался один день.</h2>

@@ -3,6 +3,7 @@
   min-height: 900px;
   overflow: hidden;
   display: flex;
+  width: 100%;
   flex-direction: column;
 }
 
