@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ModalBackdrop from '../Modal/Modal';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import Button from '../UIcomponents/Button/Button';
@@ -7,9 +7,9 @@ import habitsSelector from '../../redux/habits/habitsSelector';
 import habits from '../../templateHabitsList.json';
 import styles from '../ModalContent/ModalContent.module.css';
 
-function HabitTemplateModal({ onClick, addData, goBack, onChooseHabit }) {
+function HabitTemplateModal({ addData, goBack, onChooseHabit, onClose }) {
   const userHabits = useSelector(habitsSelector.getAllHabits);
-  const userHabitsNames = userHabits.map(({ name }) => name);
+  const userHabitsNames = userHabits.map(({ name }) => name.toLowerCase());
 
   return (
     <div className={styles.modalWrapper}>
@@ -22,7 +22,7 @@ function HabitTemplateModal({ onClick, addData, goBack, onChooseHabit }) {
             <li key={id} className={styles.modalListItem}>
               <button
                 className={
-                  userHabitsNames.includes(name)
+                  userHabitsNames.includes(name.toLowerCase())
                     ? styles.modalItemDisabled
                     : styles.modalItem
                 }
@@ -41,10 +41,10 @@ function HabitTemplateModal({ onClick, addData, goBack, onChooseHabit }) {
         <Button
           type={'button'}
           green={false}
-          handelClick={() => goBack()}
+          handelClick={goBack}
           label={'Назад'}
         />{' '}
-        <ButtonClose type="button" onClick={onClick} />
+        <ButtonClose type="button" onClick={onClose} />
       </div>
     </div>
   );

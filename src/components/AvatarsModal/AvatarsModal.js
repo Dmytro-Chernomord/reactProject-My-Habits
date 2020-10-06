@@ -3,7 +3,8 @@ import AvatarUser from '../AvatarUser/AvatarUser';
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
-
+import { NavLink } from 'react-router-dom';
+import routes from '../../routes';
 import styles from '../ModalContent/ModalContent.module.css';
 
 function AvatarsModal({ onClose }) {
@@ -16,12 +17,14 @@ function AvatarsModal({ onClose }) {
         Закрыть
       </button> */}
       <div className={styles.btnFolder}>
-        <Button
-          type={'button'}
-          green={false}
-          handelClick={() => onClose()}
-          label={'Закрыть'}
-        />
+        <NavLink to={`home/ProfilePage`}>
+          <Button
+            type={'button'}
+            green={false}
+            handelClick={() => onClose()}
+            label={'Закрыть'}
+          />
+        </NavLink>
       </div>
       <ButtonClose type="button" onClick={onClose} />
     </div>

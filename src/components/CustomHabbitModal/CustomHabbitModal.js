@@ -23,6 +23,7 @@ import './customCalendar.css';
 import styles from '../ModalContent/ModalContent.module.css';
 import { teal } from '@material-ui/core/colors';
 import ModalBackdrop from '../Modal/Modal';
+import convertIteration from '../../helpers/convertIteration';
 
 const personalStyle = `
  .calendarBox .react-datepicker__input-container > input { 
@@ -283,7 +284,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
+function CustomHabbitModal({
+  habitName,
+  onClose,
+  onClick,
+  ableToDelete,
+  info,
+  repeatHabit,
+}) {
   const classes = useStyles();
   // const [name, setName] = useState(ableToDelete ? data.name : habitName);
   // const [time, setTime] = useState(
@@ -298,11 +306,17 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
     mode: 'onChange',
   });
 
-  const name = ableToDelete ? info.name : habitName;
+  const name = ableToDelete || repeatHabit ? info.name : habitName;
   const time = ableToDelete ? info.planningTime.slice(11, 16) : '';
+
+  const iteration = ableToDelete ? info.iteration : '';
+
+  const startDate = new Date();
+
+
   // @Ihor _21DAY очень нужно для тестирования
-  const _21DAY = 1000 * 60 * 60 * 24 * 21;
-  const startDate = new Date() - _21DAY;
+  // const _21DAY = 1000 * 60 * 60 * 24 * 21;
+  // const startDate = new Date() - _21DAY;
 
   // const resetForm = () => {
   //   setName('');
@@ -313,9 +327,7 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   const onSubmit = data => {
     const piece = data.datePicker.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
-    console.log(ableToDelete);
     if (ableToDelete) {
-      console.log(info);
       dispatch(
         habitsOperation.updateHabit({
           id: info._id,
@@ -339,15 +351,15 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
   };
 
   const habits = useSelector(state => state.habits);
-  console.log(habits);
+  // console.log(habits);
   const ref = useRef(habits.length);
-  console.log(ref);
+  // console.log(ref);
   // console.log('cl', habits[habits.length - 1]._id === ref.current);
 
   useEffect(() => {
-    console.log(ref.current === habits.length);
-    ref.current !== habits.length && onClick();
-  }, [habits, onClick]);
+    // console.log(ref.current === habits.length);
+    ref.current !== habits.length && onClose();
+  }, [habits, onClose]);
 
   return (
     <div className={styles.modalWrapper}>
@@ -450,37 +462,61 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
         </div>
         <label className={styles.label}>
           <span className={styles.textLabel}>Повторение</span>
-          <FormControl className={classes.margin}>
-            <InputLabel id="demo-customized-select-label"></InputLabel>
-            <Controller
-              control={control}
+          {ableToDelete && (
+            <input
+              type="text"
               name="iteration"
-              as={({ onChange, value }) => (
-                <Select
-                  labelId="demo-customized-select-label"
-                  id="demo-customized-select"
-                  value={value}
-                  onChange={onChange}
-                  input={<BootstrapInput />}
-                  disabled={ableToDelete}
-                >
-                  <MenuItem value="allday">Ежедневно</MenuItem>
-                  <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
-                  <MenuItem value="weekend">Сб-Вс</MenuItem>
-                  <MenuItem value="firstset">Пн-Ср-Пт</MenuItem>
-                  <MenuItem value="secondset">Вт-Чт-Сб</MenuItem>
-                  <MenuItem value="eachTwoDays">Раз в 2 дня</MenuItem>
-                  <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
-                </Select>
-              )}
-              // rules={{
-              //   required: {
-              //     value: true,
-              //     message: '*обязательное поле ввода',
-              //   },
-              // }}
+              // id="name"
+              defaultValue={convertIteration(iteration)}
+              className={styles.input}
+              autoFocus="autofocus"
+              autoComplete="off"
+              disabled={true}
+              ref={register({
+                required: { value: true, message: '*обязательное поле ввода' },
+                minLength: {
+                  value: 2,
+                  message: '*название должно содержать не менее двух значений',
+                },
+              })}
+              style={{
+                outlineColor: errors.name ? '#fe6083' : '#43d190',
+              }}
             />
-          </FormControl>
+          )}
+          {!ableToDelete && (
+            <FormControl className={classes.margin}>
+              <InputLabel id="demo-customized-select-label"></InputLabel>
+              <Controller
+                control={control}
+                name="iteration"
+                as={({ onChange, value }) => (
+                  <Select
+                    labelId="demo-customized-select-label"
+                    id="demo-customized-select"
+                    value={value}
+                    onChange={onChange}
+                    input={<BootstrapInput />}
+                    disabled={ableToDelete}
+                  >
+                    <MenuItem value="allday">Ежедневно</MenuItem>
+                    <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
+                    <MenuItem value="weekend">Сб-Вс</MenuItem>
+                    <MenuItem value="firstset">Пн-Ср-Пт</MenuItem>
+                    <MenuItem value="secondset">Вт-Чт-Сб</MenuItem>
+                    <MenuItem value="eachTwoDays">Раз в 2 дня</MenuItem>
+                    <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
+                  </Select>
+                )}
+                rules={{
+                  required: {
+                    value: true,
+                    message: '*обязательное поле ввода',
+                  },
+                }}
+              />
+            </FormControl>
+          )}
         </label>
         {ableToDelete && (
           <div className={styles.btnRemoveFolder}>
@@ -504,7 +540,7 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
             <Button
               type={'button'}
               green={false}
-              handelClick={() => onClick()}
+              handelClick={() => onClose()}
               label={'Отмена'}
             />
           </div>
@@ -513,7 +549,7 @@ function CustomHabbitModal({ habitName, onClick, ableToDelete, info }) {
           </div>
         </div>
       </form>{' '}
-      <ButtonClose type="button" onClick={onClick} />
+      <ButtonClose type="button" onClick={onClose} />
     </div>
   );
 }
