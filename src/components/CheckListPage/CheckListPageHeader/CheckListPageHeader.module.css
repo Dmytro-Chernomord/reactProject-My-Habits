@@ -3,9 +3,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 33px 62px;
+  padding: 34px 62px;
+  width: 100%;
   background: #ffffff;
   border: 1px solid #d5e1dc;
+  border-radius: 0px;
 }
 
 .header {

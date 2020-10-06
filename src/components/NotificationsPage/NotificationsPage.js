@@ -97,7 +97,16 @@ function Notifications({}) {
       //       dispatch(notificationsActions.removeNotification());
       //     }
     };
-  }, [dispatch, halfWayTrough, oneDayLeft, setNotification, youCanDoBetter, youGotAchievment, youHaveFiveDaysLeft, youHaveThreeDaysLeft]);
+  }, [
+    dispatch,
+    halfWayTrough,
+    oneDayLeft,
+    setNotification,
+    youCanDoBetter,
+    youGotAchievment,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+  ]);
 
   return (
     <div className={styles.container}>
