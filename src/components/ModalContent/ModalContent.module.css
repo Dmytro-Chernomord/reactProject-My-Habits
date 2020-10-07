@@ -350,3 +350,11 @@
   margin-top: 10px;
   margin-bottom: 25px;
 }
+
+.messageCogarette {
+  font-size: 14px;
+  line-height: 1.12;
+  height: 20px;
+  text-align: start;
+  margin-left: 330px;
+}
