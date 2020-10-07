@@ -39,10 +39,10 @@ function DailyResultModal({ onClose }) {
       setMessage('Жаль, но мы не видим вашего прогресса');
     } else if (num + 1 <= value && 100 > value) {
       setColorText('#ff0000');
-      setMessage('Плохо! Не здавайтесь, у вас все получится!');
+      setMessage('Плохо! Не сдавайтесь, у вас все получится!');
     } else {
       setColorText('#ff4f00');
-      setMessage(`Не очень хорошо. Но лучше чем ${cigarettePerDay}`);
+      setMessage(`Не очень хорошо. Но лучше, чем ${cigarettePerDay}`);
     }
     if (value === '') {
       setColorText('#fe6083');

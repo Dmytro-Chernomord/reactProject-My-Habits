@@ -98,7 +98,7 @@ function InterviewModal({ onClose }) {
         </label>
         <label htmlFor="time" className={styles.labelQuiz}>
           <span className={styles.textLabelQuiz}>
-            Сколько вемени у Вас уходит на 1 сигарету?
+            Сколько времени у Вас уходит на 1 сигарету?
           </span>
           <input
             type="number"
