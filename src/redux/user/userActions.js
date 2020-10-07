@@ -13,6 +13,7 @@ const addUserInfoSuccess = createAction('user/addUserInfoSuccess');
 const addUserInfoError = createAction('user/addUserInfoError');
 
 const changePasswordRequest = createAction('user/changePasswordRequest');
+const changePasswordSuccess = createAction('user/changePasswordRequest');
 const changePasswordError = createAction('user/changePasswordError');
 
 const addUserSubscriptionRequest = createAction(
@@ -46,6 +47,7 @@ export default {
   addCreditCardRequest,
   addCreditCardSuccess,
   addCreditCardError,
+  changePasswordSuccess,
   changePasswordRequest,
   changePasswordError,
 };

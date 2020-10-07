@@ -11,11 +11,32 @@ const setNotification = createReducer(false, {
   //   [notificationsActions.removeNotification]: () => true,
 });
 
-// const renderNotification = createReducer(true, {
-//   [notificationsActions.removeNotification]: () => false,
-// });
+const renderAchievment = createReducer(false, {
+  [notificationsActions.renderAchievment]: () => true,
+});
+const renderReminder = createReducer(false, {
+  [notificationsActions.renderReminder]: () => true,
+});
+const renderFiveDays = createReducer(false, {
+  [notificationsActions.renderFiveDays]: () => true,
+});
+const renderThreeDays = createReducer(false, {
+  [notificationsActions.renderThreeDays]: () => true,
+});
+const renderOneDay = createReducer(false, {
+  [notificationsActions.renderOneDay]: () => true,
+});
+const renderHalfWay = createReducer(false, {
+  [notificationsActions.renderHalfWay]: () => true,
+});
+
 export default combineReducers({
   count,
   setNotification,
-  //   renderNotification
+  renderAchievment,
+  renderReminder,
+  renderThreeDays,
+  renderFiveDays,
+  renderOneDay,
+  renderHalfWay,
 });

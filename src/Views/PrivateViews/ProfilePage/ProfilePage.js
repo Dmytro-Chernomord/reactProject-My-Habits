@@ -77,7 +77,7 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                         className={styles.btnPassword}
                         onClick={() => setShowPassword(prev => !prev)}
                       >
-                        Изменить пароль
+                        {showPassword ? 'Закрыть пароли' : 'Изменить пароль'}
                       </button>
                       <CSSTransition
                         in={showPassword}

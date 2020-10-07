@@ -4,14 +4,18 @@
 .list {
   list-style: none;
   margin: 0;
-  padding: 62px;
+  /* padding: 62px; */
+  padding-top: 37px;
+  padding-left: 16px;
+  padding-bottom: 40px;
+  padding-right: 16px;
 }
 
 .item {
   position: relative;
   /* margin: 30px auto; */
   padding: 20px 30px;
-  width: 720px;
+  /* width: 675px; */
   background: #ffffff;
   /* #EFEEFE */
   box-shadow: 0px 2px 8px #efeefe;
