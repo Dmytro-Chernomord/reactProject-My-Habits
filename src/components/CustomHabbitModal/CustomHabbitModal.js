@@ -76,7 +76,7 @@ const personalStyle = `
   }
   .calendarBox .react-datepicker__month {
     
-    font-family: "Montserrat";
+    
      background-color: rgba(255, 255, 255, 0.7);
     color: #181c27;
   display: flex;
