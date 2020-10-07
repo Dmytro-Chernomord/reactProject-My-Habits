@@ -56,7 +56,7 @@ const HomeView = () => {
   const daysLeft = habits.map(el => el.filter(elm => elm === null));
   const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
   const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
-  const halfWayTrough = daysLeft.some(el => el.length > 1);
+  const halfWayTrough = daysLeft.some(el => el.length === 10);
 
   const youHaveThreeDaysLeftArr = habitsData.filter(el => {
     if (typeof el.data === 'boolean') {
@@ -64,15 +64,16 @@ const HomeView = () => {
       return el;
     }
   });
-  const youHaveFiveDaysLeftArr = habitsData.filter(el => {
-    console.log(el, 'el');
+  const youHaveFiveDaysLeftArr = habitsData.filter(el =>
+    el.data.some(elm => elm),
+  );
 
-    el.data.some(bul => {
-      if (typeof bul === 'boolean') {
-        return el;
-      }
-    });
-  });
+  // const goodStart = oneSucces.filter(one => {
+  //   if (one.data === true) {
+  //     return one;
+  //   }
+  // });
+  // console.log(goodStart);
   console.log(youHaveFiveDaysLeftArr);
   //newNotification
 
