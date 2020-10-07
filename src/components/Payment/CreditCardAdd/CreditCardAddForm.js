@@ -13,7 +13,6 @@ function CardNumbInput(props) {
     <InputMask
       mask={props.mask}
       // mask="9999 XXXX XXXX XXXX"
-      defaultValue={props.ee}
       onChange={props.onChange}
       value={props.value}
       name="number"
@@ -53,7 +52,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   const [errorRequiredDate, setErrorRequiredDate] = useState(false);
   const [errorShow, setErrorShow] = useState(false);
   const [dateValid, setDateValid] = useState(null);
-  const [mask, setMask] = useState('9999/9999/9999/9999');
+  const [mask, setMask] = useState('9999 9999 9999 9999');
 
   const dispatch = useDispatch();
 
@@ -62,7 +61,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   }, [dispatch, number, timeExpiration]);
 
   const handleNumber = ({ target: { value } }) => {
-    setMask('9999/9999/9999/9999');
+    setMask('9999 9999 9999 9999');
     if (value.split('_').length === 17) {
       setErrorRequiredNumber(true);
       setErrorNumber(false);
@@ -75,15 +74,15 @@ const AddCreditCardForm = ({ closeForm }) => {
       setErrorRequiredNumber(false);
       setErrorShow(false);
     }
+
     setNumber(value);
   };
 
   const handleBlur = () => {
-    const num = number.split('/');
+    const num = number.split(' ');
     const xxxx = ['XXXX', 'XXXX', 'XXXX'];
     num.splice(1, 3, ...xxxx);
-    setMask(num.join('/'));
-    setNumber(num.join('/'));
+    setMask(num.join(' '));
   };
 
   const handletimeExpiration = ({ target: { value } }) => {
@@ -152,7 +151,11 @@ const AddCreditCardForm = ({ closeForm }) => {
 
   return (
     <div className={styles.boxFormPassword}>
-      <Cards number={number} expiry={timeExpiration} />
+      <Cards
+        number={number}
+        expiry={timeExpiration}
+        placeholders={{ name: '' }}
+      />
       <form className={styles.formProfile} onSubmit={onSubmit}>
         <div className={styles.boxErrorCard}>
           {errorNumber && (
