@@ -76,7 +76,7 @@ class ItemHabit extends Component {
             <h3 className={s.title}>{name}</h3>
             <ProgressBar completed={efficiency} />
             <span className={s.progressNumber}>{efficiency}%</span>
-            <span>{index}</span>
+            {/* <span>{index}</span> */}
             <p className={s.text}>Прогресс привития привычки</p>
           </div>
           <div className={s.btnBox}>
@@ -85,7 +85,7 @@ class ItemHabit extends Component {
                 isDisabled={stateBut1}
                 handelClick={() => {
                   this.props.setHabitsDataDay(this.props, true, index);
-                  if (index === 1) {
+                  if (index === 20) {
                     this.openModal('congrats');
                     this.setState({ uniqueId: this.props._id });
                   }
@@ -100,7 +100,7 @@ class ItemHabit extends Component {
                 isDisabled={stateBut2}
                 handelClick={() => {
                   this.props.setHabitsDataDay(this.props, false, index);
-                  if (index === 1) {
+                  if (index === 20) {
                     this.openModal('congrats');
                     this.setState({ uniqueId: this.props._id });
                   }
