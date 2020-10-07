@@ -23,7 +23,7 @@
 }
 
 .input {
-  width: 345px;
+  min-width: 300px;
   padding: 10px 20px;
   background-color: #ffffff;
   font-weight: normal;

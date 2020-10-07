@@ -168,16 +168,17 @@ h2 {
   background-image: linear-gradient(#f8c302f1 3.75%, #fe6082fc 94.69%);
   position: absolute;
   display: block;
-  width: 323px;
-  height: 296px;
+  width: 280px;
+  height: 100px;
   border-radius: 5px;
   color: #414040;
   box-shadow: 2px 2px 5px 0px rgba(69, 67, 67, 0.75);
   padding: 17px 30px 10px 30px;
   font-size: 18px;
   text-align: center;
-  right: -191px;
+  right: -140px;
   z-index: 9;
+  color: #fff;
 }
 
 .StopBtn {
