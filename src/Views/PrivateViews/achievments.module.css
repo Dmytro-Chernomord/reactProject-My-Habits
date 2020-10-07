@@ -7,13 +7,18 @@
   display: flex;
   justify-content: space-between;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 42px;
   padding-left: 62px;
   padding-right: 79px;
   background: #ffffff;
-  border: 1px solid #d5e1dc;
+  border-bottom: 1px solid #d5e1dc;
   border-radius: 0px;
-  height: 114px;
+  height: 115px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-style: normal;
+  color: #4f4f4f;
+  font-weight: 400;
 }
 .title {
   margin: 0px;

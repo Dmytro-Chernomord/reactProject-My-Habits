@@ -9,6 +9,8 @@ const renderFiveDays = createAction('notification/renderFiveDays');
 const renderThreeDays = createAction('notification/renderThreeDays');
 const renderOneDay = createAction('notification/renderOneDay');
 const renderHalfWay = createAction('notification/renderHalfway');
+const saverTime = createAction('notification/saverTime');
+
 export default {
   addNotification,
   removeNotification,
@@ -19,4 +21,5 @@ export default {
   renderFiveDays,
   renderOneDay,
   renderHalfWay,
+  saverTime,
 };

@@ -5,13 +5,14 @@ import operations from '../../../redux/user/userOperation';
 import Button from '../../Button/Button';
 import styles from '../../ChangePassword/ChangePassword.module.css';
 import NotificationModal from '../../notifications/NotificationModal';
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css';
 
 function CardNumbInput(props) {
   return (
     <InputMask
       mask={props.mask}
       // mask="9999 XXXX XXXX XXXX"
-      defaultValue={props.ee}
       onChange={props.onChange}
       value={props.value}
       name="number"
@@ -43,7 +44,7 @@ function ExpirationDateInput(props) {
   );
 }
 const AddCreditCardForm = ({ closeForm }) => {
-  const [number, setNumber] = useState('');
+  const [numbers, setNumber] = useState('');
   const [timeExpiration, setTimeExpiration] = useState('');
   const [errorNumber, setErrorNumber] = useState(false);
   const [errorDate, setErrorDate] = useState(false);
@@ -51,16 +52,20 @@ const AddCreditCardForm = ({ closeForm }) => {
   const [errorRequiredDate, setErrorRequiredDate] = useState(false);
   const [errorShow, setErrorShow] = useState(false);
   const [dateValid, setDateValid] = useState(null);
-  const [mask, setMask] = useState('9999/9999/9999/9999');
+  const [mask, setMask] = useState('9999 9999 9999 9999');
 
   const dispatch = useDispatch();
 
   const addCreditCard = useCallback(() => {
+    const str = numbers;
+    const secretNumber = str.slice(0, 5);
+    const number = secretNumber + `XXXX XXXX XXXX`;
+
     dispatch(operations.addCreditCard({ number, timeExpiration }));
-  }, [dispatch, number, timeExpiration]);
+  }, [dispatch, numbers, timeExpiration]);
 
   const handleNumber = ({ target: { value } }) => {
-    setMask('9999/9999/9999/9999');
+    setMask('9999 9999 9999 9999');
     if (value.split('_').length === 17) {
       setErrorRequiredNumber(true);
       setErrorNumber(false);
@@ -73,15 +78,15 @@ const AddCreditCardForm = ({ closeForm }) => {
       setErrorRequiredNumber(false);
       setErrorShow(false);
     }
+
     setNumber(value);
   };
 
   const handleBlur = () => {
-    const num = number.split('/');
+    const num = numbers.split(' ');
     const xxxx = ['XXXX', 'XXXX', 'XXXX'];
     num.splice(1, 3, ...xxxx);
-    setMask(num.join('/'));
-    setNumber(num.join('/'));
+    setMask(num.join(' '));
   };
 
   const handletimeExpiration = ({ target: { value } }) => {
@@ -150,6 +155,11 @@ const AddCreditCardForm = ({ closeForm }) => {
 
   return (
     <div className={styles.boxFormPassword}>
+      <Cards
+        number={numbers}
+        expiry={timeExpiration}
+        placeholders={{ name: '' }}
+      />
       <form className={styles.formProfile} onSubmit={onSubmit}>
         <div className={styles.boxErrorCard}>
           {errorNumber && (
@@ -164,7 +174,7 @@ const AddCreditCardForm = ({ closeForm }) => {
           <CardNumbInput
             onChange={handleNumber}
             name="number"
-            value={number}
+            value={numbers}
             type="data"
             mask={mask}
             handleBlur={handleBlur}

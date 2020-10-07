@@ -58,7 +58,7 @@
   font-family: 'Rubik';
   display: flex;
   flex-direction: column;
-  width: 374px;
+  width: 350px;
   height: 400px;
   border-radius: 0px;
   border: none;
@@ -86,14 +86,14 @@
   padding: 0px;
   display: flex;
   background-color: #43d190;
-  margin-left: 120px;
+  margin: 0 auto;
   color: #ffff;
   border-radius: 5px;
   width: 120px;
 }
 .calendar .react-datepicker__month {
   display: flex;
-  width: 378px;
+  width: 350px;
   max-height: 392px;
   height: 100%;
   flex-direction: column;
@@ -261,7 +261,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 378px;
+  width: 350px;
   padding: 5px 0;
   margin-bottom: 30px;
 }
