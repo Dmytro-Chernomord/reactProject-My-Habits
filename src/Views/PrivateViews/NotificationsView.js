@@ -3,7 +3,6 @@ import React from 'react';
 import Notifications from '../../components/NotificationsPage/NotificationsPage';
 // import Header from '../../components/Header/Header';
 export default function NotificationsView({
-  habitsDatas,
   oneDayLeft,
   setNotification,
   youHaveThreeDaysLeft,
@@ -18,7 +17,6 @@ export default function NotificationsView({
         youHaveThreeDaysLeft={youHaveThreeDaysLeft}
         setNotification={setNotification}
         oneDayLeft={oneDayLeft}
-        habitsDatas={{ habitsDatas }}
         halfWayTrough={halfWayTrough}
         youHaveFiveDaysLeft={youHaveFiveDaysLeft}
         youCanDoBetter={youCanDoBetter}

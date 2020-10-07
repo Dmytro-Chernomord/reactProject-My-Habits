@@ -42,30 +42,11 @@ const HomeView = () => {
   const habitsData = useSelector(state => state.habits);
 
   const stateNotification = useSelector(state => state.notifications.count);
-  const renderAchievment = useSelector(
-    state => state.notifications.renderAchievment,
-  );
-  const renderFiveDays = useSelector(
-    state => state.notifications.renderFiveDays,
-  );
-  const renderThreeDays = useSelector(
-    state => state.notifications.renderThreeDays,
-  );
-  const renderOneDay = useSelector(state => state.notifications.renderOneDay);
-  const renderReminder = useSelector(
-    state => state.notifications.renderReminder,
-  );
-  const renderHalfWay = useSelector(state => state.notifications.renderHalfWay);
+
   const setNotification = useSelector(
     state => state.notifications.setNotification,
   );
 
-  // const filteredHabitsData = useSelector(state =>
-  //   habitSelector.getFilterTodayHabits(state),
-  // );
-  // const habitsData = useSelector(state => state.habits);
-  // const habitsData = [...habitsDatas.habitsDatas];
-  // console.log(habitsDatas.habitsDatas);
   const habits = habitsData.map(el => el.data);
 
   const activeDays = habits.filter(el =>
@@ -156,7 +137,6 @@ const HomeView = () => {
             setNotification={setNotification}
             stateNotification={stateNotification}
             oneDayLeft={oneDayLeft}
-            habitsDatas={habitsData}
             youHaveThreeDaysLeft={youHaveThreeDaysLeft}
             halfWayTrough={halfWayTrough}
             youHaveFiveDaysLeft={youHaveFiveDaysLeft}

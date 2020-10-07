@@ -6,37 +6,9 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './transition.css';
 import notificationsActions from '../../redux/notifications/notificationsActions';
 
-// const testNotification = () => {
-//   const habitsData = useSelector(state => state.habits);
-//   const habits = habitsData.map(el => el.data);
-
-//   const activeDays = habits.filter(el =>
-//     el.filter(elm => typeof elm === 'boolean'),
-//   );
-
-//   const daysLeft = habits.map(el => el.filter(elm => elm === null));
-//   const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
-//   const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
-//   const halfWayTrough = daysLeft.some(el => el.length > 1);
-
-//   const presentActiveDays = activeDays.filter(elm => elm.length > 0);
-
-//   const uncompletedDays = presentActiveDays.map(el =>
-//     el.filter(elm => elm === false),
-//   );
-//   const youCanDoBetter = uncompletedDays.some(el => el.length > 0);
-//   const successfullDays = presentActiveDays.map(el =>
-//     el.filter(elm => elm === true),
-//   );
-//   const oneDayLeft = daysLeft.some(el => el.length === 1);
-
-//   const youGotAchievment = successfullDays.some(el => el.length > 20);
-// };
-
 function Notifications({
-  habitsDatas,
   oneDayLeft,
-  // stateNotification,
+
   setNotification,
   youHaveThreeDaysLeft,
   halfWayTrough,
@@ -85,96 +57,11 @@ function Notifications({
     dispatch(notificationsActions.renderOneDay());
     dispatch(notificationsActions.removeNotification());
   };
-  // const [isVisibleReminder, setIsVisibleReminder] = useState(false);
+
   const handleClickReminder = () => {
     dispatch(notificationsActions.renderReminder());
     dispatch(notificationsActions.removeNotification());
   };
-
-  // const filteredHabitsData = useSelector(state =>
-  //   habitSelector.getFilterTodayHabits(state),
-  // );
-  // // const habitsData = useSelector(state => state.habits);
-  // const habitsData = [...habitsDatas.habitsDatas];
-  // // console.log(habitsDatas.habitsDatas);
-  // const habits = habitsData.map(el => el.data);
-
-  // const activeDays = habits.filter(el =>
-  //   el.filter(elm => typeof elm === 'boolean'),
-  // );
-
-  // const daysLeft = habits.map(el => el.filter(elm => elm === null));
-  // const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
-  // const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
-  // const halfWayTrough = daysLeft.some(el => el.length > 1);
-
-  // const presentActiveDays = activeDays.filter(elm => elm.length > 0);
-
-  // const uncompletedDays = presentActiveDays.map(el =>
-  //   el.filter(elm => elm === false),
-  // );
-  // const youCanDoBetter = uncompletedDays.some(el => el.length > 0);
-  // const successfullDays = presentActiveDays.map(el =>
-  //   el.filter(elm => elm === true),
-  // );
-  // const oneDayLeft = daysLeft.some(el => el.length === 1);
-
-  // const youGotAchievment = successfullDays.some(el => el.length > 20);
-
-  // useEffect(() => {
-  //   if (youGotAchievment && !setNotification && stateNotification === null) {
-  //     dispatch(notificationsActions.addNotification());
-  //   }
-  //   if (youCanDoBetter && !setNotification && stateNotification === null) {
-  //     dispatch(notificationsActions.addNotification());
-  //   }
-  //   if (youHaveFiveDaysLeft && !setNotification && stateNotification === null) {
-  //     dispatch(notificationsActions.addNotification());
-  //   }
-  //   if (
-  //     youHaveThreeDaysLeft &&
-  //     !setNotification &&
-  //     stateNotification === null
-  //   ) {
-  //     dispatch(notificationsActions.addNotification());
-  //   }
-  //   if (oneDayLeft && !setNotification && stateNotification === null) {
-  //     dispatch(notificationsActions.addNotification());
-  //   }
-  //   if (halfWayTrough && !setNotification && stateNotification === null) {
-  //     dispatch(notificationsActions.addNotification());
-  //   }
-  //   return () => {};
-  // }, [
-  //   dispatch,
-  //   halfWayTrough,
-  //   oneDayLeft,
-  //   setNotification,
-  //   stateNotification,
-  //   youCanDoBetter,
-  //   youGotAchievment,
-  //   youHaveFiveDaysLeft,
-  //   youHaveThreeDaysLeft,
-  // ]);
-
-  // useEffect(() => {
-  //   if (stateNotification === 0) {
-  //     dispatch(notificationsActions.setNotification());
-  //   }
-
-  //   return () => {};
-  // }, [dispatch, stateNotification]);
-
-  // }, [
-  //   dispatch,
-  //   halfWayTrough,
-  //   oneDayLeft,
-  //   setNotification,
-  //   youCanDoBetter,
-  //   youGotAchievment,
-  //   youHaveFiveDaysLeft,
-  //   youHaveThreeDaysLeft,
-  // ];
 
   return (
     <div>
