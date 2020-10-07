@@ -26,6 +26,10 @@ const ChangePassword = ({ setShowPassword }) => {
     }
     dispatch(userOperation.changePassword({ ...data }));
     setShowError(false);
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowPassword(false);
+    }, 1000);
   };
 
   const showPassToggle = () => {
@@ -34,10 +38,6 @@ const ChangePassword = ({ setShowPassword }) => {
     } else {
       setEyePass('text');
     }
-    setShowMessage(true);
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 1000);
   };
   return (
     <div className={styles.boxFormPassword}>
@@ -148,7 +148,9 @@ const ChangePassword = ({ setShowPassword }) => {
         {/* <div style={{ marginBottom: '5px' }}>
           <NotificationModal />
         </div> */}
-        <Button variety={'white'} text="Изменить пароль" />
+        <div className={styles.boxBtn}>
+          <Button variety={'white'} text="Изменить пароль" />
+        </div>
       </form>
     </div>
   );
