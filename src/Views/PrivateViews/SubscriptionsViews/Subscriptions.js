@@ -130,7 +130,9 @@ const Subscriptions = () => {
           <div className={style.subscribe}>
             {showInfo && (
               <div className={style.Info}>
-                Пробный период на 7 дней с Ultra подпиской.
+                Мы дарим Тебе на 7 дней нашу лучшую подписку! <br />
+                -не хочешь ? - жми "Stop", или выбери другую!
+                <br /> Желаем успехов в достижении Твоих целей!
               </div>
             )}
             <button
