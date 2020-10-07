@@ -5,6 +5,8 @@ import operations from '../../../redux/user/userOperation';
 import Button from '../../Button/Button';
 import styles from '../../ChangePassword/ChangePassword.module.css';
 import NotificationModal from '../../notifications/NotificationModal';
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css';
 
 function CardNumbInput(props) {
   return (
@@ -150,6 +152,7 @@ const AddCreditCardForm = ({ closeForm }) => {
 
   return (
     <div className={styles.boxFormPassword}>
+      <Cards number={number} expiry={timeExpiration} />
       <form className={styles.formProfile} onSubmit={onSubmit}>
         <div className={styles.boxErrorCard}>
           {errorNumber && (
