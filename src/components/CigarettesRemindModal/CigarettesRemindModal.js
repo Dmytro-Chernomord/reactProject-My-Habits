@@ -12,11 +12,13 @@ import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 function CigaretteRemindModal({ onClose }) {
   const [amount, setAmount] = useState({});
   const dispatch = useDispatch();
+  const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
+  const startedAt = useSelector(cigSelector.getCigarettesDataStartedAt);
 
   //   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const missedDates = useSelector(cigSelector.getMissedDatesArray);
-  //   console.log(missedDates);
-  let arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  // console.log(missedDates);
+  // console.log(cigarettesArray);
   const handleInputChange = e => {
     let data = {};
 
@@ -29,7 +31,7 @@ function CigaretteRemindModal({ onClose }) {
     data[name] = value;
     // console.log(data);
     setAmount(prev => ({ ...prev, ...data }));
-    console.log(arr);
+
     // for (let i = 0; i < arr.length; i++) {
     //   const element = arr[i];
     //   console.log(element);
@@ -42,7 +44,7 @@ function CigaretteRemindModal({ onClose }) {
     // data[name] = value;
     // setAmount(prev => [...prev, ...data]);
   };
-  console.log(amount);
+  // console.log(amount);
 
   // console.log(amount);
 
@@ -59,12 +61,40 @@ function CigaretteRemindModal({ onClose }) {
 
   const onSubmit = e => {
     e.preventDefault();
-    // dispatch(
-    //   cigarettesOperation.postDayCigarettes({
-    //     startedAt: cigarettesStartedAt,
-    //     data: checkSigaretteStatiscs(cigarettesArray, dif, Number(amount)),
-    //   }),
-    // );
+    // console.log(amount);
+    let result = [];
+    let config = [...cigarettesArray];
+    for (let i = 0; i < cigarettesArray.length; i++) {
+      const element = cigarettesArray[i];
+      // console.log(element);
+      const key = Object.keys(amount);
+      const value = Object.values(amount);
+      for (let y = 0; y < key.length; y++) {
+        const e = Number(key[y]);
+        const v = Number(value[y]);
+
+        if (i === e) {
+          result.push(v);
+          break;
+        }
+      }
+      if (typeof element === 'number') {
+        result.push(element);
+        // continue;
+      }
+      // result.push(element);
+      // console.log('key', key, 'value', value);
+    }
+
+    console.log(config.splice(0, `${result.length}`, ...result));
+
+    // console.log(cigarettesArray.splice(0, `${result.length}`, `${[result]}`));
+    dispatch(
+      cigarettesOperation.postDayCigarettes({
+        startedAt: startedAt,
+        data: config,
+      }),
+    );
     onClose();
   };
 
