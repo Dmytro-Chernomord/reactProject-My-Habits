@@ -117,6 +117,7 @@ function CigaretteRemindModal({ onClose }) {
                 // value={amount}
                 onChange={handleInputChange}
                 className={styles.input}
+                required
               />
             </label>
           ))}
