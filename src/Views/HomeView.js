@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Route, Link, useLocation, useRouteMatch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import authOperation from '../redux/auth/authOperation';
 // import TempBut from '../components/TempBut';
 import Notifications from './PrivateViews/NotificationsView';
 import Achievements from '../Views/PrivateViews/Achievements';
 import CheckListPage from '../components/CheckListPage/CheckListPage';
 import userOperation from '../redux/user/userOperation';
-import setToken from '../redux/auth/authOperation';
+// import setToken from '../redux/auth/authOperation';
 import authSelector from '../redux/auth/authSelector';
 import MainPrivateView from '../Views/PrivateViews/MainPrivateView';
 import ProfilePage from './PrivateViews/ProfilePage/ProfilePage';
@@ -23,6 +23,10 @@ import quizSelector from '../redux/quiz/quizSelector';
 // import NotFound from '../components/NotFound/NotFound';
 import Layout from '../components/Layout/Layout';
 import habitsSelector from '../redux/habits/habitsSelector';
+import operation from '../redux/user/userOperation';
+import userSelector from '../redux/user/userSelector';
+import notificationsActions from '../redux/notifications/notificationsActions';
+// import authOperation from '../redux/auth/authOperation';
 
 // const styles = {
 //   display: 'flex',
@@ -30,132 +34,147 @@ import habitsSelector from '../redux/habits/habitsSelector';
 //   title: { backgroundColor: 'gray' },
 // };
 
-class HomeView extends Component {
-  // testNotification = () => {
-  //   return (this.habits = () => this.props.habitsData.map(el => el.data));
-  //   // console.log(this.habits);
-  //   // this.activeDays = this.habits.filter(el =>
-  //   //   el.filter(elm => typeof elm === 'boolean'),
-  //   // );
+const HomeView = () => {
+  const dispatch = useDispatch();
 
-  //   // this.daysLeft = this.habits.map(el => el.filter(elm => elm === null));
-  //   // this.youHaveThreeDaysLeft = this.daysLeft.some(el => el.length === 3);
-  //   // this.youHaveFiveDaysLeft = this.daysLeft.some(el => el.length === 5);
-  //   // this.halfWayTrough = this.daysLeft.some(el => el.length > 1);
+  let match = useRouteMatch();
+  const token = useSelector(state => state.auth.token);
+  const habitsData = useSelector(state => state.habits);
 
-  //   // this.presentActiveDays = this.activeDays.filter(elm => elm.length > 0);
+  const stateNotification = useSelector(state => state.notifications.count);
+  const renderAchievment = useSelector(
+    state => state.notifications.renderAchievment,
+  );
+  const renderFiveDays = useSelector(
+    state => state.notifications.renderFiveDays,
+  );
+  const renderThreeDays = useSelector(
+    state => state.notifications.renderThreeDays,
+  );
+  const renderOneDay = useSelector(state => state.notifications.renderOneDay);
+  const renderReminder = useSelector(
+    state => state.notifications.renderReminder,
+  );
+  const renderHalfWay = useSelector(state => state.notifications.renderHalfWay);
+  const setNotification = useSelector(
+    state => state.notifications.setNotification,
+  );
 
-  //   // this.uncompletedDays = this.presentActiveDays.map(el =>
-  //   //   el.filter(elm => elm === false),
-  //   // );
-  //   // this.youCanDoBetter = this.uncompletedDays.some(el => el.length > 0);
-  //   // this.successfullDays = this.presentActiveDays.map(el =>
-  //   //   el.filter(elm => elm === true),
-  //   // );
-  //   // this.oneDayLeft = this.daysLeft.some(el => el.length === 1);
+  // const filteredHabitsData = useSelector(state =>
+  //   habitSelector.getFilterTodayHabits(state),
+  // );
+  // const habitsData = useSelector(state => state.habits);
+  // const habitsData = [...habitsDatas.habitsDatas];
+  // console.log(habitsDatas.habitsDatas);
+  const habits = habitsData.map(el => el.data);
 
-  //   // this.youGotAchievment = this.successfullDays.some(el => el.length > 20);
-  // };
+  const activeDays = habits.filter(el =>
+    el.filter(elm => typeof elm === 'boolean'),
+  );
 
-  // state = {
-  //   showModal: false,
-  // };
+  const daysLeft = habits.map(el => el.filter(elm => elm === null));
+  const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
+  const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
+  const halfWayTrough = daysLeft.some(el => el.length > 1);
 
-  // openModal = () => {
-  //   this.setState({ showModal: true });
-  // };
+  const presentActiveDays = activeDays.filter(elm => elm.length > 0);
 
-  // closeModal = () => {
-  //   this.setState({ showModal: false });
-  // };
+  const uncompletedDays = presentActiveDays.map(el =>
+    el.filter(elm => elm === false),
+  );
+  const youCanDoBetter = uncompletedDays.some(el => el.length > 0);
+  const successfullDays = presentActiveDays.map(el =>
+    el.filter(elm => elm === true),
+  );
+  const oneDayLeft = daysLeft.some(el => el.length === 1);
 
-  componentDidMount() {
-    // console.log(this.props.token);
-    setToken.setToken(this.props.token);
-    this.props.onGetOwnHabits();
-    // this.testNotification();
-  }
+  const youGotAchievment = successfullDays.some(el => el.length > 20);
 
-  // componentDidUpdate() {
-  //   if (
-  //     Object.values(this.props.quizInfo).includes(0) &&
-  //     this.state.showModal === false
-  //   ) {
-  //     this.openModal();
-  //   }
-  // }
+  useEffect(() => {
+    if (youGotAchievment && !setNotification && stateNotification === null) {
+      dispatch(notificationsActions.addNotification());
+    }
+    if (youCanDoBetter && !setNotification && stateNotification === null) {
+      dispatch(notificationsActions.addNotification());
+    }
+    if (youHaveFiveDaysLeft && !setNotification && stateNotification === null) {
+      dispatch(notificationsActions.addNotification());
+    }
+    if (
+      youHaveThreeDaysLeft &&
+      !setNotification &&
+      stateNotification === null
+    ) {
+      dispatch(notificationsActions.addNotification());
+    }
+    if (oneDayLeft && !setNotification && stateNotification === null) {
+      dispatch(notificationsActions.addNotification());
+    }
+    if (halfWayTrough && !setNotification && stateNotification === null) {
+      dispatch(notificationsActions.addNotification());
+    }
+    return () => {};
+  }, [
+    dispatch,
+    halfWayTrough,
+    oneDayLeft,
+    setNotification,
+    stateNotification,
+    youCanDoBetter,
+    youGotAchievment,
+    youHaveFiveDaysLeft,
+    youHaveThreeDaysLeft,
+  ]);
 
-  render() {
-    const { match } = this.props;
-    return (
-      <>
-        {/* <div style={styles}>
-          <div style={styles.box}> */}
-        <Layout sections={'sides'}>
-          <LeftSideBarView match={match} onLogOut={this.props.onLogOut} />
-        </Layout>
-        {/* </div> */}
-        {/* <div style={styles.box}> */}
-        {/* <header style={styles.title}>title</header> */}
-        {/* <div> */}
-        <Layout sections={'middle'}>
-          <Route
-            path={`${match.path}`}
-            exact
-            // component={CheckListPage}
-          >
-            <CheckListPage
-            // toggleModal={this.props.toggleModal}
-            // changeLayout={this.changeLayout}
-            />
-          </Route>
-          <Route path={`${match.path}/Notifications`}>
-            <Notifications habitsDatas={this.props.habitsData} />
-          </Route>
-          <Route path={`${match.path}/ProfilePage`}>
-            <ProfilePage
-            // toggleModal={this.props.toggleModal}
-            // changeLayout={this.changeLayout}
-            />
-          </Route>
-          <Route path={`${match.path}/Achievments`} component={Achievements} />{' '}
-          <Route
-            path={`${match.path}/Subscriptions`}
-            component={Subscriptions}
+  useEffect(() => {
+    if (stateNotification === 0) {
+      dispatch(notificationsActions.setNotification());
+    }
+
+    return () => {};
+  }, [dispatch, stateNotification]);
+
+  const onLogOut = dispatch(authOperation.logOut);
+  useEffect(() => {
+    authOperation.setToken(token);
+    dispatch(operation.getOwnHabits());
+    return () => {};
+  }, [dispatch, token]);
+
+  return (
+    <>
+      <Layout sections={'sides'}>
+        <LeftSideBarView match={match} onLogOut={onLogOut} />
+      </Layout>
+
+      <Layout sections={'middle'}>
+        <Route path={`${match.path}`} exact>
+          <CheckListPage />
+        </Route>
+        <Route path={`${match.path}/Notifications`}>
+          <Notifications
+            setNotification={setNotification}
+            stateNotification={stateNotification}
+            oneDayLeft={oneDayLeft}
+            habitsDatas={habitsData}
+            youHaveThreeDaysLeft={youHaveThreeDaysLeft}
+            halfWayTrough={halfWayTrough}
+            youHaveFiveDaysLeft={youHaveFiveDaysLeft}
+            youCanDoBetter={youCanDoBetter}
+            youGotAchievment={youGotAchievment}
           />
-        </Layout>
-        {/* </div> */}
-        {/* </div> */}
-        {/* <div style={styles.box}> */}
-        <Layout sections={'sides'}>
-          <RightSideBar />
-        </Layout>
-        {/* </div> */}
-        {/* </div> */}
-        {/* {this.props.showModal && (
-          <ModalBackdrop onClose={this.props.toggleModal}>
-            <ModalContent
-              onSave={this.props.toggleModal}
-              layout={this.state.layout}
-              // ableToDelete={isAbleToDelete}
-            />
-          </ModalBackdrop>
-        )} */}
-        {/* {this.state.showModal && <InterviewModal onClose={this.closeModal} />} */}
-      </>
-    );
-  }
-}
+        </Route>
+        <Route path={`${match.path}/ProfilePage`}>
+          <ProfilePage />
+        </Route>
+        <Route path={`${match.path}/Achievments`} component={Achievements} />{' '}
+        <Route path={`${match.path}/Subscriptions`} component={Subscriptions} />
+      </Layout>
+      <Layout sections={'sides'}>
+        <RightSideBar />
+      </Layout>
+    </>
+  );
+};
 
-const mapStateToProps = state => ({
-  token: authSelector.isAuthenticated(state),
-  showModal: modalSelector.getModal(state),
-  habitsData: habitsSelector.getAllHabits(state),
-  // quizInfo: quizSelector.getQuizResult(state),
-});
-
-export default connect(mapStateToProps, {
-  onLogOut: authOperation.logOut,
-  onGetOwnHabits: userOperation.getOwnHabits,
-  // toggleModal: toggle.toggleModal,
-})(HomeView);
+export default HomeView;
