@@ -68,7 +68,7 @@
 .calendar .react-datepicker__navigation {
   cursor: pointer;
   position: absolute;
-  background-color: #fff;
+  background-color: transparent;
   padding: 0;
   z-index: 1;
   height: 20px;
