@@ -105,20 +105,22 @@ function CigaretteRemindModal({ onClose }) {
       </h2>
       <p className={styles.modalTextCustom}>Вы забыли заполнить</p>
       <form onSubmit={onSubmit} className={styles.formProfile}>
-        {missedDates.map(({ index, date }) => (
-          <label className={styles.labelDailyResult} key={index}>
-            <span className={styles.textLabelDailyResult}>
-              {date.slice(0, 10)}
-            </span>
-            <input
-              type="number"
-              name={index}
-              // value={amount}
-              onChange={handleInputChange}
-              className={styles.input}
-            />
-          </label>
-        ))}
+        <div className={styles.modalList}>
+          {missedDates.map(({ index, date }) => (
+            <label className={styles.labelRemindModal} key={index}>
+              <span className={styles.textLabelDailyResult}>
+                {date.slice(0, 10)}
+              </span>
+              <input
+                type="number"
+                name={index}
+                // value={amount}
+                onChange={handleInputChange}
+                className={styles.input}
+              />
+            </label>
+          ))}
+        </div>
         <div className={styles.btnFolder}>
           <div className={styles.btnBox}>
             <Button
