@@ -44,7 +44,7 @@ function ExpirationDateInput(props) {
   );
 }
 const AddCreditCardForm = ({ closeForm }) => {
-  const [number, setNumber] = useState('');
+  const [numbers, setNumber] = useState('');
   const [timeExpiration, setTimeExpiration] = useState('');
   const [errorNumber, setErrorNumber] = useState(false);
   const [errorDate, setErrorDate] = useState(false);
@@ -57,8 +57,12 @@ const AddCreditCardForm = ({ closeForm }) => {
   const dispatch = useDispatch();
 
   const addCreditCard = useCallback(() => {
+    const str = numbers;
+    const secretNumber = str.slice(0, 5);
+    const number = secretNumber + `XXXX XXXX XXXX`;
+
     dispatch(operations.addCreditCard({ number, timeExpiration }));
-  }, [dispatch, number, timeExpiration]);
+  }, [dispatch, numbers, timeExpiration]);
 
   const handleNumber = ({ target: { value } }) => {
     setMask('9999 9999 9999 9999');
@@ -79,7 +83,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   };
 
   const handleBlur = () => {
-    const num = number.split(' ');
+    const num = numbers.split(' ');
     const xxxx = ['XXXX', 'XXXX', 'XXXX'];
     num.splice(1, 3, ...xxxx);
     setMask(num.join(' '));
@@ -152,7 +156,7 @@ const AddCreditCardForm = ({ closeForm }) => {
   return (
     <div className={styles.boxFormPassword}>
       <Cards
-        number={number}
+        number={numbers}
         expiry={timeExpiration}
         placeholders={{ name: '' }}
       />
@@ -170,7 +174,7 @@ const AddCreditCardForm = ({ closeForm }) => {
           <CardNumbInput
             onChange={handleNumber}
             name="number"
-            value={number}
+            value={numbers}
             type="data"
             mask={mask}
             handleBlur={handleBlur}
