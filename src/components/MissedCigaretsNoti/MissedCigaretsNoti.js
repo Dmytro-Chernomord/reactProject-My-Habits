@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import Button from '../UIcomponents/Button/Button';
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import CigarettesRemindModal from '../CigarettesRemindModal/CigarettesRemindModal';
 import styles from './MissedCigaretsNoti.module.css';
+import transitionStyles from '../ModalContent/ModalTransition.module.css';
 // import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 
 export function MissedCigaretsNoti({ amountDays, closeNoti }) {
@@ -30,9 +32,17 @@ export function MissedCigaretsNoti({ amountDays, closeNoti }) {
           label={'+ за прошлые даты'}
         />
       </div>
-      {showModal && (
+      <CSSTransition
+        in={showModal}
+        timeout={250}
+        classNames={transitionStyles}
+        unmountOnExit
+      >
         <CigarettesRemindModal onClose={closeModal}></CigarettesRemindModal>
-      )}
+      </CSSTransition>
+      {/* {showModal && (
+        <CigarettesRemindModal onClose={closeModal}></CigarettesRemindModal>
+      )} */}
     </div>
   );
 }

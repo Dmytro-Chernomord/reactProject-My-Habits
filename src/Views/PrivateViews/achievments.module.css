@@ -37,8 +37,9 @@
 .item_success {
   background-color: #43d190;
   border-radius: 10px;
-  width: calc((100% - 184px) / 3);
-  margin-right: 30px;
+  width: 220px;
+  height: 80px;
+
   margin-bottom: 30px;
   box-shadow: 0px 8px 16px rgba(67, 209, 144, 0.15);
 }
