@@ -134,7 +134,7 @@ const HomeView = () => {
     return () => {};
   }, [dispatch, stateNotification]);
 
-  const onLogOut = dispatch(authOperation.logOut);
+  const onLogOut = () => dispatch(authOperation.logOut());
   useEffect(() => {
     authOperation.setToken(token);
     dispatch(operation.getOwnHabits());
