@@ -22,6 +22,7 @@ import modalSelector from '../redux/modal/modalSelector';
 import quizSelector from '../redux/quiz/quizSelector';
 // import NotFound from '../components/NotFound/NotFound';
 import Layout from '../components/Layout/Layout';
+import habitsSelector from '../redux/habits/habitsSelector';
 
 // const styles = {
 //   display: 'flex',
@@ -30,6 +31,32 @@ import Layout from '../components/Layout/Layout';
 // };
 
 class HomeView extends Component {
+  // testNotification = () => {
+  //   return (this.habits = () => this.props.habitsData.map(el => el.data));
+  //   // console.log(this.habits);
+  //   // this.activeDays = this.habits.filter(el =>
+  //   //   el.filter(elm => typeof elm === 'boolean'),
+  //   // );
+
+  //   // this.daysLeft = this.habits.map(el => el.filter(elm => elm === null));
+  //   // this.youHaveThreeDaysLeft = this.daysLeft.some(el => el.length === 3);
+  //   // this.youHaveFiveDaysLeft = this.daysLeft.some(el => el.length === 5);
+  //   // this.halfWayTrough = this.daysLeft.some(el => el.length > 1);
+
+  //   // this.presentActiveDays = this.activeDays.filter(elm => elm.length > 0);
+
+  //   // this.uncompletedDays = this.presentActiveDays.map(el =>
+  //   //   el.filter(elm => elm === false),
+  //   // );
+  //   // this.youCanDoBetter = this.uncompletedDays.some(el => el.length > 0);
+  //   // this.successfullDays = this.presentActiveDays.map(el =>
+  //   //   el.filter(elm => elm === true),
+  //   // );
+  //   // this.oneDayLeft = this.daysLeft.some(el => el.length === 1);
+
+  //   // this.youGotAchievment = this.successfullDays.some(el => el.length > 20);
+  // };
+
   // state = {
   //   showModal: false,
   // };
@@ -46,6 +73,7 @@ class HomeView extends Component {
     // console.log(this.props.token);
     setToken.setToken(this.props.token);
     this.props.onGetOwnHabits();
+    // this.testNotification();
   }
 
   // componentDidUpdate() {
@@ -81,10 +109,9 @@ class HomeView extends Component {
             // changeLayout={this.changeLayout}
             />
           </Route>
-          <Route
-            path={`${match.path}/Notifications`}
-            component={Notifications}
-          />
+          <Route path={`${match.path}/Notifications`}>
+            <Notifications habitsDatas={this.props.habitsData} />
+          </Route>
           <Route path={`${match.path}/ProfilePage`}>
             <ProfilePage
             // toggleModal={this.props.toggleModal}
@@ -123,6 +150,7 @@ class HomeView extends Component {
 const mapStateToProps = state => ({
   token: authSelector.isAuthenticated(state),
   showModal: modalSelector.getModal(state),
+  habitsData: habitsSelector.getAllHabits(state),
   // quizInfo: quizSelector.getQuizResult(state),
 });
 

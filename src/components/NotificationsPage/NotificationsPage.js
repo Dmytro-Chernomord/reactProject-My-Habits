@@ -6,7 +6,34 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './transition.css';
 import notificationsActions from '../../redux/notifications/notificationsActions';
 
-function Notifications() {
+// const testNotification = () => {
+//   const habitsData = useSelector(state => state.habits);
+//   const habits = habitsData.map(el => el.data);
+
+//   const activeDays = habits.filter(el =>
+//     el.filter(elm => typeof elm === 'boolean'),
+//   );
+
+//   const daysLeft = habits.map(el => el.filter(elm => elm === null));
+//   const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
+//   const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
+//   const halfWayTrough = daysLeft.some(el => el.length > 1);
+
+//   const presentActiveDays = activeDays.filter(elm => elm.length > 0);
+
+//   const uncompletedDays = presentActiveDays.map(el =>
+//     el.filter(elm => elm === false),
+//   );
+//   const youCanDoBetter = uncompletedDays.some(el => el.length > 0);
+//   const successfullDays = presentActiveDays.map(el =>
+//     el.filter(elm => elm === true),
+//   );
+//   const oneDayLeft = daysLeft.some(el => el.length === 1);
+
+//   const youGotAchievment = successfullDays.some(el => el.length > 20);
+// };
+
+function Notifications({ habitsDatas }) {
   const stateNotification = useSelector(state => state.notifications.count);
   const renderAchievment = useSelector(
     state => state.notifications.renderAchievment,
@@ -60,8 +87,9 @@ function Notifications() {
   const filteredHabitsData = useSelector(state =>
     habitSelector.getFilterTodayHabits(state),
   );
-  const habitsData = useSelector(state => state.habits);
-
+  // const habitsData = useSelector(state => state.habits);
+  const habitsData = [...habitsDatas.habitsDatas];
+  // console.log([...habitsDatas.habitsDatas]);
   const habits = habitsData.map(el => el.data);
 
   const activeDays = habits.filter(el =>
