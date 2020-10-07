@@ -45,8 +45,12 @@ button {
   display: inline-block;
 }
 
-/* h1,
-h2 {
+h1 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+}
+/* h2 {
   text-align: center;
 } */
 .swiper-container {
