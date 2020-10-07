@@ -2,6 +2,12 @@
   padding: 20px;
   border-bottom: 1px solid #d5e1dc;
   /* width: 714px; */
-  height: 114px;
+  margin-left: auto;
+  height: 115px;
   width: 100%;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-style: normal;
+  color: #4f4f4f;
+  font-weight: 500;
 }

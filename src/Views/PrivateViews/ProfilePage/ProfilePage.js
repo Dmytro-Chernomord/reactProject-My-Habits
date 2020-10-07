@@ -12,6 +12,7 @@ import userSelector from '../../../redux/user/userSelector';
 import Subscriptions from '../SubscriptionsViews/Subscriptions';
 import ChangePassword from '../../../components/ChangePassword/ChangePassword';
 import ProfileForm from '../../../components/ProfileForm/ProfileForm';
+import style from '../../PrivateViews/SubscriptionsViews/Subscriptions.module.css';
 
 function ProfilePage({ match, location, toggleModal, changeLayout }) {
   const [showAvatars, setShowAvatars] = useState(false);
@@ -21,6 +22,28 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
 
   const state = useSelector(state => state);
   const subscription = userSelector.getSubscription(state);
+
+  const changeColor = () => {
+    switch (subscription) {
+      case 'Noob':
+        return style.Noob;
+
+      case 'Basic':
+        return style.Basic;
+
+      case 'Standart':
+        return style.Standart;
+
+      case 'Premium':
+        return style.Premium;
+
+      case 'Ultra':
+        return style.Ultra;
+
+      default:
+        return style.styleSubscpt;
+    }
+  };
 
   useEffect(() => {
     if (location.pathname === '/home/ProfilePage/avatars') {
@@ -77,7 +100,7 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                         className={styles.btnPassword}
                         onClick={() => setShowPassword(prev => !prev)}
                       >
-                        Изменить пароль
+                        {showPassword ? 'Закрыть пароли' : 'Изменить пароль'}
                       </button>
                       <CSSTransition
                         in={showPassword}
@@ -102,18 +125,20 @@ function ProfilePage({ match, location, toggleModal, changeLayout }) {
                       Выбрать другой аватар
                     </NavLink>
 
-                    {subscription === '' ? (
+                    {/* {subscription === '' ? (
                       <p className={styles.typeSubscription}>Basic</p>
-                    ) : (
-                      <p className={styles.typeSubscription}>{subscription}</p>
-                    )}
+                    ) : ( */}
+                    <p className={changeColor()}>{subscription}</p>
+                    {/* )} */}
 
                     <NavLink
                       exact
                       to={`${match.url}/Subscriptions`}
                       onClick={() => setShowSubscriptions(true)}
                     >
-                      <Button variety={'white'} text="Изменить подписку" />
+                      <div className={styles.buttonDiv}>
+                        <Button variety={'white'} text="Изменить подписку" />
+                      </div>
                     </NavLink>
                   </div>
                 </div>

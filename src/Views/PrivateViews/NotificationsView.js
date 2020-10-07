@@ -5,7 +5,6 @@ import Header from '../../components/Header/Header';
 export default function NotificationsView() {
   return (
     <div>
-      <Header title="Уведомления" />
       <Notifications />
     </div>
   );

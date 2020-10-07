@@ -3,10 +3,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 34px 62px;
+  padding: 34px 64px 36px 34px;
   width: 100%;
   background: #ffffff;
-  border: 1px solid #d5e1dc;
+  border-bottom: 1px solid #d5e1dc;
   border-radius: 0px;
 }
 
