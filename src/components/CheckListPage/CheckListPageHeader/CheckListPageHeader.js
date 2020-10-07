@@ -38,6 +38,8 @@ export const CheckListPageHeader = ({ dailyModal, missedDays }) => {
       dispatch(cigarettesActions.setMissedDates(dates));
       if (dates.length > 0) {
         setNotiIsShown(true);
+      } else {
+        setNotiIsShown(false);
       }
     }
   }, [cigarettesArray, cigarettesStartedAt, dispatch]);

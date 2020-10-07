@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import dateSelector from '../../redux/date/dateSelector';
 import habitsSelector from '../../redux/habits/habitsSelector';
 import habitsOperation from '../../redux/habits/habitsOperation';
@@ -11,6 +12,7 @@ import ItemHabit from './ItemHabit';
 import s from './CheckListPage.module.css';
 import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
 import { Scroll } from '../Scroll/Scroll';
+import transitionStyles from '../../components/ModalContent/ModalTransition.module.css';
 
 class CheckListPage extends Component {
   state = { showModal: '', updata: false };
@@ -71,12 +73,21 @@ class CheckListPage extends Component {
             ))}
           </ul>
         </div> */}
-
-        {this.state.showModal === 'daily' && (
+        <CSSTransition
+          in={this.state.showModal === 'daily'}
+          timeout={250}
+          classNames={transitionStyles}
+          unmountOnExit
+        >
           <DailyResultModal
             onClose={() => this.toggleModal('')}
           ></DailyResultModal>
-        )}
+        </CSSTransition>
+        {/* {this.state.showModal === 'daily' && (
+          <DailyResultModal
+            onClose={() => this.toggleModal('')}
+          ></DailyResultModal>
+        )} */}
       </>
     );
   }

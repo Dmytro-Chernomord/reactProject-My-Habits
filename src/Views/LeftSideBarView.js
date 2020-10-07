@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 // import LogoBox from '../components/LeftSideBar/LogoBox/LogoBox';
 // import UserMenu from '../components/LeftSideBar/UserMenu/UserMenu';
 // import TimeMoney from '../components/LeftSideBar/TimeMoney/TimeMoney';
@@ -10,6 +11,7 @@ import HabitChoiceModal from '../components/HabitChoiceModal/HabitChoiceModal';
 import HabitTemplateModal from '../components/HabitTemplateModal/HabitTemplateModal';
 import CustomHabbitModal from '../components/CustomHabbitModal/CustomHabbitModal';
 import LeftSideBarStatic from '../components/LeftSideBar/LeftSideBarstatic/LeftSideBarStatic';
+import transitionStyles from '../components/ModalContent/ModalTransition.module.css';
 
 // const LeftSideBarStatic = ({ match, onLogOut }) => {
 //   return (
@@ -81,7 +83,12 @@ export default function LeftSideBarView({ match, onLogOut }) {
         staticComponentAfter={LeftSideBarButton}
         isLeftBar={true}
       />
-      {openModal === 'add' && (
+      <CSSTransition
+        in={openModal === 'add'}
+        timeout={250}
+        classNames={transitionStyles}
+        unmountOnExit
+      >
         <HabitChoiceModal
           // isTemplateModal={isTemplateModal}
           // isCustomModal={isCustomModal}
@@ -89,8 +96,16 @@ export default function LeftSideBarView({ match, onLogOut }) {
           openCustom={() => handelClick('custom')}
           openTemplate={() => handelClick('template')}
         ></HabitChoiceModal>
-      )}
-      {openModal === 'template' && (
+      </CSSTransition>
+      {/* {openModal === 'add' && (
+        
+      )} */}
+      <CSSTransition
+        in={openModal === 'template'}
+        timeout={250}
+        classNames={transitionStyles}
+        unmountOnExit
+      >
         <HabitTemplateModal
           addData={setCustomModalData}
           goBack={() => handelClick('add')}
@@ -100,8 +115,16 @@ export default function LeftSideBarView({ match, onLogOut }) {
           //   closeAllModals();
           // }}
         ></HabitTemplateModal>
-      )}
-      {openModal === 'custom' && (
+      </CSSTransition>
+      {/* {openModal === 'template' && (
+      
+      )} */}
+      <CSSTransition
+        in={openModal === 'custom'}
+        timeout={250}
+        classNames={transitionStyles}
+        unmountOnExit
+      >
         <CustomHabbitModal
           habitName={customModalData}
           // isTemplateModal={isTemplateModal}
@@ -111,7 +134,10 @@ export default function LeftSideBarView({ match, onLogOut }) {
           //   closeAllModals();
           // }}
         ></CustomHabbitModal>
-      )}
+      </CSSTransition>
+      {/* {openModal === 'custom' && (
+       
+      )} */}
     </>
   );
 }

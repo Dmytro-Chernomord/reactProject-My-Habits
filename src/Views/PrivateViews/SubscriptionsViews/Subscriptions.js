@@ -8,6 +8,28 @@ import operathions from '../../../redux/user/userOperation';
 import selector from '../../../redux/user/userSelector';
 import Countdown from 'react-countdown';
 
+export const changeColor = subscription => {
+  switch (subscription) {
+    case 'Noob':
+      return style.Noob;
+
+    case 'Basic':
+      return style.Basic;
+
+    case 'Standart':
+      return style.Standart;
+
+    case 'Premium':
+      return style.Premium;
+
+    case 'Ultra':
+      return style.Ultra;
+
+    default:
+      return style.styleSubscpt;
+  }
+};
+
 const Subscriptions = () => {
   const [plan, setPlan] = useState('');
   const [disabledBtn, setDisabled] = useState(false);
@@ -65,34 +87,13 @@ const Subscriptions = () => {
     setSevenDays(10000);
     onTimerCompleted();
   };
-  const changeColor = () => {
-    switch (subscription) {
-      case 'Noob':
-        return style.Noob;
-
-      case 'Basic':
-        return style.Basic;
-
-      case 'Standart':
-        return style.Standart;
-
-      case 'Premium':
-        return style.Premium;
-
-      case 'Ultra':
-        return style.Ultra;
-
-      default:
-        return style.styleSubscpt;
-    }
-  };
 
   return (
     <>
       <Header title="Подписки" />
       <div className={style.div}>
         <h2 className={style.header}>Тип подписки:</h2>
-        <span className={changeColor()}>{subscription}</span>
+        <span className={changeColor(subscription)}>{subscription}</span>
         {disabledTimer && (
           <>
             <div className={style.timer}>

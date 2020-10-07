@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import ProgressBar from '../UIcomponents/ProgressBar/ProgressBar';
 import CustomHabitModal from '../CustomHabbitModal/CustomHabbitModal';
@@ -9,6 +10,7 @@ import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
 import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
 import habitsSelector from '../../redux/habits/habitsSelector';
+import transitionStyles from '../ModalContent/ModalTransition.module.css';
 
 class ItemHabit extends Component {
   state = {
@@ -85,7 +87,7 @@ class ItemHabit extends Component {
                 isDisabled={stateBut1}
                 handelClick={() => {
                   this.props.setHabitsDataDay(this.props, true, index);
-                  if (index === 1) {
+                  if (index === 4) {
                     this.openModal('congrats');
                     this.setState({ uniqueId: this.props._id });
                   }
@@ -100,7 +102,7 @@ class ItemHabit extends Component {
                 isDisabled={stateBut2}
                 handelClick={() => {
                   this.props.setHabitsDataDay(this.props, false, index);
-                  if (index === 1) {
+                  if (index === 4) {
                     this.openModal('congrats');
                     this.setState({ uniqueId: this.props._id });
                   }
@@ -169,7 +171,12 @@ class ItemHabit extends Component {
             </div>
           </>
         )}
-        {this.state.showModal === 'custom' && (
+        <CSSTransition
+          in={this.state.showModal === 'custom'}
+          timeout={250}
+          classNames={transitionStyles}
+          unmountOnExit
+        >
           <CustomHabitModal
             info={habitData}
             onClose={() => {
@@ -179,8 +186,24 @@ class ItemHabit extends Component {
             ableToDelete={this.state.modalUpdate}
             repeatHabit={this.state.repeatHabit}
           ></CustomHabitModal>
-        )}
-        {this.state.showModal === 'congrats' && (
+        </CSSTransition>
+        {/* {this.state.showModal === 'custom' && (
+          <CustomHabitModal
+            info={habitData}
+            onClose={() => {
+              this.openModal('');
+              this.repeatHabit(false);
+            }}
+            ableToDelete={this.state.modalUpdate}
+            repeatHabit={this.state.repeatHabit}
+          ></CustomHabitModal>
+        )} */}
+        <CSSTransition
+          in={this.state.showModal === 'congrats'}
+          timeout={250}
+          classNames={transitionStyles}
+          unmountOnExit
+        >
           <CongratulationModal
             info={habitData}
             onClose={() => {
@@ -197,7 +220,25 @@ class ItemHabit extends Component {
               this.ableToUpdate(false);
             }}
           />
-        )}
+        </CSSTransition>
+        {/* {this.state.showModal === 'congrats' && (
+          <CongratulationModal
+            info={habitData}
+            onClose={() => {
+              this.openModal('');
+              this.repeatHabit(false);
+            }}
+            onRepeat={() => {
+              this.openModal('custom');
+              this.ableToUpdate(false);
+              this.repeatHabit(true);
+            }}
+            onNewHabit={() => {
+              this.openModal('custom');
+              this.ableToUpdate(false);
+            }}
+          />
+        )} */}
       </>
     );
   }

@@ -112,7 +112,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0 10px;
-  width: 452px;
+  width: 460px;
   margin: 0 auto;
 }
 
@@ -199,6 +199,14 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 60px;
+}
+
+.labelRemindModal {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .labelQuiz {

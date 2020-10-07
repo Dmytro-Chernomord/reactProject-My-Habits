@@ -38,4 +38,5 @@ export default combineReducers({
   renderThreeDays,
   renderFiveDays,
   renderOneDay,
+  renderHalfWay,
 });

@@ -29,14 +29,16 @@ function AvatarView({ onClose, changeLayout }) {
           {avatars.map(avatar => {
             return (
               <li key={avatar.id} className={styles.itemAvatars}>
-                <img
-                  src={avatar.avatar}
-                  alt="avatar"
-                  width="157"
-                  height="157"
-                  data-id={avatar.id}
-                  onClick={handleClick}
-                />
+                <div className={styles.avatars}>
+                  <img
+                    src={avatar.avatar}
+                    alt="avatar"
+                    width="120"
+                    height="120"
+                    data-id={avatar.id}
+                    onClick={handleClick}
+                  />
+                </div>
               </li>
             );
           })}
