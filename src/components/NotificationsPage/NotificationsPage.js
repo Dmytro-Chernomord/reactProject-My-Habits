@@ -16,6 +16,8 @@ function Notifications({
   youCanDoBetter,
   youGotAchievment,
 }) {
+  console.log('youGotAchievment', oneDayLeft);
+
   const stateNotification = useSelector(state => state.notifications.count);
   const renderAchievment = useSelector(
     state => state.notifications.renderAchievment,

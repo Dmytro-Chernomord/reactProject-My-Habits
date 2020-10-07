@@ -58,6 +58,21 @@ const HomeView = () => {
   const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
   const halfWayTrough = daysLeft.some(el => el.length > 1);
 
+  //newNotification
+  const youHaveThreeDaysLeftArr = habitsData.filter(el => {
+    if (el.data.length > 0) {
+      return el;
+    }
+  });
+  const youHaveFiveDaysLeftArr = habitsData.filter(el => {
+    if (el.data.length === 5) {
+      return el;
+    }
+    // return el;
+  });
+  console.log(youHaveThreeDaysLeftArr);
+  //newNotification
+
   const presentActiveDays = activeDays.filter(elm => elm.length > 0);
 
   const uncompletedDays = presentActiveDays.map(el =>
