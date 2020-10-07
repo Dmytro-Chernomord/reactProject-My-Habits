@@ -4,12 +4,11 @@ import { useSelector } from 'react-redux';
 import styles from '../../Views/PrivateViews/achievments.module.css';
 
 const AchievmentsList = function () {
+  const time = useSelector(state => state.notifications.saverTime);
   const cigarettesData = useSelector(state => state.cigarettes.data);
   const quizCigarettesData = useSelector(state => state.quiz.cigarettePerDay);
   const daysWhenSmoke = cigarettesData.filter(item => typeof item === 'number');
-  const daysDontSmoke = cigarettesData.filter(
-    item => typeof item === 'boolean',
-  );
+  const daysDontSmoke = cigarettesData.filter(item => item === 0);
   console.log(daysDontSmoke);
   const fiveCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el > 4,
@@ -71,93 +70,81 @@ const AchievmentsList = function () {
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 6 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Не курю одну неделю</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 13 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Не курю 2 недели</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 30 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Не курю 1 месяц</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 90 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Не курю 3 месяца</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 189 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Не курю 6 месяцев</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 364 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Не курю 1 год</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 365 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>+1 год без сигарет</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 365 * 3 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>3 года без сигарет</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 365 * 5 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Уже 5. Дай пять!</p>
         </li>
         <li
           className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
+            daysDontSmoke.length > 365 * 7 ? styles.item_success : styles.item
           }
         >
           <p className={styles.text}>Вперед к мечте!</p>
         </li>
-        <li
-          className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
-          }
-        >
+        <li className={time >= 1 ? styles.item_success : styles.item}>
           <p className={styles.text}>Сохранил 1 час</p>
         </li>
-        <li
-          className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
-          }
-        >
+        <li className={time >= 3 ? styles.item_success : styles.item}>
           <p className={styles.text}>Сохранил 3 часа</p>
         </li>
-        <li
-          className={
-            daysDontSmoke.length > 4 ? styles.item_success : styles.item
-          }
-        >
+        <li className={time >= 5 ? styles.item_success : styles.item}>
           <p className={styles.text}>Сохранил 5 часов</p>
         </li>
       </ul>

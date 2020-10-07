@@ -29,6 +29,11 @@ const renderOneDay = createReducer(false, {
 const renderHalfWay = createReducer(false, {
   [notificationsActions.renderHalfWay]: () => true,
 });
+const saverTimeReducer = createReducer(0, {
+  [notificationsActions.saverTime]: (_, { payload }) => {
+    return payload;
+  },
+});
 
 export default combineReducers({
   count,
@@ -39,4 +44,5 @@ export default combineReducers({
   renderFiveDays,
   renderOneDay,
   renderHalfWay,
+  saverTime: saverTimeReducer,
 });
