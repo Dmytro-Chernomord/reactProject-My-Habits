@@ -7,7 +7,7 @@ const getOwnHabits = userData => async dispatch => {
   try {
     const response = await axios.get('/habits');
     dispatch(actions.getOwnHabitsSuccess(response.data));
-    habitsOperation.setHabitsData(response.data.habits);
+    // habitsOperation.setHabitsData(response.data.habits);
   } catch (er) {
     dispatch(actions.getOwnHabitsError(er));
   }
