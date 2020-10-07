@@ -21,8 +21,8 @@ const setHabitsDataDay = (item, key, index) => async dispatch => {
   }
 };
 
-const setHabitsData = items => dispatch => {
-  const date = useSelector(state => state.data.currentDate);
+const setHabitsData = (items, date) => dispatch => {
+  // const date = useSelector(state => state.data.currentDate);
   const nowDate = date.slice(0, 10);
   items.forEach(item => {
     const index = item.habitsDates.findIndex(el => el === nowDate);
