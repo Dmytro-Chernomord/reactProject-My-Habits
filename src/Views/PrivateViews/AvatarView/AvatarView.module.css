@@ -1,4 +1,5 @@
 .boxListAvatars {
+  text-align: center;
   /* padding: 26px; */
   background-color: #f6f6f6;
   height: 100%;
@@ -11,12 +12,12 @@
   transform: scale(1.3);
 }
 .listAvatars {
-  padding-top: 20px;
+  padding: 20px 0 0 0;
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   justify-content: center;
-  margin-top: 0;
+  margin: 0;
 
   /* margin: -15px; */
   /* width: 720px; */

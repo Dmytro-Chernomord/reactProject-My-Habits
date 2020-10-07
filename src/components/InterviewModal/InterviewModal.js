@@ -6,9 +6,14 @@ import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import styles from '../ModalContent/ModalContent.module.css';
 import NotificationModal from '../notifications/NotificationModal';
+import userOperation from '../../redux/user/userOperation';
 
 function InterviewModal({ onClose }) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userOperation.addUserInfo({ avatar: '1' }));
+  }, [dispatch]);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',

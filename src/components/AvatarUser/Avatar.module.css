@@ -1,7 +1,14 @@
 .avatar {
   border-radius: 50%;
+
   box-shadow: 2px 2px 5px 0px rgba(69, 67, 67, 0.75);
 }
 .avatar:hover {
   transform: scale(1.1);
+}
+
+.avatarBox {
+  border-radius: 50%;
+  width: 108px;
+  height: 108px;
 }

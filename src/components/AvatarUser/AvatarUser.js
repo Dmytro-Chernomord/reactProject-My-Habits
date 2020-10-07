@@ -9,32 +9,32 @@ const AvatarUser = ({ width }) => {
   const state = useSelector(state => state);
   const avatar = userSelector.getAvatar(state);
   return (
-    <>
-      {avatar === '' ? (
-        <img
-          className={s.avatar}
-          src={avatarDefault}
-          alt="avatar"
-          width={width}
-        />
-      ) : (
-        <>
-          {avatars.map(el => {
-            if (avatar === el.id) {
-              return (
-                <img
-                  className={s.avatar}
-                  key={el.id}
-                  src={el.avatar}
-                  alt="avatar"
-                  width={width}
-                />
-              );
-            }
-          })}
-        </>
-      )}
-    </>
+    // <>
+    //   {avatar === '' ? (
+    //     <img
+    //       className={s.avatar}
+    //       src={avatarDefault}
+    //       alt="avatar"
+    //       width={width}
+    //     />
+    //   ) : (
+    <div className={s.avatarBox}>
+      {avatars.map(el => {
+        if (avatar === el.id) {
+          return (
+            <img
+              className={s.avatar}
+              key={el.id}
+              src={el.avatar}
+              alt="avatar"
+              width={width}
+            />
+          );
+        }
+      })}
+    </div>
+    //   )}
+    // </>
   );
 };
 
