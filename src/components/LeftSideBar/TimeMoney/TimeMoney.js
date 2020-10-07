@@ -1,14 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Hourglass } from '../../../images/svg-icons/hourglass.svg';
 import { ReactComponent as Wallet } from '../../../images/svg-icons/wallet.svg';
 import styles from './TimeMoney.module.css';
+import actionNotification from '../../../redux/notifications/notificationsActions';
 
 function TimeMoney() {
   const { quiz } = useSelector(state => state);
   const state = useSelector(state => state);
   // console.log(state);
-
+  const dispatch = useDispatch();
   function cigMoneyPerDay(cigPackPrice, cigPerDay) {
     const cigPerPack = 20; /* захардкодил т.к. данные не приходят */
     const cigPrice = cigPackPrice / cigPerPack;
@@ -74,8 +75,10 @@ function TimeMoney() {
     }, 0);
     return timeConvert(sumOfEconomyTime);
   };
-
-  // console.log(timeEconomy(filtredArr));
+  const timeAchievments = Number(timeEconomy(filtredArr).slice(0, 2));
+  useEffect(() => {
+    dispatch(actionNotification.saverTime(timeAchievments));
+  }, [dispatch, timeAchievments]);
 
   return (
     <ul className={styles.container}>
