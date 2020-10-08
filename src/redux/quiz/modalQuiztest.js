@@ -43,7 +43,6 @@ function InterviewModal({ onClose }) {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    // console.log('hi');
     const data = {
       smokeYears,
       cigarettePerDay,
@@ -51,16 +50,6 @@ function InterviewModal({ onClose }) {
       cigarettePackPrice,
     };
     onSubmit(data);
-
-    // dispatch(
-    //   quizOperation.quizComplete({
-    //     smokeYears: years,
-    //     cigarettePerDay: amount,
-    //     cigarettePerTime: time,
-    //     cigarettePackPrice: price,
-    //   }),
-    // );
-    // onClose();
   };
 
   return (

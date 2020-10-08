@@ -9,10 +9,6 @@ import userOperation from '../redux/user/userOperation';
 import { CustomLoader } from './UIcomponents/CustomLoader/CustomLoader';
 
 class App extends Component {
-  // componentDidMount() {
-  //   this.props.onGetOwnHabits();
-  // }
-
   render() {
     return (
       <BrowserRouter>
@@ -32,8 +28,6 @@ class App extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = {};
 
 export default connect(null, {
   onGetOwnHabits: userOperation.getOwnHabits,

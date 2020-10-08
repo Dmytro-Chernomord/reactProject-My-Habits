@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { ReactComponent as Cup } from '../../../images/menu-icons/cup.svg';
 import { ReactComponent as Bell } from '../../../images/menu-icons/bell.svg';
 import { ReactComponent as Calendar } from '../../../images/menu-icons/calendar.svg';
-import notificationsActions from '../../../redux/notifications/notificationsActions';
 import styles from './NavigationBar.module.css';
 
 const Navigation = ({ match }) => {

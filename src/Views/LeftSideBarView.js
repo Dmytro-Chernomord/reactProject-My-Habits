@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-// import LogoBox from '../components/LeftSideBar/LogoBox/LogoBox';
-// import UserMenu from '../components/LeftSideBar/UserMenu/UserMenu';
-// import TimeMoney from '../components/LeftSideBar/TimeMoney/TimeMoney';
-// import NavigationBar from '../components/LeftSideBar/NavigationBar/NavigationBar';
+
 import HabitsList from '../components/LeftSideBar/Habits/HabitsList';
 import { Scroll } from '../components/Scroll/Scroll';
 import Button from '../components/UIcomponents/Button/Button';
@@ -12,18 +9,6 @@ import HabitTemplateModal from '../components/HabitTemplateModal/HabitTemplateMo
 import CustomHabbitModal from '../components/CustomHabbitModal/CustomHabbitModal';
 import LeftSideBarStatic from '../components/LeftSideBar/LeftSideBarstatic/LeftSideBarStatic';
 import transitionStyles from '../components/ModalContent/ModalTransition.module.css';
-
-// const LeftSideBarStatic = ({ match, onLogOut }) => {
-//   return (
-//     <div>
-//       <LogoBox />
-//       <UserMenu match={match} onLogOut={onLogOut} />
-//       <TimeMoney />
-//       <NavigationBar match={match} />
-//       <h2>Привычки</h2>
-//     </div>
-//   );
-// };
 
 const LeftSideBarButton = ({ handelClick }) => {
   return (
@@ -37,36 +22,12 @@ const LeftSideBarButton = ({ handelClick }) => {
 };
 
 export default function LeftSideBarView({ match, onLogOut }) {
-  const [showChoiseModal, setShowChoiseModal] = useState(false);
-  const [showTemplateModal, setShowTemplateModal] = useState(false);
-  const [showCustomModal, setShowCustomModal] = useState(false);
+  // const [showChoiseModal, setShowChoiseModal] = useState(false);
+  // const [showTemplateModal, setShowTemplateModal] = useState(false);
+  // const [showCustomModal, setShowCustomModal] = useState(false);
 
   const [customModalData, setCustomModalData] = useState('');
   const [openModal, setOpenModal] = useState('');
-
-  // const closeAllModals = () => {
-  //   setShowChoiseModal(false);
-  //   setShowTemplateModal(false);
-  //   setShowCustomModal(false);
-  // };
-
-  // const returnToChoiseModal = () => {
-  //   setShowTemplateModal(false);
-  //   setShowChoiseModal(true);
-  // };
-
-  // const isTemplateModal = () => {
-  //   setShowTemplateModal(prevShowModal => !prevShowModal);
-  // };
-
-  // const isCustomModal = () => {
-  //   setShowCustomModal(prevShowModal => !prevShowModal);
-  // };
-
-  // const onChooseHabit = () => {
-  //   setShowTemplateModal(false);
-  //   setShowCustomModal(true);
-  // };
 
   const handelClick = value => {
     setCustomModalData('');
@@ -90,16 +51,12 @@ export default function LeftSideBarView({ match, onLogOut }) {
         unmountOnExit
       >
         <HabitChoiceModal
-          // isTemplateModal={isTemplateModal}
-          // isCustomModal={isCustomModal}
           onClose={() => handelClick('')}
           openCustom={() => handelClick('custom')}
           openTemplate={() => handelClick('template')}
         ></HabitChoiceModal>
       </CSSTransition>
-      {/* {openModal === 'add' && (
-        
-      )} */}
+
       <CSSTransition
         in={openModal === 'template'}
         timeout={250}
@@ -111,14 +68,9 @@ export default function LeftSideBarView({ match, onLogOut }) {
           goBack={() => handelClick('add')}
           onChooseHabit={() => handelClick('custom')}
           onClose={() => handelClick('')}
-          // onClick={() => {
-          //   closeAllModals();
-          // }}
         ></HabitTemplateModal>
       </CSSTransition>
-      {/* {openModal === 'template' && (
-      
-      )} */}
+
       <CSSTransition
         in={openModal === 'custom'}
         timeout={250}
@@ -135,9 +87,6 @@ export default function LeftSideBarView({ match, onLogOut }) {
           // }}
         ></CustomHabbitModal>
       </CSSTransition>
-      {/* {openModal === 'custom' && (
-       
-      )} */}
     </>
   );
 }

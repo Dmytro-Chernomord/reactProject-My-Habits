@@ -5,11 +5,9 @@ import habitsOperation from '../../redux/habits/habitsOperation';
 import ProgressBar from '../UIcomponents/ProgressBar/ProgressBar';
 import CustomHabitModal from '../CustomHabbitModal/CustomHabbitModal';
 import dateSelector from '../../redux/date/dateSelector';
-
 import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
 import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
-import habitsSelector from '../../redux/habits/habitsSelector';
 import transitionStyles from '../ModalContent/ModalTransition.module.css';
 
 class ItemHabit extends Component {
@@ -68,8 +66,6 @@ class ItemHabit extends Component {
     //нельзя отметить выполнение наперед
     let enabledDate =
       currentDate.slice(0, 10) < selectedDate.slice(0, 10) ? true : false;
-    // stateBut1 = enabledDate ? true : stateBut1;
-    // stateBut2 = enabledDate ? true : stateBut2;
 
     return (
       <>

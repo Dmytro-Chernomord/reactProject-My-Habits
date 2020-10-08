@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 import habitsAction from './habitsAction';
 
@@ -80,14 +79,10 @@ const updateHabit = data => async dispatch => {
   dispatch(habitsAction.setHabitsDataRequest());
   try {
     await axios.patch('/habits', data).then(res => {
-      // const dispatch = useDispatch();
-      // dispatch(habitsAction.newHabitsArray(res.data.updatedHabit._id));
-      // console.log(res.data.updatedHabit._id);
       dispatch(habitsAction.setHabitsDataSuccess(res.data.updatedHabit));
     });
   } catch (error) {
     console.log('aus operation', error.message);
-    // dispatch(habitsAction.setHabitsDataError(error.message));
   }
 };
 

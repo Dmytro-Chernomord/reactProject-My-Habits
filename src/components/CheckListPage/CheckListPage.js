@@ -7,9 +7,6 @@ import habitsOperation from '../../redux/habits/habitsOperation';
 
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import { CheckListPageHeader } from './CheckListPageHeader/CheckListPageHeader';
-import ItemHabit from './ItemHabit';
-// import Button from '../UIcomponents/Button/Button';
-import s from './CheckListPage.module.css';
 import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
 import { Scroll } from '../Scroll/Scroll';
 import transitionStyles from '../../components/ModalContent/ModalTransition.module.css';
@@ -30,12 +27,7 @@ class CheckListPage extends Component {
     this.setState({ showModal: value });
   };
 
-  // closeModal = () => {
-  //   this.setState({ showModal: false });
-  // };
-
   render() {
-    const { items } = this.props;
     return (
       <>
         <Scroll
@@ -44,35 +36,7 @@ class CheckListPage extends Component {
           dailyModal={() => {
             this.toggleModal('daily');
           }}
-          // missedDays={() => {
-          //   this.toggleModal('missedDays');
-          // }}
         />
-        {/* <CheckListPageHeader toggleModal={this.toggleModal} /> */}
-        {/* <div className={s.headerContainer}>
-          <h2 className={s.header}>Чек-лист привычек</h2>
-          <Button
-            type={'button'}
-            green={false}
-            handelClick={this.toggleModal}
-            label={'+ Сигареты за сегодня'}
-          />
-        </div> */}
-        {/* <HabitsListInHome /> */}
-
-        {/* <div className={s.container}>
-          <ul className={s.list}>
-            {items.map(item => (
-              <li
-                key={item._id}
-                className={s.item}
-                style={{ borderLeftColor: item.habitColor }}
-              >
-                <ItemHabit {...item} />
-              </li>
-            ))}
-          </ul>
-        </div> */}
         <CSSTransition
           in={this.state.showModal === 'daily'}
           timeout={250}
@@ -83,11 +47,6 @@ class CheckListPage extends Component {
             onClose={() => this.toggleModal('')}
           ></DailyResultModal>
         </CSSTransition>
-        {/* {this.state.showModal === 'daily' && (
-          <DailyResultModal
-            onClose={() => this.toggleModal('')}
-          ></DailyResultModal>
-        )} */}
       </>
     );
   }

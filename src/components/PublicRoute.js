@@ -13,7 +13,6 @@ const PublicRoute = ({
     render={props =>
       isAuthenticated ? <Redirect to="/home" /> : <Component {...props} />
     }
-    // render={props => <Component {...props} />}
   />
 );
 

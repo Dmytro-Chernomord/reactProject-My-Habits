@@ -12,16 +12,7 @@ import styles from '../ModalContent/ModalContent.module.css';
 // data   ---   объект с информацией (название, периодичность, id, время старта) о привычке. Взят из чек-листа.
 // addData -----  добавляет данный в state для открытия новой модалки. Нужно будет новый state
 
-function CongratulationModal({
-  // habitName,
-  onClick,
-  // onClose,
-  // ableToDelete,
-  info,
-  // addData,
-  onRepeat,
-  onNewHabit,
-}) {
+function CongratulationModal({ onClick, info, onRepeat, onNewHabit }) {
   return (
     <div className={styles.modalWrapperGreen}>
       <div className={styles.modalCenterLayout}>

@@ -8,7 +8,7 @@ import actionNotification from '../../../redux/notifications/notificationsAction
 function TimeMoney() {
   const { quiz } = useSelector(state => state);
   const state = useSelector(state => state);
-  // console.log(state);
+
   const dispatch = useDispatch();
   function cigMoneyPerDay(cigPackPrice, cigPerDay) {
     const cigPerPack = 20; /* захардкодил т.к. данные не приходят */
@@ -21,9 +21,6 @@ function TimeMoney() {
     const result = cigTimePrice * cigPerDay;
     return result;
   }
-
-  // console.log(cigTimePerDay(quiz.cigarettePerTime, quiz.cigarettePerDay));
-  // console.log(cigMoneyPerDay(quiz.cigarettePackPrice, quiz.cigarettePerDay));
 
   const getFiltredCig = cigArr => {
     return cigArr.filter(cigArrItem => cigArrItem);
@@ -38,8 +35,6 @@ function TimeMoney() {
     return rhours + ' ч ' + rminutes + ' мин ';
   }
 
-  // console.log(getFiltredCig(state.cigarettes.data));
-
   const filtredArr = getFiltredCig(state.cigarettes.data);
 
   const moneyEconomy = filtredArr => {
@@ -50,18 +45,10 @@ function TimeMoney() {
       );
       const dynamicCigMoney = cigMoneyPerDay(quiz.cigarettePackPrice, arrItem);
       const result = staticCigMoney - dynamicCigMoney;
-      // console.log(`arrItem ${arrItem}`);
-      // console.log(`staticCigMoney ${staticCigMoney}`);
-      // console.log(`dynamicCigMoney ${dynamicCigMoney}`);
-      // console.log(`result ${result}`);
-      // console.log(`acc ${acc}`);
       return acc + result;
     }, 0);
-    // return (Math.round(sumOfEconomyMoney * 100) / 100).toFixed(1);
     return Math.round(sumOfEconomyMoney * 100) / 100;
   };
-
-  // console.log(moneyEconomy(filtredArr));
 
   const timeEconomy = filtredArr => {
     const sumOfEconomyTime = filtredArr.reduce((acc, arrItem) => {

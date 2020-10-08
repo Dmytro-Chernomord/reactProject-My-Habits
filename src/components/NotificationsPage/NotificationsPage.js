@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './notification.module.css';
-import habitSelector from '../../redux/habits/habitsSelector';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './transition.css';
 import notificationsActions from '../../redux/notifications/notificationsActions';
@@ -57,9 +56,9 @@ function Notifications() {
     dispatch(notificationsActions.removeNotification());
   };
 
-  const filteredHabitsData = useSelector(state =>
-    habitSelector.getFilterTodayHabits(state),
-  );
+  // const filteredHabitsData = useSelector(state =>
+  //   habitSelector.getFilterTodayHabits(state),
+  // );
   const habitsData = useSelector(state => state.habits);
 
   const habits = habitsData.map(el => el.data);
@@ -129,17 +128,6 @@ function Notifications() {
 
     return () => {};
   }, [dispatch, stateNotification]);
-
-  // }, [
-  //   dispatch,
-  //   halfWayTrough,
-  //   oneDayLeft,
-  //   setNotification,
-  //   youCanDoBetter,
-  //   youGotAchievment,
-  //   youHaveFiveDaysLeft,
-  //   youHaveThreeDaysLeft,
-  // ];
 
   return (
     <div>
