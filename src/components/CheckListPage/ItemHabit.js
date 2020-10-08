@@ -78,7 +78,7 @@ class ItemHabit extends Component {
             <h3 className={s.title}>{name}</h3>
             <ProgressBar completed={efficiency} />
             <span className={s.progressNumber}>{efficiency}%</span>
-            <span>{index}</span>
+            {/* <span>{index}</span> */}
             <p className={s.text}>Прогресс привития привычки</p>
           </div>
           <div className={s.btnBox}>
