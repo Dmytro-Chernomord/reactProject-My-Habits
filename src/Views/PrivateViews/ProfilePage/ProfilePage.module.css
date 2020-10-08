@@ -1,0 +1,71 @@
+.containerProfile {
+  padding: 60px 30px;
+  /* width: 842px; */
+  background-color: #f6f6f6;
+  height: 100%;
+}
+.titleProfile {
+  margin: 0 0 30px 0;
+  text-align: start;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 1.19;
+  color: #4f4f4f;
+}
+.boxInfoProfile {
+  display: flex;
+}
+
+.boxPassword {
+  text-align: center;
+}
+
+.boxAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: auto;
+  width: 100%;
+}
+.btnPassword {
+  margin-top: 20px;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #bdbdbd;
+  background-color: transparent;
+  border: none;
+  margin-right: 30px;
+}
+.btnPassword:hover {
+  color: #43d190;
+}
+
+.linkPageAvatars {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #bdbdbd;
+}
+.linkPageAvatars:hover {
+  color: #43d190;
+}
+
+.typeSubscription {
+  padding: 2px 8px;
+  margin: 20px 0 15px 0;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.2;
+  background: linear-gradient(222.27deg, #2eebda 3.75%, #7cf7a3 94.69%);
+  border-radius: 5px;
+}
+
+.buttonDiv {
+  margin-top: 10px;
+}

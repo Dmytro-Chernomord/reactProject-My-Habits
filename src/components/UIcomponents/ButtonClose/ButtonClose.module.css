@@ -1,0 +1,45 @@
+.button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  /* padding: 2px; */
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url(../../../images/svg-icons/close-grey.svg),
+    url(../../../images/svg-icons/close-red.svg);
+  background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center;
+}
+
+.button:hover,
+.button:focus {
+  background-size: 0, auto;
+}
+
+.white {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  /* padding: 2px; */
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url(../../../images/svg-icons/close-white.svg),
+    url(../../../images/svg-icons/close-red.svg);
+  background-repeat: no-repeat;
+  background-size: auto, 0;
+  background-position: center;
+}
+
+.white:hover,
+.white:focus {
+  background-size: 0, auto;
+}

@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 23px 0;
+  width: 100%;
+  background: #ffffff;
+  border-top: 1px solid #d5e1dc;
+  border-radius: 0px;
+}
+
+.timeMoneyBox {
+  display: flex;
+  flex-direction: column;
+  width: 135px;
+  padding: 0;
+  margin: 0;
+}
+
+.economyText {
+  text-decoration: none;
+  color: #bdbdbd;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  margin-bottom: 15px;
+}
+
+.dataView {
+  display: flex;
+}
+
+.numbers {
+  padding: 0 0 0 10px;
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  color: #4f4f4f;
+}

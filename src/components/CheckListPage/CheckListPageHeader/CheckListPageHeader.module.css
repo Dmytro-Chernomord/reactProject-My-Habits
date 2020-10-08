@@ -1,0 +1,21 @@
+.headerContainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34px 64px 36px 34px;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #d5e1dc;
+  border-radius: 0px;
+}
+
+.header {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 31px;
+
+  color: #4f4f4f;
+}

@@ -1,0 +1,360 @@
+.modalWrapper {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 784px;
+  padding: 60px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.modalWrapperGreen {
+  position: relative;
+  box-sizing: border-box;
+  width: 784px;
+  height: 580px;
+  padding: 60px;
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  background-color: #43d190;
+  border-radius: 10px;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+}
+
+.modalTitle {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 70px;
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+}
+
+.modalTitleTemplate {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.modalTitleCongrats {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  /* margin-bottom: 40px; */
+  color: #fff;
+}
+
+.modalTitleCustom {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  margin: 0;
+  color: black;
+}
+
+.modalText {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  color: #bdbdbd;
+  text-align: center;
+}
+
+.modalTextCustom {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 40px;
+  margin-top: 8px;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  color: #bdbdbd;
+  text-align: center;
+}
+
+.modalTextCongrats {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.percent {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.emptyDiv {
+  height: 118px;
+}
+
+.modalList {
+  list-style: none;
+  max-height: 340px;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0 10px;
+  width: 460px;
+  margin: 0 auto;
+}
+
+.modalList:hover {
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -o-overflow-scrolling: touch;
+}
+
+.modalList::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+}
+
+.modalList::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: transparent;
+  -webkit-box-shadow: 0 0 1px transparent;
+}
+.modalList:hover::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+
+  background: -webkit-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: -moz-linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+  background: linear-gradient(222.27deg, #7cf7a3 3.75%, #2eebda 94.69%);
+}
+.modalList:hover::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+}
+
+.modalItemDisabled {
+  width: 425px;
+  height: 44px;
+  margin-bottom: 15px;
+  color: #bdbdbd;
+  background: #e9faf7;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.modalItem {
+  width: 425px;
+  height: 44px;
+  margin-bottom: 15px;
+  color: #43d190;
+  background: #e9faf7;
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.modalItem:hover,
+.modalItem:focus {
+  background: #cbf6e3;
+  color: #4f4f4f;
+  cursor: pointer;
+}
+
+.boxInfoProfile {
+  display: flex;
+}
+.formProfile {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.labelDailyResult {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.labelRemindModal {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.labelQuiz {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.textLabel {
+  display: block;
+  width: 100px;
+  margin-right: 120px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.16;
+  text-align: left;
+}
+
+.textLabelDailyResult {
+  color: black;
+  display: block;
+  width: 180px;
+  margin-right: 40px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.16;
+  text-align: left;
+}
+
+.textLabelQuiz {
+  display: block;
+  width: 317px;
+  margin-right: 40px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.16;
+  text-align: left;
+}
+
+.input {
+  width: 220px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: black;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.inputHabitName {
+  width: 425px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.btnFolder {
+  display: flex;
+  justify-content: center;
+}
+
+.btnBox {
+  margin-right: 15px;
+}
+
+.dateBox {
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.dateBox label {
+  height: 43px;
+}
+
+.calendarBox {
+  position: absolute;
+  top: 0px;
+  left: 222px;
+  z-index: 10;
+  width: 220px;
+  height: 44px;
+  /* padding: 10px 20px; */
+  background-color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.16;
+  /* border: 1px solid #e0e0e0; */
+  border-radius: 5px;
+}
+
+.react-datepicker__month {
+  width: 280px;
+
+  margin: 0.4rem;
+  text-align: center;
+}
+
+.react-datepicker__month-container {
+  float: left;
+  width: 280px;
+}
+
+.MuiInputBase-root.MuiInputBase-formControl {
+  max-width: 220px;
+}
+
+.btnRemoveFolder {
+  position: relative;
+}
+
+.modalCenterLayout {
+  text-align: center;
+}
+
+.boxError {
+  height: 15px;
+  margin-left: 415px;
+  text-align: start;
+}
+.boxErrorHabbit {
+  height: 15px;
+  margin-left: 220px;
+  text-align: start;
+}
+.error {
+  font-size: 12px;
+  line-height: 1.12;
+  color: #fe6083;
+  margin: 0;
+}
+
+.imgWrapper {
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.messageCogarette {
+  font-size: 14px;
+  line-height: 1.12;
+  height: 20px;
+  text-align: start;
+  margin-left: 330px;
+}

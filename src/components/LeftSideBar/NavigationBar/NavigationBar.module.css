@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #ffffff;
+  border-top: 1px solid #d5e1dc;
+  border-bottom: 1px solid #d5e1dc;
+
+  border-radius: 0px;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 25px 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.linkBox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background: #cbf7e3;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.linkBox:last-child {
+  margin-right: 0;
+}
+
+.iconBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #43d190;
+  border-radius: 5px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.iconBox:hover,
+.iconBox:focus {
+  background: #333333;
+}
+.notifications {
+  position: absolute;
+  top: -6px;
+  left: 54px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 50%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: tomato;
+
+  color: #ffffff;
+}
+
+.notificationsHidden {
+  display: none;
+}

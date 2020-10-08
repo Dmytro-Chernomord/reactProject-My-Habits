@@ -1,0 +1,48 @@
+.habitsCardsItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0;
+}
+
+.habitsCardsItem:last-child {
+  margin-bottom: 0;
+}
+
+.habitsCardsText {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #bdbdbd;
+  flex-wrap: wrap;
+  width: 222px;
+}
+
+.circle {
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  animation: pulse-animation 2s infinite linear;
+}
+
+@keyframes pulse-animation {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  25% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+  }
+  75% {
+    -webkit-transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
