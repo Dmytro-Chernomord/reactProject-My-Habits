@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useForm } from 'react-hook-form';
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
@@ -8,42 +8,45 @@ import styles from '../ModalContent/ModalContent.module.css';
 import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
+import NotificationModal from '../notifications/NotificationModal';
 
 function CigaretteRemindModal({ onClose }) {
-  const [amount, setAmount] = useState({});
+  // const [amount, setAmount] = useState({});
   const dispatch = useDispatch();
   const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
   const startedAt = useSelector(cigSelector.getCigarettesDataStartedAt);
 
+  const { register, errors, handleSubmit } = useForm({
+    mode: 'onChange',
+  });
   //   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const missedDates = useSelector(cigSelector.getMissedDatesArray);
   // console.log(missedDates);
   // console.log(cigarettesArray);
-  const handleInputChange = e => {
-    let data = {};
+  // const handleInputChange = e => {
+  //   let data = {};
+  //   const { value, name } = e.target;
+  //   // const test = { data[name]: value };
+  //   // data = { ...test };
+  //   // setAmount({ id: name, number: value });
+  //   // setAmount({ id: name, number: value });
+  //   // console.log('value', value, 'name', name);
+  //   data[name] = value;
+  //   // console.log(data);
+  //   setAmount(prev => ({ ...prev, ...data }));
 
-    const { value, name } = e.target;
-    // const test = { data[name]: value };
-    // data = { ...test };
-    // setAmount({ id: name, number: value });
-    // setAmount({ id: name, number: value });
-    // console.log('value', value, 'name', name);
-    data[name] = value;
-    // console.log(data);
-    setAmount(prev => ({ ...prev, ...data }));
-
-    // for (let i = 0; i < arr.length; i++) {
-    //   const element = arr[i];
-    //   console.log(element);
-    //   if (i === name) {
-    //     console.log(name);
-    //   }
-    //   arr.splice(`${name}`, 0, `${value}`);
-    // }
-    // setAmount(data);
-    // data[name] = value;
-    // setAmount(prev => [...prev, ...data]);
-  };
+  // for (let i = 0; i < arr.length; i++) {
+  //   const element = arr[i];
+  //   console.log(element);
+  //   if (i === name) {
+  //     console.log(name);
+  //   }
+  //   arr.splice(`${name}`, 0, `${value}`);
+  // }
+  // setAmount(data);
+  // data[name] = value;
+  // setAmount(prev => [...prev, ...data]);
+  // };
   // console.log(amount);
 
   // console.log(amount);
@@ -59,9 +62,9 @@ function CigaretteRemindModal({ onClose }) {
   //     (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
   //   );
 
-  const onSubmit = e => {
-    e.preventDefault();
-    // console.log(amount);
+  const onSubmit = amount => {
+    console.log(amount);
+    // // console.log(amount);
     let result = [];
     let config = [...cigarettesArray];
     for (let i = 0; i < cigarettesArray.length; i++) {
@@ -72,22 +75,19 @@ function CigaretteRemindModal({ onClose }) {
       for (let y = 0; y < key.length; y++) {
         const e = Number(key[y]);
         const v = Number(value[y]);
-
         if (i === e) {
           result.push(v);
           break;
         }
       }
-      if (typeof element === 'number') {
-        result.push(element);
-        // continue;
-      }
-      // result.push(element);
+      // if (typeof element === 'number') {
+      //   result.push(element);
+      //   // continue;
+      // }
+      result.push(element);
       // console.log('key', key, 'value', value);
     }
-
-    console.log(config.splice(0, `${result.length}`, ...result));
-
+    // console.log(config.splice(0, `${result.length}`, ...result));
     // console.log(cigarettesArray.splice(0, `${result.length}`, `${[result]}`));
     dispatch(
       cigarettesOperation.postDayCigarettes({
@@ -104,22 +104,40 @@ function CigaretteRemindModal({ onClose }) {
         Введите, пожалуйста, данные за прошедшие дни:
       </h2>
       <p className={styles.modalTextCustom}>Вы забыли заполнить</p>
-      <form onSubmit={onSubmit} className={styles.formProfile}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
         <div className={styles.modalList}>
           {missedDates.map(({ index, date }) => (
-            <label className={styles.labelRemindModal} key={index}>
-              <span className={styles.textLabelDailyResult}>
-                {date.slice(0, 10)}
-              </span>
-              <input
-                type="number"
-                name={index}
-                // value={amount}
-                onChange={handleInputChange}
-                className={styles.input}
-                required
-              />
-            </label>
+            <div key={index}>
+              <div className={styles.boxErrorHabbit}>
+                {errors[index] && errors[index].type === 'required' && (
+                  <p className={styles.error}>*oбязательное поле ввода</p>
+                )}
+                {errors[index] && errors[index].type === 'min' && (
+                  <p className={styles.error}>*можно указать минимум 0</p>
+                )}
+              </div>
+              <label className={styles.labelRemindModal}>
+                <span className={styles.textLabelDailyResult}>
+                  {date.slice(0, 10)}
+                </span>
+                <input
+                  min="0"
+                  type="number"
+                  name={index}
+                  // value={amount}
+                  // onChange={handleInputChange}
+                  className={styles.input}
+                  ref={register({
+                    min: 0,
+                    required: true,
+                  })}
+                  style={{
+                    outlineColor: errors[index] ? '#fe6083' : '#43d190',
+                    borderColor: errors[index] ? '#fe6083' : '#e0e0e0',
+                  }}
+                />
+              </label>
+            </div>
           ))}
         </div>
         <div className={styles.btnFolder}>
@@ -139,6 +157,9 @@ function CigaretteRemindModal({ onClose }) {
               label={'Сохранить'}
             />
           </div>
+        </div>
+        <div style={{ marginBottom: '5px' }}>
+          <NotificationModal />
         </div>
         <ButtonClose type="button" onClick={onClose} />
       </form>
