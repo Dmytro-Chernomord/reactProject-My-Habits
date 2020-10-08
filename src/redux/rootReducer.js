@@ -156,6 +156,9 @@ const errorsModalReducer = createReducer(null, {
   [userActions.changePasswordError]: () => true,
   [userActions.changePasswordRequest]: () => false,
   [userActions.changePasswordSuccess]: () => false,
+  [cigarettesActions.cigarettesAddError]: () => true,
+  [cigarettesActions.cigarettesAddRequest]: () => false,
+  [cigarettesActions.cigarettesAddSuccess]: () => false,
 });
 
 const loadingReducer = createReducer(false, {
