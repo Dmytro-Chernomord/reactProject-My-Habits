@@ -52,9 +52,12 @@ const HomeView = () => {
   const halfWayTrough = daysLeft.some(el => el.length === 10);
   const presentActiveDays = activeDays.filter(elm => elm.length > 0);
   const uncompletedDays = presentActiveDays.map(el =>
-    el.filter(elm => elm === false),
+    el.filter(elm => elm === true),
   );
-  const youCanDoBetter = uncompletedDays.some(el => el.length > 0);
+  const youCanDoBetter = uncompletedDays.some(el => {
+    console.log(el.length);
+    return el.length > 0;
+  });
   const successfullDays = presentActiveDays.map(el =>
     el.filter(elm => elm === true),
   );
@@ -102,7 +105,6 @@ const HomeView = () => {
     fiveDaysAndDone,
     halfDone,
   };
-  console.log(allDayStatistic);
 
   useEffect(() => {
     if (youGotAchievment && !setNotification && stateNotification === null) {

@@ -131,26 +131,23 @@ function Notifications({
             </CSSTransition>
           )}
 
-          {youCanDoBetter &&
-            !setNotification &&
-            !renderReminder &&
-            goodStart.length > 0 && (
-              <CSSTransition classNames="option" timeout={250} unmountOnExit>
-                <div onClick={handleClickReminder} className={styles.box}>
-                  <h2 className={styles.title}>Не сдавайся!</h2>
-                  <p className={styles.text}>
-                    {/* Не забывай отмечать свои привычки! */}У тебя получится!
-                    Вот Список привычек, которые ты удачно начал:
-                  </p>
+          {youCanDoBetter && !setNotification && !renderReminder && (
+            <CSSTransition classNames="option" timeout={250} unmountOnExit>
+              <div onClick={handleClickReminder} className={styles.box}>
+                <h2 className={styles.title}>Не сдавайся!</h2>
+                <p className={styles.text}>
+                  {/* Не забывай отмечать свои привычки! */}У тебя получится!
+                  Вот Список привычек, которые ты удачно начал:
+                </p>
 
-                  <ul>
-                    {goodStart.map(el => (
-                      <li key={el._id}>{el.name}</li>
-                    ))}
-                  </ul>
-                </div>
-              </CSSTransition>
-            )}
+                <ul>
+                  {goodStart.map(el => (
+                    <li key={el._id}>{el.name}</li>
+                  ))}
+                </ul>
+              </div>
+            </CSSTransition>
+          )}
 
           {youGotAchievment && !setNotification && !renderAchievment && (
             <CSSTransition classNames="option" timeout={250}>
