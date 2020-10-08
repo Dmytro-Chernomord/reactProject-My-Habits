@@ -5,3 +5,8 @@
 .avatar:hover {
   transform: scale(1.1);
 }
+
+.avatarBox {
+  width: 108px;
+  height: 108px;
+}
