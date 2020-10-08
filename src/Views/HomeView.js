@@ -26,13 +26,6 @@ import habitsSelector from '../redux/habits/habitsSelector';
 import operation from '../redux/user/userOperation';
 import userSelector from '../redux/user/userSelector';
 import notificationsActions from '../redux/notifications/notificationsActions';
-// import authOperation from '../redux/auth/authOperation';
-
-// const styles = {
-//   display: 'flex',
-//   box: { outline: '1px solid teal' },
-//   title: { backgroundColor: 'gray' },
-// };
 
 const HomeView = () => {
   const dispatch = useDispatch();
@@ -57,28 +50,7 @@ const HomeView = () => {
   const youHaveThreeDaysLeft = daysLeft.some(el => el.length === 3);
   const youHaveFiveDaysLeft = daysLeft.some(el => el.length === 5);
   const halfWayTrough = daysLeft.some(el => el.length === 10);
-
-  const youHaveThreeDaysLeftArr = habitsData.filter(el => {
-    if (typeof el.data === 'boolean') {
-      console.log(el.data, 'el');
-      return el;
-    }
-  });
-  const youHaveFiveDaysLeftArr = habitsData.filter(el =>
-    el.data.some(elm => elm),
-  );
-
-  // const goodStart = oneSucces.filter(one => {
-  //   if (one.data === true) {
-  //     return one;
-  //   }
-  // });
-  // console.log(goodStart);
-  console.log(youHaveFiveDaysLeftArr);
-  //newNotification
-
   const presentActiveDays = activeDays.filter(elm => elm.length > 0);
-
   const uncompletedDays = presentActiveDays.map(el =>
     el.filter(elm => elm === false),
   );
@@ -87,8 +59,50 @@ const HomeView = () => {
     el.filter(elm => elm === true),
   );
   const oneDayLeft = daysLeft.some(el => el.length === 1);
-
   const youGotAchievment = successfullDays.some(el => el.length > 20);
+
+  const goodStart = habitsData.filter(el =>
+    el.data.some(elm => {
+      if (elm === true) {
+        return el;
+      }
+      return false;
+    }),
+  );
+
+  const justOneDay = [];
+  const threeDaysAndDone = [];
+  const fiveDaysAndDone = [];
+  const halfDone = [];
+
+  const howMuchDaysLeft = goodStart.filter(el => {
+    const howMuchLeft = el.data.reduce(function (accumulator, currentValue) {
+      if (typeof currentValue === 'boolean') {
+        return accumulator + 1;
+      } else {
+        return accumulator;
+      }
+    }, 0);
+    if (howMuchLeft === 20) {
+      justOneDay.push(el);
+    }
+    if (howMuchLeft === 18) {
+      threeDaysAndDone.push(el);
+    }
+    if (howMuchLeft === 16) {
+      fiveDaysAndDone.push(el);
+    }
+    if (howMuchLeft === 11 || howMuchLeft === 10) {
+      halfDone.push(el);
+    }
+  });
+  const allDayStatistic = {
+    justOneDay,
+    threeDaysAndDone,
+    fiveDaysAndDone,
+    halfDone,
+  };
+  console.log(allDayStatistic);
 
   useEffect(() => {
     if (youGotAchievment && !setNotification && stateNotification === null) {
@@ -161,6 +175,8 @@ const HomeView = () => {
             youHaveFiveDaysLeft={youHaveFiveDaysLeft}
             youCanDoBetter={youCanDoBetter}
             youGotAchievment={youGotAchievment}
+            goodStart={goodStart}
+            allDayStatistic={allDayStatistic}
           />
         </Route>
         <Route path={`${match.path}/ProfilePage`}>

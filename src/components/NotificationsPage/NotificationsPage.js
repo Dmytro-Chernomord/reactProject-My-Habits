@@ -8,13 +8,14 @@ import notificationsActions from '../../redux/notifications/notificationsActions
 
 function Notifications({
   oneDayLeft,
-
+  goodStart,
   setNotification,
   youHaveThreeDaysLeft,
   halfWayTrough,
   youHaveFiveDaysLeft,
   youCanDoBetter,
   youGotAchievment,
+  allDayStatistic,
 }) {
   console.log('youGotAchievment', oneDayLeft);
 
@@ -89,6 +90,11 @@ function Notifications({
                 <p className={styles.text}>
                   Осталось 3 дня чтобы завершить привычку!
                 </p>
+                <ul>
+                  {allDayStatistic.threeDaysAndDone.map(el => (
+                    <li key={el._id}>{el.name}</li>
+                  ))}
+                </ul>
               </div>
             </CSSTransition>
           )}
@@ -100,6 +106,11 @@ function Notifications({
                   Поздравляем! Вы на половине пути!
                 </h2>
                 <p className={styles.text}>Большая часть позади!</p>
+                <ul>
+                  {allDayStatistic.halfDone.map(el => (
+                    <li key={el._id}>{el.name}</li>
+                  ))}
+                </ul>
               </div>
             </CSSTransition>
           )}
@@ -111,20 +122,35 @@ function Notifications({
                 <p className={styles.text}>
                   Осталось 5 дня чтобы завершить привычку!
                 </p>
+                <ul>
+                  {allDayStatistic.fiveDaysAndDone.map(el => (
+                    <li key={el._id}>{el.name}</li>
+                  ))}
+                </ul>
               </div>
             </CSSTransition>
           )}
 
-          {youCanDoBetter && !setNotification && !renderReminder && (
-            <CSSTransition classNames="option" timeout={250} unmountOnExit>
-              <div onClick={handleClickReminder} className={styles.box}>
-                <h2 className={styles.title}>Не сдавайся!</h2>
-                <p className={styles.text}>
-                  Не забывай отмечать свои привычки!У тебя получится!
-                </p>
-              </div>
-            </CSSTransition>
-          )}
+          {youCanDoBetter &&
+            !setNotification &&
+            !renderReminder &&
+            goodStart.length > 0 && (
+              <CSSTransition classNames="option" timeout={250} unmountOnExit>
+                <div onClick={handleClickReminder} className={styles.box}>
+                  <h2 className={styles.title}>Не сдавайся!</h2>
+                  <p className={styles.text}>
+                    {/* Не забывай отмечать свои привычки! */}У тебя получится!
+                    Вот Список привычек, которые ты удачно начал:
+                  </p>
+
+                  <ul>
+                    {goodStart.map(el => (
+                      <li key={el._id}>{el.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              </CSSTransition>
+            )}
 
           {youGotAchievment && !setNotification && !renderAchievment && (
             <CSSTransition classNames="option" timeout={250}>
@@ -144,6 +170,11 @@ function Notifications({
                 <p className={styles.text}>
                   Остался один день чтобы завершить привычку!
                 </p>
+                <ul>
+                  {allDayStatistic.justOneDay.map(el => (
+                    <li key={el._id}>{el.name}</li>
+                  ))}
+                </ul>
               </div>
             </CSSTransition>
           )}

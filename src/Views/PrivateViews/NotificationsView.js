@@ -10,6 +10,8 @@ export default function NotificationsView({
   youHaveFiveDaysLeft,
   youCanDoBetter,
   youGotAchievment,
+  goodStart,
+  allDayStatistic,
 }) {
   return (
     <div>
@@ -21,6 +23,8 @@ export default function NotificationsView({
         youHaveFiveDaysLeft={youHaveFiveDaysLeft}
         youCanDoBetter={youCanDoBetter}
         youGotAchievment={youGotAchievment}
+        goodStart={goodStart}
+        allDayStatistic={allDayStatistic}
       />
     </div>
   );
