@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Route, Link, useLocation, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperation from '../redux/auth/authOperation';
@@ -69,16 +69,36 @@ const HomeView = () => {
       if (elm === true) {
         return el;
       }
-      return false;
+      // return false;
     }),
   );
-
+  const ref = useRef(0);
+  useEffect(() => {
+    console.log('goodStart.length', goodStart.length);
+    if (goodStart.length === 0) {
+      console.log('ref', ref.current);
+      if (goodStart.length === 0 && ref.current > 0) {
+        console.log('dispat');
+        dispatch(notificationsActions.removeNotification());
+      }
+      ref.current += 1;
+    }
+  }, [dispatch, goodStart.length]);
+  const resultHabit = habitsData.filter(el =>
+    el.data.some(elm => {
+      if (typeof elm === 'boolean') {
+        return el;
+      }
+      // return false;
+    }),
+  );
   const justOneDay = [];
   const threeDaysAndDone = [];
   const fiveDaysAndDone = [];
   const halfDone = [];
+  const justOneDayNotMarked = [];
 
-  const howMuchDaysLeft = goodStart.filter(el => {
+  const howMuchDaysLeft = resultHabit.filter(el => {
     const howMuchLeft = el.data.reduce(function (accumulator, currentValue) {
       if (typeof currentValue === 'boolean') {
         return accumulator + 1;
@@ -89,7 +109,10 @@ const HomeView = () => {
     if (howMuchLeft === 20) {
       justOneDay.push(el);
     }
-    if (howMuchLeft === 18) {
+    // if (howMuchLeft === 19) {
+    //   justOneDayNotMarked.push(el);
+    // }
+    if (howMuchLeft === 17) {
       threeDaysAndDone.push(el);
     }
     if (howMuchLeft === 16) {
@@ -104,6 +127,7 @@ const HomeView = () => {
     threeDaysAndDone,
     fiveDaysAndDone,
     halfDone,
+    justOneDayNotMarked,
   };
 
   useEffect(() => {

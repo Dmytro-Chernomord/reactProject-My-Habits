@@ -68,3 +68,7 @@
 .notificationsEmpty {
   display: none;
 }
+
+.notMarkedLi {
+  background-color: red;
+}

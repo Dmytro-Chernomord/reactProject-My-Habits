@@ -120,7 +120,7 @@ function Notifications({
               <div onClick={handleClickFiveDays} className={styles.box}>
                 <h2 className={styles.title}>Осталось совсем немного!</h2>
                 <p className={styles.text}>
-                  Осталось 5 дня чтобы завершить привычку!
+                  Осталось 5 дней чтобы завершить привычку!
                 </p>
                 <ul>
                   {allDayStatistic.fiveDaysAndDone.map(el => (
@@ -172,6 +172,13 @@ function Notifications({
                     <li key={el._id}>{el.name}</li>
                   ))}
                 </ul>
+                {/* <ul>
+                  {allDayStatistic.justOneDayNotMarked.map(el => (
+                    <li className={styles.notMarkedLi} key={el._id}>
+                      {el.name}
+                    </li>
+                  ))}
+                </ul> */}
               </div>
             </CSSTransition>
           )}
