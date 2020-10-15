@@ -9,7 +9,7 @@ function NotFound(props) {
           <div className="col-sm-12 ">
             <div>
               <div className="four_zero_four_bg">
-                <h1 className="text-center ">404</h1>
+                {/* <h1 className="text-center ">404</h1> */}
               </div>
               <h3 className="description">Look like you're lost</h3>
               <div className="contant_box_404">

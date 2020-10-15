@@ -112,7 +112,7 @@ const HomeView = () => {
     // if (howMuchLeft === 19) {
     //   justOneDayNotMarked.push(el);
     // }
-    if (howMuchLeft === 17) {
+    if (howMuchLeft === 18) {
       threeDaysAndDone.push(el);
     }
     if (howMuchLeft === 16) {
