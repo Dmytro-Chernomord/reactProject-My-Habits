@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import userOperation from '../../redux/user/userOperation';
 import Button from '../Button/Button';
 import styles from './ChangePassword.module.css';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
-import NotificationModal from '../../components/notifications/NotificationModal';
+//import NotificationModal from '../../components/notifications/NotificationModal';
 
 const ChangePassword = ({ setShowPassword }) => {
   const [showError, setShowError] = useState(false);

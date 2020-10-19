@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import userSelector from '../../redux/user/userSelector';
-import avatarDefault from '../../images/avatars/defaultAvatar.png';
+//import avatarDefault from '../../images/avatars/defaultAvatar.png';
 import avatars from '../../avatars';
 import s from './Avatar.module.css';
 

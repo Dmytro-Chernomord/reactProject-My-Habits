@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import userOperations from '../../redux/user/userOperation';
-import { TextField } from '@material-ui/core';
+// import { TextField } from '@material-ui/core';
 // import userSelectors from '../../redux/user/userSelector';
 // import Input from '../UIcomponents/Input/Input';
 import Button from '../UIcomponents/Button/Button';
@@ -11,11 +11,11 @@ import { ButtonRemoveHabit } from '../UIcomponents/ButtonRemoveHabit/ButtonRemov
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
-import NativeSelect from '@material-ui/core/NativeSelect';
+// import NativeSelect from '@material-ui/core/NativeSelect';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
@@ -313,6 +313,10 @@ function CustomHabbitModal({
 
   const startDate = new Date();
 
+  //Лена - добавила эту переменную, чтоб привести дату к текущему часовому поясую
+  //Метод toISOString переводит дату по 0 меридиану, то есть берет локальное время и отнимает разницу
+  const currentTimeZoneOffset = -1000 * 60 * startDate.getTimezoneOffset();
+
   // @Ihor _21DAY очень нужно для тестирования
   // const _21DAY = 1000 * 60 * 60 * 24 * 21;
   // const startDate = new Date() - _21DAY;
@@ -324,7 +328,8 @@ function CustomHabbitModal({
   //   setIteration('');
   // };
   const onSubmit = async data => {
-    const piece = data.datePicker.toISOString().slice(0, 11);
+    const day = new Date(Date.parse(data.datePicker) + currentTimeZoneOffset);
+    const piece = day.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
     if (ableToDelete) {
       await dispatch(
@@ -545,7 +550,7 @@ function CustomHabbitModal({
             <Button type={'submit'} green={true} label={'Сохранить'} />
           </div>
         </div>
-      </form>{' '}
+      </form>
       <ButtonClose type="button" onClick={onClose} />
     </div>
   );
@@ -591,8 +596,7 @@ export default ModalBackdrop(CustomHabbitModal);
 
 //   // resetForm();
 // };
-{
-  /* <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
+/* <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
         <label htmlFor="name" className={styles.label}>
           <span className={styles.textLabel}>Название</span>
           <input
@@ -684,4 +688,3 @@ export default ModalBackdrop(CustomHabbitModal);
       </form>{' '}
       <ButtonClose type="button" onClick={onClick} />
     </div> */
-}
