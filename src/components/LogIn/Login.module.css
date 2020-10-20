@@ -112,6 +112,8 @@
   line-height: 19px;
   text-align: center;
   color: #ffffff;
+  margin: 0;
+  padding: 10px 0;
 }
 
 .LoginButton:hover {
