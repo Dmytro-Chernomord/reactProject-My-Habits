@@ -1,6 +1,6 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import fadeStyle from '../../Views/PrivateViews/ProfilePage/FadeProfilePage.module.css';
+// import { CSSTransition } from 'react-transition-group';
+// import fadeStyle from '../../Views/PrivateViews/ProfilePage/FadeProfilePage.module.css';
 import styles from './NotificationLogin.module.css';
 import { ReactComponent as Close } from '../../images/svg-icons/close-red.svg';
 

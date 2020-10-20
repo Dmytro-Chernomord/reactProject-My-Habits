@@ -1,10 +1,10 @@
 import React from 'react';
-import AvatarUser from '../AvatarUser/AvatarUser';
+// import AvatarUser from '../AvatarUser/AvatarUser';
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
-import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
+// import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import { Redirect } from 'react-router-dom';
-import routes from '../../routes';
+// import routes from '../../routes';
 import styles from '../ModalContent/ModalContent.module.css';
 
 function AvatarsModal({ onClose }) {

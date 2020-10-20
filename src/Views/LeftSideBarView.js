@@ -37,9 +37,9 @@ const LeftSideBarButton = ({ handelClick }) => {
 };
 
 export default function LeftSideBarView({ match, onLogOut }) {
-  const [showChoiseModal, setShowChoiseModal] = useState(false);
-  const [showTemplateModal, setShowTemplateModal] = useState(false);
-  const [showCustomModal, setShowCustomModal] = useState(false);
+  // const [showChoiseModal, setShowChoiseModal] = useState(false);
+  // const [showTemplateModal, setShowTemplateModal] = useState(false);
+  // const [showCustomModal, setShowCustomModal] = useState(false);
 
   const [customModalData, setCustomModalData] = useState('');
   const [openModal, setOpenModal] = useState('');

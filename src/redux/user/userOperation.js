@@ -1,6 +1,6 @@
 import axios from 'axios';
 import actions from './userActions';
-import habitsOperation from '../habits/habitsOperation';
+//import habitsOperation from '../habits/habitsOperation';
 
 const getOwnHabits = userData => async dispatch => {
   dispatch(actions.getOwnHabitsRequest());

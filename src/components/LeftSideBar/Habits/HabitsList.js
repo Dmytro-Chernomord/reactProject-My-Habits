@@ -1,7 +1,7 @@
 import HabitsListItem from '../HabitsListItem/HabitsListItem';
 import { useSelector } from 'react-redux';
 import styles from './habitsList.module.css';
-import React, { useState } from 'react';
+import React from 'react';
 // import HabitChoiceModal from '../../HabitChoiceModal/HabitChoiceModal';
 // import CustomHabbitModal from '../../CustomHabbitModal/CustomHabbitModal';
 // import HabitTemplateModal from '../../HabitTemplateModal/HabitTemplateModal';

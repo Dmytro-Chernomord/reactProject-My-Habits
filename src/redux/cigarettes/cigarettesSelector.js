@@ -1,5 +1,5 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
+// import { createSelector } from '@reduxjs/toolkit';
+// import { useSelector } from 'react-redux';
 
 const getCigarettesData = state => state.cigarettes;
 const getCigarettesDataStartedAt = state => state.cigarettes.startedAt;

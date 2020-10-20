@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import InputMask, { beforeMaskedStateChange } from 'react-input-mask';
+import { useDispatch } from 'react-redux';
+import InputMask from 'react-input-mask';
 import operations from '../../../redux/user/userOperation';
 import Button from '../../Button/Button';
 import styles from '../../ChangePassword/ChangePassword.module.css';
