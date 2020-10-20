@@ -26,7 +26,7 @@ function TimeMoney() {
   // console.log(cigMoneyPerDay(quiz.cigarettePackPrice, quiz.cigarettePerDay));
 
   const getFiltredCig = cigArr => {
-    return cigArr.filter(cigArrItem => cigArrItem);
+    return cigArr.filter(cigArrItem => cigArrItem !== null);
   };
 
   function timeConvert(n) {
@@ -50,11 +50,11 @@ function TimeMoney() {
       );
       const dynamicCigMoney = cigMoneyPerDay(quiz.cigarettePackPrice, arrItem);
       const result = staticCigMoney - dynamicCigMoney;
-      // console.log(`arrItem ${arrItem}`);
+      //console.log(`arrItem ${arrItem}`);
       // console.log(`staticCigMoney ${staticCigMoney}`);
-      // console.log(`dynamicCigMoney ${dynamicCigMoney}`);
-      // console.log(`result ${result}`);
-      // console.log(`acc ${acc}`);
+      //console.log(`dynamicCigMoney ${dynamicCigMoney}`);
+      //console.log(`result ${result}`);
+      //console.log(`acc ${acc}`);
       return acc + result;
     }, 0);
     // return (Math.round(sumOfEconomyMoney * 100) / 100).toFixed(1);
