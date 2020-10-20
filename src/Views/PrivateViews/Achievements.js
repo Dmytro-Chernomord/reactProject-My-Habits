@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './achievments.module.css';
 import AchievmentsList from '../../components/AchievmentsList/AchievmentsList';
-import Header from '../../components/Header/Header';
+// import Header from '../../components/Header/Header';
 
 export default function Achievments() {
   return (

@@ -9,7 +9,7 @@ import dateSelector from '../../redux/date/dateSelector';
 import CongratulationModal from '../CongratulationModal/CongratulationModal';
 import s from './ItemHabit.module.css';
 import CheckListButton from '../UIcomponents/CheckListButton/CheckListButton';
-import habitsSelector from '../../redux/habits/habitsSelector';
+// import habitsSelector from '../../redux/habits/habitsSelector';
 import transitionStyles from '../ModalContent/ModalTransition.module.css';
 
 class ItemHabit extends Component {

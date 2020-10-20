@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
@@ -7,7 +7,7 @@ import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from '../ModalContent/ModalContent.module.css';
 import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
-import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
+// import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 
 function CigaretteRemindModal({ onClose }) {
   const [amount, setAmount] = useState({});

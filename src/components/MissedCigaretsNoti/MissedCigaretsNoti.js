@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import Button from '../UIcomponents/Button/Button';
-import DailyResultModal from '../DailyResultModal/DailyResultModal';
+// import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import CigarettesRemindModal from '../CigarettesRemindModal/CigarettesRemindModal';
 import styles from './MissedCigaretsNoti.module.css';

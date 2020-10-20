@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import quizOperation from '../../redux/quiz/quizOperation';
@@ -221,8 +221,8 @@ export default ModalBackdrop(InterviewModal);
 // onClose();
 
 // };
-{
-  /* <div className={styles.modalWrapper}>
+
+/* <div className={styles.modalWrapper}>
   <h2 className={styles.modalTitleCustom}>Ответьте на 4 коротких вопроса.</h2>
   <p className={styles.modalTextCustom}>
     Так мы сможем более точно дать вам рекомендации:
@@ -289,4 +289,3 @@ export default ModalBackdrop(InterviewModal);
     </div>
   </form>
 </div>; */
-}

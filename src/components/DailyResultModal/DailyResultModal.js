@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ModalBackdrop from '../Modal/Modal';
@@ -9,7 +9,7 @@ import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 import userSelector from '../../redux/user/userSelector';
-import { logDOM } from '@testing-library/react';
+//import { logDOM } from '@testing-library/react';
 import NotificationModal from '../notifications/NotificationModal';
 
 ////----------------------------------------------------------
