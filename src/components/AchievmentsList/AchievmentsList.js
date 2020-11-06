@@ -1,4 +1,3 @@
-// import { element } from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from '../../Views/PrivateViews/achievments.module.css';
@@ -9,7 +8,7 @@ const AchievmentsList = function () {
   const quizCigarettesData = useSelector(state => state.quiz.cigarettePerDay);
   const daysWhenSmoke = cigarettesData.filter(item => typeof item === 'number');
   const daysDontSmoke = cigarettesData.filter(item => item === 0);
-  console.log(daysDontSmoke);
+
   const fiveCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el > 4,
   );
@@ -19,8 +18,7 @@ const AchievmentsList = function () {
   const threeCigarettesLess = daysWhenSmoke.some(
     el => quizCigarettesData - el > 2,
   );
-  console.log(cigarettesData);
-  // console.log(daysDontSmoke.length > 0);
+
   return (
     <div>
       <header className={styles.header}>

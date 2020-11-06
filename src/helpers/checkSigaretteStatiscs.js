@@ -11,9 +11,6 @@ const checkSigaretteStatiscs = (cigarettesArray, dif, inputValue) => {
     const element = cigarettesArray[i];
     if (i - dif < 0 && element === null) {
       // const dayWthoutInfo = Date.parse(new Date()) - i * MS_PER_DAY;
-      //   console.log(new Date(dayWthoutInfo));
-      //   console.log('showModal');
-      //   console.log('element : ', element, 'i : ', i);
       // эта логика будет пушить информацию для будущей модалки с вопросами о пропущенных днях
     }
     if (i - dif === 0) {
@@ -46,21 +43,9 @@ const checkSigaretteMissedDates = (cigarettesArray, dif, parseStartedAt) => {
     const element = cigarettesArray[i];
     if (i - dif < 0 && element === null) {
       const dayWthoutInfo = new Date(parseStartedAt).valueOf() + i * MS_PER_DAY;
-
-      // console.log('parseStartedAt', parseStartedAt);
-      // console.log('dayWthoutInfo', dayWthoutInfo);
-      // console.log(
-      //   ' new Date dayWthoutInfo',
-      //   new Date(dayWthoutInfo).toISOString(),
-      // );
       result.push({ date: new Date(dayWthoutInfo).toISOString(), index: i });
       continue;
-
-      // console.log('showModal');
-      // console.log('element : ', element, 'i : ', i);
-      // эта логика будет пушить информацию для будущей модалки с вопросами о пропущенных днях
     }
-    // console.log(result);
   }
   return result;
 };

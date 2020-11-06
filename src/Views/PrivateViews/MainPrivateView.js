@@ -1,31 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import routes from '../../routes';
-// import ProfilePage from './ProfilePage/ProfilePage';
-// import Achievements from './Achievements';
-// import CheckListView from '../PrivateViews/CheckListView';
-// import LeftSideBar from '../LeftSideBarView';
-// import Modal from '../../components/Modal/Modal';
 import ModalBackdrop from '../../components/Modal/Modal';
 import ModalContent from '../../components/ModalContent/ModalContent';
 import toggle from '../../redux/modal/modalOperation';
 import modalSelector from '../../redux/modal/modalSelector';
 
-// const ChecklistView = lazy(() =>
-//   import(
-//     '../Views/AuthViews/ChecklistView' /* webpackChunkName: "checklist-view" */
-//   ),
-// );
 export default function MainPrivateView() {
   const showModal = useSelector(modalSelector.getModal);
   const dispatch = useDispatch();
-  // const [showModal, setShowModal] = useState(false);
   const [layout, setLayout] = useState(false);
   const [isAbleToDelete, setIsAbleToDelete] = useState(false);
-  // console.log(showModal);
-  // const toggleModal = useCallback(() => {
-  //   setShowModal(prevShowModal => !prevShowModal);
-  // }, []);
+
   const toggleModal = () => dispatch(toggle.toggleModal());
 
   return (

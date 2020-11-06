@@ -7,7 +7,6 @@ import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
 import styles from '../ModalContent/ModalContent.module.css';
 import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
-// import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 
 function CigaretteRemindModal({ onClose }) {
   const [amount, setAmount] = useState({});
@@ -15,58 +14,20 @@ function CigaretteRemindModal({ onClose }) {
   const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
   const startedAt = useSelector(cigSelector.getCigarettesDataStartedAt);
 
-  //   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   const missedDates = useSelector(cigSelector.getMissedDatesArray);
-  // console.log(missedDates);
-  // console.log(cigarettesArray);
+
   const handleInputChange = e => {
     let data = {};
-
     const { value, name } = e.target;
-    // const test = { data[name]: value };
-    // data = { ...test };
-    // setAmount({ id: name, number: value });
-    // setAmount({ id: name, number: value });
-    // console.log('value', value, 'name', name);
     data[name] = value;
-    // console.log(data);
     setAmount(prev => ({ ...prev, ...data }));
-
-    // for (let i = 0; i < arr.length; i++) {
-    //   const element = arr[i];
-    //   console.log(element);
-    //   if (i === name) {
-    //     console.log(name);
-    //   }
-    //   arr.splice(`${name}`, 0, `${value}`);
-    // }
-    // setAmount(data);
-    // data[name] = value;
-    // setAmount(prev => [...prev, ...data]);
   };
-  // console.log(amount);
-
-  // console.log(amount);
-
-  //   const cigarettesStartedAt = useSelector(
-  //     cigSelector.getCigarettesDataStartedAt,
-  //   );
-  //   const cigarettesArray = useSelector(cigSelector.getCigarettesArray);
-
-  //   const today = new Date();
-  //   const parseStartedAt = new Date(cigarettesStartedAt);
-  //   const dif = Math.floor(
-  //     (Date.parse(today) - Date.parse(parseStartedAt)) / MS_PER_DAY,
-  //   );
-
   const onSubmit = e => {
     e.preventDefault();
-    // console.log(amount);
     let result = [];
     let config = [...cigarettesArray];
     for (let i = 0; i < cigarettesArray.length; i++) {
       const element = cigarettesArray[i];
-      // console.log(element);
       const key = Object.keys(amount);
       const value = Object.values(amount);
       for (let y = 0; y < key.length; y++) {
@@ -82,13 +43,10 @@ function CigaretteRemindModal({ onClose }) {
         result.push(element);
         // continue;
       }
-      // result.push(element);
-      // console.log('key', key, 'value', value);
     }
 
-    console.log(config.splice(0, `${result.length}`, ...result));
+    // console.log(config.splice(0, `${result.length}`, ...result));
 
-    // console.log(cigarettesArray.splice(0, `${result.length}`, `${[result]}`));
     dispatch(
       cigarettesOperation.postDayCigarettes({
         startedAt: startedAt,

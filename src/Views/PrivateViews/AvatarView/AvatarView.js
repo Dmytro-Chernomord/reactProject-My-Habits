@@ -17,7 +17,6 @@ function AvatarView({ onClose, changeLayout }) {
   const handleClick = e => {
     const { dataset } = e.target;
     toggleModal();
-    // changeLayout('AvatarsModal');
     dispatch(userOperation.addUserInfo({ avatar: dataset.id }));
   };
 
@@ -44,21 +43,7 @@ function AvatarView({ onClose, changeLayout }) {
           })}
         </ul>
       </div>
-      {showModal && (
-        <AvatarsModal
-          onClose={toggleModal}
-          // onClick={() => {
-          //   setTemplateHabit();
-          //   toggleModal();
-          // }}
-        >
-          {/* <ModalContent
-            onSave={toggleModal}
-            layout={layout}
-            // ableToDelete={isAbleToDelete}
-          /> */}
-        </AvatarsModal>
-      )}
+      {showModal && <AvatarsModal onClose={toggleModal}></AvatarsModal>}
     </>
   );
 }

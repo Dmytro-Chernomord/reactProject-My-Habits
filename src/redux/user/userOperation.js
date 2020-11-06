@@ -1,13 +1,11 @@
 import axios from 'axios';
 import actions from './userActions';
-//import habitsOperation from '../habits/habitsOperation';
 
 const getOwnHabits = userData => async dispatch => {
   dispatch(actions.getOwnHabitsRequest());
   try {
     const response = await axios.get('/habits');
     dispatch(actions.getOwnHabitsSuccess(response.data));
-    // habitsOperation.setHabitsData(response.data.habits);
   } catch (er) {
     dispatch(actions.getOwnHabitsError(er));
   }
@@ -23,7 +21,6 @@ const addHabit = habit => async dispatch => {
     );
     dispatch(actions.addHabitSuccess(response.data));
   } catch (error) {
-    console.log(error.message);
     dispatch(actions.addHabitError(error.message));
   }
 };

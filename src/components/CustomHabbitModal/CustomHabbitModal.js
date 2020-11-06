@@ -3,19 +3,14 @@ import { useDispatch } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import habitsOperation from '../../redux/habits/habitsOperation';
 import userOperations from '../../redux/user/userOperation';
-// import { TextField } from '@material-ui/core';
-// import userSelectors from '../../redux/user/userSelector';
-// import Input from '../UIcomponents/Input/Input';
 import Button from '../UIcomponents/Button/Button';
 import { ButtonRemoveHabit } from '../UIcomponents/ButtonRemoveHabit/ButtonRemoveHabit';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import InputLabel from '@material-ui/core/InputLabel';
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import ButtonClose from '../UIcomponents/ButtonClose/ButtonClose';
-// import NativeSelect from '@material-ui/core/NativeSelect';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
@@ -356,17 +351,6 @@ function CustomHabbitModal({
     dispatch(habitsOperation.removeHabit(info._id));
   };
 
-  // const habits = useSelector(state => state.habits);
-  // console.log(habits);
-  // const ref = useRef(habits.length);
-  // console.log(ref);
-  // console.log('cl', habits[habits.length - 1]._id === ref.current);
-
-  // useEffect(() => {
-  //   // console.log(ref.current === habits.length);
-  //   ref.current !== habits.length && onClose();
-  // }, [habits, onClose]);
-
   return (
     <div className={styles.modalWrapper}>
       <style>{personalStyle}</style>
@@ -557,134 +541,3 @@ function CustomHabbitModal({
 }
 
 export default ModalBackdrop(CustomHabbitModal);
-
-// const piece = startDate.toISOString().slice(0, 11);
-// const planningTime = piece + time + ':00.000Z';
-// const onSubmit = useCallback(
-//   habit => dispatch(userOperations.addHabit(habit)),
-//   [dispatch],
-// );
-// const handleInputChange = e => {
-//   const { name, value } = e.target;
-
-//   switch (name) {
-//     case 'name':
-//       setName(value);
-//       break;
-
-//     case 'date':
-//       setStartDate(value);
-//       break;
-
-//     case 'time':
-//       setTime(value);
-//       break;
-
-//     case 'iteration':
-//       setIteration(value);
-//       break;
-
-//     default:
-//       console.warn(`Тип поля name - ${name} не обрабатывается`);
-//   }
-// };
-
-// const handleFormSubmit = e => {
-//   e.preventDefault();
-//   const data = { name, planningTime, iteration };
-//   onSubmit(data);
-
-//   // resetForm();
-// };
-/* <form onSubmit={handleSubmit(onSubmit)} className={styles.formProfile}>
-        <label htmlFor="name" className={styles.label}>
-          <span className={styles.textLabel}>Название</span>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            value={name}
-            onChange={handleInputChange}
-            className={styles.inputHabitName}
-            autoFocus="autofocus"
-            autoComplete="off"
-          />
-        </label>
-        <div className={styles.dateBox}>
-          <label htmlFor="date" className={styles.label}>
-            <span className={styles.textLabel}>Дата старта</span>
-            <div className={'calendarBox'}>
-              <DatePicker
-                dateFormat="yyyy/MM/dd"
-                selected={startDate}
-                onChange={date => setStartDate(date)}
-                locale="ru"
-                placeholder=" __.__.__"
-                disabled={ableToDelete}
-              />
-            </div>
-          </label>
-        </div>
-        <label htmlFor="time" className={styles.label}>
-          <span className={styles.textLabel}>Время</span>
-          <input
-            type="time"
-            name="time"
-            id="time"
-            value={time}
-            required
-            onChange={handleInputChange}
-            className={styles.input}
-            disabled={ableToDelete}
-          />
-        </label>
-        <label className={styles.label}>
-          <span className={styles.textLabel}>Повторение</span>
-          <FormControl className={classes.margin}>
-            <InputLabel id="demo-customized-select-label"></InputLabel>
-            <Select
-              labelId="demo-customized-select-label"
-              id="demo-customized-select"
-              name="iteration"
-              value={iteration}
-              onChange={handleInputChange}
-              input={<BootstrapInput />}
-              disabled={ableToDelete}
-            >
-              <MenuItem value="allday">Ежедневно</MenuItem>
-              <MenuItem value="workday">Пн-Вт-Ср-Чт-Пт</MenuItem>
-              <MenuItem value="weekend">Сб-Вс</MenuItem>
-              <MenuItem value="firstset">Пн-Ср-Пт</MenuItem>
-              <MenuItem value="secondset">Вт-Чт-Сб</MenuItem>
-              <MenuItem value="eachTwoDays">Раз в 2 дня</MenuItem>
-              <MenuItem value="onceAWeek">Раз в неделю</MenuItem>
-            </Select>
-          </FormControl>
-        </label>
-        {ableToDelete && (
-          <div className={styles.btnRemoveFolder}>
-            <ButtonRemoveHabit
-              type="button"
-              // временный функционал кнопки Удалить привычку
-              handelClick={deleteHabit}
-              title="Удалить привычку"
-            />
-          </div>
-        )}
-        <div className={styles.btnFolder}>
-          <div className={styles.btnBox}>
-            <Button
-              type={'button'}
-              green={false}
-              handelClick={() => onClick()}
-              label={'Отмена'}
-            />
-          </div>
-          <div>
-            <Button type={'submit'} green={true} label={'Сохранить'} />
-          </div>
-        </div>
-      </form>{' '}
-      <ButtonClose type="button" onClick={onClick} />
-    </div> */

@@ -7,9 +7,6 @@ import habitsOperation from '../../redux/habits/habitsOperation';
 
 import DailyResultModal from '../DailyResultModal/DailyResultModal';
 import { CheckListPageHeader } from './CheckListPageHeader/CheckListPageHeader';
-// import ItemHabit from './ItemHabit';
-// import Button from '../UIcomponents/Button/Button';
-// import s from './CheckListPage.module.css';
 import HabitsListInHome from './HabitsListInHome/HabitsListInHome';
 import { Scroll } from '../Scroll/Scroll';
 import transitionStyles from '../../components/ModalContent/ModalTransition.module.css';

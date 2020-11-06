@@ -6,7 +6,6 @@ import Button from '../Button/Button';
 import styles from './ChangePassword.module.css';
 import { ReactComponent as ClosedEye } from '../../images/homepage/svg/closedEye.svg';
 import { ReactComponent as OpenedEye } from '../../images/homepage/svg/openedEye.svg';
-//import NotificationModal from '../../components/notifications/NotificationModal';
 
 const ChangePassword = ({ setShowPassword }) => {
   const [showError, setShowError] = useState(false);

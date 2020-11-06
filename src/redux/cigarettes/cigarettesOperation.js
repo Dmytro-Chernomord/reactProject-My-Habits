@@ -7,8 +7,6 @@ const postDayCigarettes = userData => dispatch => {
   axios
     .post('/users/updateCigarettes', userData)
     .then(response => {
-      console.log(response);
-
       dispatch(cigarettesActions.cigarettesAddSuccess(response.data.data));
     })
     .catch(error =>
