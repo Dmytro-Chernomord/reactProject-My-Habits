@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import style from '../../../Views/PrivateViews/SubscriptionsViews/Subscriptions.module.css';
 import userSelector from '../../../redux/user/userSelector';
 import AvatarUser from '../../AvatarUser/AvatarUser';
-// import avatar4 from '../../../images/avatars/avatar4.png';
 import operations from '../../../redux/user/userOperation';
 
 const UserMenu = ({ onLogOut, match }) => {

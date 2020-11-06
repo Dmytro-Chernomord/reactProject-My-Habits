@@ -38,10 +38,14 @@ export const Calendar = () => {
   const registerData = useSelector(state => state.user.registerData);
   const dispatch = useDispatch();
   const today = new Date();
+  const currentTimeZoneOffset = -1000 * 60 * today.getTimezoneOffset();
 
   useEffect(() => {
-    dispatch(getSelectedDate(startDate.toISOString()));
-  }, [dispatch, startDate]);
+    const selectedDate = new Date(
+      Date.parse(startDate) + currentTimeZoneOffset,
+    );
+    dispatch(getSelectedDate(selectedDate.toISOString()));
+  }, [dispatch, startDate, currentTimeZoneOffset]);
 
   const handelDateChange = date => setStartDate(date);
 

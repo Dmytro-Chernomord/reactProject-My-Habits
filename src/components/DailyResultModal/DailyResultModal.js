@@ -9,6 +9,8 @@ import cigarettesOperation from '../../redux/cigarettes/cigarettesOperation';
 import cigSelector from '../../redux/cigarettes/cigarettesSelector';
 import { checkSigaretteStatiscs } from '../../helpers/checkSigaretteStatiscs';
 import userSelector from '../../redux/user/userSelector';
+//import { logDOM } from '@testing-library/react';
+import NotificationModal from '../notifications/NotificationModal';
 
 ////----------------------------------------------------------
 function DailyResultModal({ onClose }) {
@@ -36,7 +38,7 @@ function DailyResultModal({ onClose }) {
     } else if (num <= value && num + 1 > value) {
       setColorText('#ff3b1f');
       setMessage('Жаль, но мы не видим вашего прогресса');
-    } else if (num + 1 <= value && 100 > value) {
+    } else if (num + 1 <= value && 1000000000 > value) {
       setColorText('#ff0000');
       setMessage('Плохо! Не сдавайтесь, у вас все получится!');
     } else {
@@ -130,6 +132,9 @@ function DailyResultModal({ onClose }) {
               label={'Сохранить'}
             />
           </div>
+        </div>
+        <div style={{ marginBottom: '5px' }}>
+          <NotificationModal />
         </div>
         <ButtonClose type="button" onClick={onClose} />
       </form>

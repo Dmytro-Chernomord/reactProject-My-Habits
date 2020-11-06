@@ -1,18 +1,27 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import quizOperation from '../../redux/quiz/quizOperation';
 import ModalBackdrop from '../Modal/Modal';
 import Button from '../UIcomponents/Button/Button';
 import styles from '../ModalContent/ModalContent.module.css';
 import NotificationModal from '../notifications/NotificationModal';
+import userOperation from '../../redux/user/userOperation';
+import userSelector from '../../redux/user/userSelector';
 
 function InterviewModal({ onClose }) {
   const dispatch = useDispatch();
+  const state = useSelector(state => state);
+  const avatarState = userSelector.getAvatar(state);
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
+  useEffect(() => {
+    if (avatarState === '') {
+      dispatch(userOperation.addUserInfo({ avatar: '1' }));
+    }
+  }, [avatarState, dispatch]);
 
   const onSubmit = data => {
     dispatch(

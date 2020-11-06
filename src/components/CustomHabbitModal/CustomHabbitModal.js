@@ -308,6 +308,10 @@ function CustomHabbitModal({
 
   const startDate = new Date();
 
+  //Лена - добавила эту переменную, чтоб привести дату к текущему часовому поясую
+  //Метод toISOString переводит дату по 0 меридиану, то есть берет локальное время и отнимает разницу
+  const currentTimeZoneOffset = -1000 * 60 * startDate.getTimezoneOffset();
+
   // @Ihor _21DAY очень нужно для тестирования
   // const _21DAY = 1000 * 60 * 60 * 24 * 21;
   // const startDate = new Date() - _21DAY;
@@ -319,7 +323,8 @@ function CustomHabbitModal({
   //   setIteration('');
   // };
   const onSubmit = async data => {
-    const piece = data.datePicker.toISOString().slice(0, 11);
+    const day = new Date(Date.parse(data.datePicker) + currentTimeZoneOffset);
+    const piece = day.toISOString().slice(0, 11);
     const planningTime = piece + data.time + ':00.000Z';
     if (ableToDelete) {
       await dispatch(
@@ -529,7 +534,7 @@ function CustomHabbitModal({
             <Button type={'submit'} green={true} label={'Сохранить'} />
           </div>
         </div>
-      </form>{' '}
+      </form>
       <ButtonClose type="button" onClick={onClose} />
     </div>
   );

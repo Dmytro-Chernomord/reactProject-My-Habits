@@ -23,7 +23,7 @@ function TimeMoney() {
   }
 
   const getFiltredCig = cigArr => {
-    return cigArr.filter(cigArrItem => cigArrItem);
+    return cigArr.filter(cigArrItem => cigArrItem !== null);
   };
 
   function timeConvert(n) {

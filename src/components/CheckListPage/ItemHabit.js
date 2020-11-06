@@ -83,7 +83,7 @@ class ItemHabit extends Component {
                 isDisabled={stateBut1}
                 handelClick={() => {
                   this.props.setHabitsDataDay(this.props, true, index);
-                  if (index === 4) {
+                  if (index === 20) {
                     this.openModal('congrats');
                     this.setState({ uniqueId: this.props._id });
                   }
@@ -98,7 +98,7 @@ class ItemHabit extends Component {
                 isDisabled={stateBut2}
                 handelClick={() => {
                   this.props.setHabitsDataDay(this.props, false, index);
-                  if (index === 4) {
+                  if (index === 20) {
                     this.openModal('congrats');
                     this.setState({ uniqueId: this.props._id });
                   }
